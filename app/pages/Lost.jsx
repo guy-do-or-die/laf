@@ -10,16 +10,17 @@ import { Label } from "../components/ui/label";
 import { useSimulateLafLost, useWriteLafLost } from "../contracts"
 
 export default function Lost() {
-    const resp = useParams();
+    const { secretHash } = useParams();
+
     const [reward, setReward] = useState("0.001");
-    const [geoLocation, setGeoLocation] = useState("");
+    const [geo, setGeo] = useState("");
 
     const rewardValue = reward ? parseEther(reward) : parseEther("0");
     
     const lostParams = {
-        args: [resp.secretHash, geoLocation],
+        args: [secretHash, geo],
         value: rewardValue,
-        enabled: reward !== "0" && geoLocation.trim() !== ""
+        enabled: reward !== "0" && geo.trim() !== ""
     };
 
     return (
@@ -42,12 +43,12 @@ export default function Lost() {
                 </div>
                 
                 <div className="space-y-2">
-                    <Label htmlFor="geoLocation">Last Known Location</Label>
+                    <Label htmlFor="geo">Last Known Location</Label>
                     <Input
-                        id="geoLocation"
+                        id="geo"
                         placeholder="e.g., New York, Central Park"
-                        value={geoLocation}
-                        onChange={(e) => setGeoLocation(e.target.value)}
+                        value={geo}
+                        onChange={(e) => setGeo(e.target.value)}
                     />
                 </div>
                 
