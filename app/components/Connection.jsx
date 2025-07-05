@@ -4,14 +4,16 @@ import { Button } from "./ui/button";
 
 import { useAccount } from '../wallet'
 
+import {notify} from './Notification'
+
 export default function Connection() {
     const { logged, login, logout } = useAccount();
     const [location, setLocation] = useLocation();
 
-    // Redirect to /items when logged in
     useEffect(() => {
         if (logged && location === '/') {
             setLocation('/items');
+            notify('Connected', 'success');
         }
     }, [logged, location, setLocation]);
 
@@ -24,9 +26,9 @@ export default function Connection() {
             {
                 logged 
                 ?
-                <Button onClick={logout}>Disconnect</Button>
+                <Button variant="ghost" onClick={() => {logout(); notify('Disconnected', 'success')}}>Disconnect</Button>
                 :
-                <Button onClick={handleLogin}>Connect</Button>
+                <Button variant="default" onClick={handleLogin}>Connect</Button>
             }
         </div>
     )
