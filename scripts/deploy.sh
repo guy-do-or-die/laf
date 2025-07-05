@@ -53,8 +53,21 @@ else
 fi
 
 if [ -n "$DEPLOYED_ADDRESS" ]; then
-  echo "
-✅ Deployment successful!"
+  echo "✅ Deployment successful!"
   echo "📍 LAF contract deployed at: $DEPLOYED_ADDRESS"
   echo "🔗 View on Etherscan: ${ETHERSCAN_API_URL%/v2/api*}/address/$DEPLOYED_ADDRESS"
+  
+  ENV_VAR="CONTRACT_$CHAIN_NAME"
+  
+  if grep -q "$ENV_VAR=" .env; then
+    sed -i "s|$ENV_VAR=.*|$ENV_VAR=$DEPLOYED_ADDRESS|g" .env
+    echo "✏️ Updated $ENV_VAR in .env file"
+  else
+    echo "" >> .env
+    echo "$ENV_VAR=$DEPLOYED_ADDRESS" >> .env
+    echo "" >> .env
+    echo "✏️ Added $ENV_VAR to .env file"
+  fi
+  
+  echo "🔄 Run 'bun run wagmi' to update contract bindings with the new address"
 fi
