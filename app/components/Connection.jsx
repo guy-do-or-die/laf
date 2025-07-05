@@ -1,13 +1,20 @@
 import { Button } from "./ui/button";
-import { useConnect } from 'wagmi'
+
+import { useAccount } from '../wallet'
 
 
 export default function Connection() {
-    const { connectors, connect } = useConnect()
+    const { logged, login, logout } = useAccount()
 
     return (
         <div>
-            <Button onClick={() => connect({ connector: connectors[0] })}>Connect</Button>
+            {
+                logged 
+                ?
+                <Button onClick={logout}>Disconnect</Button>
+                :
+                <Button onClick={login}>Connect</Button>
+            }
         </div>
     )
 }

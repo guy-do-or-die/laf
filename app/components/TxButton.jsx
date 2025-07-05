@@ -1,20 +1,29 @@
 import { Button } from "./ui/button"; 
 
-import { useAccount } from 'wagmi'
+import { useAccount } from '../wallet'
 
 
 function TxButton({simulateHook, writeHook, params, text}) {
 
-    const { address } = useAccount()
+    const { address, logged } = useAccount()
 
-    const { data: simulateData } = simulateHook({...params})
+    const {
+        data: simulateData,
+        isSuccess: isSimulateSuccess
+    } = simulateHook({
+        query: { enabled: logged },
+        ...params
+    })
 
-    const { writeContract } = writeHook({...params})
+    const { writeContract } = writeHook({
+        query: { enabled: logged && isSimulateSuccess },
+        ...params
+    })
 
-    const onClick = () => simulateData && writeContract({ ...simulateData.request, account: address })
+    const onClick = () => writeContract({ ...simulateData.request, account: address })
 
     return (
-        <Button onClick={onClick} disabled={!address || !simulateData}>
+        <Button onClick={onClick} disabled={!logged || !simulateData}>
             {text} 
         </Button>
     )
