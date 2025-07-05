@@ -9,6 +9,8 @@ import { notify } from "../components/Notification";
 
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
+import { Button } from "../components/ui/button";
+import { MapPin } from "lucide-react";
 
 import { useSimulateLafLost, useWriteLafLost } from "../contracts"
 
@@ -18,6 +20,7 @@ export default function Lost() {
 
     const [reward, setReward] = useState("0.001");
     const [geo, setGeo] = useState("");
+    const [isGettingLocation, setIsGettingLocation] = useState(false);
 
     const rewardValue = reward ? parseEther(reward) : parseEther("0");
     
@@ -54,12 +57,44 @@ export default function Lost() {
                 
                 <div className="space-y-2">
                     <Label htmlFor="geo">Last Known Location</Label>
-                    <Input
-                        id="geo"
-                        placeholder="e.g., New York, Central Park"
-                        value={geo}
-                        onChange={(e) => setGeo(e.target.value)}
-                    />
+                    <div className="flex gap-2">
+                        <Input
+                            id="geo"
+                            placeholder="e.g., New York, Central Park"
+                            value={geo}
+                            onChange={(e) => setGeo(e.target.value)}
+                            className="flex-1"
+                        />
+                        <Button 
+                            variant="outline" 
+                            size="icon"
+                            disabled={isGettingLocation}
+                            onClick={() => {
+                                setIsGettingLocation(true);
+                                if (navigator.geolocation) {
+                                    navigator.geolocation.getCurrentPosition(
+                                        (position) => {
+                                            const { latitude, longitude } = position.coords;
+                                            setGeo(`${latitude.toFixed(6)}, ${longitude.toFixed(6)}`);
+                                            setIsGettingLocation(false);
+                                        },
+                                        (error) => {
+                                            console.error("Error getting location:", error);
+                                            notify("Could not get your location", "error");
+                                            setIsGettingLocation(false);
+                                        },
+                                        { enableHighAccuracy: true }
+                                    );
+                                } else {
+                                    notify("Geolocation is not supported by your browser", "error");
+                                    setIsGettingLocation(false);
+                                }
+                            }}
+                            title="Use current location"
+                        >
+                            <MapPin className={isGettingLocation ? "animate-pulse" : ""} size={18} />
+                        </Button>
+                    </div>
                 </div>
                 
                 <TxButton

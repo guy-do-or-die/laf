@@ -1,21 +1,19 @@
 
-import { useParams } from "wouter";
-import { useState } from "react";
-import { parseEther } from "viem";
+import { useParams, useLocation } from "wouter";
 
 import { useBlockNumber } from "wagmi";
 
 import ItemCard from "../components/ItemCard";
 import TxButton from "../components/TxButton";
-import { Input } from "../components/ui/input";
-import { Label } from "../components/ui/label";
+import { notify } from "../components/Notification";
+
 
 import { useReadLafItems, useSimulateLafFound, useWriteLafFound, useReadItemIsFound } from "../contracts"
 
 
 export default function Found() {
-
     const { secretHash, secret } = useParams();
+    const [location, setLocation] = useLocation();
 
     const { data: blockNumber } = useBlockNumber()
 
@@ -28,7 +26,8 @@ export default function Found() {
         enabled: !isFound,
         confirmationCallback: ({ data, error }) => {
             if (!error && data) {
-                notify('The owner informed!', 'success');
+                notify('The owner has been informed!', 'success');
+                setLocation(location, { replace: true });
             }
         }
     };

@@ -17,7 +17,7 @@ export default function Items() {
     const [items, setItems] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
    
-    const { data: blockNumber } = useBlockNumber()
+    const { data: blockNumber } = useBlockNumber({})
     const publicClient = usePublicClient();
 
     useEffect(() => {

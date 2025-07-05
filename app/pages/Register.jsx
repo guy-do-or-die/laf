@@ -42,11 +42,11 @@ export default function Register() {
     
     const [itemData] = useState(() => {
         const { secret, secretHash } = generateRandomSecret();
-        
-        const qrCode = new QRCodeStyling({
-            ...qrOptions,
-            data: `${window.location.origin}/found/${secretHash}/${secret}`,
-        });
+
+        const url = `${window.location.origin}/found/${secretHash}/${secret}`; 
+        const qrCode = new QRCodeStyling({ ...qrOptions, data: url });
+
+        console.log(url, secretHash);
         
         return { secret, secretHash, qrCode };
     });
