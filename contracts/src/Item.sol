@@ -20,6 +20,7 @@ contract Item is Initializable {
     bool public isFound;
     bool public isReturned;
 
+    uint256 public constant MINIMUM_REWARD = 0.01 ether;
     uint256 public constant IMMEDIATE_REWARD_PERCENTAGE = 1;
 
     constructor() {
@@ -37,6 +38,8 @@ contract Item is Initializable {
     function lost(string calldata _geo) external payable {
         require(msg.sender == factory, "Only factory can call this function");
         require(!isLost, "Already lost");
+
+        require(msg.value >= MINIMUM_REWARD, "Reward is too low");
 
         reward = msg.value;
         geo = _geo;

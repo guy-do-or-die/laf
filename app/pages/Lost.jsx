@@ -1,9 +1,12 @@
 
-import { useParams } from "wouter";
+
 import { useState } from "react";
 import { parseEther } from "viem";
+import { useParams, useLocation } from "wouter";
 
 import TxButton from "../components/TxButton";
+import { notify } from "../components/Notification";
+
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
 
@@ -11,6 +14,7 @@ import { useSimulateLafLost, useWriteLafLost } from "../contracts"
 
 export default function Lost() {
     const { secretHash } = useParams();
+    const [, setLocation] = useLocation();
 
     const [reward, setReward] = useState("0.001");
     const [geo, setGeo] = useState("");
@@ -20,7 +24,13 @@ export default function Lost() {
     const lostParams = {
         args: [secretHash, geo],
         value: rewardValue,
-        enabled: reward !== "0" && geo.trim() !== ""
+        enabled: reward !== "0" && geo.trim() !== "",
+        confirmationCallback: ({ data, error }) => {
+            if (!error && data) {
+                notify('Item reported lost!', 'success');
+                setLocation('/items');
+            }
+        }
     };
 
     return (

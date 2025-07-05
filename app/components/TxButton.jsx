@@ -20,6 +20,7 @@ function TxButton({simulateHook, writeHook, params, text}) {
         data: simulateData,
         isSuccess: isSimulateSuccess,
         isPending: isSimulatePending,
+        isLoading: isSimulateLoading,
         isError: isSimulateError,
         error: simulateError
     } = simulateHook({
@@ -91,12 +92,12 @@ function TxButton({simulateHook, writeHook, params, text}) {
     }, [isConfirmationError, isConfirmationSuccess])
 
     useEffect(() => {
-        if (params.enabled && isSimulatePending) {
+        if (params.enabled && isSimulateLoading) {
             notify('Loading', 'loading', { id: 'simulating' })
         } else {
             hide('simulating')
         }
-    })
+    }, [isSimulateLoading])
 
     useEffect(() => {
         if (isWritePending) {

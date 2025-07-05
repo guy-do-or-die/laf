@@ -1,5 +1,6 @@
 import {useRef, useEffect, useState} from 'react';
 
+import { useLocation } from 'wouter';
 import { keccak256, stringToHex, getAddress } from 'viem';
 
 import QRCodeStyling from 'qr-code-styling';
@@ -10,7 +11,7 @@ import { Textarea } from "../components/ui/textarea";
 import TxButton from "../components/TxButton";
 
 import { useSimulateLafRegisterItem, useWriteLafRegisterItem } from "../contracts"
-
+import { notify } from '../components/Notification';
 
 function generateSecretHash(secret) {
     const hash = keccak256(stringToHex(secret));
@@ -37,6 +38,8 @@ function generateRandomSecret(length = 32) {
 
 
 export default function Register() {
+    const [, setLocation] = useLocation();
+    
     const [itemData] = useState(() => {
         const { secret, secretHash } = generateRandomSecret();
         
@@ -59,7 +62,16 @@ export default function Register() {
         }
     }, [itemData.qrCode]);
 
-    const registerParams = {args: [itemData.secretHash, comment], enabled: comment.length > 0}
+    const registerParams = {
+        args: [itemData.secretHash, comment],
+        enabled: comment.length > 0,
+        confirmationCallback: ({ data, error }) => {
+            if (!error && data) {
+                notify('Item registered successfully!', 'success');
+                setLocation('/items');
+            }
+        }
+    }
 
     return (
         <div className="flex flex-col items-center gap-8">
