@@ -48,7 +48,6 @@ export default function ItemCard({ hash, address, blockNumber }) {
         }
     }, [readData, isError, blockNumber]);
 
-    // Helper function to get status text
     const getStatusText = (status) => {
         switch (status) {
             case 0: return 'Registered';
@@ -59,7 +58,6 @@ export default function ItemCard({ hash, address, blockNumber }) {
         }
     };
 
-    // Helper function to get status color
     const getStatusColor = (status) => {
         switch (status) {
             case 0: return 'bg-gray-100';
@@ -79,11 +77,16 @@ export default function ItemCard({ hash, address, blockNumber }) {
                         {!isLoading && getStatusText(itemData.isLost ? 1 : itemData.isFound ? 2 : itemData.isReturned ? 3 : 0)}
                     </p>
                 </div>
-                <div className="flex items-center space-x-2">
-                    <Button variant="outline" size="sm" asChild>
-                        <Link to={`/lost/${hash}`}>Lost</Link>
-                    </Button>
-                </div>
+                { 
+                    !itemData.isLost
+                        ? 
+                    <div className="flex items-center space-x-2">
+                        <Button variant="outline" size="sm" asChild>
+                            <Link to={`/lost/${hash}`}>Lost</Link>
+                        </Button>
+                    </div>
+                        : ""
+                }
             </div>
         </Card>
     )
