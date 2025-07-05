@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   images: {
     domains: ["static.usernames.app-backend.toolsforhumanity.com"],
   },
-  allowedDevOrigins: ["d3f2-83-144-23-155.ngrok-free.app"], // Add your dev origin here
+  allowedDevOrigins: ["aardvark-careful-purely.ngrok-free.app"], // Add your dev origin here
   reactStrictMode: false,
 };
 
