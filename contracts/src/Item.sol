@@ -13,10 +13,14 @@ contract Item is Initializable {
     string public comment;
 
     address public finder;
+    uint256 public reward;
+    string public geo;
 
     bool public isLost;
     bool public isFound;
     bool public isReturned;
+
+    uint256 public constant IMMEDIATE_REWARD_PERCENTAGE = 1;
 
     constructor() {
         factory = address(msg.sender);
@@ -30,9 +34,13 @@ contract Item is Initializable {
         secretHash = _secretHash;
     }
 
-    function lost() external {
+    function lost(string calldata _geo) external payable {
         require(msg.sender == factory, "Only factory can call this function");
         require(!isLost, "Already lost");
+
+        reward = msg.value;
+        geo = _geo;
+
         isLost = true;
     }
 
@@ -45,6 +53,16 @@ contract Item is Initializable {
         require(secretHash == hashAsAddress, "Invalid secret");
 
         finder = _finder;
+        
+        if (address(this).balance > 0) {
+            uint256 immediateReward = (address(this).balance * IMMEDIATE_REWARD_PERCENTAGE) / 100;
+            
+            if (immediateReward > 0) {
+                (bool success, ) = _finder.call{value: immediateReward}("");
+                require(success, "Immediate reward transfer failed");
+            }
+        }
+
         isFound = true;
     }
 
@@ -52,6 +70,11 @@ contract Item is Initializable {
         require(msg.sender == factory, "Only factory can call this function");
         require(!isReturned, "Already returned");
         require(isFound, "Not found");
+
+        if (finder != address(0) && address(this).balance > 0) {
+            (bool success, ) = finder.call{value: address(this).balance}("");
+            require(success, "Reward transfer failed");
+        }
 
         isReturned = true;
     }

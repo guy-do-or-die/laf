@@ -59,7 +59,7 @@ export default function Register() {
         }
     }, [itemData.qrCode]);
 
-    const params = {args: [itemData.secretHash, comment], enabled: comment.length > 0}
+    const registerParams = {args: [itemData.secretHash, comment], enabled: comment.length > 0}
 
     return (
         <div className="flex flex-col items-center gap-8">
@@ -93,7 +93,7 @@ export default function Register() {
                     <TxButton
                         simulateHook={useSimulateLafRegisterItem}
                         writeHook={useWriteLafRegisterItem}
-                        params={params}
+                        params={registerParams}
                         text="Register Item"
                     />
                 </div>

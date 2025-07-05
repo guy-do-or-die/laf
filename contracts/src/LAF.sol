@@ -44,11 +44,11 @@ contract LAF is ERC1155Supply, Ownable, ReentrancyGuard {
         return Item(items[hash]);
     }
 
-    function lost(address _secretHash) external nonReentrant {
+    function lost(address _secretHash, string calldata _geoLocation) external payable nonReentrant {
         Item item = getItem(_secretHash);
         require(item.owner() == msg.sender, "Not the owner");
         
-        item.lost();
+        item.lost{value: msg.value}(_geoLocation);
 
         emit ItemLost(msg.sender, address(item), _secretHash);
     }

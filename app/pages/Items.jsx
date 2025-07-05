@@ -72,7 +72,7 @@ export default function Items() {
         <div className="flex flex-col items-center gap-8">
             <h2 className="text-2xl font-bold">Your Items</h2>
             
-            <div className="w-full max-w-4xl">
+            <div className="w-full max-w-4xl min-w-64">
                 <div className="flex justify-center mb-8">
                     <Button asChild variant="outline">
                         <Link href="/register">Register New Item</Link>
@@ -91,9 +91,6 @@ export default function Items() {
                     <Card>
                         <CardContent className="pt-6 text-center">
                             <p>You don't have any registered items yet.</p>
-                            <Button asChild className="mt-4">
-                                <Link href="/register">Register Your First Item</Link>
-                            </Button>
                         </CardContent>
                     </Card>
                 ) : (

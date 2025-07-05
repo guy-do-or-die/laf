@@ -13,7 +13,6 @@ contract DeployScript is Script {
         
         vm.startBroadcast();
         
-        // Deploy the LAF contract
         laf = new LAF();
         
         console2.log("LAF deployed at:", address(laf));
