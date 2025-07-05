@@ -5,12 +5,12 @@ function App() {
   return (
     <div className="min-h-screen font-sans antialiased p-8">
       <h1 className="text-2xl font-bold mb-4">LAF Project</h1>
-      
+      Hello I am LAV
       {/* Test boxes with direct CSS styles */}
       <div className="mb-8">
         <h2 className="text-xl font-semibold mb-2">Direct CSS Styles:</h2>
         <div className="red-box">
-          This should be a red box with white text (using direct CSS)
+          This should be a red box with white text (using direct CSS) LAV was here
         </div>
       </div>
       
