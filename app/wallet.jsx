@@ -12,7 +12,7 @@ export const supportedChains = {
     test: chains.worldchainSepolia,
 }
   
-export const chain = supportedChains['test']
+export const chain = supportedChains['main']
 
 export const queryClient = new QueryClient()
 
