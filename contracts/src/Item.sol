@@ -12,7 +12,7 @@ contract Item is Initializable {
     address public secretHash;
     string public comment;
 
-    address public founder;
+    address public finder;
 
     bool public isLost;
     bool public isFound;
@@ -36,7 +36,7 @@ contract Item is Initializable {
         isLost = true;
     }
 
-    function found(address _founder, string calldata _secret) external {
+    function found(address _finder, string calldata _secret) external {
         require(msg.sender == factory, "Only factory can call this function");
         require(isLost, "Not lost");
         require(!isFound, "Already found");
@@ -44,7 +44,7 @@ contract Item is Initializable {
         address hashAsAddress = address(uint160(uint256(keccak256(bytes(_secret)))));
         require(secretHash == hashAsAddress, "Invalid secret");
 
-        founder = _founder;
+        finder = _finder;
         isFound = true;
     }
 

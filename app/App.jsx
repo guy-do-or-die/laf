@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Lost from "./pages/Lost";
 import Found from "./pages/Found";
+import Items from "./pages/Items";
 
 function App() {
   return (
@@ -18,8 +19,9 @@ function App() {
         <Router>
           <Route path="/" component={Home} />
           <Route path="/register" component={Register} />
-          <Route path="/lost" component={Lost} />
-          <Route path="/found" component={Found} />
+          <Route path="/lost/:secretHash" component={Lost} />
+          <Route path="/found/:secretHash/:secret" component={Found} />
+          <Route path="/items" component={Items} />
         </Router>
       </Content>
 

@@ -16,10 +16,10 @@ contract LAF is ERC1155Supply, Ownable, ReentrancyGuard {
     mapping(address => address) public items;
     uint256 public itemsCount;
 
-    event ItemRegistered(address indexed owner, address indexed hash);
-    event ItemLost(address indexed owner, address indexed hash);
-    event ItemFound(address indexed owner, address indexed hash);
-    event ItemReturned(address indexed owner, address indexed hash);
+    event ItemRegistered(address indexed owner, address indexed item, address indexed hash);
+    event ItemLost(address indexed owner, address indexed item, address indexed hash);
+    event ItemFound(address indexed owner, address indexed item, address indexed hash);
+    event ItemReturned(address indexed owner, address indexed item, address indexed hash);
 
     constructor() ERC1155("") Ownable(msg.sender) {
         itemImplementation = new Item();
@@ -29,12 +29,14 @@ contract LAF is ERC1155Supply, Ownable, ReentrancyGuard {
         require(_secretHash != address(0), "Secret hash is empty");
         require(items[_secretHash] == address(0), "Item already exists");
 
-        Item item = Item(address(itemImplementation).clone());
+        address itemAddress = address(itemImplementation).clone();
+        Item item = Item(itemAddress);
+
         item.initialize(msg.sender, _secretHash, _comment);
-        items[_secretHash] = address(item);
+        items[_secretHash] = itemAddress;
         itemsCount++;
 
-        emit ItemRegistered(msg.sender, _secretHash);
+        emit ItemRegistered(msg.sender, itemAddress, _secretHash);
     }
 
     function getItem(address hash) internal view returns (Item) {
@@ -48,7 +50,7 @@ contract LAF is ERC1155Supply, Ownable, ReentrancyGuard {
         
         item.lost();
 
-        emit ItemLost(msg.sender, _secretHash);
+        emit ItemLost(msg.sender, address(item), _secretHash);
     }
 
     function found(address _secretHash, string calldata _secret) external nonReentrant {
@@ -56,7 +58,7 @@ contract LAF is ERC1155Supply, Ownable, ReentrancyGuard {
 
         item.found(msg.sender, _secret);
 
-        emit ItemFound(msg.sender, _secretHash);
+        emit ItemFound(msg.sender, address(item), _secretHash);
     }
 
     function returned(address _secretHash) external nonReentrant {
@@ -65,6 +67,6 @@ contract LAF is ERC1155Supply, Ownable, ReentrancyGuard {
 
         item.returned();
 
-        emit ItemReturned(msg.sender, _secretHash);
+        emit ItemReturned(msg.sender, address(item), _secretHash);
     }
 }
