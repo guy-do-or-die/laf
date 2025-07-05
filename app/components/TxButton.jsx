@@ -13,16 +13,18 @@ function TxButton({simulateHook, writeHook, params, text}) {
         isError: isSimulateError,
         error: simulateError
     } = simulateHook({
-        query: { enabled: logged },
+        query: { enabled: params.enabled && logged },
         ...params
     })
 
     const { writeContract } = writeHook({
-        query: { enabled: logged && isSimulateSuccess },
+        query: { enabled: params.enabled && logged && isSimulateSuccess },
         ...params
     })
 
     const onClick = () => writeContract({ ...simulateData.request, account: address })
+
+    console.log(simulateError)
 
     return (
         <Button variant="outline" onClick={onClick} disabled={!logged || !simulateData}>

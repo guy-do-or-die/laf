@@ -10,6 +10,9 @@ contract Item is Initializable {
 
     address public owner;
     address public secretHash;
+    string public comment;
+
+    address public founder;
 
     bool public isLost;
     bool public isFound;
@@ -20,26 +23,36 @@ contract Item is Initializable {
         _disableInitializers();
     }
 
-    function initialize(address _owner, address _secretHash) external initializer {
+    function initialize(address _owner, address _secretHash, string calldata _comment) external initializer {
         require(msg.sender == factory, "Only factory can initialize");
         owner = _owner;
+        comment = _comment;
         secretHash = _secretHash;
     }
 
     function lost() external {
         require(msg.sender == factory, "Only factory can call this function");
+        require(!isLost, "Already lost");
         isLost = true;
     }
 
-    function found(string calldata _secret) external {
+    function found(address _founder, string calldata _secret) external {
         require(msg.sender == factory, "Only factory can call this function");
+        require(isLost, "Not lost");
+        require(!isFound, "Already found");
+
         address hashAsAddress = address(uint160(uint256(keccak256(bytes(_secret)))));
         require(secretHash == hashAsAddress, "Invalid secret");
+
+        founder = _founder;
         isFound = true;
     }
 
     function returned() external {
         require(msg.sender == factory, "Only factory can call this function");
+        require(!isReturned, "Already returned");
+        require(isFound, "Not found");
+
         isReturned = true;
     }
 }

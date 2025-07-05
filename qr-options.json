@@ -4,7 +4,7 @@
     "width": 300,
     "height": 300,
     "data": "<FILL IT>",
-    "margin": 10,
+    "margin": 2,
     "qrOptions": {
         "typeNumber": "0",
         "mode": "Byte",

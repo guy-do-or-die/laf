@@ -1,10 +1,11 @@
 import {useRef, useEffect, useState} from 'react';
 
 import { keccak256, stringToHex, getAddress } from 'viem';
-import { useLocation } from 'wouter';
 
 import QRCodeStyling from 'qr-code-styling';
 import qrOptions from '../../qr-options.json';
+
+import { Textarea } from "../components/ui/textarea";
 
 import TxButton from "../components/TxButton";
 
@@ -46,6 +47,8 @@ export default function Register() {
         
         return { secret, secretHash, qrCode };
     });
+
+    const [comment, setComment] = useState('');
     
     const qrRef = useRef(null);
     
@@ -56,7 +59,7 @@ export default function Register() {
         }
     }, [itemData.qrCode]);
 
-    const params = {args: [itemData.secretHash]}
+    const params = {args: [itemData.secretHash, comment], enabled: comment.length > 0}
 
     return (
         <div className="flex flex-col items-center gap-8">
@@ -77,6 +80,14 @@ export default function Register() {
                 ></div>
                 <p className="text-sm text-gray-600">The code is not being saved anywhere</p>
                 <p className="text-sm text-gray-600 mb-4">Click to download</p>
+                
+                <div className="mb-4">
+                    <Textarea
+                        placeholder="Comment"
+                        value={comment}
+                        onChange={(e) => setComment(e.target.value)}
+                    />
+                </div>
                 
                 <div className="flex justify-center">
                     <TxButton
