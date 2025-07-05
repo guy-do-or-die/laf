@@ -19,6 +19,8 @@ docs/
 # Contracts
 contracts/lib
 contracts/forge-std
+contracts/broadcast
+contracts/cache
 
 # Logs
 logs
