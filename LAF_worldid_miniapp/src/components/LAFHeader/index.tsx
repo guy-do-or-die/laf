@@ -1,4 +1,4 @@
-export function Header() {
+export function LAFHeader() {
   return (
     <div>
       {/* Simple header with just Tailwind classes */}
@@ -11,7 +11,6 @@ export function Header() {
             </a>
             <span className="text-sm text-white">Lost and Found</span>
           </div>
-          
           {/* Test box with red background */}
           <div className="bg-red-500 text-white p-4 rounded">
             This should be a red box with white text
@@ -22,4 +21,4 @@ export function Header() {
   );
 }
 
-export default Header;
+export default LAFHeader;

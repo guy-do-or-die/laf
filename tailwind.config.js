@@ -1,9 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    './index.html',
-    './app/**/*.{js,ts,jsx,tsx}',
-  ],
+  content: ["./index.html", "./app/**/*.{js,ts,jsx,tsx}"],
   theme: {
     container: {
       center: true,
@@ -31,8 +28,8 @@ export default {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-      }
+      },
     },
   },
   plugins: [],
-}
+};

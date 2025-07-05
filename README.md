@@ -30,12 +30,14 @@ The LAF project consists of two main contracts:
 ### Installation
 
 1. Clone the repository:
+
    ```bash
    git clone <repository-url>
    cd laf
    ```
 
 2. Install Foundry dependencies:
+
    ```bash
    forge install
    ```
@@ -68,6 +70,7 @@ forge test -vv --gas-report
 #### Local Development
 
 1. Start a local Anvil chain:
+
    ```bash
    anvil
    ```
@@ -80,6 +83,7 @@ forge test -vv --gas-report
 #### Testnet Deployment
 
 1. Create a `.env` file with your private key and RPC URL:
+
    ```
    PRIVATE_KEY=your_private_key
    RPC_URL=your_rpc_url
