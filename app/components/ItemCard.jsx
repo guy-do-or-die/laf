@@ -7,6 +7,7 @@ import { useReadContracts } from 'wagmi';
 import { Card } from "./ui/card";
 import { Button } from "./ui/button";
 import TxButton from "./TxButton";
+import { MessageButton } from "./Messaging";
 
 import { useAccount } from '../wallet';
 import { itemAbi, useSimulateLafReturned, useWriteLafReturned } from '../contracts';
@@ -140,15 +141,23 @@ export default function ItemCard({ hash, address, blockNumber }) {
                     { 
                         itemData.isFound && !itemData.isReturned && !isLoading && (
                             <>
-                                <Button variant="outline" className="w-full" asChild>
-                                    {currentUserAddress && currentUserAddress.toLowerCase() === itemData.owner?.toLowerCase() ? (
-                                        <Link to={`/connect/${itemData.finder}`}>Connect</Link>
-                                    ) : currentUserAddress && currentUserAddress.toLowerCase() === itemData.finder?.toLowerCase() ? (
-                                        <Link to={`/connect/${itemData.owner}`}>Connect</Link>
-                                    ) : (
-                                        <Link to={`/connect/${itemData.finder}`}>Connect</Link>
-                                    )}
-                                </Button>
+                                {/* Replace the Connect button with direct messaging */}
+                                {currentUserAddress && currentUserAddress.toLowerCase() === itemData.owner?.toLowerCase() ? (
+                                    <MessageButton 
+                                        recipientAddress={itemData.finder} 
+                                        buttonText="Message Finder"
+                                    />
+                                ) : currentUserAddress && currentUserAddress.toLowerCase() === itemData.finder?.toLowerCase() ? (
+                                    <MessageButton 
+                                        recipientAddress={itemData.owner} 
+                                        buttonText="Message Owner"
+                                    />
+                                ) : (
+                                    <MessageButton 
+                                        recipientAddress={itemData.finder} 
+                                        buttonText="Message Finder"
+                                    />
+                                )}
                                 
                                 {currentUserAddress && currentUserAddress.toLowerCase() === itemData.owner?.toLowerCase() && (
                                     <TxButton

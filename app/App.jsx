@@ -9,6 +9,10 @@ import Register from "./pages/Register";
 import Lost from "./pages/Lost";
 import Found from "./pages/Found";
 import Items from "./pages/Items";
+import Messages from "./pages/Messages";
+
+// Import XMTP provider
+import { XMTPProvider } from "./lib/xmtp";
 
 function App() {
   return (
@@ -16,13 +20,16 @@ function App() {
       <Header />
 
       <Content>
-        <Router>
-          <Route path="/" component={Home} />
-          <Route path="/register" component={Register} />
-          <Route path="/lost/:secretHash" component={Lost} />
-          <Route path="/found/:secretHash/:secret" component={Found} />
-          <Route path="/items" component={Items} />
-        </Router>
+        <XMTPProvider>
+          <Router>
+            <Route path="/" component={Home} />
+            <Route path="/register" component={Register} />
+            <Route path="/lost/:secretHash" component={Lost} />
+            <Route path="/found/:secretHash/:secret" component={Found} />
+            <Route path="/items" component={Items} />
+            <Route path="/messages" component={Messages} />
+          </Router>
+        </XMTPProvider>
       </Content>
 
       <Footer />

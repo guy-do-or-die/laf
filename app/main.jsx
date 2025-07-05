@@ -1,3 +1,9 @@
+// Import polyfills first
+import { Buffer } from 'buffer';
+
+// Make Buffer available globally
+window.Buffer = Buffer;
+
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "/app/index.css";

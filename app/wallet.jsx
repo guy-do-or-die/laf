@@ -7,6 +7,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 import { http, useWalletClient } from 'wagmi'
 
+import { XMTPProvider } from './lib/xmtp'
+
 export const supportedChains = {
     main: chains.worldchain,
     test: chains.worldchainSepolia,
@@ -49,7 +51,9 @@ export default function WalletProvider({ children }) {
     <PrivyProvider appId={import.meta.env.VITE_PRIVY_APP_ID} config={privyConfig}>
       <QueryClientProvider client={queryClient}>
         <WagmiProvider config={wagmiConfig}>
+          <XMTPProvider>
             {children}
+          </XMTPProvider>
         </WagmiProvider>
       </QueryClientProvider>
     </PrivyProvider>
