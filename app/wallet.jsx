@@ -2,7 +2,7 @@ import * as chains from 'viem/chains'
 
 import { PrivyProvider, usePrivy } from '@privy-io/react-auth'
 import { WagmiProvider, createConfig } from '@privy-io/wagmi'
-
+import { createStorage } from '@wagmi/core';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 import { http, useWalletClient } from 'wagmi'
@@ -21,11 +21,19 @@ export const privyConfig = {
     walletChainType: 'ethereum-only',
     supportedChains: [chain],
     defaultChain: chain,
+    embeddedWallets: {
+      requireUserPasswordOnCreate: false,
+    },
 }
 
 export const wagmiConfig = createConfig({
   chains: [chain],
   transports: { [chain.id]: http() },
+  ssr: true,
+  storage: createStorage({
+    storage: typeof window !== 'undefined' ? window.localStorage : null,
+    key: 'wagmi',
+  }),
 })
 
 
