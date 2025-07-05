@@ -1296,6 +1296,13 @@ export const itemAbi = [
   {
     type: 'function',
     inputs: [],
+    name: 'MINIMUM_REWARD',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
     name: 'comment',
     outputs: [{ name: '', internalType: 'string', type: 'string' }],
     stateMutability: 'view',
@@ -2922,6 +2929,14 @@ export const useReadItemImmediateRewardPercentage =
     abi: itemAbi,
     functionName: 'IMMEDIATE_REWARD_PERCENTAGE',
   })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"MINIMUM_REWARD"`
+ */
+export const useReadItemMinimumReward = /*#__PURE__*/ createUseReadContract({
+  abi: itemAbi,
+  functionName: 'MINIMUM_REWARD',
+})
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"comment"`
