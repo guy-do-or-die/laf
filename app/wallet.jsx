@@ -21,6 +21,10 @@ export const privyConfig = {
     walletChainType: 'ethereum-only',
     supportedChains: [chain],
     defaultChain: chain,
+    embeddedWallet: {
+       createOnLogin: 'users-without-wallets',
+       showWalletUIs: true,
+    },
 }
 
 export const wagmiConfig = createConfig({
