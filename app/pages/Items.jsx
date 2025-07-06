@@ -16,7 +16,7 @@ import RegisterModal from "../components/RegisterModal";
 
 
 export default function Items() {
-    const { address, logged } = useAccount();
+    const { address, loggedIn } = useAccount();
     const [items, setItems] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -25,8 +25,8 @@ export default function Items() {
     const publicClient = usePublicClient();
 
     useEffect(() => {
-        const loadItems = async () => {
-          if (!logged || !address) {
+        const loadMintEvents = async () => {
+          if (!loggedIn || !address) {
             setIsLoading(false);
             return;
           }
@@ -88,18 +88,18 @@ export default function Items() {
         } else {
           blockNumber && address && loadItems();
         }
-      }, [blockNumber, address, logged, publicClient])
+      }, [blockNumber, address, loggedIn, publicClient])
     
     return (
         <PageContainer>
-            {logged && (
+            {loggedIn && (
                 <PageHeader 
                     title="My Items" 
                     description="Manage your registered items and add new ones"
                 />
             )}
             
-            {!logged ? (
+            {!loggedIn ? (
                 <EmptyState 
                     icon={Lock}
                     title="Connect Your Wallet"

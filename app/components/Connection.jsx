@@ -4,14 +4,14 @@ import { Button } from "./ui/button";
 
 import { useAccount } from '../wallet'
 
-import {notify} from './Notification'
 
 export default function Connection() {
-    const { logged, login, logout } = useAccount();
+    const { loggedIn, login, logout } = useAccount();
     const [location, setLocation] = useLocation();
     const hasNotified = useRef(false);
 
     useEffect(() => {
+<<<<<<< Updated upstream
         if (logged && location === '/' && !hasNotified.current) {
             setLocation('/items');
             notify('Connected', 'success');
@@ -19,12 +19,16 @@ export default function Connection() {
         }
         if (!logged) {
             hasNotified.current = false;
+=======
+        if (loggedIn && location === '/') {
+            setLocation('/items');
+>>>>>>> Stashed changes
         }
-    }, [logged, location, setLocation]);
 
-    const handleLogin = () => {
-        login();
-    };
+        if (!loggedIn && location === '/items') {
+            setLocation('/');
+        }
+    }, [loggedIn]);
 
     const handleLogout = () => {
         logout();
@@ -35,8 +39,9 @@ export default function Connection() {
     return (
         <div className="flex items-center">
             {
-                logged 
+                loggedIn 
                 ?
+<<<<<<< Updated upstream
                 <Button 
                     variant="outline" 
                     onClick={handleLogout}
@@ -57,6 +62,11 @@ export default function Connection() {
                     </svg>
                     Connect Wallet
                 </Button>
+=======
+                <Button variant="ghost" onClick={logout}>Disconnect</Button>
+                :
+                <Button variant="default" onClick={login}>Connect</Button>
+>>>>>>> Stashed changes
             }
         </div>
     )
