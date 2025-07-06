@@ -6,76 +6,58 @@ import { Button } from "../components/ui/button";
 
 export default function Home() {
     return (
-        <div className="w-full">
+        <div className="w-full retro-container min-h-screen py-4">
             {/* Hero Section */}
-            <div className="text-center mb-16">
-                <h1 className="text-5xl font-bold text-gray-900 mb-6">
+            <div className="text-center mb-8 retro-section">
+                <h1 className="retro-title text-3xl md:text-4xl font-bold mb-3">
                     Lost Something?
-                    <span className="block text-blue-600">We'll Help You Find It</span>
+                    <span className="block retro-accent">We'll Help You Find It</span>
                 </h1>
-                <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+                <p className="retro-text text-base md:text-lg mb-4 max-w-xl mx-auto px-4">
                     A decentralized platform for registering, reporting, and reuniting lost items with their owners. 
                     Powered by blockchain technology for trust and transparency.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <Button asChild size="lg" className="bg-blue-600 hover:bg-blue-700">
-                        <Link href="/register">
-                            <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                            </svg>
-                            Register Item
-                        </Link>
-                    </Button>
-                    <Button asChild variant="outline" size="lg">
-                        <Link href="/items">
-                            <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                            </svg>
-                            View My Items
-                        </Link>
-                    </Button>
-                </div>
             </div>
 
             {/* Features Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-                <Card className="text-center hover:shadow-lg transition-shadow duration-200">
-                    <CardContent className="pt-8 pb-6">
-                        <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg className="w-8 h-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 mb-8 px-4">
+                <Card className="retro-card text-center hover:shadow-lg transition-shadow duration-200">
+                    <CardContent className="pt-4 pb-3 px-3">
+                        <div className="w-10 h-10 retro-icon-bg rounded-full flex items-center justify-center mx-auto mb-2">
+                            <svg className="w-5 h-5 retro-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                         </div>
-                        <h3 className="text-xl font-semibold text-gray-900 mb-2">Secure Registration</h3>
-                        <p className="text-gray-600">
+                        <h3 className="text-base font-semibold retro-text mb-1">Secure Registration</h3>
+                        <p className="retro-text-secondary text-xs">
                             Register your valuable items on the blockchain with cryptographic proof of ownership.
                         </p>
                     </CardContent>
                 </Card>
 
-                <Card className="text-center hover:shadow-lg transition-shadow duration-200">
-                    <CardContent className="pt-8 pb-6">
-                        <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg className="w-8 h-8 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <Card className="retro-card text-center hover:shadow-lg transition-shadow duration-200">
+                    <CardContent className="pt-4 pb-3 px-3">
+                        <div className="w-10 h-10 retro-icon-bg rounded-full flex items-center justify-center mx-auto mb-2">
+                            <svg className="w-5 h-5 retro-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
                             </svg>
                         </div>
-                        <h3 className="text-xl font-semibold text-gray-900 mb-2">Report Lost Items</h3>
-                        <p className="text-gray-600">
+                        <h3 className="text-base font-semibold retro-text mb-1">Report Lost Items</h3>
+                        <p className="retro-text-secondary text-xs">
                             Quickly report when an item goes missing and set rewards for finders.
                         </p>
                     </CardContent>
                 </Card>
 
-                <Card className="text-center hover:shadow-lg transition-shadow duration-200">
-                    <CardContent className="pt-8 pb-6">
-                        <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg className="w-8 h-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <Card className="retro-card text-center hover:shadow-lg transition-shadow duration-200">
+                    <CardContent className="pt-4 pb-3 px-3">
+                        <div className="w-10 h-10 retro-icon-bg rounded-full flex items-center justify-center mx-auto mb-2">
+                            <svg className="w-5 h-5 retro-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                             </svg>
                         </div>
-                        <h3 className="text-xl font-semibold text-gray-900 mb-2">Reunite & Reward</h3>
-                        <p className="text-gray-600">
+                        <h3 className="text-base font-semibold retro-text mb-1">Reunite & Reward</h3>
+                        <p className="retro-text-secondary text-xs">
                             Connect with finders and automatically distribute rewards when items are returned.
                         </p>
                     </CardContent>
@@ -83,36 +65,46 @@ export default function Home() {
             </div>
 
             {/* How it Works */}
-            <div className="text-center">
-                <h2 className="text-3xl font-bold text-gray-900 mb-12">How It Works</h2>
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-                    <div className="flex flex-col items-center">
-                        <div className="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg mb-4">
-                            1
+            <div className="retro-section px-4 pb-4">
+                <h2 className="retro-title text-xl md:text-2xl font-bold mb-4 text-center">How It Works</h2>
+                <div className="retro-card p-4">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div className="flex flex-col items-center text-center">
+                            <div className="w-12 h-12 retro-icon-bg rounded-full flex items-center justify-center mb-2">
+                                <svg className="w-6 h-6 retro-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                </svg>
+                            </div>
+                            <h4 className="font-semibold retro-text mb-1 text-sm">Register</h4>
+                            <p className="retro-text-secondary text-xs leading-tight">Add your valuable items to the blockchain registry</p>
                         </div>
-                        <h4 className="font-semibold text-gray-900 mb-2">Register</h4>
-                        <p className="text-gray-600 text-sm">Add your valuable items to the blockchain registry</p>
-                    </div>
-                    <div className="flex flex-col items-center">
-                        <div className="w-12 h-12 bg-yellow-600 text-white rounded-full flex items-center justify-center font-bold text-lg mb-4">
-                            2
+                        <div className="flex flex-col items-center text-center">
+                            <div className="w-12 h-12 retro-icon-bg rounded-full flex items-center justify-center mb-2">
+                                <svg className="w-6 h-6 retro-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                                </svg>
+                            </div>
+                            <h4 className="font-semibold retro-text mb-1 text-sm">Report</h4>
+                            <p className="retro-text-secondary text-xs leading-tight">Mark items as lost when they go missing</p>
                         </div>
-                        <h4 className="font-semibold text-gray-900 mb-2">Report</h4>
-                        <p className="text-gray-600 text-sm">Mark items as lost when they go missing</p>
-                    </div>
-                    <div className="flex flex-col items-center">
-                        <div className="w-12 h-12 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold text-lg mb-4">
-                            3
+                        <div className="flex flex-col items-center text-center">
+                            <div className="w-12 h-12 retro-icon-bg rounded-full flex items-center justify-center mb-2">
+                                <svg className="w-6 h-6 retro-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                            </div>
+                            <h4 className="font-semibold retro-text mb-1 text-sm">Find</h4>
+                            <p className="retro-text-secondary text-xs leading-tight">Finders can report discovered items</p>
                         </div>
-                        <h4 className="font-semibold text-gray-900 mb-2">Find</h4>
-                        <p className="text-gray-600 text-sm">Finders can report discovered items</p>
-                    </div>
-                    <div className="flex flex-col items-center">
-                        <div className="w-12 h-12 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-lg mb-4">
-                            4
+                        <div className="flex flex-col items-center text-center">
+                            <div className="w-12 h-12 retro-icon-bg rounded-full flex items-center justify-center mb-2">
+                                <svg className="w-6 h-6 retro-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                </svg>
+                            </div>
+                            <h4 className="font-semibold retro-text mb-1 text-sm">Reunite</h4>
+                            <p className="retro-text-secondary text-xs leading-tight">Connect and return items to their owners</p>
                         </div>
-                        <h4 className="font-semibold text-gray-900 mb-2">Reunite</h4>
-                        <p className="text-gray-600 text-sm">Connect and return items to their owners</p>
                     </div>
                 </div>
             </div>

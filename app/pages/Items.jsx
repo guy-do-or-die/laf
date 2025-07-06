@@ -108,46 +108,36 @@ export default function Items() {
             ) : isLoading ? (
                 <LoadingGrid message="Loading your items..." />
             ) : (
-                items.length === 0 ? (
-                    <EmptyState 
-                        icon={Plus}
-                        title="No Items Yet"
-                        description="Start by registering your first item"
-                        actionLabel="Add New Item"
-                        onAction={() => setIsModalOpen(true)}
-                    />
-                ) : (
-                    <GridLayout>
-                        {/* Add New Item Card */}
-                        <Card className="retro-card cursor-pointer group hover:scale-[1.02] transition-transform duration-200">
-                            <CardContent className="pt-6">
-                                <Button 
-                                    variant="ghost" 
-                                    className="w-full h-full min-h-[200px] flex flex-col items-center justify-center text-black hover:text-gray-700"
-                                    onClick={() => setIsModalOpen(true)}
-                                >
-                                    <div className="flex flex-col items-center space-y-3">
-                                        <Plus className="h-12 w-12" />
-                                        <div className="text-center">
-                                            <p className="font-bold text-lg uppercase tracking-wide">Add New Item</p>
-                                            <p className="text-sm text-gray-600 font-medium">Register a new item</p>
-                                        </div>
+                <GridLayout>
+                    {/* Add New Item Card */}
+                    <Card className="retro-card cursor-pointer group hover:scale-[1.02] transition-transform duration-200">
+                        <CardContent className="pt-6">
+                            <Button 
+                                variant="ghost" 
+                                className="w-full h-full min-h-[200px] flex flex-col items-center justify-center text-black hover:text-gray-700"
+                                onClick={() => setIsModalOpen(true)}
+                            >
+                                <div className="flex flex-col items-center space-y-3">
+                                    <Plus className="h-12 w-12" />
+                                    <div className="text-center">
+                                        <p className="font-bold text-lg uppercase tracking-wide">Add New Item</p>
+                                        <p className="text-sm text-gray-600 font-medium">Register a new item</p>
                                     </div>
-                                </Button>
-                            </CardContent>
-                        </Card>
-                        
-                        {/* Existing Items */}
-                        {items?.map((item) => (
-                            <ItemCard 
-                                key={item.hash} 
-                                hash={item.hash} 
-                                address={item.address} 
-                                blockNumber={blockNumber} 
-                            />
-                        ))}
-                    </GridLayout>
-                )
+                                </div>
+                            </Button>
+                        </CardContent>
+                    </Card>
+                    
+                    {/* Existing Items */}
+                    {items?.map((item) => (
+                        <ItemCard 
+                            key={item.hash} 
+                            hash={item.hash} 
+                            address={item.address} 
+                            blockNumber={blockNumber} 
+                        />
+                    ))}
+                </GridLayout>
             )}
             
             <RegisterModal 
