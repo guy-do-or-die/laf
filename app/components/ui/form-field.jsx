@@ -3,7 +3,7 @@ import { Input } from "./input";
 import { Textarea } from "./textarea";
 import { Button } from "./button";
 import { Alert, AlertDescription } from "./alert";
-import { MapPin, DollarSign, MessageSquare } from "lucide-react";
+import { MapPin, DollarSign } from "lucide-react";
 import { cn } from "@/app/lib/utils";
 
 export function FormField({ 
@@ -93,16 +93,13 @@ export function DescriptionField({ value, onChange, error, ...props }) {
       required
       {...props}
     >
-      <div className="relative">
-        <MessageSquare className="absolute left-3 top-3 text-gray-400 w-4 h-4 z-10" />
-        <Textarea
-          id="description"
-          placeholder="Describe the item..."
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          className="pl-10 min-h-[80px] resize-none retro-input"
-        />
-      </div>
+      <Textarea
+        id="description"
+        placeholder="Describe the item..."
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="min-h-[80px] resize-none retro-input"
+      />
     </FormField>
   );
 }

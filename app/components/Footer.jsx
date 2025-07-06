@@ -6,7 +6,7 @@ export default function Footer() {
                 <div className="flex flex-col md:flex-row items-center justify-between">
                     <div className="flex items-center space-x-2 mb-4 md:mb-0">
                         <a href="https://github.com/guy-do-or-die/laf" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
-                            <span className="text-black font-bold uppercase tracking-wide">{new Date().getFullYear()} Laf is... Lost and Found</span>
+                            <span className="text-black font-bold uppercase tracking-wide">Laf is... Lost and Found</span>
                         </a>
                     </div>
                     <div className="text-center md:text-right">

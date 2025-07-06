@@ -3,7 +3,7 @@
 // 1. Измените ENABLE_MOCK_DATA на true
 // 2. Перезагрузите страницу
 // Чтобы вернуться к реальным данным, установите ENABLE_MOCK_DATA обратно в false
-export const ENABLE_MOCK_DATA = true;
+export const ENABLE_MOCK_DATA = false;
 
 export const mockItems = [
   {
