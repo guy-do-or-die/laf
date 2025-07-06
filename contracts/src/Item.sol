@@ -20,7 +20,7 @@ contract Item is Initializable {
     bool public isFound;
     bool public isReturned;
 
-    uint256 public constant MINIMUM_REWARD = 0.00001 ether;
+    uint256 public constant MINIMUM_REWARD = 0.000001 ether;
     uint256 public constant IMMEDIATE_REWARD_PERCENTAGE = 1;
 
     constructor() {

@@ -18,7 +18,7 @@ export default function Lost() {
     const { secretHash } = useParams();
     const [, setLocation] = useLocation();
 
-    const [reward, setReward] = useState("0.00001");
+    const [reward, setReward] = useState("0.000001");
     const [geo, setGeo] = useState("");
     const [isGettingLocation, setIsGettingLocation] = useState(false);
 
@@ -46,9 +46,9 @@ export default function Lost() {
                     <Input
                         id="reward"
                         type="number"
-                        placeholder="0.00001"
-                        step="0.00001"
-                        min="0.00001"
+                        placeholder="0.000001"
+                        step="0.000001"
+                        min="0.000001"
                         value={reward}
                         onChange={(e) => setReward(e.target.value)}
                         className="retro-input"
