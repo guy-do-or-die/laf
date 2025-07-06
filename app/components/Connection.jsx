@@ -42,7 +42,7 @@ export default function Connection() {
                 </Button>
                 :
                 <Button 
-                    onClick={handleLogin}
+                    onClick={login}
                     className="retro-button bg-green-500 border-2 border-black text-white hover:bg-green-600 font-medium"
                 >
                     <svg className="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
