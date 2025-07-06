@@ -49,13 +49,13 @@ export function useAccount() {
 export default function WalletProvider({ children }) {
   return (
     <PrivyProvider appId={import.meta.env.VITE_PRIVY_APP_ID} config={privyConfig}>
-      <SmartWalletsProvider>
         <QueryClientProvider client={queryClient}>
           <WagmiProvider config={wagmiConfig}>
+            <SmartWalletsProvider>
               {children}
+            </SmartWalletsProvider>
           </WagmiProvider>
         </QueryClientProvider>
-      </SmartWalletsProvider>
     </PrivyProvider>
   )
 }
