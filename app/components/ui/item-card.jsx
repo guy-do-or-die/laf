@@ -10,7 +10,6 @@ import { Skeleton } from "./skeleton";
 
 import { useAccount } from '../../wallet';
 import { itemAbi } from '../../contracts';
-import { ENABLE_MOCK_DATA, getMockItemData } from '../../data/mockItems';
 import { cn } from "@/app/lib/utils";
 
 const statusColorMap = {
@@ -44,17 +43,11 @@ export function ItemCard({
       { address, abi: itemAbi, functionName: 'finder' },
       { address, abi: itemAbi, functionName: 'owner' },
     ],
-    query: { enabled: !ENABLE_MOCK_DATA }
+    query: { enabled: true }
   });
 
   useEffect(() => {
-    if (ENABLE_MOCK_DATA) {
-      const mockData = getMockItemData(address);
-      if (mockData) {
-        setItemData(mockData);
-        setTimeout(() => setIsLoading(false), 100);
-      }
-    } else if (readData) {
+    if (readData) {
       setItemData({
         comment: readData[0].result,
         isLost: readData[1].result,

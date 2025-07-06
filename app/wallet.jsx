@@ -7,8 +7,6 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 import { http, useWalletClient } from 'wagmi'
 
-import { SmartWalletsProvider } from "@privy-io/react-auth/smart-wallets";
-
 export const supportedChains = {
     main: chains.worldchain,
     test: chains.worldchainSepolia,
@@ -35,13 +33,13 @@ export function useAccount() {
   const { user, ready, authenticated, login, logout } = usePrivy()
 
   const address = user?.wallet?.address
-  const logged = ready && authenticated
+  const loggedIn = ready && authenticated
 
   return {
     address,
     login,
     logout,
-    logged,
+    loggedIn,
   }
 }
 
@@ -51,9 +49,7 @@ export default function WalletProvider({ children }) {
     <PrivyProvider appId={import.meta.env.VITE_PRIVY_APP_ID} config={privyConfig}>
         <QueryClientProvider client={queryClient}>
           <WagmiProvider config={wagmiConfig}>
-            <SmartWalletsProvider>
               {children}
-            </SmartWalletsProvider>
           </WagmiProvider>
         </QueryClientProvider>
     </PrivyProvider>

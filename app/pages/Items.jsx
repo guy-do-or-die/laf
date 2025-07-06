@@ -5,7 +5,6 @@ import { useBlockNumber } from 'wagmi'
 
 import { useAccount, chain } from '../wallet';
 import { lafAbi, lafAddress } from '../contracts';
-import { ENABLE_MOCK_DATA, mockItems } from '../data/mockItems';
 
 import { PageContainer, PageHeader, GridLayout, EmptyState, LoadingGrid } from "../components/ui/page-layout";
 import { Card, CardContent } from "../components/ui/card";
@@ -28,19 +27,6 @@ export default function Items() {
         const loadMintEvents = async () => {
           if (!loggedIn || !address) {
             setIsLoading(false);
-            return;
-          }
-
-          if (ENABLE_MOCK_DATA) {
-            // Use mock data
-            setIsLoading(true);
-            setTimeout(() => {
-              setItems(mockItems.map(item => ({
-                hash: item.hash,
-                address: item.address
-              })));
-              setIsLoading(false);
-            }, 500); // Simulate loading delay
             return;
           }
 
@@ -82,12 +68,7 @@ export default function Items() {
             setIsLoading(false);
           }
         }
-    
-        if (ENABLE_MOCK_DATA) {
-          loadItems();
-        } else {
-          blockNumber && address && loadItems();
-        }
+        blockNumber && address && loadMintEvents(); 
       }, [blockNumber, address, loggedIn, publicClient])
     
     return (

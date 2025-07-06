@@ -8,16 +8,10 @@ import { useAccount } from '../wallet'
 export default function Connection() {
     const { loggedIn, login, logout } = useAccount();
     const [location, setLocation] = useLocation();
-    const hasNotified = useRef(false);
 
     useEffect(() => {
-        if (loggedIn && location === '/' && !hasNotified.current) {
+        if (loggedIn && location === '/' ) {
             setLocation('/items');
-            notify('Connected', 'success');
-            hasNotified.current = true;
-        }
-        if (!loggedIn) {
-            hasNotified.current = false;
         }
 
         if (!loggedIn && location === '/items') {
