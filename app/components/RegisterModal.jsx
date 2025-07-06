@@ -4,7 +4,9 @@ import QRCodeStyling from 'qr-code-styling';
 import qrOptions from '../../qr-options.json';
 
 import { Modal } from './ui/modal';
-import { Textarea } from './ui/textarea';
+import { DescriptionField, SubmitButton } from './ui/form-field';
+import { Button } from './ui/button';
+import { Download, Printer } from 'lucide-react';
 import TxButton from './TxButton';
 import { useSimulateLafRegisterItem, useWriteLafRegisterItem } from '../contracts';
 import { notify } from './Notification';
@@ -94,14 +96,13 @@ export default function RegisterModal({ isOpen, onClose }) {
                             
                             {/* Form Section */}
                             <div className="flex-1 space-y-6">
-                                <div className="space-y-3">
-                                    <Textarea
-                                        placeholder="Add a comment about your item..."
-                                        value={comment}
-                                        onChange={(e) => setComment(e.target.value)}
-                                        className="min-h-[200px] w-full"
-                                    />
-                                </div>
+                                <DescriptionField
+                                    label="Item Description"
+                                    placeholder="Add a comment about your item..."
+                                    value={comment}
+                                    onChange={setComment}
+                                    className="min-h-[200px]"
+                                />
                                 
                                 <div className="flex justify-end">
                                     <TxButton
@@ -116,7 +117,7 @@ export default function RegisterModal({ isOpen, onClose }) {
                         
                         <div className="mt-6 flex gap-3 justify-center">
                         {/* Action Buttons Section */}
-                        <button
+                        <Button
                             onClick={() => {
                                 try {
                                     if (itemData?.qrCode) {
@@ -130,24 +131,21 @@ export default function RegisterModal({ isOpen, onClose }) {
                                     notify('Failed to download QR code', 'error');
                                 }
                             }}
-                            className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg transition-colors font-medium"
+                            className="flex items-center gap-2"
                             title="Download QR Code"
                         >
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                            </svg>
+                            <Download className="w-4 h-4" />
                             Download QR
-                        </button>
-                        <button
+                        </Button>
+                        <Button
                             onClick={() => window.print()}
-                            className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg transition-colors font-medium"
+                            variant="secondary"
+                            className="flex items-center gap-2"
                             title="Print QR Code"
                         >
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
-                            </svg>
+                            <Printer className="w-4 h-4" />
                             Print QR
-                        </button>
+                        </Button>
                     </div>
                     </>
                 )}

@@ -6,6 +6,23 @@ function Textarea({
   className,
   ...props
 }) {
+  // Check if retro-input class is present
+  const isRetro = className && className.includes('retro-input');
+  
+  if (isRetro) {
+    // For retro textareas, use minimal base styles
+    return (
+      <textarea
+        data-slot="textarea"
+        className={cn(
+          "w-full min-h-16",
+          className
+        )}
+        {...props} />
+    );
+  }
+  
+  // Default shadcn textarea styles
   return (
     <textarea
       data-slot="textarea"

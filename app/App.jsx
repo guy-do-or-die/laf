@@ -12,7 +12,7 @@ import Items from "./pages/Items";
 
 function App() {
   return (
-    <div className="min-h-screen font-sans antialiased flex flex-col">
+    <div className="min-h-screen font-sans antialiased flex flex-col retro-grid">
       <Header />
 
       <Content>
@@ -24,7 +24,7 @@ function App() {
           <Route path="/items" component={Items} />
         </Router>
       </Content>
-
+      
       <Footer />
     </div>
   );

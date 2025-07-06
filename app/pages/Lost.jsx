@@ -51,6 +51,7 @@ export default function Lost() {
                         min="0.001"
                         value={reward}
                         onChange={(e) => setReward(e.target.value)}
+                        className="retro-input"
                     />
                     <p className="text-sm text-gray-500">This amount will be sent as ETH to the contract</p>
                 </div>
@@ -63,7 +64,7 @@ export default function Lost() {
                             placeholder="e.g., New York, Central Park"
                             value={geo}
                             onChange={(e) => setGeo(e.target.value)}
-                            className="flex-1"
+                            className="flex-1 retro-input"
                         />
                         <Button 
                             variant="outline" 

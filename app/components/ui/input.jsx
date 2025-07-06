@@ -7,6 +7,24 @@ function Input({
   type,
   ...props
 }) {
+  // Check if retro-input class is present
+  const isRetro = className && className.includes('retro-input');
+  
+  if (isRetro) {
+    // For retro inputs, use minimal base styles
+    return (
+      <input
+        type={type}
+        data-slot="input"
+        className={cn(
+          "w-full",
+          className
+        )}
+        {...props} />
+    );
+  }
+  
+  // Default shadcn input styles
   return (
     <input
       type={type}

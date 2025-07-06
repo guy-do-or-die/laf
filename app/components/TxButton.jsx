@@ -12,7 +12,7 @@ import { useAccount } from '../wallet'
 
 
 
-function TxButton({simulateHook, writeHook, params, text}) {
+function TxButton({simulateHook, writeHook, params, text, className, variant = "outline", ...props}) {
 
     const { address, logged } = useAccount()
 
@@ -128,7 +128,13 @@ function TxButton({simulateHook, writeHook, params, text}) {
     confirmationData && console.log('confirmation error', confirmationError)
 
     return (
-        <Button variant="outline" onClick={onClick} disabled={!logged || !simulateData || disabled}>
+        <Button 
+            variant={variant} 
+            onClick={onClick} 
+            disabled={!logged || !simulateData || disabled}
+            className={`retro-button ${className || ''}`}
+            {...props}
+        >
             {loading && <LoaderCircle className="mr-2 h-4 w-4 animate-spin" />}
             {text} 
         </Button>
