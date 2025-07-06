@@ -11,18 +11,13 @@ export default function Connection() {
     const hasNotified = useRef(false);
 
     useEffect(() => {
-<<<<<<< Updated upstream
-        if (logged && location === '/' && !hasNotified.current) {
+        if (loggedIn && location === '/' && !hasNotified.current) {
             setLocation('/items');
             notify('Connected', 'success');
             hasNotified.current = true;
         }
-        if (!logged) {
+        if (!loggedIn) {
             hasNotified.current = false;
-=======
-        if (loggedIn && location === '/') {
-            setLocation('/items');
->>>>>>> Stashed changes
         }
 
         if (!loggedIn && location === '/items') {
@@ -30,21 +25,14 @@ export default function Connection() {
         }
     }, [loggedIn]);
 
-    const handleLogout = () => {
-        logout();
-        notify('Disconnected', 'success');
-        hasNotified.current = false;
-    };
-
     return (
         <div className="flex items-center">
             {
                 loggedIn 
                 ?
-<<<<<<< Updated upstream
                 <Button 
                     variant="outline" 
-                    onClick={handleLogout}
+                    onClick={logout}
                     className="retro-button bg-red-500 border-2 border-black text-white hover:bg-red-600"
                 >
                     <svg className="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -62,11 +50,6 @@ export default function Connection() {
                     </svg>
                     Connect Wallet
                 </Button>
-=======
-                <Button variant="ghost" onClick={logout}>Disconnect</Button>
-                :
-                <Button variant="default" onClick={login}>Connect</Button>
->>>>>>> Stashed changes
             }
         </div>
     )
