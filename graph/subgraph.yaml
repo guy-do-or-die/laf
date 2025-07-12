@@ -8,9 +8,9 @@ dataSources:
     name: LAF
     network: base-sepolia
     source:
-      address: "0xb9148d5dd465f086a0ddbd23740711c5ab70a49f"
+      address: "0xdcc39e42b8eb5bfb1239703e411e59c90e576ce2"
       abi: LAF
-      startBlock: 28276397
+      startBlock: 28292914
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.9

@@ -1,5 +1,6 @@
 import Notification from './Notification'
 import Connection from './Connection'
+import Info from './Info'
 
 
 export default function Header() {
@@ -11,6 +12,9 @@ export default function Header() {
                 </div>
                 <div className="flex-grow">
                     <Notification />
+                </div>
+                <div className="flex-grow">
+                    <Info /> 
                 </div>
                 <div className="flex-shrink-0">
                     <Connection />

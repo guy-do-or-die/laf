@@ -26,10 +26,7 @@ export default function Connection() {
             {
                 loggedIn 
                 ?
-                <div>
-                    <p>{address}</p>
-                    <Button variant="ghost" onClick={() => {logout(); notify('Disconnected', 'success')}}>Disconnect</Button>
-                </div>
+                <Button variant="ghost" onClick={() => {logout(); notify('Disconnected', 'success')}}>Disconnect</Button>
                 :
                 <Button variant="default" onClick={handleLogin}>Connect</Button>
             }

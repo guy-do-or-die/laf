@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'wouter';
 
-import { zeroAddress, formatEther } from 'viem';
+import { formatUnits } from 'viem';
 import { useReadContracts } from 'wagmi';
 
 import { Card } from "./ui/card";
@@ -120,7 +120,7 @@ export default function ItemCard({ hash, address, blockNumber }) {
                     )}
                     {itemData.reward > 0 && (
                         <p className="text-sm text-gray-500">
-                            Reward: {parseFloat(formatEther(itemData.reward)).toFixed(3)} ETH
+                            Reward: {formatUnits(itemData.reward, 6)} USDC
                         </p>
                     )}
                     {/* {itemData.finder !== zeroAddress && (

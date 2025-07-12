@@ -4,6 +4,7 @@ pragma solidity ^0.8.19;
 import "@openzeppelin/contracts/proxy/Clones.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 import "./Item.sol";
 import "./Meta.sol";
@@ -14,6 +15,8 @@ contract LAF is Meta, Ownable, ReentrancyGuard {
     using Clones for address;
 
     Item public immutable itemImplementation;
+    address public immutable rewardToken;
+
     mapping(address => address) public items;
 
     uint256 public itemsCount;
@@ -22,7 +25,6 @@ contract LAF is Meta, Ownable, ReentrancyGuard {
     uint256 public lostNumber;
     uint256 public foundNumber;
     uint256 public returnedNumber;
-
     uint256 public rewardsDistributed;
 
     event ItemRegistered(address indexed owner, address indexed item, address indexed hash);
@@ -30,7 +32,9 @@ contract LAF is Meta, Ownable, ReentrancyGuard {
     event ItemFound(address indexed owner, address indexed item, address indexed hash);
     event ItemReturned(address indexed owner, address indexed item, address indexed hash);
 
-    constructor() Meta() Ownable(msg.sender) {
+    constructor(address _rewardToken) Meta() Ownable(msg.sender) {
+        require(_rewardToken != address(0), "Reward token address cannot be zero");
+        rewardToken = _rewardToken;
         itemImplementation = new Item();
     } 
 
@@ -43,7 +47,7 @@ contract LAF is Meta, Ownable, ReentrancyGuard {
         address itemAddress = address(itemImplementation).clone();
         Item item = Item(itemAddress);
 
-        item.initialize(owner, _secretHash, _comment);
+        item.initialize(owner, _secretHash, _comment, rewardToken);
         items[_secretHash] = itemAddress;
         itemsCount++;
 
@@ -59,11 +63,14 @@ contract LAF is Meta, Ownable, ReentrancyGuard {
         return Item(items[hash]);
     }
 
-    function lost(address _secretHash, string calldata _geoLocation) external payable nonReentrant {
+    function lost(address _secretHash, uint256 _rewardAmount, string calldata _geoLocation) external nonReentrant {
         Item item = getItem(_secretHash);
         require(item.owner() == msg.sender, "Not the owner");
+        require(_rewardAmount > 0, "Reward amount must be greater than 0");
         
-        item.lost{value: msg.value}(_geoLocation);
+        IERC20(rewardToken).transferFrom(msg.sender, address(item), _rewardAmount);
+        
+        item.lost(_rewardAmount, _geoLocation);
 
         _mint(item.owner(), LOST, 1, "");
 

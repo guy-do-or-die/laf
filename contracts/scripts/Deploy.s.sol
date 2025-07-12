@@ -13,9 +13,13 @@ contract DeployScript is Script {
         
         vm.startBroadcast();
         
-        laf = new LAF();
+        address rewardToken = vm.envAddress("REWARD_TOKEN_ADDRESS");
+        require(rewardToken != address(0), "REWARD_TOKEN_ADDRESS not set in .env");
+        
+        laf = new LAF(rewardToken);
         
         console2.log("LAF deployed at:", address(laf));
+        console2.log("Reward token address:", rewardToken);
         console2.log("Deployment successful and verified");
 
         vm.stopBroadcast();

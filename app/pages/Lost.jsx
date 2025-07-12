@@ -1,7 +1,7 @@
 
+import { parseUnits } from "viem";
 
 import { useState } from "react";
-import { parseEther } from "viem";
 import { useParams, useLocation } from "wouter";
 
 import TxButton from "../components/TxButton";
@@ -10,25 +10,50 @@ import { notify } from "../components/Notification";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
 import { Button } from "../components/ui/button";
+
 import { MapPin } from "lucide-react";
 
-import { useSimulateLafLost, useWriteLafLost } from "../contracts"
-import { useSmartWalletWriteHook } from "../wallet"
+import {
+    useSimulateLafLost,
+    useWriteLafLost,
+    useReadUsdcAllowance,
+    useSimulateUsdcApprove,
+    useWriteUsdcApprove,
+    lafAddress
+} from "../contracts"
 
+import { useSmartWalletWriteHook, chain } from "../wallet"
+
+import { useAccount } from "../wallet"
 
 export default function Lost() {
     const { secretHash } = useParams();
     const [, setLocation] = useLocation();
 
-    const [reward, setReward] = useState("0.001");
+    const contractAddress = lafAddress?.[chain.id];
+
+    const [reward, setReward] = useState("1");
     const [geo, setGeo] = useState("");
     const [isGettingLocation, setIsGettingLocation] = useState(false);
 
-    const rewardValue = reward ? parseEther(reward) : parseEther("0");
+    const { address } = useAccount();
+    const { data: allowance, refetch: refetchAllowance } = useReadUsdcAllowance({ args: [address, contractAddress] });
+
+    const rewardValue = reward ? parseUnits(reward, 6) : parseUnits("0", 6);
     
+    const allowanceParams = {
+        args: [contractAddress, rewardValue],
+        enabled: reward !== "0" && geo.trim() !== "",
+        confirmationCallback: ({ data, error }) => {
+            if (!error && data) {
+                notify('Approved!', 'success');
+                refetchAllowance();
+            }
+        }
+    };
+
     const lostParams = {
-        args: [secretHash, geo],
-        value: rewardValue,
+        args: [secretHash, rewardValue, geo],
         enabled: reward !== "0" && geo.trim() !== "",
         confirmationCallback: ({ data, error }) => {
             if (!error && data) {
@@ -44,17 +69,17 @@ export default function Lost() {
             
             <div className="w-full max-w-md space-y-4 border p-6 rounded-lg shadow-md">
                 <div className="space-y-2">
-                    <Label htmlFor="reward">Reward (in ETH)</Label>
+                    <Label htmlFor="reward">Reward (in USDC)</Label>
                     <Input
                         id="reward"
                         type="number"
-                        placeholder="0.001"
-                        step="0.001"
-                        min="0.001"
+                        placeholder="1"
+                        step="1"
+                        min="1"
                         value={reward}
                         onChange={(e) => setReward(e.target.value)}
                     />
-                    <p className="text-sm text-gray-500">This amount will be sent as ETH to the contract</p>
+                    <p className="text-sm text-gray-500">This amount will be sent to the escrow contract</p>
                 </div>
                 
                 <div className="space-y-2">
@@ -98,12 +123,21 @@ export default function Lost() {
                         </Button>
                     </div>
                 </div>
-                
-                <TxButton
-                    simulateHook={useSimulateLafLost}
-                    writeHook={useSmartWalletWriteHook(useWriteLafLost)}
-                    params={lostParams}
-                    text="Find" />
+                { 
+                    allowance < rewardValue
+                        ?
+                    <TxButton
+                        simulateHook={useSimulateUsdcApprove}
+                        writeHook={useSmartWalletWriteHook(useWriteUsdcApprove)}
+                        params={allowanceParams}
+                        text="Approve" />
+                        :
+                    <TxButton
+                        simulateHook={useSimulateLafLost}
+                        writeHook={useSmartWalletWriteHook(useWriteLafLost)}
+                        params={lostParams}
+                        text="Find" />
+                }
             </div>
         </div>
     );
