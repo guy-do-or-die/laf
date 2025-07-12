@@ -43,7 +43,7 @@ export default function Lost() {
     
     const allowanceParams = {
         args: [contractAddress, rewardValue],
-        enabled: reward !== "0" && geo.trim() !== "",
+        enabled: reward !== "0",
         confirmationCallback: ({ data, error }) => {
             if (!error && data) {
                 notify('Approved!', 'success');
@@ -54,7 +54,7 @@ export default function Lost() {
 
     const lostParams = {
         args: [secretHash, rewardValue, geo],
-        enabled: reward !== "0" && geo.trim() !== "",
+        enabled: reward !== "0" && geo.trim() !== "" && allowance >= rewardValue,
         confirmationCallback: ({ data, error }) => {
             if (!error && data) {
                 notify('Item reported lost!', 'success');
@@ -127,12 +127,14 @@ export default function Lost() {
                     allowance < rewardValue
                         ?
                     <TxButton
+                        key="approve-button"
                         simulateHook={useSimulateUsdcApprove}
                         writeHook={useSmartWalletWriteHook(useWriteUsdcApprove)}
                         params={allowanceParams}
                         text="Approve" />
                         :
                     <TxButton
+                        key="lost-button"
                         simulateHook={useSimulateLafLost}
                         writeHook={useSmartWalletWriteHook(useWriteLafLost)}
                         params={lostParams}

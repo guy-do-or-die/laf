@@ -19,7 +19,6 @@ function TxButton({simulateHook, writeHook, params, text}) {
     const {
         data: simulateData,
         isSuccess: isSimulateSuccess,
-        isPending: isSimulatePending,
         isLoading: isSimulateLoading,
         isError: isSimulateError,
         error: simulateError
@@ -56,9 +55,6 @@ function TxButton({simulateHook, writeHook, params, text}) {
     useEffect(() => {
         if (isSimulateError) {
             params.onSimulateError?.(simulateError) || notify(parseError(simulateError), 'error')
-        }
-        if (isSimulateSuccess) {
-            params.onSimulateSuccess?.(simulateData) || notify(simulateData?.result, 'success')
         }
         if (isSimulateError || isSimulateSuccess) {
             params.simulateCallback?.({ data: simulateData, error: simulateError })
@@ -123,9 +119,9 @@ function TxButton({simulateHook, writeHook, params, text}) {
     const onClick = () => writeContract({ ...simulateData.request, account: address })
 
 
-    simulateData && console.log('simulate error', simulateError)
-    writeData && console.log('write error', writeError)
-    confirmationData && console.log('confirmation error', confirmationError)
+    //simulateData && console.log('simulate error', simulateError)
+    //writeData && console.log('write error', writeError)
+    //confirmationData && console.log('confirmation error', confirmationError)
 
     return (
         <Button variant="outline" onClick={onClick} disabled={!loggedIn || !simulateData || disabled}>

@@ -120,7 +120,7 @@ export default function ItemCard({ hash, address, blockNumber }) {
                     )}
                     {itemData.reward > 0 && (
                         <p className="text-sm text-gray-500">
-                            Reward: {formatUnits(itemData.reward, 6)} USDC
+                            Reward: ${formatUnits(itemData.reward, 6)}
                         </p>
                     )}
                     {/* {itemData.finder !== zeroAddress && (
