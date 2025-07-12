@@ -1,0 +1,8 @@
+{
+  "base-sepolia": {
+    "LAF": {
+      "address": "0xb9148d5dd465f086a0ddbd23740711c5ab70a49f",
+      "startBlock": 28276397
+    }
+  }
+}

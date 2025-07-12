@@ -1,0 +1,56 @@
+specVersion: 1.3.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: LAF
+    network: base-sepolia
+    source:
+      address: "0xb9148d5dd465f086a0ddbd23740711c5ab70a49f"
+      abi: LAF
+      startBlock: 28276397
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      entities:
+        - ApprovalForAll
+        - Down
+        - ItemFound
+        - ItemLost
+        - ItemRegistered
+        - ItemReturned
+        - OwnershipTransferred
+        - TransferBatch
+        - TransferSingle
+        - URI
+        - Up
+      abis:
+        - name: LAF
+          file: ./abis/LAF.json
+      eventHandlers:
+        - event: ApprovalForAll(indexed address,indexed address,bool)
+          handler: handleApprovalForAll
+        - event: Down(indexed address,indexed address)
+          handler: handleDown
+        - event: ItemFound(indexed address,indexed address,indexed address)
+          handler: handleItemFound
+        - event: ItemLost(indexed address,indexed address,indexed address)
+          handler: handleItemLost
+        - event: ItemRegistered(indexed address,indexed address,indexed address)
+          handler: handleItemRegistered
+        - event: ItemReturned(indexed address,indexed address,indexed address)
+          handler: handleItemReturned
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: TransferBatch(indexed address,indexed address,indexed address,uint256[],uint256[])
+          handler: handleTransferBatch
+        - event: TransferSingle(indexed address,indexed address,indexed address,uint256,uint256)
+          handler: handleTransferSingle
+        - event: URI(string,indexed uint256)
+          handler: handleURI
+        - event: Up(indexed address,indexed address)
+          handler: handleUp
+      file: ./src/laf.ts

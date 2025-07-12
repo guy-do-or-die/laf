@@ -14,10 +14,10 @@ export default defineConfig({
     foundry({
       deployments: {
         LAF: {
-          [chains.worldchain.id]:
-            process.env.CONTRACT_WORLDCHAIN || zeroAddress,
-          [chains.worldchainSepolia.id]:
-            process.env.CONTRACT_WORLDCHAIN_SEPOLIA || zeroAddress,
+          [chains.base.id]:
+            process.env.CONTRACT_BASE || zeroAddress,
+          [chains.baseSepolia.id]:
+            process.env.CONTRACT_BASE_SEPOLIA || zeroAddress,
         },
       },
     }),

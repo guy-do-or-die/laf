@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'wouter';
-import { usePublicClient } from 'wagmi';
-import { decodeEventLog } from 'viem'
-import { useBlockNumber } from 'wagmi'
 
-import { useAccount, chain } from '../wallet';
-import { lafAbi, lafAddress } from '../contracts';
+import { useBlockNumber } from "wagmi";
+
+import { useAccount } from '../wallet';
+import { getUserItems } from '../utils/graphql';
 
 import { Card, CardContent } from "../components/ui/card";
 import { Button } from "../components/ui/button";
@@ -13,60 +12,41 @@ import ItemCard from "../components/ItemCard";
 
 
 export default function Items() {
-    const { address, logged } = useAccount();
+    const { address, loggedIn } = useAccount();
     const [items, setItems] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-   
-    const { data: blockNumber } = useBlockNumber({})
-    const publicClient = usePublicClient();
 
+    const { blockNumber } = useBlockNumber();
+   
     useEffect(() => {
-        const loadMintEvents = async () => {
-          if (!logged || !address) {
+        const loadUserItems = async () => {
+          if (!loggedIn || !address) {
             setIsLoading(false);
             return;
           }
 
           try {
             setIsLoading(true);
-            const logs = await publicClient.getLogs({
-              address: lafAddress[chain.id],
-              event: {
-                type: 'event',
-                name: 'ItemRegistered',
-                inputs: [
-                  { type: 'address', name: 'owner', indexed: true },
-                  { type: 'address', name: 'item', indexed: true },
-                  { type: 'address', name: 'hash', indexed: true },
-                ],
-              },
-              args: { owner: address },
-              fromBlock: blockNumber ? BigInt(blockNumber) - 100000n : 'earliest',
-              toBlock: blockNumber ? BigInt(blockNumber) : 'latest',
-            })
+            const itemsData = await getUserItems(address);
+            
+            const formattedItems = itemsData?.map((item) => ({
+                hash: item.hash,
+                address: item.item,
+                blockNumber: item.blockNumber,
+                blockTimestamp: item.blockTimestamp,
+                transactionHash: item.transactionHash
+            }))
     
-            const ids = logs?.map((log) => {
-                const { args } = decodeEventLog({
-                  abi: lafAbi,
-                  data: log.data,
-                  topics: log.topics,
-                })
-                return {
-                    hash: args.hash,
-                    address: args.item,
-                } 
-              })?.sort((a, b) => b - a)
-    
-            ids && setItems(ids)
+            setItems(formattedItems || [])
             setIsLoading(false);
           } catch (error) {
-            console.error('Failed to load mint events:', error)
+            console.error('Failed to load items from subgraph:', error)
             setIsLoading(false);
           }
         }
     
-        blockNumber && address && loadMintEvents()
-      }, [blockNumber, address, logged, publicClient])
+        address && loadUserItems()
+      }, [address, loggedIn])
     
     return (
         <div className="flex flex-col items-center gap-8">
@@ -79,7 +59,7 @@ export default function Items() {
                     </Button>
                 </div>
 
-                {!logged ? (
+                {!loggedIn ? (
                     <Card className="w-full">
                         <CardContent className="pt-6 text-center">
                             <p>Please connect your wallet to view your items.</p>

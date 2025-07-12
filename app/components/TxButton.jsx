@@ -14,7 +14,7 @@ import { useAccount } from '../wallet'
 
 function TxButton({simulateHook, writeHook, params, text}) {
 
-    const { address, logged } = useAccount()
+    const { address, loggedIn } = useAccount()
 
     const {
         data: simulateData,
@@ -24,7 +24,7 @@ function TxButton({simulateHook, writeHook, params, text}) {
         isError: isSimulateError,
         error: simulateError
     } = simulateHook({
-        query: { enabled: params.enabled && logged },
+        query: { enabled: params.enabled && loggedIn },
         ...params
     })
 
@@ -36,7 +36,7 @@ function TxButton({simulateHook, writeHook, params, text}) {
         isError: isWriteError,
         error: writeError
     } = writeHook({
-        query: { enabled: params.enabled && logged && isSimulateSuccess },
+        query: { enabled: params.enabled && loggedIn && isSimulateSuccess },
         ...params
     })
 
@@ -49,7 +49,7 @@ function TxButton({simulateHook, writeHook, params, text}) {
     } = useWaitForTransactionReceipt({
         confirmations: 1,
         hash: writeData,
-        query: { enabled: logged && params.enabled && writeData },
+        query: { enabled: loggedIn && params.enabled && writeData },
         ...params,
     })
 
@@ -118,7 +118,7 @@ function TxButton({simulateHook, writeHook, params, text}) {
 
 
     const loading = isWritePending || (isConfirmationLoading && !isConfirmationSuccess && !isConfirmationError)
-    const disabled = !logged || !params?.enabled || !Boolean(simulateData?.request) || loading
+    const disabled = !loggedIn || !params?.enabled || !Boolean(simulateData?.request) || loading
 
     const onClick = () => writeContract({ ...simulateData.request, account: address })
 
@@ -128,7 +128,7 @@ function TxButton({simulateHook, writeHook, params, text}) {
     confirmationData && console.log('confirmation error', confirmationError)
 
     return (
-        <Button variant="outline" onClick={onClick} disabled={!logged || !simulateData || disabled}>
+        <Button variant="outline" onClick={onClick} disabled={!loggedIn || !simulateData || disabled}>
             {loading && <LoaderCircle className="mr-2 h-4 w-4 animate-spin" />}
             {text} 
         </Button>

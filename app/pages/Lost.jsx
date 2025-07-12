@@ -13,6 +13,8 @@ import { Button } from "../components/ui/button";
 import { MapPin } from "lucide-react";
 
 import { useSimulateLafLost, useWriteLafLost } from "../contracts"
+import { useSmartWalletWriteHook } from "../wallet"
+
 
 export default function Lost() {
     const { secretHash } = useParams();
@@ -99,7 +101,7 @@ export default function Lost() {
                 
                 <TxButton
                     simulateHook={useSimulateLafLost}
-                    writeHook={useWriteLafLost}
+                    writeHook={useSmartWalletWriteHook(useWriteLafLost)}
                     params={lostParams}
                     text="Find" />
             </div>

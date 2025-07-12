@@ -5,10 +5,11 @@ import { useBlockNumber } from "wagmi";
 
 import ItemCard from "../components/ItemCard";
 import TxButton from "../components/TxButton";
+
 import { notify } from "../components/Notification";
 
-
 import { useReadLafItems, useSimulateLafFound, useWriteLafFound, useReadItemIsFound } from "../contracts"
+import { useSmartWalletWriteHook } from "../wallet"
 
 
 export default function Found() {
@@ -59,7 +60,7 @@ export default function Found() {
                             </p>
                             <TxButton
                                 simulateHook={useSimulateLafFound}
-                                writeHook={useWriteLafFound}
+                                writeHook={useSmartWalletWriteHook(useWriteLafFound)}
                                 params={foundParams}
                                 text="Confirm Found" />
                         </div>

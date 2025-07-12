@@ -7,15 +7,15 @@ import { useAccount } from '../wallet'
 import {notify} from './Notification'
 
 export default function Connection() {
-    const { logged, login, logout } = useAccount();
+    const { loggedIn, login, logout, address } = useAccount();
     const [location, setLocation] = useLocation();
 
     useEffect(() => {
-        if (logged && location === '/') {
+        if (loggedIn && location === '/') {
             setLocation('/items');
             notify('Connected', 'success');
         }
-    }, [logged, location, setLocation]);
+    }, [loggedIn, location, setLocation]);
 
     const handleLogin = () => {
         login();
@@ -24,9 +24,12 @@ export default function Connection() {
     return (
         <div>
             {
-                logged 
+                loggedIn 
                 ?
-                <Button variant="ghost" onClick={() => {logout(); notify('Disconnected', 'success')}}>Disconnect</Button>
+                <div>
+                    <p>{address}</p>
+                    <Button variant="ghost" onClick={() => {logout(); notify('Disconnected', 'success')}}>Disconnect</Button>
+                </div>
                 :
                 <Button variant="default" onClick={handleLogin}>Connect</Button>
             }

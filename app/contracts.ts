@@ -1427,8 +1427,8 @@ export const itemAbi = [
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const lafAbi = [
   { type: 'constructor', inputs: [], stateMutability: 'nonpayable' },
@@ -1912,17 +1912,17 @@ export const lafAbi = [
 ]
 
 /**
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const lafAddress = {
-  480: '0x0000000000000000000000000000000000000000',
-  4801: '0xA041CF0fAda8139A602C3aE6e4AAB8d4A05DaDcC',
+  8453: '0x0000000000000000000000000000000000000000',
+  84532: '0xB9148D5dd465F086A0DDBd23740711C5ab70a49f',
 }
 
 /**
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const lafConfig = { address: lafAddress, abi: lafAbi }
 
@@ -3479,8 +3479,8 @@ export const useWatchItemInitializedEvent =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useReadLaf = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -3490,8 +3490,8 @@ export const useReadLaf = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"balanceOf"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useReadLafBalanceOf = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -3502,8 +3502,8 @@ export const useReadLafBalanceOf = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"balanceOfBatch"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useReadLafBalanceOfBatch = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -3514,8 +3514,8 @@ export const useReadLafBalanceOfBatch = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"exists"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useReadLafExists = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -3526,8 +3526,8 @@ export const useReadLafExists = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"foundNumber"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useReadLafFoundNumber = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -3538,8 +3538,8 @@ export const useReadLafFoundNumber = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"isApprovedForAll"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useReadLafIsApprovedForAll = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -3550,8 +3550,8 @@ export const useReadLafIsApprovedForAll = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"itemImplementation"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useReadLafItemImplementation = /*#__PURE__*/ createUseReadContract(
   { abi: lafAbi, address: lafAddress, functionName: 'itemImplementation' },
@@ -3560,8 +3560,8 @@ export const useReadLafItemImplementation = /*#__PURE__*/ createUseReadContract(
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"items"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useReadLafItems = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -3572,8 +3572,8 @@ export const useReadLafItems = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"itemsCount"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useReadLafItemsCount = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -3584,8 +3584,8 @@ export const useReadLafItemsCount = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"lostNumber"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useReadLafLostNumber = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -3596,8 +3596,8 @@ export const useReadLafLostNumber = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"owner"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useReadLafOwner = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -3608,8 +3608,8 @@ export const useReadLafOwner = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"registeredNumber"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useReadLafRegisteredNumber = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -3620,8 +3620,8 @@ export const useReadLafRegisteredNumber = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"returnedNumber"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useReadLafReturnedNumber = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -3632,8 +3632,8 @@ export const useReadLafReturnedNumber = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"rewardsDistributed"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useReadLafRewardsDistributed = /*#__PURE__*/ createUseReadContract(
   { abi: lafAbi, address: lafAddress, functionName: 'rewardsDistributed' },
@@ -3642,8 +3642,8 @@ export const useReadLafRewardsDistributed = /*#__PURE__*/ createUseReadContract(
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"supportsInterface"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useReadLafSupportsInterface = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -3654,8 +3654,8 @@ export const useReadLafSupportsInterface = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"totalSupply"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useReadLafTotalSupply = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -3666,8 +3666,8 @@ export const useReadLafTotalSupply = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"trust"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useReadLafTrust = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -3678,8 +3678,8 @@ export const useReadLafTrust = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"uri"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useReadLafUri = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -3690,8 +3690,8 @@ export const useReadLafUri = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useWriteLaf = /*#__PURE__*/ createUseWriteContract({
   abi: lafAbi,
@@ -3701,8 +3701,8 @@ export const useWriteLaf = /*#__PURE__*/ createUseWriteContract({
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"found"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useWriteLafFound = /*#__PURE__*/ createUseWriteContract({
   abi: lafAbi,
@@ -3713,8 +3713,8 @@ export const useWriteLafFound = /*#__PURE__*/ createUseWriteContract({
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"lost"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useWriteLafLost = /*#__PURE__*/ createUseWriteContract({
   abi: lafAbi,
@@ -3725,8 +3725,8 @@ export const useWriteLafLost = /*#__PURE__*/ createUseWriteContract({
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"registerItem"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useWriteLafRegisterItem = /*#__PURE__*/ createUseWriteContract({
   abi: lafAbi,
@@ -3737,8 +3737,8 @@ export const useWriteLafRegisterItem = /*#__PURE__*/ createUseWriteContract({
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"renounceOwnership"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useWriteLafRenounceOwnership =
   /*#__PURE__*/ createUseWriteContract({
@@ -3750,8 +3750,8 @@ export const useWriteLafRenounceOwnership =
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"returned"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useWriteLafReturned = /*#__PURE__*/ createUseWriteContract({
   abi: lafAbi,
@@ -3762,8 +3762,8 @@ export const useWriteLafReturned = /*#__PURE__*/ createUseWriteContract({
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"safeBatchTransferFrom"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useWriteLafSafeBatchTransferFrom =
   /*#__PURE__*/ createUseWriteContract({
@@ -3775,8 +3775,8 @@ export const useWriteLafSafeBatchTransferFrom =
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"safeTransferFrom"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useWriteLafSafeTransferFrom = /*#__PURE__*/ createUseWriteContract(
   { abi: lafAbi, address: lafAddress, functionName: 'safeTransferFrom' },
@@ -3785,8 +3785,8 @@ export const useWriteLafSafeTransferFrom = /*#__PURE__*/ createUseWriteContract(
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setApprovalForAll"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useWriteLafSetApprovalForAll =
   /*#__PURE__*/ createUseWriteContract({
@@ -3798,8 +3798,8 @@ export const useWriteLafSetApprovalForAll =
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"thumbDown"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useWriteLafThumbDown = /*#__PURE__*/ createUseWriteContract({
   abi: lafAbi,
@@ -3810,8 +3810,8 @@ export const useWriteLafThumbDown = /*#__PURE__*/ createUseWriteContract({
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"thumbUp"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useWriteLafThumbUp = /*#__PURE__*/ createUseWriteContract({
   abi: lafAbi,
@@ -3822,8 +3822,8 @@ export const useWriteLafThumbUp = /*#__PURE__*/ createUseWriteContract({
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"transferOwnership"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useWriteLafTransferOwnership =
   /*#__PURE__*/ createUseWriteContract({
@@ -3835,8 +3835,8 @@ export const useWriteLafTransferOwnership =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useSimulateLaf = /*#__PURE__*/ createUseSimulateContract({
   abi: lafAbi,
@@ -3846,8 +3846,8 @@ export const useSimulateLaf = /*#__PURE__*/ createUseSimulateContract({
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"found"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useSimulateLafFound = /*#__PURE__*/ createUseSimulateContract({
   abi: lafAbi,
@@ -3858,8 +3858,8 @@ export const useSimulateLafFound = /*#__PURE__*/ createUseSimulateContract({
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"lost"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useSimulateLafLost = /*#__PURE__*/ createUseSimulateContract({
   abi: lafAbi,
@@ -3870,8 +3870,8 @@ export const useSimulateLafLost = /*#__PURE__*/ createUseSimulateContract({
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"registerItem"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useSimulateLafRegisterItem =
   /*#__PURE__*/ createUseSimulateContract({
@@ -3883,8 +3883,8 @@ export const useSimulateLafRegisterItem =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"renounceOwnership"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useSimulateLafRenounceOwnership =
   /*#__PURE__*/ createUseSimulateContract({
@@ -3896,8 +3896,8 @@ export const useSimulateLafRenounceOwnership =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"returned"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useSimulateLafReturned = /*#__PURE__*/ createUseSimulateContract({
   abi: lafAbi,
@@ -3908,8 +3908,8 @@ export const useSimulateLafReturned = /*#__PURE__*/ createUseSimulateContract({
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"safeBatchTransferFrom"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useSimulateLafSafeBatchTransferFrom =
   /*#__PURE__*/ createUseSimulateContract({
@@ -3921,8 +3921,8 @@ export const useSimulateLafSafeBatchTransferFrom =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"safeTransferFrom"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useSimulateLafSafeTransferFrom =
   /*#__PURE__*/ createUseSimulateContract({
@@ -3934,8 +3934,8 @@ export const useSimulateLafSafeTransferFrom =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setApprovalForAll"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useSimulateLafSetApprovalForAll =
   /*#__PURE__*/ createUseSimulateContract({
@@ -3947,8 +3947,8 @@ export const useSimulateLafSetApprovalForAll =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"thumbDown"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useSimulateLafThumbDown = /*#__PURE__*/ createUseSimulateContract({
   abi: lafAbi,
@@ -3959,8 +3959,8 @@ export const useSimulateLafThumbDown = /*#__PURE__*/ createUseSimulateContract({
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"thumbUp"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useSimulateLafThumbUp = /*#__PURE__*/ createUseSimulateContract({
   abi: lafAbi,
@@ -3971,8 +3971,8 @@ export const useSimulateLafThumbUp = /*#__PURE__*/ createUseSimulateContract({
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"transferOwnership"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useSimulateLafTransferOwnership =
   /*#__PURE__*/ createUseSimulateContract({
@@ -3984,8 +3984,8 @@ export const useSimulateLafTransferOwnership =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useWatchLafEvent = /*#__PURE__*/ createUseWatchContractEvent({
   abi: lafAbi,
@@ -3995,8 +3995,8 @@ export const useWatchLafEvent = /*#__PURE__*/ createUseWatchContractEvent({
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"ApprovalForAll"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useWatchLafApprovalForAllEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -4008,8 +4008,8 @@ export const useWatchLafApprovalForAllEvent =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"Down"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useWatchLafDownEvent = /*#__PURE__*/ createUseWatchContractEvent({
   abi: lafAbi,
@@ -4020,8 +4020,8 @@ export const useWatchLafDownEvent = /*#__PURE__*/ createUseWatchContractEvent({
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"ItemFound"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useWatchLafItemFoundEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -4033,8 +4033,8 @@ export const useWatchLafItemFoundEvent =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"ItemLost"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useWatchLafItemLostEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -4046,8 +4046,8 @@ export const useWatchLafItemLostEvent =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"ItemRegistered"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useWatchLafItemRegisteredEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -4059,8 +4059,8 @@ export const useWatchLafItemRegisteredEvent =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"ItemReturned"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useWatchLafItemReturnedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -4072,8 +4072,8 @@ export const useWatchLafItemReturnedEvent =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"OwnershipTransferred"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useWatchLafOwnershipTransferredEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -4085,8 +4085,8 @@ export const useWatchLafOwnershipTransferredEvent =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"TransferBatch"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useWatchLafTransferBatchEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -4098,8 +4098,8 @@ export const useWatchLafTransferBatchEvent =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"TransferSingle"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useWatchLafTransferSingleEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -4111,8 +4111,8 @@ export const useWatchLafTransferSingleEvent =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"URI"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useWatchLafUriEvent = /*#__PURE__*/ createUseWatchContractEvent({
   abi: lafAbi,
@@ -4123,8 +4123,8 @@ export const useWatchLafUriEvent = /*#__PURE__*/ createUseWatchContractEvent({
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"Up"`
  *
- * - [__View Contract on World Chain Worldscan__](https://worldscan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on World Chain Sepolia Worldscan Sepolia__](https://sepolia.worldscan.org/address/0xa041cf0fada8139a602c3ae6e4aab8d4a05dadcc)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xb9148d5dd465f086a0ddbd23740711c5ab70a49f)
  */
 export const useWatchLafUpEvent = /*#__PURE__*/ createUseWatchContractEvent({
   abi: lafAbi,

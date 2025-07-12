@@ -8,10 +8,12 @@ import qrOptions from '../../qr-options.json';
 
 import { Textarea } from "../components/ui/textarea";
 
+import { notify } from '../components/Notification';
 import TxButton from "../components/TxButton";
 
 import { useSimulateLafRegisterItem, useWriteLafRegisterItem } from "../contracts"
-import { notify } from '../components/Notification';
+import { useSmartWalletWriteHook } from "../wallet"
+
 
 function generateSecretHash(secret) {
     const hash = keccak256(stringToHex(secret));
@@ -104,7 +106,7 @@ export default function Register() {
                 <div className="flex justify-center">
                     <TxButton
                         simulateHook={useSimulateLafRegisterItem}
-                        writeHook={useWriteLafRegisterItem}
+                        writeHook={useSmartWalletWriteHook(useWriteLafRegisterItem)}
                         params={registerParams}
                         text="Register Item"
                     />
