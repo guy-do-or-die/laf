@@ -4,7 +4,6 @@ pragma solidity ^0.8.19;
 import "@openzeppelin/contracts/proxy/Clones.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 import "./Item.sol";
 import "./Meta.sol";
@@ -27,10 +26,10 @@ contract LAF is Meta, Ownable, ReentrancyGuard {
     uint256 public returnedNumber;
     uint256 public rewardsDistributed;
 
-    event ItemRegistered(address indexed owner, address indexed item, address indexed hash);
-    event ItemLost(address indexed owner, address indexed item, address indexed hash);
-    event ItemFound(address indexed owner, address indexed item, address indexed hash);
-    event ItemReturned(address indexed owner, address indexed item, address indexed hash);
+    event ItemRegistered(address indexed item, address hash, address indexed owner);
+    event ItemLost(address indexed item, address hash, address indexed owner, uint256 indexed rewardAmount, string geoLocation);
+    event ItemFound(address indexed item, address hash, address indexed owner, address indexed finder);
+    event ItemReturned(address indexed item, address hash, address indexed owner);
 
     constructor(address _rewardToken) Meta() Ownable(msg.sender) {
         require(_rewardToken != address(0), "Reward token address cannot be zero");
@@ -55,7 +54,7 @@ contract LAF is Meta, Ownable, ReentrancyGuard {
 
         registeredNumber++;
 
-        emit ItemRegistered(owner, itemAddress, _secretHash);
+        emit ItemRegistered(itemAddress, _secretHash, owner);
     }
 
     function getItem(address hash) internal view returns (Item) {
@@ -68,15 +67,13 @@ contract LAF is Meta, Ownable, ReentrancyGuard {
         require(item.owner() == msg.sender, "Not the owner");
         require(_rewardAmount > 0, "Reward amount must be greater than 0");
         
-        IERC20(rewardToken).transferFrom(msg.sender, address(item), _rewardAmount);
-        
         item.lost(_rewardAmount, _geoLocation);
 
         _mint(item.owner(), LOST, 1, "");
 
         lostNumber++;
 
-        emit ItemLost(msg.sender, address(item), _secretHash);
+        emit ItemLost(address(item), _secretHash, item.owner(), _rewardAmount, _geoLocation);
     }
 
     function found(address _secretHash, string calldata _secret) external nonReentrant {
@@ -88,7 +85,7 @@ contract LAF is Meta, Ownable, ReentrancyGuard {
 
         foundNumber++;
 
-        emit ItemFound(msg.sender, address(item), _secretHash);
+        emit ItemFound(address(item), _secretHash, item.owner(), msg.sender);
     }
 
     function returned(address _secretHash) external nonReentrant {
@@ -104,7 +101,7 @@ contract LAF is Meta, Ownable, ReentrancyGuard {
 
         returnedNumber++;
 
-        emit ItemReturned(msg.sender, address(item), _secretHash);
+        emit ItemReturned(address(item), _secretHash, msg.sender);
     }
 
 }

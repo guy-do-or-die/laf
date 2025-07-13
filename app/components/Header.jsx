@@ -1,23 +1,32 @@
 import Notification from './Notification'
 import Connection from './Connection'
-import Info from './Info'
+import Logo from './Logo'
 
 
 export default function Header() {
     return (
         <header className="w-full">
-            <div className="container mx-auto flex items-center justify-between py-4 px-4">
-                <div className="flex-shrink-0">
-                    <h1 className="text-2xl font-bold"><a href="/">Laf is... Lost and Found</a></h1>
+            <div className="container mx-auto py-4 px-4">
+                {/* Mobile Layout */}
+                <div className="flex flex-col space-y-4 md:hidden">
+                    <div className="flex items-center justify-between">
+                        <Logo />
+                        <Connection />
+                    </div>
+                    <div className="flex items-center justify-center">
+                        <Notification />
+                    </div>
                 </div>
-                <div className="flex-grow">
-                    <Notification />
-                </div>
-                <div className="flex-grow">
-                    <Info /> 
-                </div>
-                <div className="flex-shrink-0">
-                    <Connection />
+                
+                {/* Desktop Layout */}
+                <div className="hidden md:flex items-center justify-between">
+                    <Logo />
+                    <div className="flex-grow flex justify-center">
+                        <Notification />
+                    </div>
+                    <div className="flex-shrink-0">
+                        <Connection />
+                    </div>
                 </div>
             </div>
         </header>

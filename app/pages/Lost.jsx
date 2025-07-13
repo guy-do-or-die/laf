@@ -14,15 +14,17 @@ import { Button } from "../components/ui/button";
 import { MapPin } from "lucide-react";
 
 import {
+    useReadErc20Allowance,
+    useSimulateErc20Approve,
+    useWriteErc20Approve,
     useSimulateLafLost,
     useWriteLafLost,
-    useReadUsdcAllowance,
-    useSimulateUsdcApprove,
-    useWriteUsdcApprove,
+    useReadLafItems,
     lafAddress
 } from "../contracts"
 
-import { useSmartWalletWriteHook, chain } from "../wallet"
+import { useSmartWalletWriteHook, useSmartWalletSimulateHook, chain } from "../wallet"
+import { useSmartWallets } from '@privy-io/react-auth/smart-wallets';
 
 import { useAccount } from "../wallet"
 
@@ -37,13 +39,39 @@ export default function Lost() {
     const [isGettingLocation, setIsGettingLocation] = useState(false);
 
     const { address } = useAccount();
-    const { data: allowance, refetch: refetchAllowance } = useReadUsdcAllowance({ args: [address, contractAddress] });
+    const { client: smartWalletClient } = useSmartWallets();
+    const isSmartWallet = !!smartWalletClient;
+    
+    // Get the specific Item contract address for this secretHash
+    const { data: itemContractAddress } = useReadLafItems({
+        args: [secretHash],
+        enabled: !!secretHash
+    });
+    
+    // Item contract does the transferFrom, so approve the Item contract
+    const approvalTarget = itemContractAddress;
+    
+    const { data: allowance, refetch: refetchAllowance } = useReadErc20Allowance({ 
+        args: [address, approvalTarget],
+        enabled: !!approvalTarget
+    });
 
     const rewardValue = reward ? parseUnits(reward, 6) : parseUnits("0", 6);
     
+    // Debug info
+    console.log('Debug Lost.jsx:', {
+        address,
+        isSmartWallet,
+        smartWalletClient: !!smartWalletClient,
+        allowance,
+        rewardValue,
+        itemContractAddress,
+        approvalTarget
+    });
+    
     const allowanceParams = {
-        args: [contractAddress, rewardValue],
-        enabled: reward !== "0",
+        args: [approvalTarget, rewardValue],
+        enabled: reward !== "0" && !!approvalTarget,
         confirmationCallback: ({ data, error }) => {
             if (!error && data) {
                 notify('Approved!', 'success');
@@ -54,7 +82,7 @@ export default function Lost() {
 
     const lostParams = {
         args: [secretHash, rewardValue, geo],
-        enabled: reward !== "0" && geo.trim() !== "" && allowance >= rewardValue,
+        enabled: reward !== "0" && geo.trim() !== "" && !!itemContractAddress && allowance >= rewardValue,
         confirmationCallback: ({ data, error }) => {
             if (!error && data) {
                 notify('Item reported lost!', 'success');
@@ -67,7 +95,7 @@ export default function Lost() {
         <div className="flex flex-col items-center gap-8 p-4">
             <h1 className="text-2xl font-bold">Report Lost Item</h1>
             
-            <div className="w-full max-w-md space-y-4 border p-6 rounded-lg shadow-md">
+            <div className="w-full max-w-md space-y-4 border-0 p-6 rounded-xl shadow-lg backdrop-blur-sm bg-white/95">
                 <div className="space-y-2">
                     <Label htmlFor="reward">Reward (in USDC)</Label>
                     <Input
@@ -79,7 +107,7 @@ export default function Lost() {
                         value={reward}
                         onChange={(e) => setReward(e.target.value)}
                     />
-                    <p className="text-sm text-gray-500">This amount will be sent to the escrow contract</p>
+                    <p className="text-sm text-gray-500">This USDC amount will be held in escrow and given as reward when found</p>
                 </div>
                 
                 <div className="space-y-2">
@@ -124,21 +152,23 @@ export default function Lost() {
                     </div>
                 </div>
                 { 
-                    allowance < rewardValue
-                        ?
-                    <TxButton
-                        key="approve-button"
-                        simulateHook={useSimulateUsdcApprove}
-                        writeHook={useSmartWalletWriteHook(useWriteUsdcApprove)}
-                        params={allowanceParams}
-                        text="Approve" />
-                        :
-                    <TxButton
-                        key="lost-button"
-                        simulateHook={useSimulateLafLost}
-                        writeHook={useSmartWalletWriteHook(useWriteLafLost)}
-                        params={lostParams}
-                        text="Find" />
+                    !itemContractAddress ? (
+                        <div className="text-center text-gray-500">Loading item...</div>
+                    ) : allowance < rewardValue ? (
+                        <TxButton
+                            key="approve-button"
+                            simulateHook={useSmartWalletSimulateHook(useSimulateErc20Approve)}
+                            writeHook={useSmartWalletWriteHook(useWriteErc20Approve)}
+                            params={allowanceParams}
+                            text="Approve" />
+                    ) : (
+                        <TxButton
+                            key="lost-button"
+                            simulateHook={useSmartWalletSimulateHook(useSimulateLafLost)}
+                            writeHook={useSmartWalletWriteHook(useWriteLafLost)}
+                            params={lostParams}
+                            text="Find" />
+                    )
                 }
             </div>
         </div>

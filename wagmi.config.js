@@ -12,12 +12,13 @@ export default defineConfig({
   plugins: [
     react(),
     foundry({
+      artifacts: "contracts/out",
       deployments: {
         LAF: {
           [chains.base.id]: process.env.CONTRACT_BASE || zeroAddress,
           [chains.baseSepolia.id]: process.env.CONTRACT_BASE_SEPOLIA || zeroAddress,
         },
-        USDC: {
+        ERC20: {
           [chains.base.id]: process.env.USDC_BASE || zeroAddress,
           [chains.baseSepolia.id]: process.env.USDC_BASE_SEPOLIA || zeroAddress,
         },

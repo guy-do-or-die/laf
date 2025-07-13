@@ -44,6 +44,8 @@ contract Item is Initializable {
         require(!isLost, "Already lost");
         require(_rewardAmount >= MINIMUM_REWARD, "Reward is too low");
 
+        IERC20(rewardToken).transferFrom(owner, address(this), _rewardAmount);
+
         reward = _rewardAmount;
         geo = _geo;
 

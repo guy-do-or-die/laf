@@ -39,6 +39,21 @@ export const wagmiConfig = createConfig({
 })
 
 
+export function useSmartWalletSimulateHook(originalSimulateHook) {
+  return function useSmartWalletEnhancedSimulateHook(args) {
+    const { address: smartWalletAddress } = useAccount();
+    const { client: smartWalletClient } = useSmartWallets();
+    
+    // If smart wallet is available, override the account in simulation
+    const enhancedArgs = smartWalletClient && smartWalletAddress ? {
+      ...args,
+      account: smartWalletAddress
+    } : args;
+    
+    return originalSimulateHook(enhancedArgs);
+  };
+}
+
 export function useSmartWalletWriteHook(originalWriteHook) {
   return function useSmartWalletEnhancedHook(args) {
     const { client: smartWalletClient } = useSmartWallets();

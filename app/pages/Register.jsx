@@ -12,7 +12,7 @@ import { notify } from '../components/Notification';
 import TxButton from "../components/TxButton";
 
 import { useSimulateLafRegisterItem, useWriteLafRegisterItem } from "../contracts"
-import { useSmartWalletWriteHook } from "../wallet"
+import { useSmartWalletSimulateHook, useSmartWalletWriteHook } from "../wallet"
 
 
 function generateSecretHash(secret) {
@@ -79,7 +79,7 @@ export default function Register() {
         <div className="flex flex-col items-center gap-8">
             <h2 className="text-2xl font-bold">Register a New Item</h2>
             
-            <div className="border p-4 rounded-lg shadow-md">
+            <div className="border-0 p-4 rounded-xl shadow-lg backdrop-blur-sm bg-white/95">
                 <h3 className="text-lg font-semibold mb-2">Your Item's QR Code</h3>
                 <div 
                     ref={qrRef} 
@@ -105,7 +105,7 @@ export default function Register() {
                 
                 <div className="flex justify-center">
                     <TxButton
-                        simulateHook={useSimulateLafRegisterItem}
+                        simulateHook={useSmartWalletSimulateHook(useSimulateLafRegisterItem)}
                         writeHook={useSmartWalletWriteHook(useWriteLafRegisterItem)}
                         params={registerParams}
                         text="Register Item"

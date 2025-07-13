@@ -10,6 +10,7 @@ import TxButton from "./TxButton";
 
 import { useAccount } from '../wallet';
 import { itemAbi, useSimulateLafReturned, useWriteLafReturned } from '../contracts';
+import { useSmartWalletSimulateHook, useSmartWalletWriteHook } from '../wallet';
 
 
 export default function ItemCard({ hash, address, blockNumber }) {
@@ -152,8 +153,8 @@ export default function ItemCard({ hash, address, blockNumber }) {
                                 
                                 {currentUserAddress && currentUserAddress.toLowerCase() === itemData.owner?.toLowerCase() && (
                                     <TxButton
-                                        simulateHook={useSimulateLafReturned}
-                                        writeHook={useWriteLafReturned}
+                                        simulateHook={useSmartWalletSimulateHook(useSimulateLafReturned)}
+                                        writeHook={useSmartWalletWriteHook(useWriteLafReturned)}
                                         params={{
                                             args: [hash],
                                             enabled: true

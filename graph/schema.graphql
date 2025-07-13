@@ -19,9 +19,10 @@ type Down @entity(immutable: true) {
 
 type ItemFound @entity(immutable: true) {
   id: Bytes!
-  owner: Bytes! # address
   item: Bytes! # address
   hash: Bytes! # address
+  owner: Bytes! # original owner of the item
+  finder: Bytes! # address of who found the item
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -29,9 +30,13 @@ type ItemFound @entity(immutable: true) {
 
 type ItemLost @entity(immutable: true) {
   id: Bytes!
-  owner: Bytes! # address
   item: Bytes! # address
   hash: Bytes! # address
+  owner: Bytes! # address
+  rewardAmount: BigInt! # reward amount
+  geoLocation: String! # geographic location
+  latitude: BigDecimal # parsed latitude
+  longitude: BigDecimal # parsed longitude
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -39,9 +44,9 @@ type ItemLost @entity(immutable: true) {
 
 type ItemRegistered @entity(immutable: true) {
   id: Bytes!
-  owner: Bytes! # address
   item: Bytes! # address
   hash: Bytes! # address
+  owner: Bytes! # address
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
@@ -49,12 +54,46 @@ type ItemRegistered @entity(immutable: true) {
 
 type ItemReturned @entity(immutable: true) {
   id: Bytes!
-  owner: Bytes! # address
   item: Bytes! # address
   hash: Bytes! # address
+  owner: Bytes! # address
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
+}
+
+# Enhanced entity to track current item status efficiently
+type ItemStatus @entity(immutable: false) {
+  id: Bytes! # item contract address
+  item: Bytes! # item contract address
+  owner: Bytes! # original owner
+  finder: Bytes # who found the item (null if not found)
+  hash: Bytes! # secret hash
+  status: String! # current status
+  
+  # Geographic data (from ItemLost event)
+  geoLocation: String # geographic location
+  latitude: BigDecimal # parsed latitude
+  longitude: BigDecimal # parsed longitude
+  
+  # Timestamps
+  registeredAt: BigInt!
+  lostAt: BigInt
+  foundAt: BigInt
+  returnedAt: BigInt
+  lastUpdated: BigInt!
+  
+  # Event references
+  registeredEvent: Bytes!
+  lostEvent: Bytes
+  foundEvent: Bytes
+  returnedEvent: Bytes
+  
+  # Transaction hashes
+  registeredTx: Bytes!
+  lostTx: Bytes
+  foundTx: Bytes
+  returnedTx: Bytes
 }
 
 type OwnershipTransferred @entity(immutable: true) {
