@@ -49,10 +49,10 @@ export default function Items() {
       }, [address, loggedIn])
     
     return (
-        <div className="flex flex-col items-center gap-8">
+        <div className="flex flex-col items-center">
             <h2 className="text-2xl font-bold">Your Items</h2>
             
-            <div className="w-full max-w-4xl">
+            <div className="w-full max-w-6xl">
                 <div className="flex justify-center mb-8">
                     <Button asChild variant="outline">
                         <Link href="/register">Register New Item</Link>
@@ -74,7 +74,7 @@ export default function Items() {
                         </CardContent>
                     </Card>
                 ) : (
-                    <div className="flex flex-col space-y-3 w-full">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full">
                         {items?.map((item) => (
                             <ItemCard 
                                 key={item.hash} 

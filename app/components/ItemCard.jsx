@@ -4,7 +4,7 @@ import { Link } from 'wouter';
 import { formatUnits } from 'viem';
 import { useReadContracts } from 'wagmi';
 
-import { Card } from "./ui/card";
+import { Card, CardContent, CardFooter } from "./ui/card";
 import { Button } from "./ui/button";
 import TxButton from "./TxButton";
 
@@ -107,9 +107,8 @@ export default function ItemCard({ hash, address, blockNumber }) {
     };
 
     return (
-        <Card className={`${getStatusColor(getStatus())} w-full`}>
-            <div className="flex items-center p-4 min-w-72">
-                <div className="flex-1 min-w-64">
+        <Card className={`${getStatusColor(getStatus())} w-full min-w-64 min-h-48`}>
+            <CardContent className="flex-1">
                     <h3 className="font-medium">{itemData.comment || 'Loading...'}</h3>
                     <p className="text-sm text-gray-500">
                         {!isLoading && getStatusText(getStatus())}
@@ -129,11 +128,11 @@ export default function ItemCard({ hash, address, blockNumber }) {
                             Finder: {itemData.finder}
                         </p>
                     )} */}
-                </div>
-                <div className="flex flex-col space-y-2 mt-2 w-full">
+            </CardContent>
+            <CardFooter className="flex flex-wrap gap-2">
                     { 
                         !itemData.isLost && (
-                            <Button variant="outline" className="w-full" asChild>
+                            <Button variant="outline" className="flex-1" asChild>
                                 <Link to={`/lost/${hash}`}>Lost</Link>
                             </Button>
                         )
@@ -141,7 +140,7 @@ export default function ItemCard({ hash, address, blockNumber }) {
                     { 
                         itemData.isFound && !itemData.isReturned && !isLoading && (
                             <>
-                                <Button variant="outline" className="w-full" asChild>
+                                <Button variant="outline" className="flex-1" asChild>
                                     {currentUserAddress && currentUserAddress.toLowerCase() === itemData.owner?.toLowerCase() ? (
                                         <Link to={`/connect/${itemData.finder}`}>Connect</Link>
                                     ) : currentUserAddress && currentUserAddress.toLowerCase() === itemData.finder?.toLowerCase() ? (
@@ -165,8 +164,7 @@ export default function ItemCard({ hash, address, blockNumber }) {
                             </>
                         )
                     }
-                </div>
-            </div>
+            </CardFooter>
         </Card>
     )
 }

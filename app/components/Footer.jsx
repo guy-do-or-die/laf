@@ -17,7 +17,7 @@ const Base = () => {
 
 export default function Footer() {
   return (
-    <footer className="border-t border-gray-200/50 bg-gray-50 py-3 sm:py-4 px-4 sm:px-6 text-gray-600 text-sm mt-auto">
+    <footer className="border-t mt-8 border-gray-200/50 bg-gray-50 py-3 sm:py-4 px-4 sm:px-6 text-gray-600 text-sm mt-auto">
       <div className="max-w-4xl mx-auto flex flex-row justify-between items-center gap-3 sm:gap-4">
         <Links />
         <div className="flex items-center gap-1.5 sm:gap-2">

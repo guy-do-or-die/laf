@@ -124,7 +124,7 @@ function TxButton({simulateHook, writeHook, params, text}) {
     //confirmationData && console.log('confirmation error', confirmationError)
 
     return (
-        <Button variant="outline" onClick={onClick} disabled={!loggedIn || !simulateData || disabled}>
+        <Button variant="outline" className="flex-1" onClick={onClick} disabled={!loggedIn || !simulateData || disabled}>
             {loading && <LoaderCircle className="mr-2 h-4 w-4 animate-spin" />}
             {text} 
         </Button>
