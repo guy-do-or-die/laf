@@ -41,14 +41,8 @@ export const wagmiConfig = createConfig({
 
 export function useSmartWalletSimulateHook(originalSimulateHook) {
   return function useSmartWalletEnhancedSimulateHook(args) {
-    const { address: smartWalletAddress } = useAccount();
-    const { client: smartWalletClient } = useSmartWallets();
-    
-    // If smart wallet is available, override the account in simulation
-    const enhancedArgs = smartWalletClient && smartWalletAddress ? {
-      ...args,
-      account: smartWalletAddress
-    } : args;
+    const { address: account, smartWalletClient } = useAccount();
+    const enhancedArgs = smartWalletClient ? {...args, account} : args;
     
     return originalSimulateHook(enhancedArgs);
   };
@@ -56,7 +50,8 @@ export function useSmartWalletSimulateHook(originalSimulateHook) {
 
 export function useSmartWalletWriteHook(originalWriteHook) {
   return function useSmartWalletEnhancedHook(args) {
-    const { client: smartWalletClient } = useSmartWallets();
+    const { smartWalletClient } = useAccount();
+
     const originalResult = originalWriteHook(args);
     
     const [data, setData] = useState(null);
@@ -123,24 +118,41 @@ export function useSmartWalletWriteHook(originalWriteHook) {
 export function useAccount() {
   const { wallets } = useWallets();
   const { user, ready, authenticated, login, logout } = usePrivy()
-
+  const { client: privySmartWalletClient } = useSmartWallets();
   const { setActiveWallet } = useSetActiveWallet();
-
+    
   const activeWallet = wallets.find((wallet) => wallet.address === user?.wallet?.address);
+  
+  // Get smart wallet from user's linked accounts
   const smartWallet = user?.linkedAccounts?.find((account) => account.type === 'smart_wallet');
+  const address = smartWallet?.address || activeWallet?.address;
+  const loggedIn = ready && authenticated;
 
   useEffect(() => {
     activeWallet && setActiveWallet(activeWallet);
   }, [activeWallet])
 
-  const address = smartWallet?.address || activeWallet?.address 
-  const loggedIn = ready && authenticated
-
+  // Debug what we're getting from Privy (throttled to prevent spam)
+  useEffect(() => {
+    if (loggedIn && (smartWallet || privySmartWalletClient)) {
+      console.log('Privy Smart Wallet Debug:', {
+        hasSmartWallet: !!smartWallet,
+        smartWalletAddress: smartWallet?.address,
+        hasPrivyClient: !!privySmartWalletClient,
+        privyClientType: typeof privySmartWalletClient,
+        privyClientMethods: privySmartWalletClient ? Object.getOwnPropertyNames(privySmartWalletClient).filter(name => typeof privySmartWalletClient[name] === 'function') : []
+      });
+    }
+  }, [loggedIn, !!smartWallet, !!privySmartWalletClient]); // Only log when these change
+  
   return {
     address,
     login,
     logout,
     loggedIn,
+    smartWallet,
+    smartWalletClient: privySmartWalletClient, // Use the actual Privy smart wallet client
+    user // For components that need access to full user info
   }
 }
 

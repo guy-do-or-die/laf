@@ -1,6 +1,7 @@
 import Notification from './Notification'
 import Connection from './Connection'
 import Logo from './Logo'
+import { XMTPStatus } from './XMTPStatus'
 
 
 export default function Header() {
@@ -11,7 +12,10 @@ export default function Header() {
                 <div className="flex flex-col space-y-4 md:hidden">
                     <div className="flex items-center justify-between">
                         <Logo />
-                        <Connection />
+                        <div className="flex items-center space-x-2">
+                            <XMTPStatus />
+                            <Connection />
+                        </div>
                     </div>
                     <div className="flex items-center justify-center">
                         <Notification />
@@ -24,7 +28,8 @@ export default function Header() {
                     <div className="flex-grow flex justify-center">
                         <Notification />
                     </div>
-                    <div className="flex-shrink-0">
+                    <div className="flex-shrink-0 flex items-center space-x-3">
+                        <XMTPStatus />
                         <Connection />
                     </div>
                 </div>

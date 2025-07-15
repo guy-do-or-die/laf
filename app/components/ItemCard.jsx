@@ -7,6 +7,7 @@ import { useReadContracts } from 'wagmi';
 import { Card, CardContent, CardFooter } from "./ui/card";
 import { Button } from "./ui/button";
 import TxButton from "./TxButton";
+import { MessageButton } from "./MessageButton";
 
 import { useAccount } from '../wallet';
 import { itemAbi, useSimulateLafReturned, useWriteLafReturned } from '../contracts';
@@ -140,15 +141,25 @@ export default function ItemCard({ hash, address, blockNumber }) {
                     { 
                         itemData.isFound && !itemData.isReturned && !isLoading && (
                             <>
-                                <Button variant="outline" className="flex-1" asChild>
-                                    {currentUserAddress && currentUserAddress.toLowerCase() === itemData.owner?.toLowerCase() ? (
-                                        <Link to={`/connect/${itemData.finder}`}>Connect</Link>
-                                    ) : currentUserAddress && currentUserAddress.toLowerCase() === itemData.finder?.toLowerCase() ? (
-                                        <Link to={`/connect/${itemData.owner}`}>Connect</Link>
-                                    ) : (
-                                        <Link to={`/connect/${itemData.finder}`}>Connect</Link>
-                                    )}
-                                </Button>
+                                {currentUserAddress && currentUserAddress.toLowerCase() === itemData.owner?.toLowerCase() ? (
+                                    <MessageButton
+                                        recipientAddress={itemData.finder}
+                                        itemTitle={itemData.comment || "Your item"}
+                                        className="flex-1"
+                                    />
+                                ) : currentUserAddress && currentUserAddress.toLowerCase() === itemData.finder?.toLowerCase() ? (
+                                    <MessageButton
+                                        recipientAddress={itemData.owner}
+                                        itemTitle={itemData.comment || "Found item"}
+                                        className="flex-1"
+                                    />
+                                ) : (
+                                    <MessageButton
+                                        recipientAddress={itemData.finder}
+                                        itemTitle={itemData.comment || "Item"}
+                                        className="flex-1"
+                                    />
+                                )}
                                 
                                 {currentUserAddress && currentUserAddress.toLowerCase() === itemData.owner?.toLowerCase() && (
                                     <TxButton

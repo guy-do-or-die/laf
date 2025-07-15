@@ -11,4 +11,16 @@ export default defineConfig({
       "~": path.resolve(__dirname, "./"),
     },
   },
+  optimizeDeps: {
+    exclude: ["@xmtp/browser-sdk"],
+    include: ["protobufjs/minimal"],
+  },
+  define: {
+    global: "globalThis",
+  },
+  server: {
+    fs: {
+      allow: ["."],
+    },
+  },
 });
