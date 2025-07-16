@@ -2,12 +2,14 @@
 pragma solidity ^0.8.19;
 
 import "@openzeppelin/contracts/token/ERC1155/extensions/ERC1155Supply.sol";
+import "@openzeppelin/contracts/interfaces/IERC2981.sol";
 
 import "@openzeppelin/contracts/utils/Base64.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
 
-contract Meta is ERC1155Supply {
+abstract contract Meta is ERC1155Supply, IERC2981 {
+
     uint256 constant REGISTERED = 1;
     uint256 constant LOST = 2;
     uint256 constant FOUND = 3;
@@ -17,7 +19,7 @@ contract Meta is ERC1155Supply {
 
     uint256 constant PIC_SIZE = 256;
 
-    constructor() ERC1155("") {}
+    constructor() ERC1155("LAF is...") {}
 
     mapping(address => int) public trust;
 
@@ -61,55 +63,62 @@ contract Meta is ERC1155Supply {
     }
 
     function getMeta(uint256 tokenId) internal pure returns (string memory emoji, string memory title) {
-        if (tokenId == REGISTERED) return (unicode"😎", "Registered");
-        if (tokenId == LOST) return (unicode"😔", "Lost");
-        if (tokenId == FOUND) return (unicode"😊", "Found");
-        if (tokenId == RETURNED) return (unicode"🙏", "Returned");
+        if (tokenId == 0) return (unicode"❤️‍🩹", "LAF is...");
+        if (tokenId == REGISTERED) return (unicode"😉", "Registered");
+        if (tokenId == LOST) return (unicode"😢", "Lost");
+        if (tokenId == FOUND) return (unicode"😎", "Found");
+        if (tokenId == RETURNED) return (unicode"😇", "Returned");
         if (tokenId == UP) return (unicode"👍", "Thumb Up");
         if (tokenId == DOWN) return (unicode"👎", "Thumb Down");
-        return ("", "");
+        return (unicode"🫥", "404");
     }
 
-    function getImage(uint256 tokenId) internal pure returns (bytes memory image) {
-        (string memory emoji, ) = getMeta(tokenId);
+    function uri(uint256 tokenId) public pure override returns (string memory) {
+        (string memory emoji, string memory title) = getMeta(tokenId);
 
-        if (bytes(emoji).length > 0) {
-            image = abi.encodePacked(
+        string memory svg = string(
+            abi.encodePacked(
                 '<svg xmlns="http://www.w3.org/2000/svg" width="', Strings.toString(PIC_SIZE), '" height="', Strings.toString(PIC_SIZE), '">',
-                '<text x="50%" y="60%" text-anchor="middle" font-size="64" font-family="EmojiFont, sans-serif">',
-                emoji, '</text></svg>'
-            );
-        }
-    }
+                '<text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="64" font-family="sans-serif">', emoji, '</text></svg>'
+            )
+        );
 
-    function uri(uint256 tokenId) public pure override returns (string memory data) {
-        (, string memory title) = getMeta(tokenId);
+        string memory json = string(
+            abi.encodePacked(
+                '{',
+                    '"name": "', title, '",',
+                    '"description": "http://laf.is",',
+                    '"image": "data:image/svg+xml;base64,', Base64.encode(bytes(svg)), '",',
+                    '"attributes": []',
+                '}'
+            )
+        );
 
-        if (bytes(title).length > 0) {
-            data = string(
-                abi.encodePacked(
-                    "data:application/json;base64,",
-                    Base64.encode(
-                        abi.encodePacked(
-                            "{",
-                                '  "name": "', title, '"',
-                                ', "description": "http://laf.is"',
-                                ', "image": "data:image/svg+xml;base64,', Base64.encode(getImage(tokenId)), '"',
-                            "}"
-                        )
-                    )
-                )
-            );
-        }
+        return string(
+            abi.encodePacked(
+                "data:application/json;base64,", Base64.encode(bytes(json))
+            )
+        );
     }
 
     function safeTransferFrom(address from, address to, uint256 id, uint256 amount, bytes memory data) public virtual override {
-        require(from == address(0) || to == address(0), "Non-transferable token");
+        if (id != 0) {
+            require(from == address(0) || to == address(0), "Non-transferable token");
+        }
         super.safeTransferFrom(from, to, id, amount, data);
     }
 
     function safeBatchTransferFrom(address from, address to, uint256[] memory ids, uint256[] memory amounts, bytes memory data) public virtual override {
-        require(from == address(0) || to == address(0), "Non-transferable token");
+        for (uint256 i = 0; i < ids.length; i++) {
+            if (ids[i] != 0) {
+                require(from == address(0) || to == address(0), "Non-transferable token");
+            }
+        }
         super.safeBatchTransferFrom(from, to, ids, amounts, data);
     }
+
+    function supportsInterface(bytes4 interfaceId) public view virtual override(ERC1155, IERC165) returns (bool) {
+        return interfaceId == type(IERC2981).interfaceId || super.supportsInterface(interfaceId);
+    }
+
 }
