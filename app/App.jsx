@@ -20,7 +20,7 @@ function App() {
           <Route path="/" component={Home} />
           <Route path="/register" component={Register} />
           <Route path="/lost/:secretHash" component={Lost} />
-          <Route path="/found/:secretHash/:secret" component={Found} />
+          <Route path="/found/:secretHash/:secret/:ownerSignature" component={Found} />
           <Route path="/items" component={Items} />
         </Router>
       </Content>

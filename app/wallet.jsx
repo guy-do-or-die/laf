@@ -1,10 +1,10 @@
 import { useEffect, useState, useCallback } from 'react';
 
-import { http } from 'wagmi'
 import { encodeFunctionData } from 'viem'
 
 import * as chains from 'viem/chains'
 
+import { http, useAccount as useWagmi } from 'wagmi'
 import { PrivyProvider, usePrivy, useWallets } from '@privy-io/react-auth'
 import { WagmiProvider, createConfig, useSetActiveWallet } from '@privy-io/wagmi'
 import { SmartWalletsProvider, useSmartWallets } from '@privy-io/react-auth/smart-wallets';
@@ -117,7 +117,9 @@ export function useSmartWalletWriteHook(originalWriteHook) {
 
 export function useAccount() {
   const { wallets } = useWallets();
+  const { isConnected } = useWagmi();
   const { user, ready, authenticated, login, logout } = usePrivy()
+
   const { client: privySmartWalletClient } = useSmartWallets();
   const { setActiveWallet } = useSetActiveWallet();
     
@@ -126,7 +128,7 @@ export function useAccount() {
   // Get smart wallet from user's linked accounts
   const smartWallet = user?.linkedAccounts?.find((account) => account.type === 'smart_wallet');
   const address = smartWallet?.address || activeWallet?.address;
-  const loggedIn = ready && authenticated;
+  const loggedIn = ready && authenticated && isConnected;
 
   useEffect(() => {
     activeWallet && setActiveWallet(activeWallet);

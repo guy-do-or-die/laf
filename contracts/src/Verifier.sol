@@ -2,6 +2,7 @@
 pragma solidity ^0.8.19;
 
 import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
+import "@openzeppelin/contracts/utils/cryptography/MessageHashUtils.sol";
 
 
 interface IERC1271 {
@@ -25,10 +26,12 @@ abstract contract Verifier {
         bytes32 _messageHash,
         bytes calldata _signature
     ) internal view {
+        bytes32 ethHash = MessageHashUtils.toEthSignedMessageHash(_messageHash);
+
         if (_isContract(_signer)) {
-            require(IERC1271(_signer).isValidSignature(_messageHash, _signature) == MAGIC, INVALID_SIGNATURE_ERROR);
+            require(IERC1271(_signer).isValidSignature(ethHash, _signature) == MAGIC, INVALID_SIGNATURE_ERROR);
         } else {
-            require(ECDSA.recover(_messageHash, _signature) == _signer, INVALID_SIGNATURE_ERROR);
+            require(ECDSA.recover(ethHash, _signature) == _signer, INVALID_SIGNATURE_ERROR);
         }
     }
 

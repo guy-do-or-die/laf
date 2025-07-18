@@ -146,14 +146,12 @@ contract LAF is ConfigOwnable, Meta, ReentrancyGuard, Verifier {
         emit ItemLost(address(item), _secretHash, itemOwner, _rewardAmount, _geoLocation);
     }
 
-    /// @notice Verify the secret with owner and finder signatures
-    /// @param _itemOwner Address of the item owner
+    /// @notice Verify the secret and two signatures (owner + finder)
     /// @param _secretHash Hash of the secret used to identify the item
     /// @param _secret The plaintext secret
     /// @param _ownerSignature Owner's signature over the secret
     /// @param _finderSignature Finder's signature over the secret
     function _verifySecret(
-        address _itemOwner,
         address _secretHash,
         string calldata _secret,
         bytes calldata _ownerSignature,
@@ -161,7 +159,8 @@ contract LAF is ConfigOwnable, Meta, ReentrancyGuard, Verifier {
     ) internal view {
         bytes32 messageHash = keccak256(abi.encodePacked(_secret));
 
-        _verifySignature(_itemOwner, messageHash, _ownerSignature);
+        address itemOwner = _getItem(_secretHash).owner();
+        _verifySignature(itemOwner, messageHash, _ownerSignature);
         _verifySignature(msg.sender, messageHash, _finderSignature);
 
         address hashAsAddress = address(uint160(uint256(messageHash)));
@@ -184,7 +183,7 @@ contract LAF is ConfigOwnable, Meta, ReentrancyGuard, Verifier {
         address itemOwner = item.owner();
         require(itemOwner != msg.sender, INVALID_SENDER_ERROR);
 
-        _verifySecret(itemOwner, _secretHash, _secret, _ownerSignature, _finderSignature);
+        _verifySecret(_secretHash, _secret, _ownerSignature, _finderSignature);
 
         item.found(msg.sender);
 
@@ -211,9 +210,7 @@ contract LAF is ConfigOwnable, Meta, ReentrancyGuard, Verifier {
 
         address owner = item.owner();
         address finder = item.finder();
-        address delegateAddress = item.delegate();
-
-        require(owner == msg.sender || delegateAddress == msg.sender, INVALID_SENDER_ERROR);
+        require(owner == msg.sender || item.delegate() == msg.sender, INVALID_SENDER_ERROR);
 
         Charity memory charity = charities[_charityIndex];
         address charityAddress = charity.contractAddress;
