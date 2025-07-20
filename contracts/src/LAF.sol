@@ -48,7 +48,7 @@ contract LAF is ConfigOwnable, Meta, ReentrancyGuard {
     uint256 public feesDistributed;
 
     event ItemRegistered(address indexed item, address hash, address indexed owner);
-    event ItemLost(address indexed item, address hash, address indexed owner, uint256 indexed rewardAmount, string geoLocation);
+    event ItemLost(address indexed item, address hash, address indexed owner, uint256 indexed rewardAmount, string geo);
     event ItemRevokedLost(address indexed item, address hash, address indexed owner);
     event ItemFound(address indexed item, address hash, address indexed owner, address indexed finder);
     event ItemReturned(address indexed item, address hash, address indexed owner, address indexed finder);
@@ -56,8 +56,10 @@ contract LAF is ConfigOwnable, Meta, ReentrancyGuard {
     event RewardsDistributed(address indexed item, address hash, address indexed owner, address indexed finder, uint256 rewardAmount);
     event CharityFeesDistributed(address indexed item, address hash, address indexed owner, address indexed charity, uint256 charityFeeAmount);
     event FeesDistributed(address indexed item, address hash, address indexed owner, address indexed treasury, uint256 feeAmount);
+    event DelegateFeesDistributed(address indexed item, address hash, address indexed owner, address indexed delegate, uint256 delegateFeeAmount);
 
     event Minted(address indexed owner);
+    event Pong(address indexed wallet);
 
     string constant private INVALID_SENDER_ERROR = "Invalid sender";
     string constant private EMPTY_VALUE_ERROR = "Empty value";  
@@ -128,11 +130,11 @@ contract LAF is ConfigOwnable, Meta, ReentrancyGuard {
     /// @notice Mark an item as lost and set a reward
     /// @param _secretHash Hash of the secret used to identify the item
     /// @param _rewardAmount Amount of reward tokens offered for finding the item
-    /// @param _geoLocation Geohash location where the item was lost
+    /// @param _geo Geohash location where the item was lost
     function lost(
         address _secretHash,
         uint256 _rewardAmount,
-        string calldata _geoLocation
+        string calldata _geo
     ) external nonReentrant {
         Item item = _getItem(_secretHash);
 
@@ -140,13 +142,13 @@ contract LAF is ConfigOwnable, Meta, ReentrancyGuard {
         require(itemOwner == msg.sender, INVALID_SENDER_ERROR);
         require(_rewardAmount >= config.minReward, "Reward is too low");
 
-        item.lost(_rewardAmount, _geoLocation);
+        item.lost(_rewardAmount, _geo);
 
         _mint(itemOwner, LOST, 1, "");
 
         lostCount++;
 
-        emit ItemLost(address(item), _secretHash, itemOwner, _rewardAmount, _geoLocation);
+        emit ItemLost(address(item), _secretHash, itemOwner, _rewardAmount, _geo);
     }
 
     /// @notice Verify the secret and two signatures (owner + finder)
@@ -219,15 +221,29 @@ contract LAF is ConfigOwnable, Meta, ReentrancyGuard {
 
         address owner = item.owner();
         address finder = item.finder();
-        require(owner == msg.sender || item.delegate() == msg.sender, INVALID_SENDER_ERROR);
+        address delegate = item.delegate();
+        require(owner == msg.sender || delegate == msg.sender, INVALID_SENDER_ERROR);
 
         Charity memory charity = charities[_charityIndex];
         address charityAddress = charity.contractAddress;
         require(charity.active && charityAddress != address(0), "Not a valid charity");
 
-        (uint256 rewardAmount, uint256 charityFeeAmount, uint256 feeAmount) = item.returned(charityAddress, _charityFee, _fee);
+        (
+            uint256 rewardAmount,
+            uint256 charityFeeAmount,
+            uint256 feeAmount,
+            uint256 delegateFeeAmount
+        ) = item.returned(
+            charityAddress,
+            _charityFee,
+            _fee
+        );
 
         _mint(finder, RETURNED, 1, "");
+
+        if (delegate != msg.sender) {
+            _mint(delegate, DELEGATED, 1, "");
+        }
 
         _mintWithTrust(owner, UP, 1, "");
         _mintWithTrust(finder, UP, 2, "");
@@ -243,6 +259,7 @@ contract LAF is ConfigOwnable, Meta, ReentrancyGuard {
         emit RewardsDistributed(address(item), _secretHash, owner, finder, rewardAmount);
         emit CharityFeesDistributed(address(item), _secretHash, owner, charityAddress, charityFeeAmount);
         emit FeesDistributed(address(item), _secretHash, owner, treasury, feeAmount);
+        emit DelegateFeesDistributed(address(item), _secretHash, owner, delegate, delegateFeeAmount);
     }
 
     /// @notice Revoke the lost status of an item and reclaim the reward
@@ -322,6 +339,12 @@ contract LAF is ConfigOwnable, Meta, ReentrancyGuard {
     ) external onlyOwner {
         require(_treasury != address(0), EMPTY_VALUE_ERROR);
         treasury = _treasury;
+    }
+
+    /// @notice Ping function
+    /// @dev This function does nothing but emit an event
+    function ping() external nonReentrant {
+        emit Pong(msg.sender);
     }
 
 }

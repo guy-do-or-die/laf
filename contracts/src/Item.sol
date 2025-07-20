@@ -28,6 +28,8 @@ contract Item is Config, Initializable {
     bool public isFound;
     bool public isReturned;
 
+    uint256 public reward;
+
     uint256 public lostTs;
     uint256 public foundTs;
     uint256 public returnedTs;
@@ -35,9 +37,10 @@ contract Item is Config, Initializable {
     uint256 public detailsUpdatedTs;
     uint256 public delegateUpdatedTs;
 
-    uint256 public reward;
+    uint256 public delegateFee;
 
     string constant private INVALID_STATE_ERROR = "Invalid state";
+    string constant private INVALID_VALUE_ERROR = "Invalid value";
     string constant private TRANSFER_FAILED_ERROR = "Transfer failed";
     string constant private COOLDOWN_ERROR = "Cooldown not passed";
 
@@ -134,6 +137,7 @@ contract Item is Config, Initializable {
     /// @return rewardAmount Amount of tokens sent to the finder
     /// @return charityFeeAmount Amount of tokens sent to the charity
     /// @return feeAmount Amount of tokens sent to the platform treasury
+    /// @return delegateFeeAmount Amount of tokens sent to the delegate
     function returned(
         address _charity,
         uint256 _charityFee,
@@ -141,7 +145,8 @@ contract Item is Config, Initializable {
     ) external onlyFactory returns (
         uint256 rewardAmount,
         uint256 charityFeeAmount,
-        uint256 feeAmount
+        uint256 feeAmount,
+        uint256 delegateFeeAmount
     ) {
         require(!isReturned && isFound, INVALID_STATE_ERROR);
 
@@ -154,13 +159,19 @@ contract Item is Config, Initializable {
         require(_charityFee >= minCharityFeeBps && _charityFee <= MAX_CHARITY_FEE_BPS, "Invalid charity fee");
         require(_fee >= minFeeBps && _fee <= MAX_FEE_BPS, "Invalid fee");
 
+        require(_charityFee + _fee + delegateFee < MAX_FEE_BPS, "Invalid fees");
+
         IERC20 token = IERC20(rewardToken);
         uint256 remainingBalance = token.balanceOf(address(this));
 
         charityFeeAmount = (remainingBalance * _charityFee) / BASIS_POINTS;
         feeAmount = (remainingBalance * _fee) / BASIS_POINTS;
 
-        rewardAmount = remainingBalance - charityFeeAmount - feeAmount;
+        if (delegate != address(0) && delegateFee > 0) {
+            delegateFeeAmount = (remainingBalance * delegateFee) / BASIS_POINTS;
+        }
+
+        rewardAmount = remainingBalance - charityFeeAmount - feeAmount - delegateFeeAmount;
 
         if (charityFeeAmount > 0) {
             require(token.transfer(_charity, charityFeeAmount), TRANSFER_FAILED_ERROR);
@@ -170,6 +181,10 @@ contract Item is Config, Initializable {
             address treasuryAddress  = ILAF(factory).treasury();
             require(treasuryAddress != address(0), "Treasury address not set");
             require(token.transfer(treasuryAddress, feeAmount), TRANSFER_FAILED_ERROR);
+        }
+
+        if (delegate != address(0) && delegateFeeAmount > 0) {
+            require(token.transfer(delegate, delegateFeeAmount), TRANSFER_FAILED_ERROR);
         }
 
         if (rewardAmount > 0) {
@@ -206,6 +221,10 @@ contract Item is Config, Initializable {
         string calldata _comment,
         string calldata _geo
     ) external onlyOwner {
+        require(!isFound && !isReturned, INVALID_STATE_ERROR);
+        require(bytes(_comment).length > 0, INVALID_VALUE_ERROR);
+        require(bytes(_geo).length > 0, INVALID_VALUE_ERROR);
+        
         comment = _comment;
         geo = _geo;
 
@@ -215,9 +234,14 @@ contract Item is Config, Initializable {
     /// @notice Update the delegate address that can confirm return on behalf of the owner
     /// @param _delegate Address of the delegate
     function updateDelegate(
-        address _delegate
+        address _delegate,
+        uint256 _delegateFee
     ) external onlyOwner {
+        require(!isReturned, INVALID_STATE_ERROR);
+        require(_delegate != address(0),INVALID_VALUE_ERROR);
+        
         delegate = _delegate;
+        delegateFee = _delegateFee;
 
         delegateUpdatedTs = block.timestamp;
     }

@@ -69,8 +69,10 @@ export function useUnifiedSigning() {
             throw new Error('Smart wallet client not available');
           }
 
+          // Allow signing with undeployed smart wallets (counterfactual)
+          // Privy handles this internally using the controlling EOA
           if (!isSmartWalletDeployed) {
-            throw new Error('Smart wallet is not deployed yet');
+            console.log('📱 Smart wallet not deployed yet - using counterfactual signing');
           }
           
           console.log('📱 Using smartWalletClient for ERC-1271 signature');

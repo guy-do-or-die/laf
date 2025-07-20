@@ -64,16 +64,13 @@ interface ILAF {
     /// @notice Register a new item in the LAF system
     function registerItem(address secretHash, string calldata comment) external;
     /// @notice Mark an item as lost and set a reward
-    function lost(address secretHash, uint256 rewardAmount, string calldata geoLocation) external;
+    function lost(address secretHash, uint256 rewardAmount, string calldata geo) external;
     /// @notice Mark an item as found by providing the correct secret
     function found(address secretHash, string calldata secret, bytes calldata ownerSignature, bytes calldata finderSignature) external;
     /// @notice Mark an item as returned to its owner
     function returned(address secretHash, uint256 charityIndex, uint256 charityFee, uint256 fee) external;
     /// @notice Revoke the lost status of an item and reclaim the reward
     function revokeLost(address secretHash) external;
-
-    /// @notice Mint a special commemorative transferable token by paying ETH
-    function mint() external payable;
 
     // Owner functions
     /// @notice Add a new charity that can receive donations
@@ -97,4 +94,11 @@ interface ILAF {
     function setFoundCooldown(uint256 foundCooldownSeconds) external;
     function setReturnCooldown(uint256 returnCooldownSeconds) external;
     function setRevokeLostCooldown(uint256 revokeLostCooldownSeconds) external;
+
+    /// @notice Mint a special commemorative transferable token by paying ETH
+    function mint() external payable;
+
+    /// @notice Ping function
+    function ping() external;
+
 }

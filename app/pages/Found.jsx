@@ -13,13 +13,13 @@ import { notify } from "../components/Notification";
 import { useAccount } from "../wallet";
 import { useUnifiedSigning } from "../hooks/useUnifiedSigning";
 
-import { useReadLafItems, useSimulateLafFound, useWriteLafFound, useReadItemIsFound, useReadItemOwner } from "../contracts"
+import { useReadLafItems, useSimulateLafFound, useWriteLafFound, useReadItemIsFound, useReadItemOwner, useSimulateLafPing, useWriteLafPing } from "../contracts"
 import { useSmartWalletSimulateHook, useSmartWalletWriteHook } from "../wallet"
 
 
 export default function Found() {
     const { secretHash, secret, ownerSignature } = useParams();
-    const { address, activeWalletType, signingMethod } = useAccount();
+    const { address, activeWalletType, signingMethod, smartWalletClient, isSmartWalletDeployed } = useAccount();
     const { signMessage, isReady: signingReady } = useUnifiedSigning();
     
     const [finderSignature, setFinderSignature] = useState(null);
@@ -27,11 +27,41 @@ export default function Found() {
     const [secretSigned, setSecretSigned] = useState(false);
     const [ownerSignatureValid, setOwnerSignatureValid] = useState(null); // null = not checked, true/false = result
 
+    // Smart wallet deployment state
+    const [isDeployingWallet, setIsDeployingWallet] = useState(false);
+    const [walletDeploymentNeeded, setWalletDeploymentNeeded] = useState(false);
+
     const { data: blockNumber, refetch: refetchBlockNumber } = useBlockNumber()
     const { data: itemAddress } = useReadLafItems({ args: [secretHash] });
     const { data: isFound } = useReadItemIsFound({ address: itemAddress });
     const { data: ownerAddress } = useReadItemOwner({ address: itemAddress });
     
+    // Ping parameters for smart wallet deployment
+    const pingParams = {
+        args: [],
+        enabled: walletDeploymentNeeded && activeWalletType === 'smart_wallet',
+        confirmationCallback: ({ data, error }) => {
+            if (!error && data) {
+                console.log('Smart wallet deployed via ping:', data);
+                notify('Smart wallet deployed successfully!', 'success');
+                setWalletDeploymentNeeded(false);
+                setIsDeployingWallet(false);
+            } else if (error) {
+                console.error('Failed to deploy smart wallet via ping:', error);
+                notify('Failed to deploy smart wallet. Please try again.', 'error');
+                setIsDeployingWallet(false);
+            }
+        }
+    };
+
+    useEffect(() => {
+        if (activeWalletType === 'smart_wallet' && !isSmartWalletDeployed) {
+            setWalletDeploymentNeeded(true);
+        } else {
+            setWalletDeploymentNeeded(false);
+        }
+    }, [activeWalletType, isSmartWalletDeployed]);
+
     // Validate owner signature when component mounts
     useEffect(() => {
         const validateOwnerSignature = async () => {
@@ -463,9 +493,35 @@ export default function Found() {
                                         </p>
                                     )}
                                 </div>
+                            ) : walletDeploymentNeeded ? (
+                                <div className="border-0 p-6 rounded-xl shadow-lg backdrop-blur-sm bg-white/95">
+                                    <h3 className="text-lg font-semibold mb-4">Step 2: Deploy Smart Wallet</h3>
+                                    <p className="mb-2 text-sm text-green-600">
+                                        ✅ Owner signature verified
+                                    </p>
+                                    <p className="mb-2 text-sm text-green-600">
+                                        ✅ Finder signature completed
+                                    </p>
+                                    <p className="mb-4 text-sm text-yellow-600">
+                                        ⚠️ Smart wallet needs to be deployed before receiving USDC rewards
+                                    </p>
+                                    <p className="mb-4 text-sm text-gray-600">
+                                        Your smart wallet needs to be deployed on-chain to receive USDC tokens. 
+                                        This is a one-time setup that enables your wallet to receive rewards.
+                                    </p>
+                                    <div className="flex justify-center">
+                                        <TxButton
+                                            simulateHook={useSmartWalletSimulateHook(useSimulateLafPing)}
+                                            writeHook={useSmartWalletWriteHook(useWriteLafPing)}
+                                            params={pingParams}
+                                            text="Deploy Smart Wallet"
+                                            onStart={() => setIsDeployingWallet(true)}
+                                        />
+                                    </div>
+                                </div>
                             ) : (
                                 <div className="border-0 p-6 rounded-xl shadow-lg backdrop-blur-sm bg-white/95">
-                                    <h3 className="text-lg font-semibold mb-4">Step 2: Confirm Found</h3>
+                                    <h3 className="text-lg font-semibold mb-4">Step 3: Confirm Found</h3>
                                     <p className="mb-2 text-sm text-green-600">
                                         ✅ Owner signature verified
                                     </p>

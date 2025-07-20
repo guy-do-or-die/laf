@@ -14,8 +14,9 @@ abstract contract Meta is ERC1155Supply, IERC2981 {
     uint256 constant LOST = 2;
     uint256 constant FOUND = 3;
     uint256 constant RETURNED = 4;
-    uint256 constant UP = 5;
-    uint256 constant DOWN = 6;
+    uint256 constant DELEGATED = 5;
+    uint256 constant UP = 6;
+    uint256 constant DOWN = 7;
 
     uint256 constant PIC_SIZE = 256;
 
@@ -68,6 +69,7 @@ abstract contract Meta is ERC1155Supply, IERC2981 {
         if (tokenId == LOST) return (unicode"😢", "Lost");
         if (tokenId == FOUND) return (unicode"😎", "Found");
         if (tokenId == RETURNED) return (unicode"😇", "Returned");
+        if (tokenId == DELEGATED) return (unicode"🧐", "Delegated");
         if (tokenId == UP) return (unicode"👍", "Thumb Up");
         if (tokenId == DOWN) return (unicode"👎", "Thumb Down");
         return (unicode"🫥", "404");
