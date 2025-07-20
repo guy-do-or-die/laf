@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { useXMTP } from "@/xmtp/contexts/XMTPContext";
+import { useXMTP } from "@/messaging/xmtp/contexts/XMTPContext";
 
 
 export const useConversation = (conversation) => {

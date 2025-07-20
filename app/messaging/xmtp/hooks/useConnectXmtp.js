@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from "react";
 
-import { useXMTP } from "@/xmtp/contexts/XMTPContext";
-import { createEOASigner, createSCWSigner } from "@/xmtp/helpers/createSigner";
+import { useXMTP } from "@/messaging/xmtp/contexts/XMTPContext";
+import { createEOASigner, createSCWSigner } from "@/messaging/xmtp/helpers/createSigner";
 
 import { useAccount, chain } from "@/wallet";
 import { useUnifiedSigning } from "@/hooks/useUnifiedSigning";

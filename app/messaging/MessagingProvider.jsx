@@ -2,15 +2,15 @@ import { createContext, useContext, useMemo } from "react";
 
 // Import messaging providers
 import WakuProvider, { useWaku } from "./waku/WakuContext";
-import XMTPProvider, { useXMTP } from "../xmtp/contexts/XMTPContext";
+import XMTPProvider, { useXMTP } from "./xmtp/contexts/XMTPContext";
 
 // Import connection hooks
 import { useConnectWaku } from "./waku/useConnectWaku";
-import { useConnectXmtp } from "../xmtp/hooks/useConnectXmtp";
+import { useConnectXmtp } from "./xmtp/hooks/useConnectXmtp";
 
 // Import conversation hooks
 import { useWakuConversation } from "./waku/useWakuConversation";
-import { useConversation as useXMTPConversation } from "../xmtp/hooks/useConversation";
+import { useConversation as useXMTPConversation } from "./xmtp/hooks/useConversation";
 
 // Messaging provider types
 export const MessagingProviders = {
