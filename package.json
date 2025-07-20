@@ -20,6 +20,8 @@
     "@radix-ui/react-label": "^2.1.7",
     "@radix-ui/react-slot": "^1.2.3",
     "@wagmi/cli": "^2.3.1",
+    "@waku/react": "^0.0.7-b9d400c",
+    "@waku/sdk": "^0.0.33",
     "@xmtp/browser-sdk": "3.1.0-rc1",
     "@xmtp/content-type-reaction": "^2.0.2",
     "@xmtp/content-type-remote-attachment": "^2.0.2",

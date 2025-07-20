@@ -14,14 +14,14 @@ import { useFundWallet, usePrivy} from '@privy-io/react-auth';
 
 import { useAccount, chain } from '../wallet';
 import { useReadErc20BalanceOf } from '../contracts';
-import { useConnectXmtp } from '../xmtp/hooks/useConnectXmtp';
+import { useMessagingConnection } from '../messaging/MessagingProvider';
 
 import {notify} from './Notification';
 
 
 export default function Connection() {
     const { loggedIn, login, logout, address, user, exportWallet } = useAccount();
-    const { connect: connectXmtp, disconnect: disconnectXmtp } = useConnectXmtp();
+    const { connect: connectMessaging, disconnect: disconnectMessaging } = useMessagingConnection();
 
     const [location, setLocation] = useLocation();
     const [isOpen, setIsOpen] = useState(false);
@@ -33,7 +33,7 @@ export default function Connection() {
         if (loggedIn && location === '/') {
             notify('Connected', 'success', { id: "connected"});
             setLocation('/items');
-            connectXmtp();
+            connectMessaging();
         }
 
         if (!loggedIn && location === '/items') {
@@ -43,12 +43,12 @@ export default function Connection() {
 
     const handleLogin = () => {
         login();
-        connectXmtp();
+        connectMessaging();
     };
 
     const handleLogout = () => {
         logout();
-        disconnectXmtp();
+        disconnectMessaging();
         setLocation('/');
     };
 

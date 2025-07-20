@@ -11,15 +11,14 @@ import { SmartWalletsProvider, useSmartWallets } from '@privy-io/react-auth/smar
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
+export const queryClient = new QueryClient()
+
 export const supportedChains = {
     main: chains.base,
     test: chains.baseSepolia,
 }
   
 export const chain = supportedChains['test']
-
-export const queryClient = new QueryClient()
-
 
 export const privyConfig = {
     loginMethods: ['email', 'google', 'wallet'],
@@ -173,6 +172,7 @@ export function useAccount() {
   // Debug wallet state (throttled to prevent spam)
   useEffect(() => {
     if (loggedIn) {
+      /*
       console.log('🔗 Unified Wallet State:', {
         activeWalletType,
         address: address?.slice(0, 8) + '...',
@@ -184,6 +184,7 @@ export function useAccount() {
         wagmiConnected: isConnected,
         isSmartWalletDeployed
       });
+      */
     }
   }, [loggedIn,
     activeWalletType,

@@ -5,6 +5,7 @@ import { useBlockNumber } from "wagmi";
 
 import { useAccount } from '../wallet';
 import { getUserItems } from '../utils/graphql';
+import { useBlockContext, useBlockUpdates } from '../contexts/BlockContext';
 
 import { Card, CardContent } from "../components/ui/card";
 import { Button } from "../components/ui/button";
@@ -15,38 +16,39 @@ export default function Items() {
     const { address, loggedIn } = useAccount();
     const [items, setItems] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const { currentBlock, updateTrigger } = useBlockContext();
 
     const { blockNumber } = useBlockNumber();
    
-    useEffect(() => {
-        const loadUserItems = async () => {
-          if (!loggedIn || !address) {
-            setIsLoading(false);
-            return;
-          }
+    const loadUserItems = async () => {
+      if (!loggedIn || !address) {
+        setIsLoading(false);
+        return;
+      }
 
-          try {
-            setIsLoading(true);
-            const itemsData = await getUserItems(address);
-            
-            const formattedItems = itemsData?.map((item) => ({
-                hash: item.hash,
-                address: item.item,
-                blockNumber: item.blockNumber,
-                blockTimestamp: item.blockTimestamp,
-                transactionHash: item.transactionHash
-            }))
-    
-            setItems(formattedItems || [])
-            setIsLoading(false);
-          } catch (error) {
-            console.error('Failed to load items from subgraph:', error)
-            setIsLoading(false);
-          }
-        }
-    
+      try {
+        setIsLoading(true);
+        const itemsData = await getUserItems(address);
+        
+        const formattedItems = itemsData?.map((item) => ({
+            hash: item.hash,
+            address: item.item,
+            blockNumber: item.blockNumber,
+            blockTimestamp: item.blockTimestamp,
+            transactionHash: item.transactionHash
+        }))
+
+        setItems(formattedItems || [])
+        setIsLoading(false);
+      } catch (error) {
+        console.error('Failed to load items from subgraph:', error)
+        setIsLoading(false);
+      }
+    }
+
+    useEffect(() => {
         address && loadUserItems()
-      }, [address, loggedIn])
+    }, [address, loggedIn])
     
     return (
         <div className="flex flex-col items-center">

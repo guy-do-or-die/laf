@@ -1,7 +1,7 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 
-import { X, Send, Loader2, MessageSquare, AlertCircle } from "lucide-react";
+import { X, Send, Loader2, MessageSquare, AlertCircle, ChevronDown } from "lucide-react";
 
 import { Button } from "./ui/button";
 import { Card, CardHeader, CardTitle, CardFooter } from "./ui/card";
@@ -9,68 +9,91 @@ import { Input } from "./ui/input";
 
 import { useAccount } from "@/wallet";
 
-import { useXMTP } from "@/xmtp/contexts/XMTPContext";
-import { useConversation } from "@/xmtp/hooks/useConversation";
-import { useConversations } from "@/xmtp/contexts/ConversationsContext";
-import { useConversations as useConversationsHook } from "@/xmtp/hooks/useConversations";
+import { useMessaging, useMessagingConversation } from "@/messaging/MessagingProvider.jsx";
 
-
-export const MessageModal = ({ isOpen, onClose, recipientAddress, itemTitle }) => {
+export const MessageModal = ({ isOpen, onClose, itemTitle, secretHash, recipientAddress }) => {
   const { address } = useAccount();
-  const { client } = useXMTP();
-
-  const [conversation, setConversation] = useState(null);
-  const [error, setError] = useState(null);
-  const [retryCount, setRetryCount] = useState(0);
-  const [hasAttempted, setHasAttempted] = useState(false);
+  const { client, provider } = useMessaging();
   
-  // Separate state variables for different loading phases
-  const [conversationLoading, setConversationLoading] = useState(true);
-  const [initializing, setInitializing] = useState(true); // Track initial setup
-  const [messageSetupComplete, setMessageSetupComplete] = useState(false); // Track if message setup is complete
-
-  // Use ConversationsContext for state management and finding existing conversations
-  const { syncAll, list, loading: conversationsLoading } = useConversations();
+  // Get our Waku node's peer ID for proper sender identification
+  const ourPeerId = client?.peerId;
   
-  // Use the hook for creating new conversations
-  const { newDmWithIdentifier } = useConversationsHook();
+  // For Waku, use peer ID; for XMTP, use wallet address
+  const ourIdentity = provider === 'waku' ? ourPeerId : address;
 
-  // This effect handles syncing conversations whenever modal is opened
-  useEffect(() => {
-    // Only run when modal is open and client is available
-    if (!isOpen || !client) {
-      return;
+  // Use the abstracted messaging conversation hook with secretHash for item-specific messaging
+  const {
+    conversation,
+    messages,
+    loading,
+    error,
+    sending,
+    sendMessage,
+    retry
+  } = useMessagingConversation(recipientAddress, secretHash);
+
+  const [inputMessage, setInputMessage] = useState("");
+  const [showScrollButton, setShowScrollButton] = useState(false);
+  const [lastMessageCount, setLastMessageCount] = useState(0);
+  const messagesEndRef = useRef(null);
+  const messagesContainerRef = useRef(null);
+
+  // Check if user is at the bottom of the chat
+  const isAtBottom = () => {
+    if (!messagesContainerRef.current) return false;
+    const container = messagesContainerRef.current;
+    const threshold = 100; // pixels from bottom to consider "at bottom"
+    return container.scrollHeight - container.scrollTop - container.clientHeight <= threshold;
+  };
+  
+  // Scroll to bottom function
+  const scrollToBottom = (smooth = true) => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ 
+        behavior: smooth ? 'smooth' : 'instant', 
+        block: 'end' 
+      });
     }
-
-    const syncConversations = async () => {
-      try {
-        console.log('[MessageModal] Syncing conversations from network (modal opened)...');
-        await syncAll();
-        
-        console.log('[MessageModal] Listing all conversations...');
-        await list({}, false); // false because we just synced
-      } catch (error) {
-        console.error('[MessageModal] Error syncing conversations:', error);
-      }
+  };
+  
+  // Handle scroll events to show/hide scroll button
+  useEffect(() => {
+    const container = messagesContainerRef.current;
+    if (!container) return;
+    
+    const handleScroll = () => {
+      const atBottom = isAtBottom();
+      setShowScrollButton(!atBottom && messages.length > 0);
     };
     
-    syncConversations();
-  }, [isOpen, client, syncAll, list]);
+    container.addEventListener('scroll', handleScroll);
+    // Check initial state
+    handleScroll();
+    
+    return () => container.removeEventListener('scroll', handleScroll);
+  }, [messages.length]);
   
-  // Reset state when modal closes to allow fresh sync on next open
+  // Smart auto-scroll: scroll when at bottom (following conversation), don't scroll when scrolled up (reading history)
   useEffect(() => {
-    if (!isOpen) {
-      console.log('[MessageModal] Modal closed, resetting state for fresh sync on next open');
-      setConversation(null);
-      setError(null);
-      setHasAttempted(false);
-      setConversationLoading(true);
-      setInitializing(true);
-      setMessageSetupComplete(false);
-      setRetryCount(0);
+    if (messagesContainerRef.current && messages.length > 0) {
+      const hasNewMessages = messages.length > lastMessageCount;
+      setLastMessageCount(messages.length);
+      
+      if (hasNewMessages) {
+        // Check if user is at bottom before new message renders
+        const wasAtBottom = isAtBottom();
+        
+        // Use requestAnimationFrame to ensure DOM is updated with new message
+        requestAnimationFrame(() => {
+          if (wasAtBottom) {
+            scrollToBottom(true); // Smooth scroll if was at bottom before new message
+          }
+          // If not at bottom, the scroll button will be shown via handleScroll
+        });
+      }
     }
-  }, [isOpen]);
-  
+  }, [messages.length, lastMessageCount]); // Only run when message count changes
+
   // Handle escape key to close modal
   useEffect(() => {
     const handleEscape = (event) => {
@@ -81,525 +104,213 @@ export const MessageModal = ({ isOpen, onClose, recipientAddress, itemTitle }) =
 
     if (isOpen) {
       document.addEventListener('keydown', handleEscape);
-      return () => {
-        document.removeEventListener('keydown', handleEscape);
-      };
+      return () => document.removeEventListener('keydown', handleEscape);
     }
   }, [isOpen, onClose]);
-  
-  // This effect handles conversation creation once
+
+  // Reset input when modal closes
   useEffect(() => {
-    // Debug: Log all condition values
-    console.log('[MessageModal] Conversation setup useEffect triggered with conditions:', {
-      isOpen,
-      hasClient: !!client,
-      hasRecipientAddress: !!recipientAddress,
-      hasAttempted,
-      hasConversation: !!conversation,
-      conversationsLoading
-    });
-    
-    // Only run this effect when modal is open, client and recipientAddress are available
-    // and we haven't attempted conversation creation yet
-    if (!isOpen || !client || !recipientAddress || hasAttempted || conversation) {
-      console.log('[MessageModal] Conversation setup skipped due to conditions:', {
-        isOpen,
-        hasClient: !!client,
-        hasRecipientAddress: !!recipientAddress,
-        hasAttempted,
-        hasConversation: !!conversation
-      });
-      return;
+    if (!isOpen) {
+      setInputMessage("");
     }
+  }, [isOpen]);
 
-    setConversationLoading(true);
-    setInitializing(true);
-    
-    // Use a timeout to prevent hanging if something goes wrong
-    const timeoutId = setTimeout(() => {
-      if (!hasAttempted && !conversation) {
-        console.warn('[MessageModal] Conversation setup timed out after 15 seconds');
-        setError(new Error('Conversation setup timed out. Please try again.'));
-        setConversationLoading(false);
-        setInitializing(false);
-        setHasAttempted(true);
-      }
-    }, 15000);
-    
-    // Debug client capabilities
-    console.log('XMTP client capabilities:', {
-      hasNewDmWithIdentifier: typeof client.conversations?.newDmWithIdentifier === 'function',
-      hasNewDm: typeof client.conversations?.newDm === 'function',
-      hasNewConversation: typeof client.conversations?.newConversation === 'function',
-      hasCanMessage: typeof client.canMessage === 'function',
-      clientVersion: client.version || 'unknown'
-    });
-    
-    // Debug client capabilities
-    console.log('XMTP client capabilities:', {
-      hasNewDmWithIdentifier: typeof client.conversations?.newDmWithIdentifier === 'function',
-      hasNewDm: typeof client.conversations?.newDm === 'function',
-      hasNewConversation: typeof client.conversations?.newConversation === 'function',
-      hasCanMessage: typeof client.canMessage === 'function',
-      clientVersion: client.version || 'unknown'
-    });
+  const handleSendMessage = async (e) => {
+    e.preventDefault();
+    if (!inputMessage.trim() || !sendMessage) return;
 
-    const setupConversation = async () => {
-      try {
-        console.log(`[MessageModal] Setting up conversation with ${recipientAddress}`);
-        
-        setConversationLoading(true);
-        setInitializing(true);
-        setError(null);
-        
-        // Add timeout to prevent hanging
-        const timeoutPromise = new Promise((_, reject) => {
-          setTimeout(() => reject(new Error('Conversation setup timed out. Please try again.')), 15000);
-        });
-        
-        console.log('[MessageModal] Calling newDmWithIdentifier...');
-        
-        // Use newDmWithIdentifier - it's a singleton that handles existing/new conversations
-        const conversationPromise = newDmWithIdentifier({
-          identifier: recipientAddress,
-          identifierKind: 'Ethereum'
-        });
-        
-        // Race between conversation creation and timeout
-        const conversation = await Promise.race([conversationPromise, timeoutPromise]);
-        
-        console.log('[MessageModal] Conversation ready:', !!conversation);
-        setConversation(conversation);
-        setConversationLoading(false);
-        setInitializing(false);
-        setHasAttempted(true);
-      } catch (error) {
-        console.error('[MessageModal] Failed to set up conversation:', error);
-        setError(error);
-        setConversationLoading(false);
-        setInitializing(false);
-        setHasAttempted(true);
-      }
-    };
-
-    setupConversation();
-
-    // Cleanup function
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, [isOpen, client, recipientAddress, hasAttempted, conversation, newDmWithIdentifier]);
-
-  // Use the conversation hook to get message-related functions and state
-  const { 
-    send, 
-    getMessages, 
-    loading: messagesLoading, 
-    messages, 
-    streamMessages, 
-    error: conversationError 
-  } = useConversation(conversation);
-  
-  // Update state when conversation changes
-  useEffect(() => {
-    if (conversation) {
-      console.log('[MessageModal] Conversation object changed:', conversation);
-      setConversationLoading(false);
-      setHasAttempted(true);
-      setInitializing(false);
-    }
-  }, [conversation]);
-  
-  // Combined loading state for UI with detailed logging
-  const loading = conversationLoading || messagesLoading;
-  
-  useEffect(() => {
-    console.log('[MessageModal] Loading state changed:', { 
-      conversationLoading, 
-      messagesLoading, 
-      combined: loading,
-      initializing,
-      hasConversation: !!conversation,
-      messageSetupComplete,
-      messageSetupRef: messageSetupRef.current
-    });
-  }, [conversationLoading, messagesLoading, loading, initializing, conversation, messageSetupComplete]);
-
-  const [newMessage, setNewMessage] = useState("");
-  const [sending, setSending] = useState(false);
-  
-  const messagesEndRef = useRef(null);
-
-  // References to track state and prevent duplicate operations
-  const stopStreamRef = useRef(() => {});
-  const streamActiveRef = useRef(false);
-  const messageSetupRef = useRef(false); // Track if message setup has been done
-
-  // Start streaming messages
-  const startStream = useCallback(async () => {
-    // Don't start a new stream if one is already active
-    if (streamActiveRef.current) {
-      console.log('[MessageModal] Stream already active, skipping startStream');
-      return;
-    }
-    
     try {
-      console.log('[MessageModal] Starting message stream...');
-      streamActiveRef.current = true;
-      stopStreamRef.current = await streamMessages() || (() => {});
-      console.log('[MessageModal] Message stream started successfully');
-    } catch (streamError) {
-      console.error('[MessageModal] Failed to start message stream:', streamError);
-      streamActiveRef.current = false;
-      setError(streamError);
-    }
-  }, [streamMessages]);
-
-  // Stop streaming messages
-  const stopStream = useCallback(() => {
-    if (!streamActiveRef.current) {
-      console.log('[MessageModal] No active stream to stop');
-      return;
-    }
-    
-    console.log('[MessageModal] Stopping message stream...');
-    stopStreamRef.current();
-    stopStreamRef.current = () => {};
-    streamActiveRef.current = false;
-  }, []);
-
-  // Keep track of the previous conversation ID to detect changes
-  const prevConversationIdRef = useRef(null);
-  
-  useEffect(() => {
-    // Create a variable to track if the component is mounted
-    let isMounted = true;
-    
-    // Reset message setup if conversation changes
-    if (conversation && prevConversationIdRef.current !== conversation.id) {
-      console.log('[MessageModal] Conversation changed, resetting message setup');
-      messageSetupRef.current = false;
-      prevConversationIdRef.current = conversation.id;
-    }
-    
-    // Only setup messaging if we have a conversation, initialization is complete,
-    // and we haven't already set up messaging
-    if (conversation && !initializing && !messageSetupRef.current) {
-      console.log('[MessageModal] Setting up messaging with conversation:', { 
-        conversationId: conversation.id || 'unknown',
-        messagesLoading,
-        messageSetupComplete,
-        messageSetupRef: messageSetupRef.current
-      });
+      await sendMessage(inputMessage.trim());
+      setInputMessage("");
       
-      // Mark that we're setting up messages to prevent duplicate setups
-      messageSetupRef.current = true;
-      
-      // Define an async function inside useEffect
-      const setupMessaging = async () => {
-        try {
-          // Stop any existing stream first
-          stopStream();
-          
-          // Get initial messages
-          console.log('[MessageModal] Loading initial messages...');
-          await getMessages();
-          
-          if (isMounted) {
-            // Start streaming messages
-            console.log('[MessageModal] Initial messages loaded, starting stream...');
-            await startStream();
-            
-            // Mark setup as complete
-            if (isMounted) {
-              setMessageSetupComplete(true);
-              console.log('[MessageModal] Message setup completed successfully');
-            }
-          }
-        } catch (e) {
-          console.error("[MessageModal] Error fetching or streaming messages:", e);
-          if (isMounted) {
-            setError(e);
-            // Reset setup ref on error so we can try again
-            messageSetupRef.current = false;
-          }
-        }
-      };
-      
-      // Execute the async function
-      setupMessaging();
-    }
-    
-    // Cleanup function
-    return () => {
-      isMounted = false;
-      stopStream();
-      console.log('[MessageModal] Cleaning up message streaming effect');
-    };
-  }, [conversation, initializing, getMessages, startStream, stopStream]);
-
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
-
-  const handleSend = async () => {
-    if (!newMessage.trim() || sending) return;
-
-    setSending(true);
-    try {
-      console.log('[MessageModal] Sending message:', newMessage.trim());
-      const messageContent = newMessage.trim();
-      
-      // Create a temporary message to show immediately in the UI
-      const timestamp = new Date();
-      const newMsg = {
-        content: messageContent,
-        senderAddress: address,
-        timestamp: timestamp,
-        isSending: true // Mark as sending
-      };
-      
-      // Add the temporary message to the UI (no need to update state, just for display)
-      const tempMessages = [...messages, newMsg];
-      console.log('[MessageModal] Added temporary message to UI, count:', tempMessages.length);
-      
-      // Send the message to XMTP network
-      await send(messageContent);
-      console.log('[MessageModal] Message sent successfully to XMTP network');
-      
-      // Clear the input field
-      setNewMessage("");
-      
-      // After successful send, force a refresh of messages if stream isn't active
-      if (!streamActiveRef.current) {
-        console.log('[MessageModal] Stream not active, refreshing messages');
-        await getMessages();
-      } else {
-        console.log('[MessageModal] Message sent, stream should handle the update');
-      }
-    } catch (e) {
-      console.error("[MessageModal] Failed to send message:", e);
-      setError(e); // Using the local error state
-    } finally {
-      setSending(false);
+      // Always scroll to bottom when user sends a message
+      setTimeout(() => {
+        scrollToBottom(true);
+      }, 100); // Small delay to ensure message is added to DOM
+    } catch (err) {
+      console.error('Failed to send message:', err);
     }
   };
 
   const handleKeyPress = (e) => {
-    if (e.key === "Enter" && !e.shiftKey) {
+    if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
-      handleSend();
+      handleSendMessage(e);
     }
   };
 
+  if (!isOpen) return null;
+
   const formatAddress = (addr) => {
-    if (!addr || typeof addr !== 'string') return 'Unknown';
-    if (addr.length < 10) return addr; // Return as-is if too short to truncate
+    if (!addr) return '';
     return `${addr.slice(0, 6)}...${addr.slice(-4)}`;
   };
 
-  const formatTime = (timestamp) => {
-    if (!timestamp) return '';
-    
-    try {
-      // Handle both Date objects and numeric timestamps
-      const date = timestamp instanceof Date ? timestamp : new Date(timestamp);
-      
-      // Check if date is valid
-      if (isNaN(date.getTime())) return '';
-      
-      return date.toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit",
-      });
-    } catch (e) {
-      console.error('Error formatting timestamp:', e);
-      return '';
-    }
+  const formatTimestamp = (timestamp) => {
+    return new Date(timestamp).toLocaleTimeString([], { 
+      hour: '2-digit', 
+      minute: '2-digit' 
+    });
+  };
+  
+  const formatFullTimestamp = (timestamp) => {
+    return new Date(timestamp).toLocaleString();
   };
 
-  // Handle click outside to close modal
   const handleBackdropClick = (e) => {
+    // Only close if clicking the backdrop itself, not the modal content
     if (e.target === e.currentTarget) {
       onClose();
     }
   };
 
-  const modalContent = (
+  return createPortal(
     <div 
-      className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50"
+      className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4 cursor-pointer"
       onClick={handleBackdropClick}
     >
-      <Card 
-        className="w-full max-w-md h-[600px] flex flex-col bg-white/95 backdrop-blur-sm shadow-2xl border-0 rounded-xl"
-        onClick={(e) => e.stopPropagation()}
-      >
-        {/* Header */}
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
-          <div className="space-y-1">
-            <CardTitle className="text-lg">Message about {itemTitle}</CardTitle>
-            <p className="text-sm text-muted-foreground">
-              To: {formatAddress(recipientAddress)}
-            </p>
+      <div className="relative w-full max-w-md h-[500px] cursor-default">
+        <Card className="w-full h-full flex flex-col bg-white/95 backdrop-blur-sm shadow-2xl border-0 rounded-xl gap-1 py-1">
+        
+        {/* Floating scroll to bottom button - positioned just above input */}
+        {showScrollButton && (
+          <div className="absolute bottom-16 right-5 z-20">
+            <button
+              onClick={() => scrollToBottom(true)}
+              className="bg-gray-400/60 hover:bg-gray-500/70 text-gray-700 hover:text-gray-800 rounded-full p-1.5 shadow-lg transition-all duration-200 hover:scale-105 backdrop-blur-sm"
+              title="Scroll to bottom"
+            >
+              <ChevronDown className="h-3 w-3" />
+            </button>
           </div>
-          <Button variant="ghost" size="sm" onClick={onClose}>
-            <X className="h-4 w-4" />
-          </Button>
+        )}
+        <CardHeader className="flex-shrink-0 py-1.5 px-3">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-2">
+              <MessageSquare className="h-3 w-3 text-blue-500" />
+              <div className="min-w-0">
+                <CardTitle className="text-xs font-medium truncate">
+                  {itemTitle ? `Chat: ${itemTitle}` : 'Message'}
+                </CardTitle>
+              </div>
+            </div>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={onClose}
+              className="h-5 w-5 p-0 hover:bg-gray-100 rounded-md"
+            >
+              <X className="h-3 w-3" />
+            </Button>
+          </div>
         </CardHeader>
 
-        {/* Messages */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-4">
-          {loading ? (
-            <div className="flex flex-col items-center justify-center h-full space-y-3">
-              <Loader2 className="h-8 w-8 animate-spin text-blue-500" />
-              <p className="text-sm text-gray-600">Starting conversation...</p>
+        {/* Messages Area */}
+        <div ref={messagesContainerRef} className="flex-1 overflow-y-auto overflow-x-hidden px-3 py-2 bg-gray-50 space-y-1 relative">
+          {loading && messages.length === 0 ? (
+            <div className="flex items-center justify-center h-full">
+              <div className="text-center">
+                <Loader2 className="h-6 w-6 animate-spin mx-auto mb-2 text-blue-500" />
+                <p className="text-sm text-gray-500">Loading conversation...</p>
+              </div>
             </div>
           ) : error ? (
-            <div className="text-center py-8">
-              <AlertCircle className="h-12 w-12 text-red-400 mx-auto mb-3" />
-              <p className="font-medium text-gray-900 mb-2">Unable to start conversation</p>
-              <p className="text-sm text-gray-600 max-w-sm mx-auto">
-                {error.message?.includes('not enabled') 
-                  ? 'This user hasn\'t enabled XMTP messaging yet. They need to connect first.' 
-                  : error.message || 'Something went wrong. Please try again.'}
-              </p>
+            <div className="flex items-center justify-center h-full">
+              <div className="text-center">
+                <AlertCircle className="h-6 w-6 mx-auto mb-2 text-red-500" />
+                <p className="text-sm text-red-600 mb-2">Failed to load conversation</p>
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  onClick={retry}
+                  className="text-xs"
+                >
+                  Try Again
+                </Button>
+              </div>
+            </div>
+          ) : messages.length === 0 ? (
+            <div className="flex items-center justify-center h-full">
+              <div className="text-center">
+                <MessageSquare className="h-8 w-8 mx-auto mb-2 text-gray-400" />
+                <p className="text-sm text-gray-500">No messages yet</p>
+                <p className="text-xs text-gray-400 mt-1">Start the conversation!</p>
+              </div>
             </div>
           ) : (
             <>
-              {messages.length === 0 ? (
-                <div className="text-center py-8">
-                  <MessageSquare className="h-12 w-12 text-gray-300 mx-auto mb-3" />
-                  <p className="font-medium text-gray-600 mb-1">No messages yet</p>
-                  <p className="text-sm text-gray-500">Start the conversation about {itemTitle}!</p>
-                </div>
-              ) : (
-                messages.map((message, index) => {
-                  // Check if this is a system message (GroupUpdated content type)
-                  const isSystemMessage = typeof message?.content === 'object' && 
-                    message?.content?.initiatedByInboxId && 
-                    message?.content?.addedInboxes;
-                  
-                  // Handle system messages differently
-                  if (isSystemMessage) {
-                    const content = message.content;
-                    const initiatorId = content.initiatedByInboxId;
-                    // Format initiator address if it's an Ethereum address
-                    const initiatorAddress = initiatorId?.startsWith('0x') ? 
-                      formatAddress(initiatorId) : 
-                      initiatorId?.slice(0, 6) + '...' + initiatorId?.slice(-4);
-                    
-                    return (
-                      <div key={index} className="flex justify-center my-3">
-                        <div className="bg-gray-100 text-gray-600 px-4 py-2 rounded-full text-xs">
-                          {message.sentAtNs ? new Date(Number(message.sentAtNs) / 1000000).toLocaleString() : null}
-                        </div>
+              {messages.map((message) => {
+                // Proper sender detection based on provider
+                const isOwnMessage = message.senderAddress === ourIdentity ||
+                                   message.senderAddress === 'self'; // fallback for legacy messages
+                
+                return (
+                  <div
+                    key={message.id}
+                    className={`flex mb-2 ${isOwnMessage ? 'justify-end' : 'justify-start'}`}
+                  >
+                    <div className={`flex items-end space-x-1 max-w-[80%] ${
+                      isOwnMessage ? 'flex-row-reverse space-x-reverse' : 'flex-row'
+                    }`}>
+                      <div
+                        className={`px-3 py-2 rounded-2xl shadow-sm overflow-hidden ${
+                          isOwnMessage
+                            ? 'bg-blue-500 text-white rounded-br-md'
+                            : 'bg-gray-200 text-gray-900 rounded-bl-md'
+                        }`}
+                      >
+                        <p className="text-sm whitespace-pre-wrap break-words break-all leading-relaxed overflow-wrap-anywhere">
+                          {message.content}
+                        </p>
                       </div>
-                    );
-                  }
-                  
-                  // Regular message handling
-                  // Identify the sender using XMTP V3 message structure
-                  let messageSender = message?.senderAddress || message?.senderInboxId || message?.sender;
-                  let isOwn = false;
-                  
-                  // Check multiple ways to determine if message is from current user
-                  if (message?.senderAddress) {
-                    isOwn = message.senderAddress.toLowerCase() === address?.toLowerCase();
-                  } else if (message?.senderInboxId && client?.inboxId) {
-                    isOwn = message.senderInboxId === client.inboxId;
-                  } else if (message?.sender) {
-                    isOwn = message.sender.toLowerCase() === address?.toLowerCase();
-                  }
-                  return (
-                    <div
-                      key={index}
-                      className={`flex mb-3 ${isOwn ? "justify-end" : "justify-start"}`}
-                    >
-                      <div className={`flex flex-col ${isOwn ? "items-end" : "items-start"} max-w-[75%]`}>
-                        {/* Sender label for peer messages */}
-                        {!isOwn && (
-                          <p className="text-xs text-gray-500 mb-1 px-1">
-                            {messageSender ? formatAddress(messageSender) : 'Unknown Sender'}
-                          </p>
-                        )}
-                        
-                        <div
-                          className={`px-4 py-3 rounded-2xl shadow-sm ${
-                            isOwn
-                              ? "bg-blue-500 text-white rounded-br-md"
-                              : "bg-gray-100 border border-gray-200 text-gray-900 rounded-bl-md"
-                          }`}
-                        >
-                          <p className="text-sm leading-relaxed">
-                            {typeof message?.content === 'string' 
-                              ? message.content 
-                              : message?.content?.text || JSON.stringify(message?.content) || 'Message content unavailable'}
-                          </p>
-                          <p className={`text-xs mt-2 ${
-                            isOwn ? "text-blue-100" : "text-gray-500"
-                          }`}>
-                            {formatTime(message.timestamp)}
-                            {isOwn && <span className="ml-1">✓</span>}
-                          </p>
-                        </div>
-                      </div>
+                      <span 
+                        className={`text-xs opacity-50 cursor-default leading-none ${
+                          isOwnMessage ? 'text-gray-600' : 'text-gray-500'
+                        }`}
+                        style={{ fontSize: '10px' }}
+                        title={formatFullTimestamp(message.timestamp)}
+                      >
+                        {formatTimestamp(message.timestamp)}
+                      </span>
                     </div>
-                  );
-                })
-              )}
-              <div ref={messagesEndRef} />
+                  </div>
+                );
+              })}
+              {/* Invisible element to scroll to */}
+              <div ref={messagesEndRef} style={{ height: '1px' }} />
             </>
           )}
         </div>
 
-        {/* Footer */}
-        <CardFooter className="p-4">
-          {error ? (
-            <div className="text-center text-sm text-muted-foreground py-2 w-full">
-              Cannot send messages at this time
-            </div>
-          ) : (
-            <div className="w-full space-y-3">
-              <div className="flex gap-3 items-end">
-                <Input
-                  value={newMessage}
-                  onChange={(e) => setNewMessage(e.target.value)}
-                  onKeyPress={handleKeyPress}
-                  placeholder={`Message about ${itemTitle}...`}
-                  disabled={sending || !conversation}
-                  className="flex-1"
-                  maxLength={500}
-                />
-                <Button
-                  onClick={handleSend}
-                  disabled={!newMessage.trim() || sending || !conversation}
-                >
-                  {sending ? (
-                    <Loader2 className="h-4 w-4 animate-spin" />
-                  ) : (
-                    <Send className="h-4 w-4" />
-                  )}
-                </Button>
-              </div>
-              {!conversation && (
-                <div className="flex items-center justify-center text-xs text-muted-foreground">
-                  <Loader2 className="h-3 w-3 animate-spin mr-2" />
-                  Establishing secure connection...
-                </div>
+        {/* Message Input */}
+        <CardFooter className="flex-shrink-0 py-1.5 px-2">
+          <form onSubmit={handleSendMessage} className="flex w-full space-x-2">
+            <Input
+              value={inputMessage}
+              onChange={(e) => setInputMessage(e.target.value)}
+              onKeyPress={handleKeyPress}
+              placeholder="Type a message..."
+              disabled={sending || !conversation}
+              className="flex-1 bg-white/95 backdrop-blur-sm border-0 shadow-sm rounded-lg h-10"
+            />
+            <Button
+              type="submit"
+              disabled={!inputMessage.trim() || sending || !conversation}
+              className="h-10 px-3 rounded-lg shadow-sm"
+            >
+              {sending ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                <Send className="h-4 w-4" />
               )}
-              {newMessage.length > 450 && (
-                <p className="text-xs text-muted-foreground text-right">
-                  {500 - newMessage.length} characters remaining
-                </p>
-              )}
-            </div>
-          )}
+            </Button>
+          </form>
         </CardFooter>
-      </Card>
-    </div>
+        </Card>
+      </div>
+    </div>,
+    document.body
   );
-
-  return createPortal(modalContent, document.body);
 };
 
 export default MessageModal;

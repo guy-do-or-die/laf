@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { useConnectXmtp } from '../xmtp/hooks/useConnectXmtp';
+import { useMessagingConnection } from '../messaging/MessagingProvider';
 
 import { MessageCircle } from "lucide-react";
 
@@ -10,8 +10,8 @@ import { useAccount } from '../wallet';
 import { MessageModal } from './MessageModal';
 
 
-export const MessageButton = ({ recipientAddress, itemTitle, className = "" }) => {
-  const { client, isConnecting } = useConnectXmtp();
+export const MessageButton = ({ recipientAddress, itemTitle, secretHash, className = "" }) => {
+  const { client, isConnecting } = useMessagingConnection();
   const { loggedIn } = useAccount();
 
   const [showModal, setShowModal] = useState(false);
@@ -29,8 +29,9 @@ export const MessageButton = ({ recipientAddress, itemTitle, className = "" }) =
       {showModal && (
         <MessageModal
           isOpen={showModal}
-          recipientAddress={recipientAddress}
           itemTitle={itemTitle}
+          secretHash={secretHash}
+          recipientAddress={recipientAddress}
           onClose={() => setShowModal(false)}
         />
       )}

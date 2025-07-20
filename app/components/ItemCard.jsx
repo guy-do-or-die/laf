@@ -4,6 +4,8 @@ import { Link } from 'wouter';
 import { formatUnits } from 'viem';
 import { useReadContracts } from 'wagmi';
 
+import { useBlockContext, useBlockUpdates } from '../contexts/BlockContext';
+
 import { Card, CardContent, CardFooter } from "./ui/card";
 import { Button } from "./ui/button";
 import TxButton from "./TxButton";
@@ -14,10 +16,12 @@ import { itemAbi, useSimulateLafReturned, useWriteLafReturned } from '../contrac
 import { useSmartWalletSimulateHook, useSmartWalletWriteHook } from '../wallet';
 
 
-export default function ItemCard({ hash, address, blockNumber }) {
+export default function ItemCard({ hash, address }) {
     const [itemData, setItemData] = useState({});
     const [isLoading, setIsLoading] = useState(true);
+
     const { address: currentUserAddress } = useAccount();
+    const { blockNumber } = useBlockContext();
 
     const { data: readData, isError } = useReadContracts({
         contracts: [
@@ -62,6 +66,7 @@ export default function ItemCard({ hash, address, blockNumber }) {
                 functionName: 'owner',
             },
         ],
+        blockNumber
     })
 
     useEffect(() => {
@@ -120,68 +125,71 @@ export default function ItemCard({ hash, address, blockNumber }) {
     return (
         <Card className={`${getStatusColor(getStatus())} w-full min-w-64 min-h-48`}>
             <CardContent className="flex-1">
-                    <h3 className="font-medium">{itemData.comment || 'Loading...'}</h3>
+                <h3 className="font-medium">{itemData.comment || 'Loading...'}</h3>
+                <p className="text-sm text-gray-500">
+                    {!isLoading && getStatusText(getStatus())}
+                </p>
+                {itemData.geo && (
                     <p className="text-sm text-gray-500">
-                        {!isLoading && getStatusText(getStatus())}
+                        {itemData.geo}
                     </p>
-                    {itemData.geo && (
-                        <p className="text-sm text-gray-500">
-                            {itemData.geo}
-                        </p>
-                    )}
-                    {itemData.reward > 0 && (
-                        <p className="text-sm text-gray-500">
-                            Reward: ${formatUnits(itemData.reward, 6)}
-                        </p>
-                    )}
-                    {/* {itemData.finder !== zeroAddress && (
-                        <p className="text-sm text-gray-500">
-                            Finder: {itemData.finder}
-                        </p>
-                    )} */}
+                )}
+                {itemData.reward > 0 && (
+                    <p className="text-sm text-gray-500">
+                        Reward: ${formatUnits(itemData.reward, 6)}
+                    </p>
+                )}
+                {/* {itemData.finder !== zeroAddress && (
+                    <p className="text-sm text-gray-500">
+                        Finder: {itemData.finder}
+                    </p>
+                )} */}
             </CardContent>
             <CardFooter className="flex flex-wrap gap-2">
-                    { 
-                        !itemData.isLost && (
-                            <Button variant="outline" className="flex-1" asChild>
-                                <Link to={`/lost/${hash}`}>Lost</Link>
-                            </Button>
-                        )
-                    }
-                    { 
-                        itemData.isFound && !itemData.isReturned && !isLoading && (
-                            <>
-                                {currentUserAddress && currentUserAddress.toLowerCase() === itemData.owner?.toLowerCase() ? (
-                                    <MessageButton
-                                        recipientAddress={itemData.finder}
-                                        itemTitle={itemData.comment || "Your item"}
-                                        className="flex-1"
-                                    />
-                                ) : currentUserAddress && currentUserAddress.toLowerCase() === itemData.finder?.toLowerCase() ? (
-                                    <MessageButton
-                                        recipientAddress={itemData.owner}
-                                        itemTitle={itemData.comment || "Found item"}
-                                        className="flex-1"
-                                    />
-                                ) : (
-                                    <MessageButton
-                                        recipientAddress={itemData.finder}
-                                        itemTitle={itemData.comment || "Item"}
-                                        className="flex-1"
-                                    />
-                                )}
-                                
-                                {currentUserAddress && currentUserAddress.toLowerCase() === itemData.owner?.toLowerCase() && (
-                                    <TxButton
-                                        simulateHook={useSmartWalletSimulateHook(useSimulateLafReturned)}
-                                        writeHook={useSmartWalletWriteHook(useWriteLafReturned)}
-                                        params={returnParams}
-                                        text="Returned"
-                                    />
-                                )}
-                            </>
-                        )
-                    }
+                { 
+                    !itemData.isLost && (
+                        <Button variant="outline" className="flex-1" asChild>
+                            <Link to={`/lost/${hash}`}>Lost</Link>
+                        </Button>
+                    )
+                }
+                { 
+                    itemData.isFound && !itemData.isReturned && !isLoading && (
+                        <>
+                            {currentUserAddress && currentUserAddress.toLowerCase() === itemData.owner?.toLowerCase() ? (
+                                <MessageButton
+                                    recipientAddress={itemData.finder}
+                                    itemTitle={itemData.comment || "Your item"}
+                                    secretHash={hash}
+                                    className="flex-1"
+                                />
+                            ) : currentUserAddress && currentUserAddress.toLowerCase() === itemData.finder?.toLowerCase() ? (
+                                <MessageButton
+                                    recipientAddress={itemData.owner}
+                                    itemTitle={itemData.comment || "Found item"}
+                                    secretHash={hash}
+                                    className="flex-1"
+                                />
+                            ) : (
+                                <MessageButton
+                                    recipientAddress={itemData.finder}
+                                    itemTitle={itemData.comment || "Item"}
+                                    secretHash={hash}
+                                    className="flex-1"
+                                />
+                            )}
+                            
+                            {currentUserAddress && currentUserAddress.toLowerCase() === itemData.owner?.toLowerCase() && (
+                                <TxButton
+                                    simulateHook={useSmartWalletSimulateHook(useSimulateLafReturned)}
+                                    writeHook={useSmartWalletWriteHook(useWriteLafReturned)}
+                                    params={returnParams}
+                                    text="Returned"
+                                />
+                            )}
+                        </>
+                    )
+                }
             </CardFooter>
         </Card>
     )

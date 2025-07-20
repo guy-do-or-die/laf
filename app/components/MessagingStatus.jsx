@@ -1,19 +1,20 @@
 import { useState, useEffect, useMemo } from 'react';
+
 import { MessageCircle, CheckCircle, AlertCircle, Loader2, Settings } from 'lucide-react';
 
 import { useAccount } from '@/wallet';
 
-import { useXMTP } from '@/xmtp/contexts/XMTPContext';
+import { useMessaging } from '@/messaging/MessagingProvider';
 
 
-export const XMTPStatus = ({ className = "" }) => {
+export const MessagingStatus = ({ className = "" }) => {
   const { user, smartWallet } = useAccount();
   const [showDetails, setShowDetails] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   
   const isSmartWallet = useMemo(() => !!smartWallet, [smartWallet]);
   
-  const { client, isConnecting, error, autoMessagingEnabled, setAutoMessagingEnabled } = useXMTP();
+  const { client, isConnecting, error, autoMessagingEnabled, setAutoMessagingEnabled, provider } = useMessaging();
   const isConnected = !!client;
 
   // Auto-hide details after 3 seconds
@@ -88,9 +89,7 @@ export const XMTPStatus = ({ className = "" }) => {
           <p className="text-sm text-red-600 font-medium mb-1">
             Connection Issue
           </p>
-          <p className="text-xs text-gray-600">
-            {error.message}
-          </p>
+          <span className="text-xs text-gray-600">Auto-messaging enabled ({provider.toUpperCase()})</span>
         </div>
       )}
     </div>
