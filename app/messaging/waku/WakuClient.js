@@ -200,8 +200,8 @@ export class WakuClient extends AbstractMessagingClient {
       return data.messages.map(msg => new AbstractMessage(
         msg.content,
         msg.senderAddress,
-        msg.timestamp,
-        msg.id
+        msg.timestamp
+        // Don't pass old ID - let AbstractMessage generate new unique ID with random component
       ));
     } catch (error) {
       console.error('❌ Failed to load cached messages:', error);
@@ -265,6 +265,22 @@ export class WakuConversation extends AbstractConversation {
     }
 
     try {
+      console.log('🚀 SEND DEBUG: Starting message send process...');
+      
+      // Check peer connectivity first
+      const peers = await this.node.libp2p.peerStore.all();
+      const connectedPeers = this.node.libp2p.getConnections();
+      console.log('🔗 SEND DEBUG: Peer connectivity:', {
+        totalPeers: peers.length,
+        connectedPeers: connectedPeers.length,
+        lightPushAvailable: !!this.node.lightPush,
+        nodeStatus: this.node.isStarted() ? 'started' : 'stopped'
+      });
+
+      if (connectedPeers.length === 0) {
+        console.warn('⚠️ SEND DEBUG: No connected peers! Message may not be transmitted.');
+      }
+
       const timestamp = Date.now();
       // Create message payload
       const messageData = {
@@ -276,21 +292,47 @@ export class WakuConversation extends AbstractConversation {
       };
 
       const payload = new TextEncoder().encode(JSON.stringify(messageData));
+      console.log('📦 SEND DEBUG: Message payload created:', {
+        contentLength: content.length,
+        payloadSize: payload.length,
+        contentTopic: this.contentTopic
+      });
 
       // Send message using LightPush
+      console.log('📡 SEND DEBUG: Attempting LightPush send...');
       const sendResult = await this.node.lightPush.send(this.encoder, {
         payload,
         timestamp: new Date()
       });
 
+      console.log('📡 SEND DEBUG: LightPush result:', {
+        result: sendResult,
+        resultType: typeof sendResult,
+        hasErrors: sendResult && sendResult.errors ? sendResult.errors.length > 0 : false,
+        errors: sendResult && sendResult.errors ? sendResult.errors : 'none'
+      });
+
       // Handle different possible response structures from Waku SDK
       if (sendResult && sendResult.errors && sendResult.errors.length > 0) {
+        console.error('❌ SEND DEBUG: LightPush errors:', sendResult.errors);
         throw new Error(`Failed to send message: ${sendResult.errors.join(', ')}`);
       }
       
       // Check if send was successful (some SDK versions return different structures)
       if (sendResult === null || sendResult === undefined) {
+        console.error('❌ SEND DEBUG: No response from Waku network');
         throw new Error('Failed to send message: No response from Waku network');
+      }
+
+      console.log('✅ SEND DEBUG: Message successfully sent via LightPush!');
+      
+      // Check if we have successful recipients
+      if (sendResult.recipients && sendResult.recipients.length > 0) {
+        console.log('📬 SEND DEBUG: Message delivered to recipients:', sendResult.recipients);
+      } else if (sendResult.successes && sendResult.successes.length > 0) {
+        console.log('📬 SEND DEBUG: Message delivery successes:', sendResult.successes);
+      } else {
+        console.warn('⚠️ SEND DEBUG: No recipients confirmed - message may not have been delivered');
       }
 
       // Create message object for immediate caching
@@ -298,8 +340,8 @@ export class WakuConversation extends AbstractConversation {
       const message = new AbstractMessage(
         content,
         senderIdentifier,
-        timestamp,
-        `${senderIdentifier}-${timestamp}`
+        timestamp
+        // Let AbstractMessage generate unique ID automatically with random component
       );
 
       // Cache the sent message immediately
@@ -351,8 +393,8 @@ export class WakuConversation extends AbstractConversation {
               const message = new AbstractMessage(
                 decoded.content,
                 senderIdentifier,
-                decoded.timestamp,
-                `${senderIdentifier}-${decoded.timestamp}`
+                decoded.timestamp
+                // Let AbstractMessage generate unique ID automatically with random component
               );
               storeMessages.push(message);
             } catch (decodeError) {
@@ -414,8 +456,8 @@ export class WakuConversation extends AbstractConversation {
       return data.messages.map(msg => new AbstractMessage(
         msg.content,
         msg.senderAddress,
-        msg.timestamp,
-        msg.id
+        msg.timestamp
+        // Don't pass old ID - let AbstractMessage generate new unique ID with random component
       ));
     } catch (error) {
       console.error('❌ Failed to load cached messages:', error);
@@ -480,8 +522,8 @@ export class WakuConversation extends AbstractConversation {
               const message = new AbstractMessage(
                 decoded.content,
                 senderIdentifier,
-                decoded.timestamp,
-                `${senderIdentifier}-${decoded.timestamp}-${Math.random().toString(36).substr(2, 9)}`
+                decoded.timestamp
+                // Let AbstractMessage generate unique ID automatically with random component
               );
               
               // Cache the received message immediately

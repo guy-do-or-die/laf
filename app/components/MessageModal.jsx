@@ -73,6 +73,18 @@ export const MessageModal = ({ isOpen, onClose, itemTitle, secretHash, recipient
     return () => container.removeEventListener('scroll', handleScroll);
   }, [messages.length]);
   
+  // Auto-scroll to bottom when conversation is first opened
+  useEffect(() => {
+    if (isOpen && messages.length > 0 && !loading && messagesContainerRef.current) {
+      // Use a small delay to ensure DOM is fully rendered
+      const timeoutId = setTimeout(() => {
+        scrollToBottom(false); // Instant scroll for initial load
+      }, 100);
+      
+      return () => clearTimeout(timeoutId);
+    }
+  }, [isOpen, messages.length, loading]); // Trigger when modal opens and messages are loaded
+  
   // Smart auto-scroll: scroll when at bottom (following conversation), don't scroll when scrolled up (reading history)
   useEffect(() => {
     if (messagesContainerRef.current && messages.length > 0) {

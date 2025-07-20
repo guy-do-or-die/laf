@@ -102,10 +102,11 @@ export class AbstractConversation {
  * Abstract message interface
  */
 export class AbstractMessage {
-  constructor(content, senderAddress, timestamp) {
+  constructor(content, senderAddress, timestamp, customId) {
     this.content = content;
     this.senderAddress = senderAddress;
     this.timestamp = timestamp || Date.now();
-    this.id = `${senderAddress}-${this.timestamp}`;
+    // Use custom ID if provided, otherwise generate unique ID with random component
+    this.id = customId || `${senderAddress}-${this.timestamp}-${Math.random().toString(36).substr(2, 9)}`;
   }
 }
