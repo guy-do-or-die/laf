@@ -3,7 +3,6 @@ import {useRef, useEffect, useState} from 'react';
 import { useLocation } from 'wouter';
 
 import { keccak256, stringToHex, getAddress } from 'viem';
-import { useSignMessage } from 'wagmi';
 
 import QRCodeStyling from 'qr-code-styling';
 import qrOptions from '../../qr-options.json';
@@ -16,6 +15,7 @@ import TxButton from "../components/TxButton";
 import { useSimulateLafRegisterItem, useWriteLafRegisterItem } from "../contracts"
 import { useSmartWalletSimulateHook, useSmartWalletWriteHook } from "../wallet"
 import { useAccount } from "../wallet"
+import { useUnifiedSigning } from "../hooks/useUnifiedSigning";
 
 
 function generateSecretHash(secret) {
@@ -44,8 +44,8 @@ function generateRandomSecret(length = 32) {
 
 export default function Register() {
     const [, setLocation] = useLocation();
-    const { loggedIn, smartWallet } = useAccount();
-    const { signMessageAsync } = useSignMessage();
+    const { loggedIn, activeWalletType, signingMethod, hasSmartWallet } = useAccount();
+    const { signMessage, isReady: signingReady } = useUnifiedSigning();
     
     const [itemData, setItemData] = useState(() => {
         const { secret, secretHash } = generateRandomSecret();
@@ -57,6 +57,9 @@ export default function Register() {
     const [secretSigned, setSecretSigned] = useState(false);
     const [signatureCancelled, setSignatureCancelled] = useState(false);
     const [hasAttemptedSignature, setHasAttemptedSignature] = useState(false);
+    const [registrationWalletType, setRegistrationWalletType] = useState(null);
+    const [registrationAddress, setRegistrationAddress] = useState(null);
+    const [walletContextLocked, setWalletContextLocked] = useState(false);
     
     const qrRef = useRef(null);
     const signatureAttemptRef = useRef(false); // Prevent double execution
@@ -69,10 +72,53 @@ export default function Register() {
             return;
         }
         
+        if (!loggedIn) {
+            console.log('Wallet not connected, cannot sign');
+            notify('Please connect your wallet first.', 'error');
+            setSignatureCancelled(true);
+            setItemData(prev => ({
+                ...prev,
+                ownerSignature: null,
+                qrCode: null
+            }));
+            return;
+        }
+        
+        // FORCE SMART WALLET USAGE WHEN AVAILABLE
+        // Always prioritize smart wallet over embedded wallet for consistency
+        let finalWalletType = activeWalletType;
+        let finalSigningMethod = signingMethod;
+        
+        // Check if we have smart wallet available but are using embedded wallet
+        if (hasSmartWallet && activeWalletType === 'embedded_wallet') {
+            console.log('🔄 Smart wallet available - forcing smart wallet usage instead of embedded wallet');
+            finalWalletType = 'smart_wallet';
+            finalSigningMethod = 'privy_smart_wallet';
+        }
+        
+        // Store the wallet context for this registration
+        if (!registrationWalletType) {
+            console.log('Setting registration wallet context:', { 
+                original: { activeWalletType, signingMethod },
+                final: { finalWalletType, finalSigningMethod }
+            });
+            setRegistrationWalletType(finalWalletType);
+            setRegistrationAddress(loggedIn);
+        } else if (registrationWalletType !== finalWalletType) {
+            console.warn('Wallet type changed during registration!', {
+                original: registrationWalletType,
+                current: finalWalletType
+            });
+            notify('Wallet type changed. Please use the same wallet for registration and QR generation.', 'warning');
+            // Reset and use current wallet
+            setRegistrationWalletType(finalWalletType);
+            setRegistrationAddress(loggedIn);
+        }
+        
         // Check all conditions before proceeding
-        if (!loggedIn || isSigningSecret || secretSigned || signatureCancelled) {
+        if (!signingReady || isSigningSecret || secretSigned || signatureCancelled) {
             console.log('Signature conditions not met:', { 
-                loggedIn, 
+                signingReady,
                 isSigningSecret, 
                 secretSigned, 
                 signatureCancelled 
@@ -88,14 +134,17 @@ export default function Register() {
             console.log('Starting item registration signature process');
             console.log('Item secret:', itemData.secret);
             console.log('Secret hash:', itemData.secretHash);
+            console.log('Final wallet type (enforced):', finalWalletType);
+            console.log('Final signing method (enforced):', finalSigningMethod);
             
-            // Sign the raw hash of the secret (contract compatible)
-            const messageHash = keccak256(stringToHex(itemData.secret));
-            console.log('Message hash:', messageHash);
+            // Sign the original secret - let the signing hook handle EIP-191 hashing
+            // This matches the contract's MessageHashUtils.toEthSignedMessageHash(bytes(_secret))
+            console.log('Requesting owner signature for original secret...');
             
-            console.log('Requesting owner signature for raw hash...');
-            const ownerSignature = await signMessageAsync({ 
-                message: { raw: messageHash }
+            // Sign the original secret using the enforced wallet type
+            const ownerSignature = await signMessage({ 
+                message: itemData.secret,  // Sign the original secret, not the hash
+                signingMethod: finalSigningMethod  // Use enforced smart wallet signing
             });
             
             console.log('Owner signature received:', ownerSignature);
@@ -114,6 +163,7 @@ export default function Register() {
             setSecretSigned(true);
             console.log('QR URL with signature generated:', url);
             console.log('Registration process complete - QR code ready!');
+            console.log('✅ QR code generated with wallet:', { activeWalletType, signingMethod });
             
         } catch (error) {
             console.error('Error signing secret:', error);
@@ -126,6 +176,15 @@ export default function Register() {
                 console.log('User cancelled signature request');
                 setSignatureCancelled(true);
                 notify('Signature cancelled. You can refresh the page to try again.', 'info');
+            } 
+            // Smart wallet specific errors
+            else if (activeWalletType === 'smart_wallet' && (
+                error.message?.includes('smart wallet') ||
+                error.message?.includes('Smart contract wallet') ||
+                error.message?.includes('ERC-1271')
+            )) {
+                console.log('Smart wallet signature error:', error);
+                notify('Smart wallet signature error. Please try again or use a different wallet.', 'error');
             } else if (error.message?.includes('Connector not connected')) {
                 console.log('Wallet not connected');
                 notify('Please connect your wallet first.', 'error');
@@ -136,6 +195,34 @@ export default function Register() {
             setIsSigningSecret(false);
             signatureAttemptRef.current = false;
         }
+    };
+    
+    // Function to regenerate QR code with current wallet
+    const regenerateQRCode = async () => {
+        console.log('🔄 Regenerating QR code with current wallet context');
+        
+        // Clear the QR container immediately to prevent side-by-side display
+        if (qrRef.current) {
+            qrRef.current.innerHTML = '';
+        }
+        
+        // Reset signature state
+        setSecretSigned(false);
+        setSignatureCancelled(false);
+        setHasAttemptedSignature(false);
+        setRegistrationWalletType(null);
+        setRegistrationAddress(null);
+        signatureAttemptRef.current = false;
+        
+        // Clear existing signature and QR code
+        setItemData(prev => ({
+            ...prev,
+            ownerSignature: null,
+            qrCode: null
+        }));
+        
+        // Generate new signature and QR code
+        await signSecretAndGenerateQR();
     };
     
     // Auto-request signature when wallet is ready
@@ -185,14 +272,14 @@ export default function Register() {
                 
                 {!secretSigned ? (
                     <div className="flex justify-center mb-4">
-                        <div className="w-64 h-64 bg-gray-200 rounded-lg animate-pulse flex items-center justify-center">
+                        <div className="w-[300px] h-[300px] bg-gray-200 rounded-lg animate-pulse flex items-center justify-center">
                             <div className="w-48 h-48 bg-gray-300 rounded animate-pulse"></div>
                         </div>
                     </div>
                 ) : (
                     <div 
                         ref={qrRef} 
-                        className="mb-4 cursor-pointer" 
+                        className="mb-4 cursor-pointer flex justify-center" 
                         onClick={() => {
                             if (itemData.qrCode) {
                                 itemData.qrCode.download({ 
@@ -211,6 +298,27 @@ export default function Register() {
                      !loggedIn ? 'Please connect your wallet to continue' :
                      'Loading your item QR'}
                 </p>
+                
+                {/* QR Regeneration Button */}
+                {loggedIn && (
+                    <div className="flex flex-col gap-2 mb-4">
+                        <button
+                            onClick={regenerateQRCode}
+                            disabled={isSigningSecret}
+                            className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                        >
+                            {isSigningSecret ? 'Generating...' : 'Regenerate QR Code'}
+                        </button>
+                        <p className="text-xs text-gray-500 text-center">
+                            Use this if you switched wallets or need a fresh QR code
+                        </p>
+                        {registrationWalletType && (
+                            <p className="text-xs text-blue-600 text-center">
+                                QR generated with: {registrationWalletType}
+                            </p>
+                        )}
+                    </div>
+                )}
                 
                 <div className="mb-4">
                     <Textarea

@@ -1,46 +1,40 @@
 import { useCallback, useEffect } from "react";
 
-import { useSignMessage as useWagmiSignMessage } from "wagmi";
-
 import { useXMTP } from "@/xmtp/contexts/XMTPContext";
 import { createEOASigner, createSCWSigner } from "@/xmtp/helpers/createSigner";
 
 import { useAccount, chain } from "@/wallet";
+import { useUnifiedSigning } from "@/hooks/useUnifiedSigning";
 
 
 export const useConnectXmtp = () => {
   const { initializing, client, initialize, disconnect } = useXMTP();
 
-  const { address, loggedIn, smartWallet, smartWalletClient } = useAccount();
+  const { address, loggedIn, activeWalletType, signingMethod } = useAccount();
+  const { signMessage, isReady: signingReady } = useUnifiedSigning();
 
-  const { signMessageAsync: wagmiSignMessage } = useWagmiSignMessage();
-
-  const useSCW = !!smartWallet;
-
+  // Determine signer type based on wallet type
+  const useSCW = activeWalletType === 'smart_wallet';
   const createSigner = useSCW ? createSCWSigner : createEOASigner;
-  const signMessage = (useSCW && smartWalletClient) 
-    ? async ({ message }) => {
-        try {
-          const signature = await smartWalletClient.signMessage({
-            message: typeof message === 'string' ? message : new TextEncoder().encode(message)
-          });
-          return signature;
-        } catch (error) {
-          console.error('Smart wallet signing failed:', error);
-          throw error;
-        }
-      }
-    : wagmiSignMessage;
 
   const connect = useCallback(() => {
     if (client) {
+      console.log('🔗 XMTP client already exists, skipping connection');
       return;
     }
 
     if (!address) {
+      console.log('❌ No address available for XMTP connection');
       return;
     }
 
+    if (!signingReady) {
+      console.log('❌ Signing not ready for XMTP connection');
+      return;
+    }
+
+    console.log(`🚀 Connecting XMTP with ${activeWalletType} (${signingMethod})`);
+    
     void initialize({
       env: 'dev',
       loggingLevel: 'off',
@@ -51,7 +45,10 @@ export const useConnectXmtp = () => {
     initialize,
     address,
     signMessage,
-    useSCW,
+    signingReady,
+    activeWalletType,
+    signingMethod,
+    createSigner
   ]);
 
   useEffect(() => {

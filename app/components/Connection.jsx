@@ -6,13 +6,11 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { LogIn, LogOut, User, Wallet, ChevronDown, ExternalLink, ArrowDownToLine, ArrowUpFromLine } from "lucide-react";
-import { useFundWallet, usePrivy } from '@privy-io/react-auth';
-import { useSmartWallets } from '@privy-io/react-auth/smart-wallets';
+import { LogIn, LogOut, User, ChevronDown, ArrowDownToLine, ArrowUpFromLine, Key } from "lucide-react";
+import { useFundWallet, usePrivy} from '@privy-io/react-auth';
 
 import { useAccount, chain } from '../wallet';
 import { useReadErc20BalanceOf } from '../contracts';
@@ -22,13 +20,11 @@ import {notify} from './Notification';
 
 
 export default function Connection() {
-    const { loggedIn, login, logout, address } = useAccount();
+    const { loggedIn, login, logout, address, user, exportWallet } = useAccount();
     const { connect: connectXmtp, disconnect: disconnectXmtp } = useConnectXmtp();
 
     const [location, setLocation] = useLocation();
     const [isOpen, setIsOpen] = useState(false);
-
-    const { user } = usePrivy();
 
     const { fundWallet } = useFundWallet();
     const { data: balance, isSuccess } = useReadErc20BalanceOf({ args: [address] });
@@ -74,6 +70,22 @@ export default function Connection() {
     };
 
     const isSmartWallet = user?.linkedAccounts?.find((account) => account.type === 'smart_wallet');
+    const embeddedWallet = user?.linkedAccounts?.find((account) => account.type === 'wallet');
+
+    const handleExportPrivateKey = async () => {
+        try {
+            if (embeddedWallet) {
+                console.log('🔑 Exporting private key for embedded wallet:', embeddedWallet.address);
+                await exportWallet();
+                setIsOpen(false);
+            } else {
+                notify('No embedded wallet found to export', 'error');
+            }
+        } catch (error) {
+            console.error('❌ Export wallet error:', error);
+            notify('Failed to export private key', 'error');
+        }
+    };
 
     if (!loggedIn) {
         return (
@@ -122,6 +134,18 @@ export default function Connection() {
                         >
                             <ArrowUpFromLine className="h-4 w-4 text-amber-600" />
                             <span className="text-sm font-medium">Withdraw</span>
+                        </DropdownMenuItem>
+                        <DropdownMenuSeparator />
+                    </>
+                )}
+                {embeddedWallet && (
+                    <>
+                        <DropdownMenuItem 
+                            onClick={handleExportPrivateKey}
+                            className="flex items-center gap-2 px-3 py-2 rounded-md transition-colors hover:bg-yellow-50 focus:bg-yellow-100 cursor-pointer"
+                        >
+                            <Key className="h-4 w-4 text-yellow-600" />
+                            <span className="text-sm font-medium">Export Private Key</span>
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
                     </>

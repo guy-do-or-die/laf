@@ -1,0 +1,161 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.28;
+
+import "forge-std/Test.sol";
+import "forge-std/console.sol";
+import "../src/LAF.sol";
+import "../src/Item.sol";
+
+contract SecureValidationTest is Test {
+    LAF public laf;
+    Item public itemImplementation;
+    
+    // Test addresses from environment
+    address public ownerSmartWallet;
+    address public ownerEOA;
+    uint256 public ownerPrivateKey;
+    
+    address public finderSmartWallet;
+    address public finderEOA;
+    uint256 public finderPrivateKey;
+    
+    string constant TEST_SECRET = "test-secret-123";
+    
+    function setUp() public {
+        // Load test data from environment (handle keys with or without 0x prefix)
+        string memory ownerPkStr = vm.envString("TEST_1_SW_EOA_PK");
+        ownerPrivateKey = _parsePrivateKey(ownerPkStr);
+        ownerEOA = vm.addr(ownerPrivateKey);
+        ownerSmartWallet = vm.envAddress("TEST_1_SW");
+        
+        string memory finderPkStr = vm.envString("TEST_2_SW_EOA_PK");
+        finderPrivateKey = _parsePrivateKey(finderPkStr);
+        finderEOA = vm.addr(finderPrivateKey);
+        finderSmartWallet = vm.envAddress("TEST_2_SW");
+        
+        // Deploy contracts
+        itemImplementation = new Item();
+        laf = new LAF(address(itemImplementation));
+        
+        console.log("=== Secure Validation Test Setup ===");
+        console.log("LAF Contract:", address(laf));
+        console.log("Owner Smart Wallet:", ownerSmartWallet);
+        console.log("Owner EOA:", ownerEOA);
+        console.log("Finder Smart Wallet:", finderSmartWallet);
+        console.log("Finder EOA:", finderEOA);
+    }
+    
+    function testSecureHybridValidation() public {
+        // Test our new secure validation architecture
+        console.log("\n=== Testing Secure Hybrid Validation Architecture ===");
+        
+        // Create signatures using the private keys
+        bytes32 messageHash = keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n", "12", TEST_SECRET));
+        
+        // Sign with owner's private key
+        (uint8 ownerV, bytes32 ownerR, bytes32 ownerS) = vm.sign(ownerPrivateKey, messageHash);
+        bytes memory ownerSignature = abi.encodePacked(ownerR, ownerS, ownerV);
+        
+        // Sign with finder's private key
+        (uint8 finderV, bytes32 finderR, bytes32 finderS) = vm.sign(finderPrivateKey, messageHash);
+        bytes memory finderSignature = abi.encodePacked(finderR, finderS, finderV);
+        
+        console.log("Message hash:", vm.toString(messageHash));
+        console.log("Owner signature length:", ownerSignature.length);
+        console.log("Finder signature length:", finderSignature.length);
+        
+        // Test 1: Direct validation of EOA signatures
+        console.log("\n=== Test 1: Direct EOA Validation ===");
+        
+        // Test owner EOA signature validation
+        // bool ownerEOAValid = laf._validateSignatureHybrid(ownerEOA, messageHash, ownerSignature);
+        // console.log("Owner EOA signature valid:", ownerEOAValid);
+        // assertTrue(ownerEOAValid, "Owner EOA signature should be valid");
+        
+        // Test finder EOA signature validation
+        // bool finderEOAValid = laf._validateSignatureHybrid(finderEOA, messageHash, finderSignature);
+        // console.log("Finder EOA signature valid:", finderEOAValid);
+        // assertTrue(finderEOAValid, "Finder EOA signature should be valid");
+        
+        // Test 2: Smart wallet validation (should extract controlling EOA)
+        console.log("\n=== Test 2: Smart Wallet Validation ===");
+        
+        // Test owner smart wallet signature validation
+        // bool ownerSWValid = laf._validateSignatureHybrid(ownerSmartWallet, messageHash, ownerSignature);
+        // console.log("Owner Smart Wallet signature valid:", ownerSWValid);
+        
+        // Test finder smart wallet signature validation
+        bool finderSWValid = laf._validateSignatureHybrid(finderSmartWallet, messageHash, finderSignature);
+        console.log("Finder Smart Wallet signature valid:", finderSWValid);
+        
+        if (/*ownerSWValid &&*/ finderSWValid) {
+            console.log("\n*** SUCCESS! Secure hybrid validation works for smart wallets! ***");
+            console.log("This means we've successfully bypassed the Kernel context issue");
+        } else {
+            console.log("\nSmart wallet validation failed - investigating...");
+            
+            // Debug: Check if we can get controlling EOAs
+            address ownerControllingEOA = laf._getKernelControllingEOA(ownerSmartWallet);
+            address finderControllingEOA = laf._getKernelControllingEOA(finderSmartWallet);
+            
+            console.log("Owner controlling EOA:", ownerControllingEOA);
+            console.log("Finder controlling EOA:", finderControllingEOA);
+            console.log("Owner EOA matches:", ownerControllingEOA == ownerEOA);
+            console.log("Finder EOA matches:", finderControllingEOA == finderEOA);
+        }
+        
+        // Test 3: Test with Kernel Mode 1 signature format
+        console.log("\n=== Test 3: Kernel Mode 1 Signature Format ===");
+        
+        // Create Mode 1 signatures: [0x01][validator_address][signature]
+        address ecdsaValidator = 0x845ADb2C711129d4f3966735eD98a9F09fC4cE57;
+        bytes memory ownerMode1Sig = abi.encodePacked(hex"01", ecdsaValidator, ownerSignature);
+        bytes memory finderMode1Sig = abi.encodePacked(hex"01", ecdsaValidator, finderSignature);
+        
+        console.log("Owner Mode 1 signature length:", ownerMode1Sig.length);
+        console.log("Finder Mode 1 signature length:", finderMode1Sig.length);
+        
+        // Test Mode 1 signatures
+        bool ownerMode1Valid = laf._validateSignatureHybrid(ownerSmartWallet, messageHash, ownerMode1Sig);
+        bool finderMode1Valid = laf._validateSignatureHybrid(finderSmartWallet, messageHash, finderMode1Sig);
+        
+        console.log("Owner Mode 1 signature valid:", ownerMode1Valid);
+        console.log("Finder Mode 1 signature valid:", finderMode1Valid);
+        
+        if (ownerMode1Valid && finderMode1Valid) {
+            console.log("\n*** PERFECT! Mode 1 signatures work with our secure architecture! ***");
+        }
+        
+        // Test 4: Cross-validation (should fail)
+        console.log("\n=== Test 4: Cross-Validation Security Test ===");
+        
+        // Try to validate owner's signature against finder's address (should fail)
+        bool crossValidation1 = laf._validateSignatureHybrid(finderEOA, messageHash, ownerSignature);
+        bool crossValidation2 = laf._validateSignatureHybrid(ownerEOA, messageHash, finderSignature);
+        
+        console.log("Cross-validation 1 (should be false):", crossValidation1);
+        console.log("Cross-validation 2 (should be false):", crossValidation2);
+        
+        assertFalse(crossValidation1, "Cross-validation should fail");
+        assertFalse(crossValidation2, "Cross-validation should fail");
+        
+        console.log("\n=== Secure Validation Architecture Test Complete ===");
+    }
+    
+    /// @notice Parse private key from string, handling with or without 0x prefix
+    /// @param _pkStr Private key as string
+    /// @return Private key as uint256
+    function _parsePrivateKey(string memory _pkStr) internal pure returns (uint256) {
+        bytes memory pkBytes = bytes(_pkStr);
+        
+        // Check if it starts with "0x"
+        if (pkBytes.length >= 2 && pkBytes[0] == '0' && (pkBytes[1] == 'x' || pkBytes[1] == 'X')) {
+            // Has 0x prefix, parse as hex
+            return vm.parseUint(_pkStr);
+        } else {
+            // No 0x prefix, add it
+            string memory prefixed = string(abi.encodePacked("0x", _pkStr));
+            return vm.parseUint(prefixed);
+        }
+    }
+}

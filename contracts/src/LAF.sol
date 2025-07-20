@@ -1,20 +1,23 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.19;
+pragma solidity ^0.8.28;
 
 import "@openzeppelin/contracts/proxy/Clones.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 
+import {IERC1271} from "@openzeppelin/contracts/interfaces/IERC1271.sol";
+import {MessageHashUtils} from "@openzeppelin/contracts/utils/cryptography/MessageHashUtils.sol";
+import {UniversalSigValidator} from "@signature-validator/contracts/EIP6492Full.sol";
+
 import "./Item.sol";
 import "./Meta.sol";
 import "./ConfigOwnable.sol";
-import "./Verifier.sol";
 
 
 /// @title LAF is... lost and found items factory contract
 /// @notice Main contract for the LAF decentralized lost and found system
 /// @dev Implements item registration, lost/found/return lifecycle, and charity management
-contract LAF is ConfigOwnable, Meta, ReentrancyGuard, Verifier {
+contract LAF is ConfigOwnable, Meta, ReentrancyGuard {
 
     using Clones for address;
 
@@ -156,17 +159,23 @@ contract LAF is ConfigOwnable, Meta, ReentrancyGuard, Verifier {
         string calldata _secret,
         bytes calldata _ownerSignature,
         bytes calldata _finderSignature
-    ) internal view {
+    ) internal {
+        // Create EIP-191 hash for signature verification (matches viem's hashMessage)
+        bytes32 ethHash = MessageHashUtils.toEthSignedMessageHash(bytes(_secret));
+        
+        // For secret hash validation, we still use the original approach
         bytes32 messageHash = keccak256(abi.encodePacked(_secret));
 
         address itemOwner = _getItem(_secretHash).owner();
-        _verifySignature(itemOwner, messageHash, _ownerSignature);
-        _verifySignature(msg.sender, messageHash, _finderSignature);
+        
+        UniversalSigValidator validator = new UniversalSigValidator();
+        require(validator.isValidSigWithSideEffects(itemOwner, ethHash, _ownerSignature), "Invalid owner signature");
+        require(validator.isValidSigWithSideEffects(msg.sender, ethHash, _finderSignature), "Invalid finder signature");
 
         address hashAsAddress = address(uint160(uint256(messageHash)));
-        require(_secretHash == hashAsAddress, "Invalid secret");
+        require(_secretHash == hashAsAddress, "Invalid secret"); 
     }
-
+    
     /// @notice Mark an item as found by providing the correct secret
     /// @param _secretHash Hash of the secret used to identify the item
     /// @param _secret The actual secret that hashes to _secretHash

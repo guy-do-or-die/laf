@@ -80,6 +80,16 @@ export default function ItemCard({ hash, address, blockNumber }) {
         }
     }, [readData, isError, blockNumber]);
 
+
+    const charityIndex = 0;
+    const charityFee = 100;
+    const fee = 0;
+
+    const returnParams = {
+        args: [hash, charityIndex, charityFee, fee],
+        enabled: true
+    }
+
     const getStatus = () => {
         if (itemData.isReturned) return 3;
         if (itemData.isFound) return 2;
@@ -165,10 +175,7 @@ export default function ItemCard({ hash, address, blockNumber }) {
                                     <TxButton
                                         simulateHook={useSmartWalletSimulateHook(useSimulateLafReturned)}
                                         writeHook={useSmartWalletWriteHook(useWriteLafReturned)}
-                                        params={{
-                                            args: [hash],
-                                            enabled: true
-                                        }}
+                                        params={returnParams}
                                         text="Returned"
                                     />
                                 )}

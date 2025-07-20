@@ -33,11 +33,17 @@ export const createSCWSigner = (address, signMessage, chainId) => {
       identifierKind: "Ethereum",
     }),
     signMessage: async (message) => {
-      const messageToSign = message && message.trim() ? message : 'XMTP Identity Verification';
-      console.log('SCW signing message:', messageToSign);
-      const signature = signMessage({message: messageToSign});
-      const signatureBytes = toBytes(signature);
-      return signatureBytes;
+      try {
+        const messageToSign = message && message.trim() ? message : 'XMTP Identity Verification';
+        console.log('SCW signing message:', messageToSign);
+        const signature = await signMessage({message: messageToSign});
+        console.log('SCW signature received:', signature);
+        const signatureBytes = toBytes(signature);
+        return signatureBytes;
+      } catch (error) {
+        console.error('SCW signing error with address ' + address.slice(0, 8), error);
+        throw error;
+      }
     },
     getChainId: () => BigInt(chainId),
   };
