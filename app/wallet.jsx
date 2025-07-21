@@ -172,19 +172,20 @@ export function useAccount() {
   // Debug wallet state (throttled to prevent spam)
   useEffect(() => {
     if (loggedIn) {
-      /*
       console.log('🔗 Unified Wallet State:', {
         activeWalletType,
         address: address?.slice(0, 8) + '...',
         signingMethod,
         hasSmartWallet,
+        smartWallet: smartWallet ? { address: smartWallet.address, type: smartWallet.type } : null,
+        privySmartWalletClient: !!privySmartWalletClient,
+        userLinkedAccounts: user?.linkedAccounts?.map(acc => ({ type: acc.type, address: acc.address?.slice(0, 8) + '...' })),
         hasEmbeddedWallet,
         hasExternalWallet,
         privyClientAvailable: !!privySmartWalletClient,
         wagmiConnected: isConnected,
         isSmartWalletDeployed
       });
-      */
     }
   }, [loggedIn,
     activeWalletType,
