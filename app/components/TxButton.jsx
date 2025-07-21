@@ -9,6 +9,13 @@ import { Button } from "./ui/button";
 import { notify, hide, parseError } from '../components/Notification'
 import { txLink } from '../components/Utils'
 import { useAccount } from '../wallet'
+import { 
+    determineTransactionPhase, 
+    isTransactionLoading, 
+    shouldDisableTransaction, 
+    getTransactionButtonText, 
+    createTransactionExecutor 
+} from '@/services/transactionService';
 
 
 
@@ -113,20 +120,36 @@ function TxButton({simulateHook, writeHook, params, text}) {
     }, [isConfirmationLoading])
 
 
-    const loading = isWritePending || (isConfirmationLoading && !isConfirmationSuccess && !isConfirmationError)
-    const disabled = !loggedIn || !params?.enabled || !Boolean(simulateData?.request) || loading
+    const transactionPhase = determineTransactionPhase({
+        isSimulateLoading,
+        isSimulateSuccess,
+        isSimulateError,
+        isWritePending,
+        isWriteSuccess,
+        isWriteError,
+        isConfirmationLoading,
+        isConfirmationSuccess,
+        isConfirmationError
+    });
 
-    const onClick = () => writeContract({ ...simulateData.request, account: address })
-
-
-    //simulateData && console.log('simulate error', simulateError)
-    //writeData && console.log('write error', writeError)
-    //confirmationData && console.log('confirmation error', confirmationError)
+    const loading = isTransactionLoading(transactionPhase);
+    const disabled = shouldDisableTransaction({
+        loggedIn,
+        enabled: params?.enabled,
+        simulateData,
+        phase: transactionPhase
+    });
+    const buttonText = getTransactionButtonText(transactionPhase, text);
+    const onClick = createTransactionExecutor({
+        writeContract,
+        simulateData,
+        address
+    });
 
     return (
-        <Button variant="outline" className="flex-1" onClick={onClick} disabled={!loggedIn || !simulateData || disabled}>
+        <Button variant="outline" className="flex-1" onClick={onClick} disabled={disabled}>
             {loading && <LoaderCircle className="mr-2 h-4 w-4 animate-spin" />}
-            {text} 
+            {buttonText}
         </Button>
     )
 }
