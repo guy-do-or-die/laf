@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useParams } from "wouter";
 
 import { createCommitRevealSignature, validateSecretHash } from '../utils/secretUtils';
+import { recoverMessageAddress } from 'viem';
 
 import ItemCard from "../components/ItemCard";
 import TxButton from "../components/TxButton";
@@ -17,6 +18,8 @@ import { useSmartWalletSimulateHook, useSmartWalletWriteHook, chain } from "../w
 import { useBlockContext } from '../contexts/BlockContext';
 
 import { isItemFound } from "../constants/itemStatus"
+
+import { verifySignature } from '../services/signatureService';
 
 
 export default function Found() {
@@ -274,7 +277,7 @@ export default function Found() {
                         </p>
                     </div>
                 </div>
-            </div>
+            /=</div>
         );
     }
     

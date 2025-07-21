@@ -17,6 +17,8 @@ import { useSmartWalletSimulateHook, useSmartWalletWriteHook } from "../wallet"
 import { useAccount } from "../wallet"
 import { useSmartWalletDeployment } from "../hooks/useSmartWalletDeployment";
 
+import { generateRandomSecret, generateSecretHash } from '@/services/signatureService';
+
 
 export default function Register() {
     const [, setLocation] = useLocation();
