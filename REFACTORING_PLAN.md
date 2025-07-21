@@ -38,6 +38,20 @@ components/containers/ItemContainer/ ← Container component
 - **Consistent error types**: Use standardized error classes for different error categories
 - **User-friendly messages**: All user-facing errors must be human-readable and actionable
 
+### **Rule 6: VALIDATION SCHEMA ARCHITECTURE**
+- **Use Zod for validation**: Type-safe, composable validation schemas
+- **Schema co-location**: Place schemas close to domain/data layer, not in services or components
+- **Schema organization**:
+  ```
+  schemas/
+    ├── base/           ← Primitive schemas (address, hash, signature)
+    ├── domain/         ← Domain entity schemas (Item, User, Message)
+    └── api/            ← API request/response schemas
+  ```
+- **Schema reusability**: Base schemas compose into complex domain schemas
+- **Validation helpers**: Centralized validation utilities with consistent error formatting
+- **Integration**: Optional React Hook Form integration for complex forms (avoid overhead for simple validation)
+
 ---
 
 ## 📊 **REFACTORING PRIORITY MATRIX**
