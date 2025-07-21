@@ -17,6 +17,7 @@ import { useReadErc20BalanceOf } from '../contracts';
 import { useMessagingConnection } from '../messaging/MessagingProvider';
 
 import {notify} from './Notification';
+import { useBlockContext } from '../contexts/BlockContext';
 
 
 export default function Connection() {
@@ -26,8 +27,12 @@ export default function Connection() {
     const [location, setLocation] = useLocation();
     const [isOpen, setIsOpen] = useState(false);
 
+    const [balance, setBalance] = useState(0n);
+
+    const { blockNumber } = useBlockContext(); 
+    const { data: balanceData } = useReadErc20BalanceOf({ args: [address], blockNumber });
+
     const { fundWallet } = useFundWallet();
-    const { data: balance, isSuccess } = useReadErc20BalanceOf({ args: [address] });
 
     useEffect(() => {
         if (loggedIn && location === '/') {
@@ -38,8 +43,15 @@ export default function Connection() {
 
         if (!loggedIn && location === '/items') {
             setLocation('/');
+            disconnectMessaging();
         }
     }, [loggedIn]);
+
+    useEffect(() => {
+        if (balanceData) {
+            setBalance(balanceData);
+        }
+    }, [balanceData]);
 
     const handleLogin = () => {
         login();
@@ -101,7 +113,7 @@ export default function Connection() {
             <DropdownMenuTrigger className="text-sm px-3 py-2 flex items-center gap-2 h-10 rounded-lg border-0 bg-background shadow-sm hover:bg-accent hover:text-accent-foreground hover:shadow-md transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
                 <User className="h-4 w-4" />
                 <span className="hidden sm:inline font-semibold text-green-600">
-                    {isSuccess ? formatBalance(balance) : 'Loading...'}
+                    {formatBalance(balance)}
                 </span>
                 <ChevronDown className="h-3 w-3" />
             </DropdownMenuTrigger>

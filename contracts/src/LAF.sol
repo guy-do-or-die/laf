@@ -241,7 +241,7 @@ contract LAF is ConfigOwnable, Meta, ReentrancyGuard {
 
         _mint(finder, RETURNED, 1, "");
 
-        if (delegate != msg.sender) {
+        if (delegate == msg.sender) {
             _mint(delegate, DELEGATED, 1, "");
         }
 

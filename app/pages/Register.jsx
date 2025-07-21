@@ -16,6 +16,7 @@ import { useSimulateLafRegisterItem, useWriteLafRegisterItem } from "../contract
 import { useSmartWalletSimulateHook, useSmartWalletWriteHook } from "../wallet"
 import { useAccount } from "../wallet"
 import { useUnifiedSigning } from "../hooks/useUnifiedSigning";
+import { useSmartWalletDeployment } from "../hooks/useSmartWalletDeployment";
 
 
 function generateSecretHash(secret) {
@@ -45,6 +46,7 @@ function generateRandomSecret(length = 32) {
 export default function Register() {
     const [, setLocation] = useLocation();
     const { loggedIn, activeWalletType, signingMethod, hasSmartWallet } = useAccount();
+    const { isDeploying: isDeployingWallet, isReady: walletReady } = useSmartWalletDeployment();
     const { signMessage, isReady: signingReady } = useUnifiedSigning();
     
     const [itemData, setItemData] = useState(() => {
@@ -58,8 +60,6 @@ export default function Register() {
     const [signatureCancelled, setSignatureCancelled] = useState(false);
     const [hasAttemptedSignature, setHasAttemptedSignature] = useState(false);
     const [registrationWalletType, setRegistrationWalletType] = useState(null);
-    const [registrationAddress, setRegistrationAddress] = useState(null);
-    const [walletContextLocked, setWalletContextLocked] = useState(false);
     
     const qrRef = useRef(null);
     const signatureAttemptRef = useRef(false); // Prevent double execution
@@ -84,6 +84,13 @@ export default function Register() {
             return;
         }
         
+        // Wait for smart wallet to be ready if needed
+        if (!walletReady) {
+            console.log('Smart wallet not ready yet, waiting...');
+            notify('Preparing smart wallet...', 'info');
+            return;
+        }
+        
         // FORCE SMART WALLET USAGE WHEN AVAILABLE
         // Always prioritize smart wallet over embedded wallet for consistency
         let finalWalletType = activeWalletType;
@@ -103,7 +110,6 @@ export default function Register() {
                 final: { finalWalletType, finalSigningMethod }
             });
             setRegistrationWalletType(finalWalletType);
-            setRegistrationAddress(loggedIn);
         } else if (registrationWalletType !== finalWalletType) {
             console.warn('Wallet type changed during registration!', {
                 original: registrationWalletType,
@@ -112,7 +118,6 @@ export default function Register() {
             notify('Wallet type changed. Please use the same wallet for registration and QR generation.', 'warning');
             // Reset and use current wallet
             setRegistrationWalletType(finalWalletType);
-            setRegistrationAddress(loggedIn);
         }
         
         // Check all conditions before proceeding
@@ -211,7 +216,6 @@ export default function Register() {
         setSignatureCancelled(false);
         setHasAttemptedSignature(false);
         setRegistrationWalletType(null);
-        setRegistrationAddress(null);
         signatureAttemptRef.current = false;
         
         // Clear existing signature and QR code
@@ -229,12 +233,13 @@ export default function Register() {
     useEffect(() => {
         // Only attempt signature if:
         // 1. Wallet is connected (address exists)
-        // 2. Not currently signing
-        // 3. Haven't signed yet
-        // 4. Haven't cancelled signature
-        // 5. Haven't attempted signature yet (prevents loops)
-        if (loggedIn && !isSigningSecret && !secretSigned && !signatureCancelled && !hasAttemptedSignature) {
-            console.log('Wallet connected, attempting automatic signature...');
+        // 2. Wallet is ready
+        // 3. Not currently signing
+        // 4. Haven't signed yet
+        // 5. Haven't cancelled signature
+        // 6. Haven't attempted signature yet (prevents loops)
+        if (loggedIn && walletReady && !isSigningSecret && !secretSigned && !signatureCancelled && !hasAttemptedSignature) {
+            console.log('Wallet connected and ready, attempting automatic signature...');
             signSecretAndGenerateQR();
         } else if (!loggedIn && hasAttemptedSignature) {
             console.log('Wallet disconnected, resetting signature state');
@@ -243,7 +248,7 @@ export default function Register() {
             setSignatureCancelled(false);
             signatureAttemptRef.current = false;
         }
-    }, [loggedIn, isSigningSecret, secretSigned, signatureCancelled, hasAttemptedSignature]);
+    }, [loggedIn, isSigningSecret, secretSigned, signatureCancelled, hasAttemptedSignature, walletReady]);
     
     useEffect(() => {
         if (qrRef.current && itemData.qrCode) {
@@ -254,7 +259,7 @@ export default function Register() {
 
     const registerParams = {
         args: [itemData.secretHash, comment],
-        enabled: comment.length > 0 && secretSigned,
+        enabled: comment.length > 0 && secretSigned && walletReady,
         confirmationCallback: ({ data, error }) => {
             if (!error && data) {
                 notify('Item registered successfully!', 'success');
@@ -329,12 +334,13 @@ export default function Register() {
                     />
                 </div>
                 
-                <div className="flex justify-center">
+                <div className="flex flex-col gap-2 items-center">
                     <TxButton
                         simulateHook={useSmartWalletSimulateHook(useSimulateLafRegisterItem)}
                         writeHook={useSmartWalletWriteHook(useWriteLafRegisterItem)}
                         params={registerParams}
-                        text="Register Item"
+                        text={isDeployingWallet ? "Preparing Smart Wallet..." : "Register Item"}
+                        disabled={!walletReady || isDeployingWallet}
                     />
                 </div>
             </div>
