@@ -98,7 +98,42 @@ components/containers/ItemContainer/ ← Container component
 **Extract from**: Scattered error handling and notification calls
 **Functions**: `parseError()`, `handleError()`, `notifySuccess()`, `notifyError()`, `notifyLoading()`
 
-#### **Step 1.6: Routing Service**
+#### **Step 1.6: Messaging Service**
+```bash
+# Create: services/messagingService.js
+```
+**Extract from**: `MessagingProvider.jsx`, `MessageModal.jsx`, XMTP/Waku logic
+**Functions**: `initializeMessaging()`, `switchProvider()`, `validateRecipient()`, `formatMessage()`
+
+#### **Step 1.7: Geolocation Service**
+```bash
+# Create: services/geolocationService.js
+```
+**Extract from**: Location handling in Register.jsx, Found.jsx
+**Functions**: `getCurrentLocation()`, `validateCoordinates()`, `formatLocation()`, `calculateDistance()`
+
+#### **Step 1.8: QR Code Service**
+```bash
+# Create: services/qrService.js
+```
+**Extract from**: QR generation logic in Register.jsx
+**Functions**: `generateQRCode()`, `parseQRData()`, `validateQRFormat()`, `createQROptions()`
+
+#### **Step 1.9: Validation Service**
+```bash
+# Create: services/validationService.js
+```
+**Extract from**: Form validation scattered across components
+**Functions**: `validateSecret()`, `validateAddress()`, `validateAmount()`, `validateComment()`
+
+#### **Step 1.10: Contract Service**
+```bash
+# Create: services/contractService.js
+```
+**Extract from**: Contract interaction patterns in multiple components
+**Functions**: `prepareContractCall()`, `handleContractError()`, `formatContractData()`, `validateContractParams()`
+
+#### **Step 1.11: Routing Service**
 ```bash
 # Create: services/routingService.js
 ```
