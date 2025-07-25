@@ -228,7 +228,7 @@ contract LAFItem is Config, Initializable, ReentrancyGuard {
             if (timePassed < _config.nonReturnCooldown + _config.nonReturnGracePeriod)
                 revert LAFErrors.CooldownNotMet(_config.nonReturnCooldown + _config.nonReturnGracePeriod - timePassed);
 
-            resultStatus = Status.Lost;
+            resultStatus = Status.Registered;
             penaltyTarget = finder;
         } else if (initiator == finder) {
             if (timePassed < _config.nonReturnCooldown)
@@ -245,10 +245,6 @@ contract LAFItem is Config, Initializable, ReentrancyGuard {
 
         status = resultStatus;
         statusUpdatedTs = block.timestamp;
-
-        if (resultStatus == Status.Lost) {
-            _resetCycle();
-        }
     }
 
     /// @notice Sponsor the reward for an item

@@ -42,6 +42,13 @@ export const configAbi = [
   {
     type: 'function',
     inputs: [],
+    name: 'MAX_DELEGATE_FEE_BPS',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
     name: 'MAX_FEE_BPS',
     outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
     stateMutability: 'view',
@@ -56,7 +63,21 @@ export const configAbi = [
   {
     type: 'function',
     inputs: [],
+    name: 'MAX_NON_RETURN_REWARD_BPS',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
     name: 'MIN_CHARITY_FEE_BPS',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'MIN_DELEGATE_FEE_BPS',
     outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
     stateMutability: 'view',
   },
@@ -77,6 +98,13 @@ export const configAbi = [
   {
     type: 'function',
     inputs: [],
+    name: 'MIN_NON_RETURN_REWARD_BPS',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
     name: 'MONTH',
     outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
     stateMutability: 'view',
@@ -91,16 +119,31 @@ export const configAbi = [
   {
     type: 'function',
     inputs: [],
+    name: 'YEAR',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
     name: 'config',
     outputs: [
       { name: 'rewardToken', internalType: 'address', type: 'address' },
+      { name: 'rewardTokenDecimals', internalType: 'uint8', type: 'uint8' },
       { name: 'minReward', internalType: 'uint256', type: 'uint256' },
-      { name: 'immediateRewardBps', internalType: 'uint256', type: 'uint256' },
       { name: 'minCharityFeeBps', internalType: 'uint256', type: 'uint256' },
       { name: 'minFeeBps', internalType: 'uint256', type: 'uint256' },
+      { name: 'immediateRewardBps', internalType: 'uint256', type: 'uint256' },
+      { name: 'nonReturnRewardBps', internalType: 'uint256', type: 'uint256' },
       { name: 'foundCooldown', internalType: 'uint256', type: 'uint256' },
       { name: 'returnCooldown', internalType: 'uint256', type: 'uint256' },
       { name: 'revokeLostCooldown', internalType: 'uint256', type: 'uint256' },
+      { name: 'nonReturnCooldown', internalType: 'uint256', type: 'uint256' },
+      {
+        name: 'nonReturnGracePeriod',
+        internalType: 'uint256',
+        type: 'uint256',
+      },
     ],
     stateMutability: 'view',
   },
@@ -129,14 +172,14 @@ export const configOwnableAbi = [
   {
     type: 'function',
     inputs: [],
-    name: 'INCORRECT_VALUE',
-    outputs: [{ name: '', internalType: 'string', type: 'string' }],
+    name: 'MAX_CHARITY_FEE_BPS',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
     stateMutability: 'view',
   },
   {
     type: 'function',
     inputs: [],
-    name: 'MAX_CHARITY_FEE_BPS',
+    name: 'MAX_DELEGATE_FEE_BPS',
     outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
     stateMutability: 'view',
   },
@@ -157,7 +200,21 @@ export const configOwnableAbi = [
   {
     type: 'function',
     inputs: [],
+    name: 'MAX_NON_RETURN_REWARD_BPS',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
     name: 'MIN_CHARITY_FEE_BPS',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'MIN_DELEGATE_FEE_BPS',
     outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
     stateMutability: 'view',
   },
@@ -178,6 +235,13 @@ export const configOwnableAbi = [
   {
     type: 'function',
     inputs: [],
+    name: 'MIN_NON_RETURN_REWARD_BPS',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
     name: 'MONTH',
     outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
     stateMutability: 'view',
@@ -192,16 +256,31 @@ export const configOwnableAbi = [
   {
     type: 'function',
     inputs: [],
+    name: 'YEAR',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
     name: 'config',
     outputs: [
       { name: 'rewardToken', internalType: 'address', type: 'address' },
+      { name: 'rewardTokenDecimals', internalType: 'uint8', type: 'uint8' },
       { name: 'minReward', internalType: 'uint256', type: 'uint256' },
-      { name: 'immediateRewardBps', internalType: 'uint256', type: 'uint256' },
       { name: 'minCharityFeeBps', internalType: 'uint256', type: 'uint256' },
       { name: 'minFeeBps', internalType: 'uint256', type: 'uint256' },
+      { name: 'immediateRewardBps', internalType: 'uint256', type: 'uint256' },
+      { name: 'nonReturnRewardBps', internalType: 'uint256', type: 'uint256' },
       { name: 'foundCooldown', internalType: 'uint256', type: 'uint256' },
       { name: 'returnCooldown', internalType: 'uint256', type: 'uint256' },
       { name: 'revokeLostCooldown', internalType: 'uint256', type: 'uint256' },
+      { name: 'nonReturnCooldown', internalType: 'uint256', type: 'uint256' },
+      {
+        name: 'nonReturnGracePeriod',
+        internalType: 'uint256',
+        type: 'uint256',
+      },
     ],
     stateMutability: 'view',
   },
@@ -229,21 +308,21 @@ export const configOwnableAbi = [
   {
     type: 'function',
     inputs: [{ name: '_value', internalType: 'uint256', type: 'uint256' }],
-    name: 'setImmediateRewardPercentage',
+    name: 'setImmediateRewardBps',
     outputs: [],
     stateMutability: 'nonpayable',
   },
   {
     type: 'function',
     inputs: [{ name: '_value', internalType: 'uint256', type: 'uint256' }],
-    name: 'setMinCharityFee',
+    name: 'setMinCharityFeeBps',
     outputs: [],
     stateMutability: 'nonpayable',
   },
   {
     type: 'function',
     inputs: [{ name: '_value', internalType: 'uint256', type: 'uint256' }],
-    name: 'setMinFee',
+    name: 'setMinFeeBps',
     outputs: [],
     stateMutability: 'nonpayable',
   },
@@ -251,6 +330,27 @@ export const configOwnableAbi = [
     type: 'function',
     inputs: [{ name: '_value', internalType: 'uint256', type: 'uint256' }],
     name: 'setMinReward',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: '_value', internalType: 'uint256', type: 'uint256' }],
+    name: 'setNonReturnCooldown',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: '_value', internalType: 'uint256', type: 'uint256' }],
+    name: 'setNonReturnGracePeriod',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: '_value', internalType: 'uint256', type: 'uint256' }],
+    name: 'setNonReturnRewardBps',
     outputs: [],
     stateMutability: 'nonpayable',
   },
@@ -265,15 +365,6 @@ export const configOwnableAbi = [
     type: 'function',
     inputs: [{ name: '_value', internalType: 'uint256', type: 'uint256' }],
     name: 'setRevokeLostCooldown',
-    outputs: [],
-    stateMutability: 'nonpayable',
-  },
-  {
-    type: 'function',
-    inputs: [
-      { name: '_rewardToken', internalType: 'address', type: 'address' },
-    ],
-    name: 'setRewardToken',
     outputs: [],
     stateMutability: 'nonpayable',
   },
@@ -302,6 +393,16 @@ export const configOwnableAbi = [
       },
     ],
     name: 'OwnershipTransferred',
+  },
+  { type: 'error', inputs: [], name: 'IncorrectValue' },
+  {
+    type: 'error',
+    inputs: [
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+      { name: 'min', internalType: 'uint256', type: 'uint256' },
+      { name: 'max', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'InvalidRange',
   },
   {
     type: 'error',
@@ -1375,19 +1476,176 @@ export const ierc1271Abi = [
 ]
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// IERC1271Wallet
+// IERC1363
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-export const ierc1271WalletAbi = [
+export const ierc1363Abi = [
   {
     type: 'function',
     inputs: [
-      { name: 'hash', internalType: 'bytes32', type: 'bytes32' },
-      { name: 'signature', internalType: 'bytes', type: 'bytes' },
+      { name: 'owner', internalType: 'address', type: 'address' },
+      { name: 'spender', internalType: 'address', type: 'address' },
     ],
-    name: 'isValidSignature',
-    outputs: [{ name: 'magicValue', internalType: 'bytes4', type: 'bytes4' }],
+    name: 'allowance',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
     stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'spender', internalType: 'address', type: 'address' },
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'approve',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'spender', internalType: 'address', type: 'address' },
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'approveAndCall',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'spender', internalType: 'address', type: 'address' },
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+      { name: 'data', internalType: 'bytes', type: 'bytes' },
+    ],
+    name: 'approveAndCall',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'account', internalType: 'address', type: 'address' }],
+    name: 'balanceOf',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'interfaceId', internalType: 'bytes4', type: 'bytes4' }],
+    name: 'supportsInterface',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'totalSupply',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'to', internalType: 'address', type: 'address' },
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'transfer',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'to', internalType: 'address', type: 'address' },
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'transferAndCall',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'to', internalType: 'address', type: 'address' },
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+      { name: 'data', internalType: 'bytes', type: 'bytes' },
+    ],
+    name: 'transferAndCall',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'from', internalType: 'address', type: 'address' },
+      { name: 'to', internalType: 'address', type: 'address' },
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'transferFrom',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'from', internalType: 'address', type: 'address' },
+      { name: 'to', internalType: 'address', type: 'address' },
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+      { name: 'data', internalType: 'bytes', type: 'bytes' },
+    ],
+    name: 'transferFromAndCall',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'from', internalType: 'address', type: 'address' },
+      { name: 'to', internalType: 'address', type: 'address' },
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'transferFromAndCall',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'owner',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'spender',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'value',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'Approval',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'from', internalType: 'address', type: 'address', indexed: true },
+      { name: 'to', internalType: 'address', type: 'address', indexed: true },
+      {
+        name: 'value',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'Transfer',
   },
 ]
 
@@ -1433,6 +1691,129 @@ export const ierc20ErrorsAbi = [
     type: 'error',
     inputs: [{ name: 'spender', internalType: 'address', type: 'address' }],
     name: 'ERC20InvalidSpender',
+  },
+]
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// IERC20Metadata
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const ierc20MetadataAbi = [
+  {
+    type: 'function',
+    inputs: [
+      { name: 'owner', internalType: 'address', type: 'address' },
+      { name: 'spender', internalType: 'address', type: 'address' },
+    ],
+    name: 'allowance',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'spender', internalType: 'address', type: 'address' },
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'approve',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'account', internalType: 'address', type: 'address' }],
+    name: 'balanceOf',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'decimals',
+    outputs: [{ name: '', internalType: 'uint8', type: 'uint8' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'name',
+    outputs: [{ name: '', internalType: 'string', type: 'string' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'symbol',
+    outputs: [{ name: '', internalType: 'string', type: 'string' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'totalSupply',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'to', internalType: 'address', type: 'address' },
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'transfer',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'from', internalType: 'address', type: 'address' },
+      { name: 'to', internalType: 'address', type: 'address' },
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'transferFrom',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'owner',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'spender',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'value',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'Approval',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'from', internalType: 'address', type: 'address', indexed: true },
+      { name: 'to', internalType: 'address', type: 'address', indexed: true },
+      {
+        name: 'value',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'Transfer',
   },
 ]
 
@@ -1535,16 +1916,6 @@ export const ilafAbi = [
   },
   {
     type: 'function',
-    inputs: [
-      { name: 'account', internalType: 'address', type: 'address' },
-      { name: 'id', internalType: 'uint256', type: 'uint256' },
-    ],
-    name: 'balanceOf',
-    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
-    stateMutability: 'view',
-  },
-  {
-    type: 'function',
     inputs: [{ name: 'index', internalType: 'uint256', type: 'uint256' }],
     name: 'charities',
     outputs: [
@@ -1581,18 +1952,24 @@ export const ilafAbi = [
         type: 'tuple',
         components: [
           { name: 'rewardToken', internalType: 'address', type: 'address' },
+          { name: 'rewardTokenDecimals', internalType: 'uint8', type: 'uint8' },
           { name: 'minReward', internalType: 'uint256', type: 'uint256' },
-          {
-            name: 'immediateRewardBps',
-            internalType: 'uint256',
-            type: 'uint256',
-          },
           {
             name: 'minCharityFeeBps',
             internalType: 'uint256',
             type: 'uint256',
           },
           { name: 'minFeeBps', internalType: 'uint256', type: 'uint256' },
+          {
+            name: 'immediateRewardBps',
+            internalType: 'uint256',
+            type: 'uint256',
+          },
+          {
+            name: 'nonReturnRewardBps',
+            internalType: 'uint256',
+            type: 'uint256',
+          },
           { name: 'foundCooldown', internalType: 'uint256', type: 'uint256' },
           { name: 'returnCooldown', internalType: 'uint256', type: 'uint256' },
           {
@@ -1600,9 +1977,26 @@ export const ilafAbi = [
             internalType: 'uint256',
             type: 'uint256',
           },
+          {
+            name: 'nonReturnCooldown',
+            internalType: 'uint256',
+            type: 'uint256',
+          },
+          {
+            name: 'nonReturnGracePeriod',
+            internalType: 'uint256',
+            type: 'uint256',
+          },
         ],
       },
     ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'delegateFeesDistributed',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
     stateMutability: 'view',
   },
   {
@@ -1615,10 +2009,8 @@ export const ilafAbi = [
   {
     type: 'function',
     inputs: [
-      { name: 'secretHash', internalType: 'address', type: 'address' },
-      { name: 'secret', internalType: 'string', type: 'string' },
-      { name: 'ownerSignature', internalType: 'bytes', type: 'bytes' },
-      { name: 'finderSignature', internalType: 'bytes', type: 'bytes' },
+      { name: '_secretHash', internalType: 'address', type: 'address' },
+      { name: '_signature', internalType: 'bytes', type: 'bytes' },
     ],
     name: 'found',
     outputs: [],
@@ -1647,17 +2039,10 @@ export const ilafAbi = [
   },
   {
     type: 'function',
-    inputs: [],
-    name: 'itemsCount',
-    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
-    stateMutability: 'view',
-  },
-  {
-    type: 'function',
     inputs: [
-      { name: 'secretHash', internalType: 'address', type: 'address' },
-      { name: 'rewardAmount', internalType: 'uint256', type: 'uint256' },
-      { name: 'geo', internalType: 'string', type: 'string' },
+      { name: '_secretHash', internalType: 'address', type: 'address' },
+      { name: '_rewardAmount', internalType: 'uint256', type: 'uint256' },
+      { name: '_geo', internalType: 'string', type: 'string' },
     ],
     name: 'lost',
     outputs: [],
@@ -1679,6 +2064,20 @@ export const ilafAbi = [
   },
   {
     type: 'function',
+    inputs: [{ name: '_secretHash', internalType: 'address', type: 'address' }],
+    name: 'nonReturn',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'nonReturnCount',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
     inputs: [],
     name: 'ping',
     outputs: [],
@@ -1687,8 +2086,8 @@ export const ilafAbi = [
   {
     type: 'function',
     inputs: [
-      { name: 'secretHash', internalType: 'address', type: 'address' },
-      { name: 'comment', internalType: 'string', type: 'string' },
+      { name: '_secretHash', internalType: 'address', type: 'address' },
+      { name: '_comment', internalType: 'string', type: 'string' },
     ],
     name: 'registerItem',
     outputs: [],
@@ -1704,10 +2103,10 @@ export const ilafAbi = [
   {
     type: 'function',
     inputs: [
-      { name: 'secretHash', internalType: 'address', type: 'address' },
-      { name: 'charityIndex', internalType: 'uint256', type: 'uint256' },
-      { name: 'charityFee', internalType: 'uint256', type: 'uint256' },
-      { name: 'fee', internalType: 'uint256', type: 'uint256' },
+      { name: '_secretHash', internalType: 'address', type: 'address' },
+      { name: '_charityIndex', internalType: 'uint256', type: 'uint256' },
+      { name: '_charityFee', internalType: 'uint256', type: 'uint256' },
+      { name: '_fee', internalType: 'uint256', type: 'uint256' },
     ],
     name: 'returned',
     outputs: [],
@@ -1722,7 +2121,7 @@ export const ilafAbi = [
   },
   {
     type: 'function',
-    inputs: [{ name: 'secretHash', internalType: 'address', type: 'address' }],
+    inputs: [{ name: '_secretHash', internalType: 'address', type: 'address' }],
     name: 'revokeLost',
     outputs: [],
     stateMutability: 'nonpayable',
@@ -1746,19 +2145,6 @@ export const ilafAbi = [
       { name: '', internalType: 'uint256', type: 'uint256' },
     ],
     stateMutability: 'view',
-  },
-  {
-    type: 'function',
-    inputs: [
-      {
-        name: 'foundCooldownSeconds',
-        internalType: 'uint256',
-        type: 'uint256',
-      },
-    ],
-    name: 'setFoundCooldown',
-    outputs: [],
-    stateMutability: 'nonpayable',
   },
   {
     type: 'function',
@@ -1822,21 +2208,41 @@ export const ilafAbi = [
   },
   {
     type: 'function',
-    inputs: [
-      { name: 'rewardTokenAddress', internalType: 'address', type: 'address' },
-    ],
-    name: 'setRewardToken',
+    inputs: [{ name: '_treasury', internalType: 'address', type: 'address' }],
+    name: 'setTreasury',
     outputs: [],
     stateMutability: 'nonpayable',
   },
   {
     type: 'function',
     inputs: [
-      { name: 'treasuryAddress', internalType: 'address', type: 'address' },
+      { name: '_secretHash', internalType: 'address', type: 'address' },
+      { name: '_amount', internalType: 'uint256', type: 'uint256' },
     ],
-    name: 'setTreasury',
+    name: 'support',
     outputs: [],
     stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'supportRewards',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'supportRewardsCount',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'supportRewardsDistributed',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
   },
   {
     type: 'function',
@@ -1844,20 +2250,6 @@ export const ilafAbi = [
     name: 'supportsInterface',
     outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
     stateMutability: 'view',
-  },
-  {
-    type: 'function',
-    inputs: [{ name: 'account', internalType: 'address', type: 'address' }],
-    name: 'thumbDown',
-    outputs: [],
-    stateMutability: 'nonpayable',
-  },
-  {
-    type: 'function',
-    inputs: [{ name: 'account', internalType: 'address', type: 'address' }],
-    name: 'thumbUp',
-    outputs: [],
-    stateMutability: 'nonpayable',
   },
   {
     type: 'function',
@@ -1877,17 +2269,174 @@ export const ilafAbi = [
   },
   {
     type: 'function',
-    inputs: [{ name: 'account', internalType: 'address', type: 'address' }],
-    name: 'trust',
-    outputs: [{ name: '', internalType: 'int256', type: 'int256' }],
+    inputs: [
+      { name: '_rewardToken', internalType: 'address', type: 'address' },
+    ],
+    name: 'updateRewardToken',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+]
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// ILAFItem
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const ilafItemAbi = [
+  {
+    type: 'function',
+    inputs: [],
+    name: 'comment',
+    outputs: [{ name: '', internalType: 'string', type: 'string' }],
     stateMutability: 'view',
   },
   {
     type: 'function',
-    inputs: [{ name: 'tokenId', internalType: 'uint256', type: 'uint256' }],
-    name: 'uri',
+    inputs: [],
+    name: 'cycle',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'delegate',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'delegateFee',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'delegateUpdatedTs',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'detailsUpdatedTs',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'factory',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'finder',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'geo',
     outputs: [{ name: '', internalType: 'string', type: 'string' }],
-    stateMutability: 'pure',
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'immediateRewardPaid',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'owner',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'reward',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'secretHash',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'status',
+    outputs: [{ name: '', internalType: 'uint8', type: 'uint8' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'statusUpdatedTs',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'supportReward',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'token',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: '_delegate', internalType: 'address', type: 'address' },
+      { name: '_delegateFee', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'updateDelegate',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: '_comment', internalType: 'string', type: 'string' },
+      { name: '_geo', internalType: 'string', type: 'string' },
+    ],
+    name: 'updateDetails',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: '_rewardAmount', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'updateReward',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'withdraw',
+    outputs: [],
+    stateMutability: 'nonpayable',
   },
 ]
 
@@ -2186,6 +2735,13 @@ export const itemAbi = [
   {
     type: 'function',
     inputs: [],
+    name: 'MAX_DELEGATE_FEE_BPS',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
     name: 'MAX_FEE_BPS',
     outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
     stateMutability: 'view',
@@ -2200,7 +2756,21 @@ export const itemAbi = [
   {
     type: 'function',
     inputs: [],
+    name: 'MAX_NON_RETURN_REWARD_BPS',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
     name: 'MIN_CHARITY_FEE_BPS',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'MIN_DELEGATE_FEE_BPS',
     outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
     stateMutability: 'view',
   },
@@ -2221,6 +2791,13 @@ export const itemAbi = [
   {
     type: 'function',
     inputs: [],
+    name: 'MIN_NON_RETURN_REWARD_BPS',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
     name: 'MONTH',
     outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
     stateMutability: 'view',
@@ -2229,6 +2806,13 @@ export const itemAbi = [
     type: 'function',
     inputs: [],
     name: 'WEEK',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'YEAR',
     outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
     stateMutability: 'view',
   },
@@ -2246,13 +2830,27 @@ export const itemAbi = [
     outputs: [
       { name: 'rewardToken', internalType: 'address', type: 'address' },
       { name: 'minReward', internalType: 'uint256', type: 'uint256' },
-      { name: 'immediateRewardBps', internalType: 'uint256', type: 'uint256' },
       { name: 'minCharityFeeBps', internalType: 'uint256', type: 'uint256' },
       { name: 'minFeeBps', internalType: 'uint256', type: 'uint256' },
+      { name: 'immediateRewardBps', internalType: 'uint256', type: 'uint256' },
+      { name: 'nonReturnRewardBps', internalType: 'uint256', type: 'uint256' },
       { name: 'foundCooldown', internalType: 'uint256', type: 'uint256' },
       { name: 'returnCooldown', internalType: 'uint256', type: 'uint256' },
       { name: 'revokeLostCooldown', internalType: 'uint256', type: 'uint256' },
+      { name: 'nonReturnCooldown', internalType: 'uint256', type: 'uint256' },
+      {
+        name: 'nonReturnGracePeriod',
+        internalType: 'uint256',
+        type: 'uint256',
+      },
     ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'cycle',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
     stateMutability: 'view',
   },
   {
@@ -2307,13 +2905,6 @@ export const itemAbi = [
   {
     type: 'function',
     inputs: [],
-    name: 'foundTs',
-    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
-    stateMutability: 'view',
-  },
-  {
-    type: 'function',
-    inputs: [],
     name: 'geo',
     outputs: [{ name: '', internalType: 'string', type: 'string' }],
     stateMutability: 'view',
@@ -2332,20 +2923,35 @@ export const itemAbi = [
           { name: 'rewardToken', internalType: 'address', type: 'address' },
           { name: 'minReward', internalType: 'uint256', type: 'uint256' },
           {
-            name: 'immediateRewardBps',
-            internalType: 'uint256',
-            type: 'uint256',
-          },
-          {
             name: 'minCharityFeeBps',
             internalType: 'uint256',
             type: 'uint256',
           },
           { name: 'minFeeBps', internalType: 'uint256', type: 'uint256' },
+          {
+            name: 'immediateRewardBps',
+            internalType: 'uint256',
+            type: 'uint256',
+          },
+          {
+            name: 'nonReturnRewardBps',
+            internalType: 'uint256',
+            type: 'uint256',
+          },
           { name: 'foundCooldown', internalType: 'uint256', type: 'uint256' },
           { name: 'returnCooldown', internalType: 'uint256', type: 'uint256' },
           {
             name: 'revokeLostCooldown',
+            internalType: 'uint256',
+            type: 'uint256',
+          },
+          {
+            name: 'nonReturnCooldown',
+            internalType: 'uint256',
+            type: 'uint256',
+          },
+          {
+            name: 'nonReturnGracePeriod',
             internalType: 'uint256',
             type: 'uint256',
           },
@@ -2355,27 +2961,6 @@ export const itemAbi = [
     name: 'initialize',
     outputs: [],
     stateMutability: 'nonpayable',
-  },
-  {
-    type: 'function',
-    inputs: [],
-    name: 'isFound',
-    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
-    stateMutability: 'view',
-  },
-  {
-    type: 'function',
-    inputs: [],
-    name: 'isLost',
-    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
-    stateMutability: 'view',
-  },
-  {
-    type: 'function',
-    inputs: [],
-    name: 'isReturned',
-    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
-    stateMutability: 'view',
   },
   {
     type: 'function',
@@ -2389,10 +2974,12 @@ export const itemAbi = [
   },
   {
     type: 'function',
-    inputs: [],
-    name: 'lostTs',
-    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
-    stateMutability: 'view',
+    inputs: [{ name: 'initiator', internalType: 'address', type: 'address' }],
+    name: 'nonReturn',
+    outputs: [
+      { name: 'resultStatus', internalType: 'enum Item.Status', type: 'uint8' },
+    ],
+    stateMutability: 'nonpayable',
   },
   {
     type: 'function',
@@ -2420,13 +3007,6 @@ export const itemAbi = [
   {
     type: 'function',
     inputs: [],
-    name: 'returnedTs',
-    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
-    stateMutability: 'view',
-  },
-  {
-    type: 'function',
-    inputs: [],
     name: 'revokeLost',
     outputs: [],
     stateMutability: 'nonpayable',
@@ -2441,15 +3021,29 @@ export const itemAbi = [
   {
     type: 'function',
     inputs: [],
-    name: 'rewardToken',
+    name: 'secretHash',
     outputs: [{ name: '', internalType: 'address', type: 'address' }],
     stateMutability: 'view',
   },
   {
     type: 'function',
     inputs: [],
-    name: 'secretHash',
-    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    name: 'status',
+    outputs: [{ name: '', internalType: 'enum Item.Status', type: 'uint8' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'statusUpdatedTs',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'token',
+    outputs: [{ name: '', internalType: 'contract IERC20', type: 'address' }],
     stateMutability: 'view',
   },
   {
@@ -2473,6 +3067,55 @@ export const itemAbi = [
     stateMutability: 'nonpayable',
   },
   {
+    type: 'function',
+    inputs: [
+      { name: '_rewardAmount', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'updateReward',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'withdraw',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'oldDelegate',
+        internalType: 'address',
+        type: 'address',
+        indexed: false,
+      },
+      {
+        name: 'newDelegate',
+        internalType: 'address',
+        type: 'address',
+        indexed: false,
+      },
+    ],
+    name: 'DelegateUpdated',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'comment',
+        internalType: 'string',
+        type: 'string',
+        indexed: false,
+      },
+      { name: 'geo', internalType: 'string', type: 'string', indexed: false },
+    ],
+    name: 'DetailsUpdated',
+  },
+  {
     type: 'event',
     anonymous: false,
     inputs: [
@@ -2485,8 +3128,80 @@ export const itemAbi = [
     ],
     name: 'Initialized',
   },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'oldReward',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+      {
+        name: 'newReward',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'RewardUpdated',
+  },
+  {
+    type: 'error',
+    inputs: [
+      { name: 'timeRemaining', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'CooldownNotMet',
+  },
+  { type: 'error', inputs: [], name: 'EmptyValue' },
+  {
+    type: 'error',
+    inputs: [
+      { name: 'fee', internalType: 'uint256', type: 'uint256' },
+      { name: 'min', internalType: 'uint256', type: 'uint256' },
+      { name: 'max', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'InvalidCharityFee',
+  },
+  {
+    type: 'error',
+    inputs: [
+      { name: 'fee', internalType: 'uint256', type: 'uint256' },
+      { name: 'min', internalType: 'uint256', type: 'uint256' },
+      { name: 'max', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'InvalidDelegateFee',
+  },
+  {
+    type: 'error',
+    inputs: [
+      { name: 'fee', internalType: 'uint256', type: 'uint256' },
+      { name: 'min', internalType: 'uint256', type: 'uint256' },
+      { name: 'max', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'InvalidFee',
+  },
   { type: 'error', inputs: [], name: 'InvalidInitialization' },
+  { type: 'error', inputs: [], name: 'InvalidSender' },
+  { type: 'error', inputs: [], name: 'InvalidStatus' },
+  { type: 'error', inputs: [], name: 'InvalidValue' },
   { type: 'error', inputs: [], name: 'NotInitializing' },
+  { type: 'error', inputs: [], name: 'OnlyFactory' },
+  { type: 'error', inputs: [], name: 'OnlyOwner' },
+  {
+    type: 'error',
+    inputs: [
+      { name: 'provided', internalType: 'uint256', type: 'uint256' },
+      { name: 'minimum', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'RewardTooLow',
+  },
+  {
+    type: 'error',
+    inputs: [{ name: 'token', internalType: 'address', type: 'address' }],
+    name: 'SafeERC20FailedOperation',
+  },
 ]
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2495,13 +3210,25 @@ export const itemAbi = [
 
 /**
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const lafAbi = [
   {
     type: 'constructor',
     inputs: [
       { name: '_rewardToken', internalType: 'address', type: 'address' },
+      {
+        name: '_charity',
+        internalType: 'struct LAF.Charity',
+        type: 'tuple',
+        components: [
+          { name: 'active', internalType: 'bool', type: 'bool' },
+          { name: 'contractAddress', internalType: 'address', type: 'address' },
+          { name: 'donated', internalType: 'uint256', type: 'uint256' },
+          { name: 'title', internalType: 'string', type: 'string' },
+          { name: 'url', internalType: 'string', type: 'string' },
+        ],
+      },
     ],
     stateMutability: 'nonpayable',
   },
@@ -2522,14 +3249,14 @@ export const lafAbi = [
   {
     type: 'function',
     inputs: [],
-    name: 'INCORRECT_VALUE',
-    outputs: [{ name: '', internalType: 'string', type: 'string' }],
+    name: 'MAX_CHARITY_FEE_BPS',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
     stateMutability: 'view',
   },
   {
     type: 'function',
     inputs: [],
-    name: 'MAX_CHARITY_FEE_BPS',
+    name: 'MAX_DELEGATE_FEE_BPS',
     outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
     stateMutability: 'view',
   },
@@ -2550,7 +3277,21 @@ export const lafAbi = [
   {
     type: 'function',
     inputs: [],
+    name: 'MAX_NON_RETURN_REWARD_BPS',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
     name: 'MIN_CHARITY_FEE_BPS',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'MIN_DELEGATE_FEE_BPS',
     outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
     stateMutability: 'view',
   },
@@ -2571,6 +3312,13 @@ export const lafAbi = [
   {
     type: 'function',
     inputs: [],
+    name: 'MIN_NON_RETURN_REWARD_BPS',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
     name: 'MONTH',
     outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
     stateMutability: 'view',
@@ -2579,6 +3327,13 @@ export const lafAbi = [
     type: 'function',
     inputs: [],
     name: 'WEEK',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'YEAR',
     outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
     stateMutability: 'view',
   },
@@ -2615,7 +3370,9 @@ export const lafAbi = [
   },
   {
     type: 'function',
-    inputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    inputs: [
+      { name: 'charityIndex', internalType: 'uint256', type: 'uint256' },
+    ],
     name: 'charities',
     outputs: [
       { name: 'active', internalType: 'bool', type: 'bool' },
@@ -2646,14 +3403,29 @@ export const lafAbi = [
     name: 'config',
     outputs: [
       { name: 'rewardToken', internalType: 'address', type: 'address' },
+      { name: 'rewardTokenDecimals', internalType: 'uint8', type: 'uint8' },
       { name: 'minReward', internalType: 'uint256', type: 'uint256' },
-      { name: 'immediateRewardBps', internalType: 'uint256', type: 'uint256' },
       { name: 'minCharityFeeBps', internalType: 'uint256', type: 'uint256' },
       { name: 'minFeeBps', internalType: 'uint256', type: 'uint256' },
+      { name: 'immediateRewardBps', internalType: 'uint256', type: 'uint256' },
+      { name: 'nonReturnRewardBps', internalType: 'uint256', type: 'uint256' },
       { name: 'foundCooldown', internalType: 'uint256', type: 'uint256' },
       { name: 'returnCooldown', internalType: 'uint256', type: 'uint256' },
       { name: 'revokeLostCooldown', internalType: 'uint256', type: 'uint256' },
+      { name: 'nonReturnCooldown', internalType: 'uint256', type: 'uint256' },
+      {
+        name: 'nonReturnGracePeriod',
+        internalType: 'uint256',
+        type: 'uint256',
+      },
     ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'delegateFeesDistributed',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
     stateMutability: 'view',
   },
   {
@@ -2674,9 +3446,7 @@ export const lafAbi = [
     type: 'function',
     inputs: [
       { name: '_secretHash', internalType: 'address', type: 'address' },
-      { name: '_secret', internalType: 'string', type: 'string' },
-      { name: '_ownerSignature', internalType: 'bytes', type: 'bytes' },
-      { name: '_finderSignature', internalType: 'bytes', type: 'bytes' },
+      { name: '_signature', internalType: 'bytes', type: 'bytes' },
     ],
     name: 'found',
     outputs: [],
@@ -2703,21 +3473,16 @@ export const lafAbi = [
     type: 'function',
     inputs: [],
     name: 'itemImplementation',
-    outputs: [{ name: '', internalType: 'contract Item', type: 'address' }],
+    outputs: [{ name: '', internalType: 'contract LAFItem', type: 'address' }],
     stateMutability: 'view',
   },
   {
     type: 'function',
-    inputs: [{ name: '', internalType: 'address', type: 'address' }],
+    inputs: [{ name: 'secretHash', internalType: 'address', type: 'address' }],
     name: 'items',
-    outputs: [{ name: '', internalType: 'address', type: 'address' }],
-    stateMutability: 'view',
-  },
-  {
-    type: 'function',
-    inputs: [],
-    name: 'itemsCount',
-    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    outputs: [
+      { name: 'contractAddress', internalType: 'address', type: 'address' },
+    ],
     stateMutability: 'view',
   },
   {
@@ -2744,6 +3509,20 @@ export const lafAbi = [
     name: 'mint',
     outputs: [],
     stateMutability: 'payable',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: '_secretHash', internalType: 'address', type: 'address' }],
+    name: 'nonReturn',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'nonReturnCount',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
   },
   {
     type: 'function',
@@ -2824,8 +3603,8 @@ export const lafAbi = [
     ],
     name: 'royaltyInfo',
     outputs: [
-      { name: '', internalType: 'address', type: 'address' },
-      { name: '', internalType: 'uint256', type: 'uint256' },
+      { name: 'receiver', internalType: 'address', type: 'address' },
+      { name: 'royaltyAmount', internalType: 'uint256', type: 'uint256' },
     ],
     stateMutability: 'view',
   },
@@ -2875,21 +3654,21 @@ export const lafAbi = [
   {
     type: 'function',
     inputs: [{ name: '_value', internalType: 'uint256', type: 'uint256' }],
-    name: 'setImmediateRewardPercentage',
+    name: 'setImmediateRewardBps',
     outputs: [],
     stateMutability: 'nonpayable',
   },
   {
     type: 'function',
     inputs: [{ name: '_value', internalType: 'uint256', type: 'uint256' }],
-    name: 'setMinCharityFee',
+    name: 'setMinCharityFeeBps',
     outputs: [],
     stateMutability: 'nonpayable',
   },
   {
     type: 'function',
     inputs: [{ name: '_value', internalType: 'uint256', type: 'uint256' }],
-    name: 'setMinFee',
+    name: 'setMinFeeBps',
     outputs: [],
     stateMutability: 'nonpayable',
   },
@@ -2897,6 +3676,27 @@ export const lafAbi = [
     type: 'function',
     inputs: [{ name: '_value', internalType: 'uint256', type: 'uint256' }],
     name: 'setMinReward',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: '_value', internalType: 'uint256', type: 'uint256' }],
+    name: 'setNonReturnCooldown',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: '_value', internalType: 'uint256', type: 'uint256' }],
+    name: 'setNonReturnGracePeriod',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: '_value', internalType: 'uint256', type: 'uint256' }],
+    name: 'setNonReturnRewardBps',
     outputs: [],
     stateMutability: 'nonpayable',
   },
@@ -2916,19 +3716,41 @@ export const lafAbi = [
   },
   {
     type: 'function',
-    inputs: [
-      { name: '_rewardToken', internalType: 'address', type: 'address' },
-    ],
-    name: 'setRewardToken',
+    inputs: [{ name: '_treasury', internalType: 'address', type: 'address' }],
+    name: 'setTreasury',
     outputs: [],
     stateMutability: 'nonpayable',
   },
   {
     type: 'function',
-    inputs: [{ name: '_treasury', internalType: 'address', type: 'address' }],
-    name: 'setTreasury',
+    inputs: [
+      { name: '_secretHash', internalType: 'address', type: 'address' },
+      { name: 'amount', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'support',
     outputs: [],
     stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'supportRewards',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'supportRewardsCount',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'supportRewardsDistributed',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
   },
   {
     type: 'function',
@@ -2997,6 +3819,15 @@ export const lafAbi = [
   },
   {
     type: 'function',
+    inputs: [
+      { name: '_rewardToken', internalType: 'address', type: 'address' },
+    ],
+    name: 'updateRewardToken',
+    outputs: [{ name: 'decimals', internalType: 'uint8', type: 'uint8' }],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
     inputs: [{ name: 'tokenId', internalType: 'uint256', type: 'uint256' }],
     name: 'uri',
     outputs: [{ name: '', internalType: 'string', type: 'string' }],
@@ -3028,7 +3859,7 @@ export const lafAbi = [
     inputs: [
       { name: 'item', internalType: 'address', type: 'address', indexed: true },
       {
-        name: 'hash',
+        name: 'secretHash',
         internalType: 'address',
         type: 'address',
         indexed: false,
@@ -3060,7 +3891,7 @@ export const lafAbi = [
     inputs: [
       { name: 'item', internalType: 'address', type: 'address', indexed: true },
       {
-        name: 'hash',
+        name: 'secretHash',
         internalType: 'address',
         type: 'address',
         indexed: false,
@@ -3101,7 +3932,7 @@ export const lafAbi = [
     inputs: [
       { name: 'item', internalType: 'address', type: 'address', indexed: true },
       {
-        name: 'hash',
+        name: 'secretHash',
         internalType: 'address',
         type: 'address',
         indexed: false,
@@ -3133,7 +3964,7 @@ export const lafAbi = [
     inputs: [
       { name: 'item', internalType: 'address', type: 'address', indexed: true },
       {
-        name: 'hash',
+        name: 'secretHash',
         internalType: 'address',
         type: 'address',
         indexed: false,
@@ -3159,7 +3990,7 @@ export const lafAbi = [
     inputs: [
       { name: 'item', internalType: 'address', type: 'address', indexed: true },
       {
-        name: 'hash',
+        name: 'secretHash',
         internalType: 'address',
         type: 'address',
         indexed: false,
@@ -3186,7 +4017,33 @@ export const lafAbi = [
     inputs: [
       { name: 'item', internalType: 'address', type: 'address', indexed: true },
       {
-        name: 'hash',
+        name: 'secretHash',
+        internalType: 'address',
+        type: 'address',
+        indexed: false,
+      },
+      {
+        name: 'initiator',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'status',
+        internalType: 'enum LAFItem.Status',
+        type: 'uint8',
+        indexed: false,
+      },
+    ],
+    name: 'ItemNonReturn',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'item', internalType: 'address', type: 'address', indexed: true },
+      {
+        name: 'secretHash',
         internalType: 'address',
         type: 'address',
         indexed: false,
@@ -3206,7 +4063,7 @@ export const lafAbi = [
     inputs: [
       { name: 'item', internalType: 'address', type: 'address', indexed: true },
       {
-        name: 'hash',
+        name: 'secretHash',
         internalType: 'address',
         type: 'address',
         indexed: false,
@@ -3232,7 +4089,7 @@ export const lafAbi = [
     inputs: [
       { name: 'item', internalType: 'address', type: 'address', indexed: true },
       {
-        name: 'hash',
+        name: 'secretHash',
         internalType: 'address',
         type: 'address',
         indexed: false,
@@ -3245,6 +4102,32 @@ export const lafAbi = [
       },
     ],
     name: 'ItemRevokedLost',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'item', internalType: 'address', type: 'address', indexed: true },
+      {
+        name: 'secretHash',
+        internalType: 'address',
+        type: 'address',
+        indexed: false,
+      },
+      {
+        name: 'supporter',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'amount',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'ItemSupported',
   },
   {
     type: 'event',
@@ -3297,7 +4180,7 @@ export const lafAbi = [
     inputs: [
       { name: 'item', internalType: 'address', type: 'address', indexed: true },
       {
-        name: 'hash',
+        name: 'secretHash',
         internalType: 'address',
         type: 'address',
         indexed: false,
@@ -3322,6 +4205,32 @@ export const lafAbi = [
       },
     ],
     name: 'RewardsDistributed',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'item', internalType: 'address', type: 'address', indexed: true },
+      {
+        name: 'secretHash',
+        internalType: 'address',
+        type: 'address',
+        indexed: false,
+      },
+      {
+        name: 'owner',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'supportAmount',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'SupportRewardsDistributed',
   },
   {
     type: 'event',
@@ -3390,6 +4299,17 @@ export const lafAbi = [
     ],
     name: 'Up',
   },
+  { type: 'error', inputs: [], name: 'ECDSAInvalidSignature' },
+  {
+    type: 'error',
+    inputs: [{ name: 'length', internalType: 'uint256', type: 'uint256' }],
+    name: 'ECDSAInvalidSignatureLength',
+  },
+  {
+    type: 'error',
+    inputs: [{ name: 's', internalType: 'bytes32', type: 'bytes32' }],
+    name: 'ECDSAInvalidSignatureS',
+  },
   {
     type: 'error',
     inputs: [
@@ -3436,7 +4356,9 @@ export const lafAbi = [
     ],
     name: 'ERC1155MissingApprovalForAll',
   },
+  { type: 'error', inputs: [], name: 'EmptyValue' },
   { type: 'error', inputs: [], name: 'FailedDeployment' },
+  { type: 'error', inputs: [], name: 'IncorrectValue' },
   {
     type: 'error',
     inputs: [
@@ -3445,6 +4367,30 @@ export const lafAbi = [
     ],
     name: 'InsufficientBalance',
   },
+  {
+    type: 'error',
+    inputs: [
+      { name: 'required', internalType: 'uint256', type: 'uint256' },
+      { name: 'available', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'InsufficientBalance',
+  },
+  { type: 'error', inputs: [], name: 'InvalidCharity' },
+  {
+    type: 'error',
+    inputs: [
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+      { name: 'min', internalType: 'uint256', type: 'uint256' },
+      { name: 'max', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'InvalidRange',
+  },
+  { type: 'error', inputs: [], name: 'InvalidSecret' },
+  { type: 'error', inputs: [], name: 'InvalidSender' },
+  { type: 'error', inputs: [], name: 'InvalidStatus' },
+  { type: 'error', inputs: [], name: 'InvalidValue' },
+  { type: 'error', inputs: [], name: 'ItemAlreadyExists' },
+  { type: 'error', inputs: [], name: 'ItemDoesNotExist' },
   {
     type: 'error',
     inputs: [{ name: 'owner', internalType: 'address', type: 'address' }],
@@ -3456,22 +4402,1031 @@ export const lafAbi = [
     name: 'OwnableUnauthorizedAccount',
   },
   { type: 'error', inputs: [], name: 'ReentrancyGuardReentrantCall' },
+  {
+    type: 'error',
+    inputs: [
+      { name: 'provided', internalType: 'uint256', type: 'uint256' },
+      { name: 'minimum', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'RewardTooLow',
+  },
+  { type: 'error', inputs: [], name: 'TransferFailed' },
+  { type: 'error', inputs: [], name: 'UnauthorizedAccess' },
+  { type: 'error', inputs: [], name: 'ZeroAddress' },
 ]
 
 /**
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const lafAddress = {
   8453: '0x0000000000000000000000000000000000000000',
-  84532: '0xd92E65585F5d69e2d9E955Ee2D19EF77C0698801',
+  84532: '0x9bc899f84588844d16Ef867053ABEcD13fd68f14',
 }
 
 /**
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const lafConfig = { address: lafAddress, abi: lafAbi }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// LAFErrors
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const lafErrorsAbi = [
+  { type: 'error', inputs: [], name: 'CharityNotActive' },
+  {
+    type: 'error',
+    inputs: [
+      { name: 'timeRemaining', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'CooldownNotMet',
+  },
+  { type: 'error', inputs: [], name: 'EmptyValue' },
+  { type: 'error', inputs: [], name: 'IncorrectValue' },
+  {
+    type: 'error',
+    inputs: [
+      { name: 'required', internalType: 'uint256', type: 'uint256' },
+      { name: 'available', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'InsufficientBalance',
+  },
+  { type: 'error', inputs: [], name: 'InsufficientTokenBalance' },
+  { type: 'error', inputs: [], name: 'InvalidCharity' },
+  {
+    type: 'error',
+    inputs: [
+      { name: 'fee', internalType: 'uint256', type: 'uint256' },
+      { name: 'min', internalType: 'uint256', type: 'uint256' },
+      { name: 'max', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'InvalidCharityFee',
+  },
+  {
+    type: 'error',
+    inputs: [
+      { name: 'fee', internalType: 'uint256', type: 'uint256' },
+      { name: 'min', internalType: 'uint256', type: 'uint256' },
+      { name: 'max', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'InvalidDelegateFee',
+  },
+  {
+    type: 'error',
+    inputs: [
+      { name: 'fee', internalType: 'uint256', type: 'uint256' },
+      { name: 'min', internalType: 'uint256', type: 'uint256' },
+      { name: 'max', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'InvalidFee',
+  },
+  { type: 'error', inputs: [], name: 'InvalidFinderSignature' },
+  { type: 'error', inputs: [], name: 'InvalidOwnerSignature' },
+  {
+    type: 'error',
+    inputs: [
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+      { name: 'min', internalType: 'uint256', type: 'uint256' },
+      { name: 'max', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'InvalidRange',
+  },
+  { type: 'error', inputs: [], name: 'InvalidSecret' },
+  { type: 'error', inputs: [], name: 'InvalidSender' },
+  { type: 'error', inputs: [], name: 'InvalidStatus' },
+  { type: 'error', inputs: [], name: 'InvalidValue' },
+  { type: 'error', inputs: [], name: 'ItemAlreadyExists' },
+  { type: 'error', inputs: [], name: 'ItemDoesNotExist' },
+  { type: 'error', inputs: [], name: 'NonTransferableToken' },
+  { type: 'error', inputs: [], name: 'OnlyFactory' },
+  { type: 'error', inputs: [], name: 'OnlyOwner' },
+  { type: 'error', inputs: [], name: 'OperationFailed' },
+  {
+    type: 'error',
+    inputs: [
+      { name: 'provided', internalType: 'uint256', type: 'uint256' },
+      { name: 'minimum', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'RewardTooLow',
+  },
+  { type: 'error', inputs: [], name: 'TransferFailed' },
+  { type: 'error', inputs: [], name: 'UnauthorizedAccess' },
+  { type: 'error', inputs: [], name: 'ZeroAddress' },
+]
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// LAFEvents
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const lafEventsAbi = [
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'item', internalType: 'address', type: 'address', indexed: true },
+      {
+        name: 'secretHash',
+        internalType: 'address',
+        type: 'address',
+        indexed: false,
+      },
+      {
+        name: 'owner',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'charity',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'charityFeeAmount',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'CharityFeesDistributed',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'item', internalType: 'address', type: 'address', indexed: true },
+      {
+        name: 'secretHash',
+        internalType: 'address',
+        type: 'address',
+        indexed: false,
+      },
+      {
+        name: 'owner',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'delegate',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'delegateFeeAmount',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'DelegateFeesDistributed',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'item', internalType: 'address', type: 'address', indexed: true },
+      {
+        name: 'secretHash',
+        internalType: 'address',
+        type: 'address',
+        indexed: false,
+      },
+      {
+        name: 'owner',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'treasury',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'feeAmount',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'FeesDistributed',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'item', internalType: 'address', type: 'address', indexed: true },
+      {
+        name: 'secretHash',
+        internalType: 'address',
+        type: 'address',
+        indexed: false,
+      },
+      {
+        name: 'owner',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'finder',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+    ],
+    name: 'ItemFound',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'item', internalType: 'address', type: 'address', indexed: true },
+      {
+        name: 'secretHash',
+        internalType: 'address',
+        type: 'address',
+        indexed: false,
+      },
+      {
+        name: 'owner',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'rewardAmount',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: true,
+      },
+      { name: 'geo', internalType: 'string', type: 'string', indexed: false },
+    ],
+    name: 'ItemLost',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'item', internalType: 'address', type: 'address', indexed: true },
+      {
+        name: 'secretHash',
+        internalType: 'address',
+        type: 'address',
+        indexed: false,
+      },
+      {
+        name: 'initiator',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'status',
+        internalType: 'enum LAFItem.Status',
+        type: 'uint8',
+        indexed: false,
+      },
+    ],
+    name: 'ItemNonReturn',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'item', internalType: 'address', type: 'address', indexed: true },
+      {
+        name: 'secretHash',
+        internalType: 'address',
+        type: 'address',
+        indexed: false,
+      },
+      {
+        name: 'owner',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+    ],
+    name: 'ItemRegistered',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'item', internalType: 'address', type: 'address', indexed: true },
+      {
+        name: 'secretHash',
+        internalType: 'address',
+        type: 'address',
+        indexed: false,
+      },
+      {
+        name: 'owner',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'finder',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+    ],
+    name: 'ItemReturned',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'item', internalType: 'address', type: 'address', indexed: true },
+      {
+        name: 'secretHash',
+        internalType: 'address',
+        type: 'address',
+        indexed: false,
+      },
+      {
+        name: 'owner',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+    ],
+    name: 'ItemRevokedLost',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'item', internalType: 'address', type: 'address', indexed: true },
+      {
+        name: 'secretHash',
+        internalType: 'address',
+        type: 'address',
+        indexed: false,
+      },
+      {
+        name: 'supporter',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'amount',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'ItemSupported',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'owner',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+    ],
+    name: 'Minted',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'wallet',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+    ],
+    name: 'Pong',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'item', internalType: 'address', type: 'address', indexed: true },
+      {
+        name: 'secretHash',
+        internalType: 'address',
+        type: 'address',
+        indexed: false,
+      },
+      {
+        name: 'owner',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'finder',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'rewardAmount',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'RewardsDistributed',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'item', internalType: 'address', type: 'address', indexed: true },
+      {
+        name: 'secretHash',
+        internalType: 'address',
+        type: 'address',
+        indexed: false,
+      },
+      {
+        name: 'owner',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'supportAmount',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'SupportRewardsDistributed',
+  },
+]
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// LAFItem
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const lafItemAbi = [
+  { type: 'constructor', inputs: [], stateMutability: 'nonpayable' },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'BASIS_POINTS',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'DAY',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'MAX_CHARITY_FEE_BPS',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'MAX_DELEGATE_FEE_BPS',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'MAX_FEE_BPS',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'MAX_IMMEDIATE_REWARD_BPS',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'MAX_NON_RETURN_REWARD_BPS',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'MIN_CHARITY_FEE_BPS',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'MIN_DELEGATE_FEE_BPS',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'MIN_FEE_BPS',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'MIN_IMMEDIATE_REWARD_BPS',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'MIN_NON_RETURN_REWARD_BPS',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'MONTH',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'WEEK',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'YEAR',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'comment',
+    outputs: [{ name: '', internalType: 'string', type: 'string' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'config',
+    outputs: [
+      { name: 'rewardToken', internalType: 'address', type: 'address' },
+      { name: 'rewardTokenDecimals', internalType: 'uint8', type: 'uint8' },
+      { name: 'minReward', internalType: 'uint256', type: 'uint256' },
+      { name: 'minCharityFeeBps', internalType: 'uint256', type: 'uint256' },
+      { name: 'minFeeBps', internalType: 'uint256', type: 'uint256' },
+      { name: 'immediateRewardBps', internalType: 'uint256', type: 'uint256' },
+      { name: 'nonReturnRewardBps', internalType: 'uint256', type: 'uint256' },
+      { name: 'foundCooldown', internalType: 'uint256', type: 'uint256' },
+      { name: 'returnCooldown', internalType: 'uint256', type: 'uint256' },
+      { name: 'revokeLostCooldown', internalType: 'uint256', type: 'uint256' },
+      { name: 'nonReturnCooldown', internalType: 'uint256', type: 'uint256' },
+      {
+        name: 'nonReturnGracePeriod',
+        internalType: 'uint256',
+        type: 'uint256',
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'cycle',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'delegate',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'delegateFee',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'delegateUpdatedTs',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'detailsUpdatedTs',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'factory',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'finder',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: '_finder', internalType: 'address', type: 'address' }],
+    name: 'found',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'geo',
+    outputs: [{ name: '', internalType: 'string', type: 'string' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'immediateRewardPaid',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: '_owner', internalType: 'address', type: 'address' },
+      { name: '_secretHash', internalType: 'address', type: 'address' },
+      { name: '_comment', internalType: 'string', type: 'string' },
+      {
+        name: '_config',
+        internalType: 'struct Config.ConfigData',
+        type: 'tuple',
+        components: [
+          { name: 'rewardToken', internalType: 'address', type: 'address' },
+          { name: 'rewardTokenDecimals', internalType: 'uint8', type: 'uint8' },
+          { name: 'minReward', internalType: 'uint256', type: 'uint256' },
+          {
+            name: 'minCharityFeeBps',
+            internalType: 'uint256',
+            type: 'uint256',
+          },
+          { name: 'minFeeBps', internalType: 'uint256', type: 'uint256' },
+          {
+            name: 'immediateRewardBps',
+            internalType: 'uint256',
+            type: 'uint256',
+          },
+          {
+            name: 'nonReturnRewardBps',
+            internalType: 'uint256',
+            type: 'uint256',
+          },
+          { name: 'foundCooldown', internalType: 'uint256', type: 'uint256' },
+          { name: 'returnCooldown', internalType: 'uint256', type: 'uint256' },
+          {
+            name: 'revokeLostCooldown',
+            internalType: 'uint256',
+            type: 'uint256',
+          },
+          {
+            name: 'nonReturnCooldown',
+            internalType: 'uint256',
+            type: 'uint256',
+          },
+          {
+            name: 'nonReturnGracePeriod',
+            internalType: 'uint256',
+            type: 'uint256',
+          },
+        ],
+      },
+    ],
+    name: 'initialize',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: '_rewardAmount', internalType: 'uint256', type: 'uint256' },
+      { name: '_geo', internalType: 'string', type: 'string' },
+    ],
+    name: 'lost',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'initiator', internalType: 'address', type: 'address' }],
+    name: 'nonReturn',
+    outputs: [
+      {
+        name: 'resultStatus',
+        internalType: 'enum LAFItem.Status',
+        type: 'uint8',
+      },
+      { name: 'penaltyTarget', internalType: 'address', type: 'address' },
+    ],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'owner',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: '_charity', internalType: 'address', type: 'address' },
+      { name: '_charityFee', internalType: 'uint256', type: 'uint256' },
+      { name: '_fee', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'returned',
+    outputs: [
+      { name: 'rewardAmount', internalType: 'uint256', type: 'uint256' },
+      { name: 'charityFeeAmount', internalType: 'uint256', type: 'uint256' },
+      { name: 'feeAmount', internalType: 'uint256', type: 'uint256' },
+      { name: 'delegateFeeAmount', internalType: 'uint256', type: 'uint256' },
+    ],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'revokeLost',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'reward',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'secretHash',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'status',
+    outputs: [{ name: '', internalType: 'enum LAFItem.Status', type: 'uint8' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'statusUpdatedTs',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'supporter', internalType: 'address', type: 'address' },
+      { name: 'amount', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'support',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'supportReward',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'token',
+    outputs: [{ name: '', internalType: 'contract IERC20', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: '_charityAddress', internalType: 'address', type: 'address' },
+      { name: 'amount', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'transferSupportRewardShare',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: '_delegate', internalType: 'address', type: 'address' },
+      { name: '_delegateFee', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'updateDelegate',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: '_comment', internalType: 'string', type: 'string' },
+      { name: '_geo', internalType: 'string', type: 'string' },
+    ],
+    name: 'updateDetails',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: '_rewardAmount', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'updateReward',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'withdraw',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'oldDelegate',
+        internalType: 'address',
+        type: 'address',
+        indexed: false,
+      },
+      {
+        name: 'newDelegate',
+        internalType: 'address',
+        type: 'address',
+        indexed: false,
+      },
+    ],
+    name: 'DelegateUpdated',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'comment',
+        internalType: 'string',
+        type: 'string',
+        indexed: false,
+      },
+      { name: 'geo', internalType: 'string', type: 'string', indexed: false },
+    ],
+    name: 'DetailsUpdated',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'version',
+        internalType: 'uint64',
+        type: 'uint64',
+        indexed: false,
+      },
+    ],
+    name: 'Initialized',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'oldReward',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+      {
+        name: 'newReward',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'RewardUpdated',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'amount',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'Withdrawn',
+  },
+  {
+    type: 'error',
+    inputs: [
+      { name: 'timeRemaining', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'CooldownNotMet',
+  },
+  { type: 'error', inputs: [], name: 'EmptyValue' },
+  {
+    type: 'error',
+    inputs: [
+      { name: 'fee', internalType: 'uint256', type: 'uint256' },
+      { name: 'min', internalType: 'uint256', type: 'uint256' },
+      { name: 'max', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'InvalidCharityFee',
+  },
+  {
+    type: 'error',
+    inputs: [
+      { name: 'fee', internalType: 'uint256', type: 'uint256' },
+      { name: 'min', internalType: 'uint256', type: 'uint256' },
+      { name: 'max', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'InvalidDelegateFee',
+  },
+  {
+    type: 'error',
+    inputs: [
+      { name: 'fee', internalType: 'uint256', type: 'uint256' },
+      { name: 'min', internalType: 'uint256', type: 'uint256' },
+      { name: 'max', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'InvalidFee',
+  },
+  { type: 'error', inputs: [], name: 'InvalidInitialization' },
+  { type: 'error', inputs: [], name: 'InvalidSender' },
+  { type: 'error', inputs: [], name: 'InvalidStatus' },
+  { type: 'error', inputs: [], name: 'InvalidValue' },
+  { type: 'error', inputs: [], name: 'NotInitializing' },
+  { type: 'error', inputs: [], name: 'OnlyFactory' },
+  { type: 'error', inputs: [], name: 'OnlyOwner' },
+  { type: 'error', inputs: [], name: 'ReentrancyGuardReentrantCall' },
+  {
+    type: 'error',
+    inputs: [
+      { name: 'provided', internalType: 'uint256', type: 'uint256' },
+      { name: 'minimum', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'RewardTooLow',
+  },
+  {
+    type: 'error',
+    inputs: [{ name: 'token', internalType: 'address', type: 'address' }],
+    name: 'SafeERC20FailedOperation',
+  },
+]
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Meta
@@ -3856,6 +5811,27 @@ export const safeCastAbi = [
 ]
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// SafeERC20
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const safeErc20Abi = [
+  {
+    type: 'error',
+    inputs: [
+      { name: 'spender', internalType: 'address', type: 'address' },
+      { name: 'currentAllowance', internalType: 'uint256', type: 'uint256' },
+      { name: 'requestedDecrease', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'SafeERC20FailedDecreaseAllowance',
+  },
+  {
+    type: 'error',
+    inputs: [{ name: 'token', internalType: 'address', type: 'address' }],
+    name: 'SafeERC20FailedOperation',
+  },
+]
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Strings
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3870,75 +5846,6 @@ export const stringsAbi = [
   },
   { type: 'error', inputs: [], name: 'StringsInvalidAddressFormat' },
   { type: 'error', inputs: [], name: 'StringsInvalidChar' },
-]
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// UniversalSigValidator
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-export const universalSigValidatorAbi = [
-  {
-    type: 'function',
-    inputs: [
-      { name: '_signer', internalType: 'address', type: 'address' },
-      { name: '_hash', internalType: 'bytes32', type: 'bytes32' },
-      { name: '_signature', internalType: 'bytes', type: 'bytes' },
-    ],
-    name: 'isValidSig',
-    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
-    stateMutability: 'nonpayable',
-  },
-  {
-    type: 'function',
-    inputs: [
-      { name: '_signer', internalType: 'address', type: 'address' },
-      { name: '_hash', internalType: 'bytes32', type: 'bytes32' },
-      { name: '_signature', internalType: 'bytes', type: 'bytes' },
-      { name: 'allowSideEffects', internalType: 'bool', type: 'bool' },
-      { name: 'tryPrepare', internalType: 'bool', type: 'bool' },
-    ],
-    name: 'isValidSigImpl',
-    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
-    stateMutability: 'nonpayable',
-  },
-  {
-    type: 'function',
-    inputs: [
-      { name: '_signer', internalType: 'address', type: 'address' },
-      { name: '_hash', internalType: 'bytes32', type: 'bytes32' },
-      { name: '_signature', internalType: 'bytes', type: 'bytes' },
-    ],
-    name: 'isValidSigWithSideEffects',
-    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
-    stateMutability: 'nonpayable',
-  },
-  {
-    type: 'error',
-    inputs: [{ name: 'error', internalType: 'bytes', type: 'bytes' }],
-    name: 'ERC1271Revert',
-  },
-  {
-    type: 'error',
-    inputs: [{ name: 'error', internalType: 'bytes', type: 'bytes' }],
-    name: 'ERC6492CallFailed',
-  },
-  { type: 'error', inputs: [], name: 'ERC6492DeploySilentlyFailed' },
-]
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// ValidateSigOffchain
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-export const validateSigOffchainAbi = [
-  {
-    type: 'constructor',
-    inputs: [
-      { name: '_signer', internalType: 'address', type: 'address' },
-      { name: '_hash', internalType: 'bytes32', type: 'bytes32' },
-      { name: '_signature', internalType: 'bytes', type: 'bytes' },
-    ],
-    stateMutability: 'nonpayable',
-  },
 ]
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -3978,6 +5885,15 @@ export const useReadConfigMaxCharityFeeBps =
   })
 
 /**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link configAbi}__ and `functionName` set to `"MAX_DELEGATE_FEE_BPS"`
+ */
+export const useReadConfigMaxDelegateFeeBps =
+  /*#__PURE__*/ createUseReadContract({
+    abi: configAbi,
+    functionName: 'MAX_DELEGATE_FEE_BPS',
+  })
+
+/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link configAbi}__ and `functionName` set to `"MAX_FEE_BPS"`
  */
 export const useReadConfigMaxFeeBps = /*#__PURE__*/ createUseReadContract({
@@ -3995,12 +5911,30 @@ export const useReadConfigMaxImmediateRewardBps =
   })
 
 /**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link configAbi}__ and `functionName` set to `"MAX_NON_RETURN_REWARD_BPS"`
+ */
+export const useReadConfigMaxNonReturnRewardBps =
+  /*#__PURE__*/ createUseReadContract({
+    abi: configAbi,
+    functionName: 'MAX_NON_RETURN_REWARD_BPS',
+  })
+
+/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link configAbi}__ and `functionName` set to `"MIN_CHARITY_FEE_BPS"`
  */
 export const useReadConfigMinCharityFeeBps =
   /*#__PURE__*/ createUseReadContract({
     abi: configAbi,
     functionName: 'MIN_CHARITY_FEE_BPS',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link configAbi}__ and `functionName` set to `"MIN_DELEGATE_FEE_BPS"`
+ */
+export const useReadConfigMinDelegateFeeBps =
+  /*#__PURE__*/ createUseReadContract({
+    abi: configAbi,
+    functionName: 'MIN_DELEGATE_FEE_BPS',
   })
 
 /**
@@ -4021,6 +5955,15 @@ export const useReadConfigMinImmediateRewardBps =
   })
 
 /**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link configAbi}__ and `functionName` set to `"MIN_NON_RETURN_REWARD_BPS"`
+ */
+export const useReadConfigMinNonReturnRewardBps =
+  /*#__PURE__*/ createUseReadContract({
+    abi: configAbi,
+    functionName: 'MIN_NON_RETURN_REWARD_BPS',
+  })
+
+/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link configAbi}__ and `functionName` set to `"MONTH"`
  */
 export const useReadConfigMonth = /*#__PURE__*/ createUseReadContract({
@@ -4034,6 +5977,14 @@ export const useReadConfigMonth = /*#__PURE__*/ createUseReadContract({
 export const useReadConfigWeek = /*#__PURE__*/ createUseReadContract({
   abi: configAbi,
   functionName: 'WEEK',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link configAbi}__ and `functionName` set to `"YEAR"`
+ */
+export const useReadConfigYear = /*#__PURE__*/ createUseReadContract({
+  abi: configAbi,
+  functionName: 'YEAR',
 })
 
 /**
@@ -4069,21 +6020,21 @@ export const useReadConfigOwnableDay = /*#__PURE__*/ createUseReadContract({
 })
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link configOwnableAbi}__ and `functionName` set to `"INCORRECT_VALUE"`
- */
-export const useReadConfigOwnableIncorrectValue =
-  /*#__PURE__*/ createUseReadContract({
-    abi: configOwnableAbi,
-    functionName: 'INCORRECT_VALUE',
-  })
-
-/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link configOwnableAbi}__ and `functionName` set to `"MAX_CHARITY_FEE_BPS"`
  */
 export const useReadConfigOwnableMaxCharityFeeBps =
   /*#__PURE__*/ createUseReadContract({
     abi: configOwnableAbi,
     functionName: 'MAX_CHARITY_FEE_BPS',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link configOwnableAbi}__ and `functionName` set to `"MAX_DELEGATE_FEE_BPS"`
+ */
+export const useReadConfigOwnableMaxDelegateFeeBps =
+  /*#__PURE__*/ createUseReadContract({
+    abi: configOwnableAbi,
+    functionName: 'MAX_DELEGATE_FEE_BPS',
   })
 
 /**
@@ -4105,12 +6056,30 @@ export const useReadConfigOwnableMaxImmediateRewardBps =
   })
 
 /**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link configOwnableAbi}__ and `functionName` set to `"MAX_NON_RETURN_REWARD_BPS"`
+ */
+export const useReadConfigOwnableMaxNonReturnRewardBps =
+  /*#__PURE__*/ createUseReadContract({
+    abi: configOwnableAbi,
+    functionName: 'MAX_NON_RETURN_REWARD_BPS',
+  })
+
+/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link configOwnableAbi}__ and `functionName` set to `"MIN_CHARITY_FEE_BPS"`
  */
 export const useReadConfigOwnableMinCharityFeeBps =
   /*#__PURE__*/ createUseReadContract({
     abi: configOwnableAbi,
     functionName: 'MIN_CHARITY_FEE_BPS',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link configOwnableAbi}__ and `functionName` set to `"MIN_DELEGATE_FEE_BPS"`
+ */
+export const useReadConfigOwnableMinDelegateFeeBps =
+  /*#__PURE__*/ createUseReadContract({
+    abi: configOwnableAbi,
+    functionName: 'MIN_DELEGATE_FEE_BPS',
   })
 
 /**
@@ -4132,6 +6101,15 @@ export const useReadConfigOwnableMinImmediateRewardBps =
   })
 
 /**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link configOwnableAbi}__ and `functionName` set to `"MIN_NON_RETURN_REWARD_BPS"`
+ */
+export const useReadConfigOwnableMinNonReturnRewardBps =
+  /*#__PURE__*/ createUseReadContract({
+    abi: configOwnableAbi,
+    functionName: 'MIN_NON_RETURN_REWARD_BPS',
+  })
+
+/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link configOwnableAbi}__ and `functionName` set to `"MONTH"`
  */
 export const useReadConfigOwnableMonth = /*#__PURE__*/ createUseReadContract({
@@ -4145,6 +6123,14 @@ export const useReadConfigOwnableMonth = /*#__PURE__*/ createUseReadContract({
 export const useReadConfigOwnableWeek = /*#__PURE__*/ createUseReadContract({
   abi: configOwnableAbi,
   functionName: 'WEEK',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link configOwnableAbi}__ and `functionName` set to `"YEAR"`
+ */
+export const useReadConfigOwnableYear = /*#__PURE__*/ createUseReadContract({
+  abi: configOwnableAbi,
+  functionName: 'YEAR',
 })
 
 /**
@@ -4189,30 +6175,30 @@ export const useWriteConfigOwnableSetFoundCooldown =
   })
 
 /**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link configOwnableAbi}__ and `functionName` set to `"setImmediateRewardPercentage"`
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link configOwnableAbi}__ and `functionName` set to `"setImmediateRewardBps"`
  */
-export const useWriteConfigOwnableSetImmediateRewardPercentage =
+export const useWriteConfigOwnableSetImmediateRewardBps =
   /*#__PURE__*/ createUseWriteContract({
     abi: configOwnableAbi,
-    functionName: 'setImmediateRewardPercentage',
+    functionName: 'setImmediateRewardBps',
   })
 
 /**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link configOwnableAbi}__ and `functionName` set to `"setMinCharityFee"`
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link configOwnableAbi}__ and `functionName` set to `"setMinCharityFeeBps"`
  */
-export const useWriteConfigOwnableSetMinCharityFee =
+export const useWriteConfigOwnableSetMinCharityFeeBps =
   /*#__PURE__*/ createUseWriteContract({
     abi: configOwnableAbi,
-    functionName: 'setMinCharityFee',
+    functionName: 'setMinCharityFeeBps',
   })
 
 /**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link configOwnableAbi}__ and `functionName` set to `"setMinFee"`
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link configOwnableAbi}__ and `functionName` set to `"setMinFeeBps"`
  */
-export const useWriteConfigOwnableSetMinFee =
+export const useWriteConfigOwnableSetMinFeeBps =
   /*#__PURE__*/ createUseWriteContract({
     abi: configOwnableAbi,
-    functionName: 'setMinFee',
+    functionName: 'setMinFeeBps',
   })
 
 /**
@@ -4222,6 +6208,33 @@ export const useWriteConfigOwnableSetMinReward =
   /*#__PURE__*/ createUseWriteContract({
     abi: configOwnableAbi,
     functionName: 'setMinReward',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link configOwnableAbi}__ and `functionName` set to `"setNonReturnCooldown"`
+ */
+export const useWriteConfigOwnableSetNonReturnCooldown =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: configOwnableAbi,
+    functionName: 'setNonReturnCooldown',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link configOwnableAbi}__ and `functionName` set to `"setNonReturnGracePeriod"`
+ */
+export const useWriteConfigOwnableSetNonReturnGracePeriod =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: configOwnableAbi,
+    functionName: 'setNonReturnGracePeriod',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link configOwnableAbi}__ and `functionName` set to `"setNonReturnRewardBps"`
+ */
+export const useWriteConfigOwnableSetNonReturnRewardBps =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: configOwnableAbi,
+    functionName: 'setNonReturnRewardBps',
   })
 
 /**
@@ -4240,15 +6253,6 @@ export const useWriteConfigOwnableSetRevokeLostCooldown =
   /*#__PURE__*/ createUseWriteContract({
     abi: configOwnableAbi,
     functionName: 'setRevokeLostCooldown',
-  })
-
-/**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link configOwnableAbi}__ and `functionName` set to `"setRewardToken"`
- */
-export const useWriteConfigOwnableSetRewardToken =
-  /*#__PURE__*/ createUseWriteContract({
-    abi: configOwnableAbi,
-    functionName: 'setRewardToken',
   })
 
 /**
@@ -4286,30 +6290,30 @@ export const useSimulateConfigOwnableSetFoundCooldown =
   })
 
 /**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link configOwnableAbi}__ and `functionName` set to `"setImmediateRewardPercentage"`
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link configOwnableAbi}__ and `functionName` set to `"setImmediateRewardBps"`
  */
-export const useSimulateConfigOwnableSetImmediateRewardPercentage =
+export const useSimulateConfigOwnableSetImmediateRewardBps =
   /*#__PURE__*/ createUseSimulateContract({
     abi: configOwnableAbi,
-    functionName: 'setImmediateRewardPercentage',
+    functionName: 'setImmediateRewardBps',
   })
 
 /**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link configOwnableAbi}__ and `functionName` set to `"setMinCharityFee"`
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link configOwnableAbi}__ and `functionName` set to `"setMinCharityFeeBps"`
  */
-export const useSimulateConfigOwnableSetMinCharityFee =
+export const useSimulateConfigOwnableSetMinCharityFeeBps =
   /*#__PURE__*/ createUseSimulateContract({
     abi: configOwnableAbi,
-    functionName: 'setMinCharityFee',
+    functionName: 'setMinCharityFeeBps',
   })
 
 /**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link configOwnableAbi}__ and `functionName` set to `"setMinFee"`
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link configOwnableAbi}__ and `functionName` set to `"setMinFeeBps"`
  */
-export const useSimulateConfigOwnableSetMinFee =
+export const useSimulateConfigOwnableSetMinFeeBps =
   /*#__PURE__*/ createUseSimulateContract({
     abi: configOwnableAbi,
-    functionName: 'setMinFee',
+    functionName: 'setMinFeeBps',
   })
 
 /**
@@ -4319,6 +6323,33 @@ export const useSimulateConfigOwnableSetMinReward =
   /*#__PURE__*/ createUseSimulateContract({
     abi: configOwnableAbi,
     functionName: 'setMinReward',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link configOwnableAbi}__ and `functionName` set to `"setNonReturnCooldown"`
+ */
+export const useSimulateConfigOwnableSetNonReturnCooldown =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: configOwnableAbi,
+    functionName: 'setNonReturnCooldown',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link configOwnableAbi}__ and `functionName` set to `"setNonReturnGracePeriod"`
+ */
+export const useSimulateConfigOwnableSetNonReturnGracePeriod =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: configOwnableAbi,
+    functionName: 'setNonReturnGracePeriod',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link configOwnableAbi}__ and `functionName` set to `"setNonReturnRewardBps"`
+ */
+export const useSimulateConfigOwnableSetNonReturnRewardBps =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: configOwnableAbi,
+    functionName: 'setNonReturnRewardBps',
   })
 
 /**
@@ -4337,15 +6368,6 @@ export const useSimulateConfigOwnableSetRevokeLostCooldown =
   /*#__PURE__*/ createUseSimulateContract({
     abi: configOwnableAbi,
     functionName: 'setRevokeLostCooldown',
-  })
-
-/**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link configOwnableAbi}__ and `functionName` set to `"setRewardToken"`
- */
-export const useSimulateConfigOwnableSetRewardToken =
-  /*#__PURE__*/ createUseSimulateContract({
-    abi: configOwnableAbi,
-    functionName: 'setRewardToken',
   })
 
 /**
@@ -5298,19 +7320,338 @@ export const useReadIerc1271IsValidSignature =
   })
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link ierc1271WalletAbi}__
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ierc1363Abi}__
  */
-export const useReadIerc1271Wallet = /*#__PURE__*/ createUseReadContract({
-  abi: ierc1271WalletAbi,
+export const useReadIerc1363 = /*#__PURE__*/ createUseReadContract({
+  abi: ierc1363Abi,
 })
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link ierc1271WalletAbi}__ and `functionName` set to `"isValidSignature"`
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ierc1363Abi}__ and `functionName` set to `"allowance"`
  */
-export const useReadIerc1271WalletIsValidSignature =
+export const useReadIerc1363Allowance = /*#__PURE__*/ createUseReadContract({
+  abi: ierc1363Abi,
+  functionName: 'allowance',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ierc1363Abi}__ and `functionName` set to `"balanceOf"`
+ */
+export const useReadIerc1363BalanceOf = /*#__PURE__*/ createUseReadContract({
+  abi: ierc1363Abi,
+  functionName: 'balanceOf',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ierc1363Abi}__ and `functionName` set to `"supportsInterface"`
+ */
+export const useReadIerc1363SupportsInterface =
   /*#__PURE__*/ createUseReadContract({
-    abi: ierc1271WalletAbi,
-    functionName: 'isValidSignature',
+    abi: ierc1363Abi,
+    functionName: 'supportsInterface',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ierc1363Abi}__ and `functionName` set to `"totalSupply"`
+ */
+export const useReadIerc1363TotalSupply = /*#__PURE__*/ createUseReadContract({
+  abi: ierc1363Abi,
+  functionName: 'totalSupply',
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ierc1363Abi}__
+ */
+export const useWriteIerc1363 = /*#__PURE__*/ createUseWriteContract({
+  abi: ierc1363Abi,
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ierc1363Abi}__ and `functionName` set to `"approve"`
+ */
+export const useWriteIerc1363Approve = /*#__PURE__*/ createUseWriteContract({
+  abi: ierc1363Abi,
+  functionName: 'approve',
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ierc1363Abi}__ and `functionName` set to `"approveAndCall"`
+ */
+export const useWriteIerc1363ApproveAndCall =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: ierc1363Abi,
+    functionName: 'approveAndCall',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ierc1363Abi}__ and `functionName` set to `"transfer"`
+ */
+export const useWriteIerc1363Transfer = /*#__PURE__*/ createUseWriteContract({
+  abi: ierc1363Abi,
+  functionName: 'transfer',
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ierc1363Abi}__ and `functionName` set to `"transferAndCall"`
+ */
+export const useWriteIerc1363TransferAndCall =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: ierc1363Abi,
+    functionName: 'transferAndCall',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ierc1363Abi}__ and `functionName` set to `"transferFrom"`
+ */
+export const useWriteIerc1363TransferFrom =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: ierc1363Abi,
+    functionName: 'transferFrom',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ierc1363Abi}__ and `functionName` set to `"transferFromAndCall"`
+ */
+export const useWriteIerc1363TransferFromAndCall =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: ierc1363Abi,
+    functionName: 'transferFromAndCall',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ierc1363Abi}__
+ */
+export const useSimulateIerc1363 = /*#__PURE__*/ createUseSimulateContract({
+  abi: ierc1363Abi,
+})
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ierc1363Abi}__ and `functionName` set to `"approve"`
+ */
+export const useSimulateIerc1363Approve =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: ierc1363Abi,
+    functionName: 'approve',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ierc1363Abi}__ and `functionName` set to `"approveAndCall"`
+ */
+export const useSimulateIerc1363ApproveAndCall =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: ierc1363Abi,
+    functionName: 'approveAndCall',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ierc1363Abi}__ and `functionName` set to `"transfer"`
+ */
+export const useSimulateIerc1363Transfer =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: ierc1363Abi,
+    functionName: 'transfer',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ierc1363Abi}__ and `functionName` set to `"transferAndCall"`
+ */
+export const useSimulateIerc1363TransferAndCall =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: ierc1363Abi,
+    functionName: 'transferAndCall',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ierc1363Abi}__ and `functionName` set to `"transferFrom"`
+ */
+export const useSimulateIerc1363TransferFrom =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: ierc1363Abi,
+    functionName: 'transferFrom',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ierc1363Abi}__ and `functionName` set to `"transferFromAndCall"`
+ */
+export const useSimulateIerc1363TransferFromAndCall =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: ierc1363Abi,
+    functionName: 'transferFromAndCall',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link ierc1363Abi}__
+ */
+export const useWatchIerc1363Event = /*#__PURE__*/ createUseWatchContractEvent({
+  abi: ierc1363Abi,
+})
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link ierc1363Abi}__ and `eventName` set to `"Approval"`
+ */
+export const useWatchIerc1363ApprovalEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: ierc1363Abi,
+    eventName: 'Approval',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link ierc1363Abi}__ and `eventName` set to `"Transfer"`
+ */
+export const useWatchIerc1363TransferEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: ierc1363Abi,
+    eventName: 'Transfer',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ierc20MetadataAbi}__
+ */
+export const useReadIerc20Metadata = /*#__PURE__*/ createUseReadContract({
+  abi: ierc20MetadataAbi,
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ierc20MetadataAbi}__ and `functionName` set to `"allowance"`
+ */
+export const useReadIerc20MetadataAllowance =
+  /*#__PURE__*/ createUseReadContract({
+    abi: ierc20MetadataAbi,
+    functionName: 'allowance',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ierc20MetadataAbi}__ and `functionName` set to `"balanceOf"`
+ */
+export const useReadIerc20MetadataBalanceOf =
+  /*#__PURE__*/ createUseReadContract({
+    abi: ierc20MetadataAbi,
+    functionName: 'balanceOf',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ierc20MetadataAbi}__ and `functionName` set to `"decimals"`
+ */
+export const useReadIerc20MetadataDecimals =
+  /*#__PURE__*/ createUseReadContract({
+    abi: ierc20MetadataAbi,
+    functionName: 'decimals',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ierc20MetadataAbi}__ and `functionName` set to `"name"`
+ */
+export const useReadIerc20MetadataName = /*#__PURE__*/ createUseReadContract({
+  abi: ierc20MetadataAbi,
+  functionName: 'name',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ierc20MetadataAbi}__ and `functionName` set to `"symbol"`
+ */
+export const useReadIerc20MetadataSymbol = /*#__PURE__*/ createUseReadContract({
+  abi: ierc20MetadataAbi,
+  functionName: 'symbol',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ierc20MetadataAbi}__ and `functionName` set to `"totalSupply"`
+ */
+export const useReadIerc20MetadataTotalSupply =
+  /*#__PURE__*/ createUseReadContract({
+    abi: ierc20MetadataAbi,
+    functionName: 'totalSupply',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ierc20MetadataAbi}__
+ */
+export const useWriteIerc20Metadata = /*#__PURE__*/ createUseWriteContract({
+  abi: ierc20MetadataAbi,
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ierc20MetadataAbi}__ and `functionName` set to `"approve"`
+ */
+export const useWriteIerc20MetadataApprove =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: ierc20MetadataAbi,
+    functionName: 'approve',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ierc20MetadataAbi}__ and `functionName` set to `"transfer"`
+ */
+export const useWriteIerc20MetadataTransfer =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: ierc20MetadataAbi,
+    functionName: 'transfer',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ierc20MetadataAbi}__ and `functionName` set to `"transferFrom"`
+ */
+export const useWriteIerc20MetadataTransferFrom =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: ierc20MetadataAbi,
+    functionName: 'transferFrom',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ierc20MetadataAbi}__
+ */
+export const useSimulateIerc20Metadata =
+  /*#__PURE__*/ createUseSimulateContract({ abi: ierc20MetadataAbi })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ierc20MetadataAbi}__ and `functionName` set to `"approve"`
+ */
+export const useSimulateIerc20MetadataApprove =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: ierc20MetadataAbi,
+    functionName: 'approve',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ierc20MetadataAbi}__ and `functionName` set to `"transfer"`
+ */
+export const useSimulateIerc20MetadataTransfer =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: ierc20MetadataAbi,
+    functionName: 'transfer',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ierc20MetadataAbi}__ and `functionName` set to `"transferFrom"`
+ */
+export const useSimulateIerc20MetadataTransferFrom =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: ierc20MetadataAbi,
+    functionName: 'transferFrom',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link ierc20MetadataAbi}__
+ */
+export const useWatchIerc20MetadataEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({ abi: ierc20MetadataAbi })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link ierc20MetadataAbi}__ and `eventName` set to `"Approval"`
+ */
+export const useWatchIerc20MetadataApprovalEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: ierc20MetadataAbi,
+    eventName: 'Approval',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link ierc20MetadataAbi}__ and `eventName` set to `"Transfer"`
+ */
+export const useWatchIerc20MetadataTransferEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: ierc20MetadataAbi,
+    eventName: 'Transfer',
   })
 
 /**
@@ -5341,14 +7682,6 @@ export const useReadIerc2981SupportsInterface =
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link ilafAbi}__
  */
 export const useReadIlaf = /*#__PURE__*/ createUseReadContract({ abi: ilafAbi })
-
-/**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link ilafAbi}__ and `functionName` set to `"balanceOf"`
- */
-export const useReadIlafBalanceOf = /*#__PURE__*/ createUseReadContract({
-  abi: ilafAbi,
-  functionName: 'balanceOf',
-})
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link ilafAbi}__ and `functionName` set to `"charities"`
@@ -5384,6 +7717,15 @@ export const useReadIlafConfig = /*#__PURE__*/ createUseReadContract({
 })
 
 /**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ilafAbi}__ and `functionName` set to `"delegateFeesDistributed"`
+ */
+export const useReadIlafDelegateFeesDistributed =
+  /*#__PURE__*/ createUseReadContract({
+    abi: ilafAbi,
+    functionName: 'delegateFeesDistributed',
+  })
+
+/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link ilafAbi}__ and `functionName` set to `"feesDistributed"`
  */
 export const useReadIlafFeesDistributed = /*#__PURE__*/ createUseReadContract({
@@ -5417,19 +7759,19 @@ export const useReadIlafItems = /*#__PURE__*/ createUseReadContract({
 })
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link ilafAbi}__ and `functionName` set to `"itemsCount"`
- */
-export const useReadIlafItemsCount = /*#__PURE__*/ createUseReadContract({
-  abi: ilafAbi,
-  functionName: 'itemsCount',
-})
-
-/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link ilafAbi}__ and `functionName` set to `"lostCount"`
  */
 export const useReadIlafLostCount = /*#__PURE__*/ createUseReadContract({
   abi: ilafAbi,
   functionName: 'lostCount',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ilafAbi}__ and `functionName` set to `"nonReturnCount"`
+ */
+export const useReadIlafNonReturnCount = /*#__PURE__*/ createUseReadContract({
+  abi: ilafAbi,
+  functionName: 'nonReturnCount',
 })
 
 /**
@@ -5466,6 +7808,32 @@ export const useReadIlafRoyaltyInfo = /*#__PURE__*/ createUseReadContract({
 })
 
 /**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ilafAbi}__ and `functionName` set to `"supportRewards"`
+ */
+export const useReadIlafSupportRewards = /*#__PURE__*/ createUseReadContract({
+  abi: ilafAbi,
+  functionName: 'supportRewards',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ilafAbi}__ and `functionName` set to `"supportRewardsCount"`
+ */
+export const useReadIlafSupportRewardsCount =
+  /*#__PURE__*/ createUseReadContract({
+    abi: ilafAbi,
+    functionName: 'supportRewardsCount',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ilafAbi}__ and `functionName` set to `"supportRewardsDistributed"`
+ */
+export const useReadIlafSupportRewardsDistributed =
+  /*#__PURE__*/ createUseReadContract({
+    abi: ilafAbi,
+    functionName: 'supportRewardsDistributed',
+  })
+
+/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link ilafAbi}__ and `functionName` set to `"supportsInterface"`
  */
 export const useReadIlafSupportsInterface = /*#__PURE__*/ createUseReadContract(
@@ -5478,22 +7846,6 @@ export const useReadIlafSupportsInterface = /*#__PURE__*/ createUseReadContract(
 export const useReadIlafTreasury = /*#__PURE__*/ createUseReadContract({
   abi: ilafAbi,
   functionName: 'treasury',
-})
-
-/**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link ilafAbi}__ and `functionName` set to `"trust"`
- */
-export const useReadIlafTrust = /*#__PURE__*/ createUseReadContract({
-  abi: ilafAbi,
-  functionName: 'trust',
-})
-
-/**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link ilafAbi}__ and `functionName` set to `"uri"`
- */
-export const useReadIlafUri = /*#__PURE__*/ createUseReadContract({
-  abi: ilafAbi,
-  functionName: 'uri',
 })
 
 /**
@@ -5536,6 +7888,14 @@ export const useWriteIlafMint = /*#__PURE__*/ createUseWriteContract({
 })
 
 /**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ilafAbi}__ and `functionName` set to `"nonReturn"`
+ */
+export const useWriteIlafNonReturn = /*#__PURE__*/ createUseWriteContract({
+  abi: ilafAbi,
+  functionName: 'nonReturn',
+})
+
+/**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ilafAbi}__ and `functionName` set to `"ping"`
  */
 export const useWriteIlafPing = /*#__PURE__*/ createUseWriteContract({
@@ -5566,15 +7926,6 @@ export const useWriteIlafRevokeLost = /*#__PURE__*/ createUseWriteContract({
   abi: ilafAbi,
   functionName: 'revokeLost',
 })
-
-/**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ilafAbi}__ and `functionName` set to `"setFoundCooldown"`
- */
-export const useWriteIlafSetFoundCooldown =
-  /*#__PURE__*/ createUseWriteContract({
-    abi: ilafAbi,
-    functionName: 'setFoundCooldown',
-  })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ilafAbi}__ and `functionName` set to `"setImmediateRewardPercentage"`
@@ -5629,14 +7980,6 @@ export const useWriteIlafSetRevokeLostCooldown =
   })
 
 /**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ilafAbi}__ and `functionName` set to `"setRewardToken"`
- */
-export const useWriteIlafSetRewardToken = /*#__PURE__*/ createUseWriteContract({
-  abi: ilafAbi,
-  functionName: 'setRewardToken',
-})
-
-/**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ilafAbi}__ and `functionName` set to `"setTreasury"`
  */
 export const useWriteIlafSetTreasury = /*#__PURE__*/ createUseWriteContract({
@@ -5645,19 +7988,11 @@ export const useWriteIlafSetTreasury = /*#__PURE__*/ createUseWriteContract({
 })
 
 /**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ilafAbi}__ and `functionName` set to `"thumbDown"`
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ilafAbi}__ and `functionName` set to `"support"`
  */
-export const useWriteIlafThumbDown = /*#__PURE__*/ createUseWriteContract({
+export const useWriteIlafSupport = /*#__PURE__*/ createUseWriteContract({
   abi: ilafAbi,
-  functionName: 'thumbDown',
-})
-
-/**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ilafAbi}__ and `functionName` set to `"thumbUp"`
- */
-export const useWriteIlafThumbUp = /*#__PURE__*/ createUseWriteContract({
-  abi: ilafAbi,
-  functionName: 'thumbUp',
+  functionName: 'support',
 })
 
 /**
@@ -5667,6 +8002,15 @@ export const useWriteIlafToggleActiveCharity =
   /*#__PURE__*/ createUseWriteContract({
     abi: ilafAbi,
     functionName: 'toggleActiveCharity',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ilafAbi}__ and `functionName` set to `"updateRewardToken"`
+ */
+export const useWriteIlafUpdateRewardToken =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: ilafAbi,
+    functionName: 'updateRewardToken',
   })
 
 /**
@@ -5710,6 +8054,13 @@ export const useSimulateIlafMint = /*#__PURE__*/ createUseSimulateContract({
 })
 
 /**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ilafAbi}__ and `functionName` set to `"nonReturn"`
+ */
+export const useSimulateIlafNonReturn = /*#__PURE__*/ createUseSimulateContract(
+  { abi: ilafAbi, functionName: 'nonReturn' },
+)
+
+/**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ilafAbi}__ and `functionName` set to `"ping"`
  */
 export const useSimulateIlafPing = /*#__PURE__*/ createUseSimulateContract({
@@ -5741,15 +8092,6 @@ export const useSimulateIlafRevokeLost =
   /*#__PURE__*/ createUseSimulateContract({
     abi: ilafAbi,
     functionName: 'revokeLost',
-  })
-
-/**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ilafAbi}__ and `functionName` set to `"setFoundCooldown"`
- */
-export const useSimulateIlafSetFoundCooldown =
-  /*#__PURE__*/ createUseSimulateContract({
-    abi: ilafAbi,
-    functionName: 'setFoundCooldown',
   })
 
 /**
@@ -5805,15 +8147,6 @@ export const useSimulateIlafSetRevokeLostCooldown =
   })
 
 /**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ilafAbi}__ and `functionName` set to `"setRewardToken"`
- */
-export const useSimulateIlafSetRewardToken =
-  /*#__PURE__*/ createUseSimulateContract({
-    abi: ilafAbi,
-    functionName: 'setRewardToken',
-  })
-
-/**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ilafAbi}__ and `functionName` set to `"setTreasury"`
  */
 export const useSimulateIlafSetTreasury =
@@ -5823,18 +8156,11 @@ export const useSimulateIlafSetTreasury =
   })
 
 /**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ilafAbi}__ and `functionName` set to `"thumbDown"`
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ilafAbi}__ and `functionName` set to `"support"`
  */
-export const useSimulateIlafThumbDown = /*#__PURE__*/ createUseSimulateContract(
-  { abi: ilafAbi, functionName: 'thumbDown' },
-)
-
-/**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ilafAbi}__ and `functionName` set to `"thumbUp"`
- */
-export const useSimulateIlafThumbUp = /*#__PURE__*/ createUseSimulateContract({
+export const useSimulateIlafSupport = /*#__PURE__*/ createUseSimulateContract({
   abi: ilafAbi,
-  functionName: 'thumbUp',
+  functionName: 'support',
 })
 
 /**
@@ -5844,6 +8170,246 @@ export const useSimulateIlafToggleActiveCharity =
   /*#__PURE__*/ createUseSimulateContract({
     abi: ilafAbi,
     functionName: 'toggleActiveCharity',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ilafAbi}__ and `functionName` set to `"updateRewardToken"`
+ */
+export const useSimulateIlafUpdateRewardToken =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: ilafAbi,
+    functionName: 'updateRewardToken',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ilafItemAbi}__
+ */
+export const useReadIlafItem = /*#__PURE__*/ createUseReadContract({
+  abi: ilafItemAbi,
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ilafItemAbi}__ and `functionName` set to `"comment"`
+ */
+export const useReadIlafItemComment = /*#__PURE__*/ createUseReadContract({
+  abi: ilafItemAbi,
+  functionName: 'comment',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ilafItemAbi}__ and `functionName` set to `"cycle"`
+ */
+export const useReadIlafItemCycle = /*#__PURE__*/ createUseReadContract({
+  abi: ilafItemAbi,
+  functionName: 'cycle',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ilafItemAbi}__ and `functionName` set to `"delegate"`
+ */
+export const useReadIlafItemDelegate = /*#__PURE__*/ createUseReadContract({
+  abi: ilafItemAbi,
+  functionName: 'delegate',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ilafItemAbi}__ and `functionName` set to `"delegateFee"`
+ */
+export const useReadIlafItemDelegateFee = /*#__PURE__*/ createUseReadContract({
+  abi: ilafItemAbi,
+  functionName: 'delegateFee',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ilafItemAbi}__ and `functionName` set to `"delegateUpdatedTs"`
+ */
+export const useReadIlafItemDelegateUpdatedTs =
+  /*#__PURE__*/ createUseReadContract({
+    abi: ilafItemAbi,
+    functionName: 'delegateUpdatedTs',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ilafItemAbi}__ and `functionName` set to `"detailsUpdatedTs"`
+ */
+export const useReadIlafItemDetailsUpdatedTs =
+  /*#__PURE__*/ createUseReadContract({
+    abi: ilafItemAbi,
+    functionName: 'detailsUpdatedTs',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ilafItemAbi}__ and `functionName` set to `"factory"`
+ */
+export const useReadIlafItemFactory = /*#__PURE__*/ createUseReadContract({
+  abi: ilafItemAbi,
+  functionName: 'factory',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ilafItemAbi}__ and `functionName` set to `"finder"`
+ */
+export const useReadIlafItemFinder = /*#__PURE__*/ createUseReadContract({
+  abi: ilafItemAbi,
+  functionName: 'finder',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ilafItemAbi}__ and `functionName` set to `"geo"`
+ */
+export const useReadIlafItemGeo = /*#__PURE__*/ createUseReadContract({
+  abi: ilafItemAbi,
+  functionName: 'geo',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ilafItemAbi}__ and `functionName` set to `"immediateRewardPaid"`
+ */
+export const useReadIlafItemImmediateRewardPaid =
+  /*#__PURE__*/ createUseReadContract({
+    abi: ilafItemAbi,
+    functionName: 'immediateRewardPaid',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ilafItemAbi}__ and `functionName` set to `"owner"`
+ */
+export const useReadIlafItemOwner = /*#__PURE__*/ createUseReadContract({
+  abi: ilafItemAbi,
+  functionName: 'owner',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ilafItemAbi}__ and `functionName` set to `"reward"`
+ */
+export const useReadIlafItemReward = /*#__PURE__*/ createUseReadContract({
+  abi: ilafItemAbi,
+  functionName: 'reward',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ilafItemAbi}__ and `functionName` set to `"secretHash"`
+ */
+export const useReadIlafItemSecretHash = /*#__PURE__*/ createUseReadContract({
+  abi: ilafItemAbi,
+  functionName: 'secretHash',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ilafItemAbi}__ and `functionName` set to `"status"`
+ */
+export const useReadIlafItemStatus = /*#__PURE__*/ createUseReadContract({
+  abi: ilafItemAbi,
+  functionName: 'status',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ilafItemAbi}__ and `functionName` set to `"statusUpdatedTs"`
+ */
+export const useReadIlafItemStatusUpdatedTs =
+  /*#__PURE__*/ createUseReadContract({
+    abi: ilafItemAbi,
+    functionName: 'statusUpdatedTs',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ilafItemAbi}__ and `functionName` set to `"supportReward"`
+ */
+export const useReadIlafItemSupportReward = /*#__PURE__*/ createUseReadContract(
+  { abi: ilafItemAbi, functionName: 'supportReward' },
+)
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ilafItemAbi}__ and `functionName` set to `"token"`
+ */
+export const useReadIlafItemToken = /*#__PURE__*/ createUseReadContract({
+  abi: ilafItemAbi,
+  functionName: 'token',
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ilafItemAbi}__
+ */
+export const useWriteIlafItem = /*#__PURE__*/ createUseWriteContract({
+  abi: ilafItemAbi,
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ilafItemAbi}__ and `functionName` set to `"updateDelegate"`
+ */
+export const useWriteIlafItemUpdateDelegate =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: ilafItemAbi,
+    functionName: 'updateDelegate',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ilafItemAbi}__ and `functionName` set to `"updateDetails"`
+ */
+export const useWriteIlafItemUpdateDetails =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: ilafItemAbi,
+    functionName: 'updateDetails',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ilafItemAbi}__ and `functionName` set to `"updateReward"`
+ */
+export const useWriteIlafItemUpdateReward =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: ilafItemAbi,
+    functionName: 'updateReward',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ilafItemAbi}__ and `functionName` set to `"withdraw"`
+ */
+export const useWriteIlafItemWithdraw = /*#__PURE__*/ createUseWriteContract({
+  abi: ilafItemAbi,
+  functionName: 'withdraw',
+})
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ilafItemAbi}__
+ */
+export const useSimulateIlafItem = /*#__PURE__*/ createUseSimulateContract({
+  abi: ilafItemAbi,
+})
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ilafItemAbi}__ and `functionName` set to `"updateDelegate"`
+ */
+export const useSimulateIlafItemUpdateDelegate =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: ilafItemAbi,
+    functionName: 'updateDelegate',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ilafItemAbi}__ and `functionName` set to `"updateDetails"`
+ */
+export const useSimulateIlafItemUpdateDetails =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: ilafItemAbi,
+    functionName: 'updateDetails',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ilafItemAbi}__ and `functionName` set to `"updateReward"`
+ */
+export const useSimulateIlafItemUpdateReward =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: ilafItemAbi,
+    functionName: 'updateReward',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ilafItemAbi}__ and `functionName` set to `"withdraw"`
+ */
+export const useSimulateIlafItemWithdraw =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: ilafItemAbi,
+    functionName: 'withdraw',
   })
 
 /**
@@ -6106,6 +8672,13 @@ export const useReadItemMaxCharityFeeBps = /*#__PURE__*/ createUseReadContract({
 })
 
 /**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"MAX_DELEGATE_FEE_BPS"`
+ */
+export const useReadItemMaxDelegateFeeBps = /*#__PURE__*/ createUseReadContract(
+  { abi: itemAbi, functionName: 'MAX_DELEGATE_FEE_BPS' },
+)
+
+/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"MAX_FEE_BPS"`
  */
 export const useReadItemMaxFeeBps = /*#__PURE__*/ createUseReadContract({
@@ -6123,12 +8696,28 @@ export const useReadItemMaxImmediateRewardBps =
   })
 
 /**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"MAX_NON_RETURN_REWARD_BPS"`
+ */
+export const useReadItemMaxNonReturnRewardBps =
+  /*#__PURE__*/ createUseReadContract({
+    abi: itemAbi,
+    functionName: 'MAX_NON_RETURN_REWARD_BPS',
+  })
+
+/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"MIN_CHARITY_FEE_BPS"`
  */
 export const useReadItemMinCharityFeeBps = /*#__PURE__*/ createUseReadContract({
   abi: itemAbi,
   functionName: 'MIN_CHARITY_FEE_BPS',
 })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"MIN_DELEGATE_FEE_BPS"`
+ */
+export const useReadItemMinDelegateFeeBps = /*#__PURE__*/ createUseReadContract(
+  { abi: itemAbi, functionName: 'MIN_DELEGATE_FEE_BPS' },
+)
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"MIN_FEE_BPS"`
@@ -6148,6 +8737,15 @@ export const useReadItemMinImmediateRewardBps =
   })
 
 /**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"MIN_NON_RETURN_REWARD_BPS"`
+ */
+export const useReadItemMinNonReturnRewardBps =
+  /*#__PURE__*/ createUseReadContract({
+    abi: itemAbi,
+    functionName: 'MIN_NON_RETURN_REWARD_BPS',
+  })
+
+/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"MONTH"`
  */
 export const useReadItemMonth = /*#__PURE__*/ createUseReadContract({
@@ -6164,6 +8762,14 @@ export const useReadItemWeek = /*#__PURE__*/ createUseReadContract({
 })
 
 /**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"YEAR"`
+ */
+export const useReadItemYear = /*#__PURE__*/ createUseReadContract({
+  abi: itemAbi,
+  functionName: 'YEAR',
+})
+
+/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"comment"`
  */
 export const useReadItemComment = /*#__PURE__*/ createUseReadContract({
@@ -6177,6 +8783,14 @@ export const useReadItemComment = /*#__PURE__*/ createUseReadContract({
 export const useReadItemConfig = /*#__PURE__*/ createUseReadContract({
   abi: itemAbi,
   functionName: 'config',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"cycle"`
+ */
+export const useReadItemCycle = /*#__PURE__*/ createUseReadContract({
+  abi: itemAbi,
+  functionName: 'cycle',
 })
 
 /**
@@ -6227,51 +8841,11 @@ export const useReadItemFinder = /*#__PURE__*/ createUseReadContract({
 })
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"foundTs"`
- */
-export const useReadItemFoundTs = /*#__PURE__*/ createUseReadContract({
-  abi: itemAbi,
-  functionName: 'foundTs',
-})
-
-/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"geo"`
  */
 export const useReadItemGeo = /*#__PURE__*/ createUseReadContract({
   abi: itemAbi,
   functionName: 'geo',
-})
-
-/**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"isFound"`
- */
-export const useReadItemIsFound = /*#__PURE__*/ createUseReadContract({
-  abi: itemAbi,
-  functionName: 'isFound',
-})
-
-/**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"isLost"`
- */
-export const useReadItemIsLost = /*#__PURE__*/ createUseReadContract({
-  abi: itemAbi,
-  functionName: 'isLost',
-})
-
-/**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"isReturned"`
- */
-export const useReadItemIsReturned = /*#__PURE__*/ createUseReadContract({
-  abi: itemAbi,
-  functionName: 'isReturned',
-})
-
-/**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"lostTs"`
- */
-export const useReadItemLostTs = /*#__PURE__*/ createUseReadContract({
-  abi: itemAbi,
-  functionName: 'lostTs',
 })
 
 /**
@@ -6283,14 +8857,6 @@ export const useReadItemOwner = /*#__PURE__*/ createUseReadContract({
 })
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"returnedTs"`
- */
-export const useReadItemReturnedTs = /*#__PURE__*/ createUseReadContract({
-  abi: itemAbi,
-  functionName: 'returnedTs',
-})
-
-/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"reward"`
  */
 export const useReadItemReward = /*#__PURE__*/ createUseReadContract({
@@ -6299,19 +8865,35 @@ export const useReadItemReward = /*#__PURE__*/ createUseReadContract({
 })
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"rewardToken"`
- */
-export const useReadItemRewardToken = /*#__PURE__*/ createUseReadContract({
-  abi: itemAbi,
-  functionName: 'rewardToken',
-})
-
-/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"secretHash"`
  */
 export const useReadItemSecretHash = /*#__PURE__*/ createUseReadContract({
   abi: itemAbi,
   functionName: 'secretHash',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"status"`
+ */
+export const useReadItemStatus = /*#__PURE__*/ createUseReadContract({
+  abi: itemAbi,
+  functionName: 'status',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"statusUpdatedTs"`
+ */
+export const useReadItemStatusUpdatedTs = /*#__PURE__*/ createUseReadContract({
+  abi: itemAbi,
+  functionName: 'statusUpdatedTs',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"token"`
+ */
+export const useReadItemToken = /*#__PURE__*/ createUseReadContract({
+  abi: itemAbi,
+  functionName: 'token',
 })
 
 /**
@@ -6343,6 +8925,14 @@ export const useWriteItemInitialize = /*#__PURE__*/ createUseWriteContract({
 export const useWriteItemLost = /*#__PURE__*/ createUseWriteContract({
   abi: itemAbi,
   functionName: 'lost',
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"nonReturn"`
+ */
+export const useWriteItemNonReturn = /*#__PURE__*/ createUseWriteContract({
+  abi: itemAbi,
+  functionName: 'nonReturn',
 })
 
 /**
@@ -6378,6 +8968,22 @@ export const useWriteItemUpdateDetails = /*#__PURE__*/ createUseWriteContract({
 })
 
 /**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"updateReward"`
+ */
+export const useWriteItemUpdateReward = /*#__PURE__*/ createUseWriteContract({
+  abi: itemAbi,
+  functionName: 'updateReward',
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"withdraw"`
+ */
+export const useWriteItemWithdraw = /*#__PURE__*/ createUseWriteContract({
+  abi: itemAbi,
+  functionName: 'withdraw',
+})
+
+/**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link itemAbi}__
  */
 export const useSimulateItem = /*#__PURE__*/ createUseSimulateContract({
@@ -6408,6 +9014,13 @@ export const useSimulateItemLost = /*#__PURE__*/ createUseSimulateContract({
   abi: itemAbi,
   functionName: 'lost',
 })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"nonReturn"`
+ */
+export const useSimulateItemNonReturn = /*#__PURE__*/ createUseSimulateContract(
+  { abi: itemAbi, functionName: 'nonReturn' },
+)
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"returned"`
@@ -6445,11 +9058,46 @@ export const useSimulateItemUpdateDetails =
   })
 
 /**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"updateReward"`
+ */
+export const useSimulateItemUpdateReward =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: itemAbi,
+    functionName: 'updateReward',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"withdraw"`
+ */
+export const useSimulateItemWithdraw = /*#__PURE__*/ createUseSimulateContract({
+  abi: itemAbi,
+  functionName: 'withdraw',
+})
+
+/**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link itemAbi}__
  */
 export const useWatchItemEvent = /*#__PURE__*/ createUseWatchContractEvent({
   abi: itemAbi,
 })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link itemAbi}__ and `eventName` set to `"DelegateUpdated"`
+ */
+export const useWatchItemDelegateUpdatedEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: itemAbi,
+    eventName: 'DelegateUpdated',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link itemAbi}__ and `eventName` set to `"DetailsUpdated"`
+ */
+export const useWatchItemDetailsUpdatedEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: itemAbi,
+    eventName: 'DetailsUpdated',
+  })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link itemAbi}__ and `eventName` set to `"Initialized"`
@@ -6461,10 +9109,19 @@ export const useWatchItemInitializedEvent =
   })
 
 /**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link itemAbi}__ and `eventName` set to `"RewardUpdated"`
+ */
+export const useWatchItemRewardUpdatedEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: itemAbi,
+    eventName: 'RewardUpdated',
+  })
+
+/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useReadLaf = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -6475,7 +9132,7 @@ export const useReadLaf = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"BASIS_POINTS"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useReadLafBasisPoints = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -6487,7 +9144,7 @@ export const useReadLafBasisPoints = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"DAY"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useReadLafDay = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -6496,22 +9153,10 @@ export const useReadLafDay = /*#__PURE__*/ createUseReadContract({
 })
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"INCORRECT_VALUE"`
- *
- * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
- */
-export const useReadLafIncorrectValue = /*#__PURE__*/ createUseReadContract({
-  abi: lafAbi,
-  address: lafAddress,
-  functionName: 'INCORRECT_VALUE',
-})
-
-/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"MAX_CHARITY_FEE_BPS"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useReadLafMaxCharityFeeBps = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -6520,10 +9165,22 @@ export const useReadLafMaxCharityFeeBps = /*#__PURE__*/ createUseReadContract({
 })
 
 /**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"MAX_DELEGATE_FEE_BPS"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ */
+export const useReadLafMaxDelegateFeeBps = /*#__PURE__*/ createUseReadContract({
+  abi: lafAbi,
+  address: lafAddress,
+  functionName: 'MAX_DELEGATE_FEE_BPS',
+})
+
+/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"MAX_FEE_BPS"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useReadLafMaxFeeBps = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -6535,7 +9192,7 @@ export const useReadLafMaxFeeBps = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"MAX_IMMEDIATE_REWARD_BPS"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useReadLafMaxImmediateRewardBps =
   /*#__PURE__*/ createUseReadContract({
@@ -6545,10 +9202,23 @@ export const useReadLafMaxImmediateRewardBps =
   })
 
 /**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"MAX_NON_RETURN_REWARD_BPS"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ */
+export const useReadLafMaxNonReturnRewardBps =
+  /*#__PURE__*/ createUseReadContract({
+    abi: lafAbi,
+    address: lafAddress,
+    functionName: 'MAX_NON_RETURN_REWARD_BPS',
+  })
+
+/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"MIN_CHARITY_FEE_BPS"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useReadLafMinCharityFeeBps = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -6557,10 +9227,22 @@ export const useReadLafMinCharityFeeBps = /*#__PURE__*/ createUseReadContract({
 })
 
 /**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"MIN_DELEGATE_FEE_BPS"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ */
+export const useReadLafMinDelegateFeeBps = /*#__PURE__*/ createUseReadContract({
+  abi: lafAbi,
+  address: lafAddress,
+  functionName: 'MIN_DELEGATE_FEE_BPS',
+})
+
+/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"MIN_FEE_BPS"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useReadLafMinFeeBps = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -6572,7 +9254,7 @@ export const useReadLafMinFeeBps = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"MIN_IMMEDIATE_REWARD_BPS"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useReadLafMinImmediateRewardBps =
   /*#__PURE__*/ createUseReadContract({
@@ -6582,10 +9264,23 @@ export const useReadLafMinImmediateRewardBps =
   })
 
 /**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"MIN_NON_RETURN_REWARD_BPS"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ */
+export const useReadLafMinNonReturnRewardBps =
+  /*#__PURE__*/ createUseReadContract({
+    abi: lafAbi,
+    address: lafAddress,
+    functionName: 'MIN_NON_RETURN_REWARD_BPS',
+  })
+
+/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"MONTH"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useReadLafMonth = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -6597,7 +9292,7 @@ export const useReadLafMonth = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"WEEK"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useReadLafWeek = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -6606,10 +9301,22 @@ export const useReadLafWeek = /*#__PURE__*/ createUseReadContract({
 })
 
 /**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"YEAR"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ */
+export const useReadLafYear = /*#__PURE__*/ createUseReadContract({
+  abi: lafAbi,
+  address: lafAddress,
+  functionName: 'YEAR',
+})
+
+/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"balanceOf"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useReadLafBalanceOf = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -6621,7 +9328,7 @@ export const useReadLafBalanceOf = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"balanceOfBatch"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useReadLafBalanceOfBatch = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -6633,7 +9340,7 @@ export const useReadLafBalanceOfBatch = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"charities"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useReadLafCharities = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -6645,7 +9352,7 @@ export const useReadLafCharities = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"charitiesCount"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useReadLafCharitiesCount = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -6657,7 +9364,7 @@ export const useReadLafCharitiesCount = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"charityFeesDistributed"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useReadLafCharityFeesDistributed =
   /*#__PURE__*/ createUseReadContract({
@@ -6670,7 +9377,7 @@ export const useReadLafCharityFeesDistributed =
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"config"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useReadLafConfig = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -6679,10 +9386,23 @@ export const useReadLafConfig = /*#__PURE__*/ createUseReadContract({
 })
 
 /**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"delegateFeesDistributed"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ */
+export const useReadLafDelegateFeesDistributed =
+  /*#__PURE__*/ createUseReadContract({
+    abi: lafAbi,
+    address: lafAddress,
+    functionName: 'delegateFeesDistributed',
+  })
+
+/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"exists"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useReadLafExists = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -6694,7 +9414,7 @@ export const useReadLafExists = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"feesDistributed"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useReadLafFeesDistributed = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -6706,7 +9426,7 @@ export const useReadLafFeesDistributed = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"foundCount"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useReadLafFoundCount = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -6718,7 +9438,7 @@ export const useReadLafFoundCount = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"isApprovedForAll"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useReadLafIsApprovedForAll = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -6730,7 +9450,7 @@ export const useReadLafIsApprovedForAll = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"itemImplementation"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useReadLafItemImplementation = /*#__PURE__*/ createUseReadContract(
   { abi: lafAbi, address: lafAddress, functionName: 'itemImplementation' },
@@ -6740,7 +9460,7 @@ export const useReadLafItemImplementation = /*#__PURE__*/ createUseReadContract(
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"items"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useReadLafItems = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -6749,22 +9469,10 @@ export const useReadLafItems = /*#__PURE__*/ createUseReadContract({
 })
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"itemsCount"`
- *
- * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
- */
-export const useReadLafItemsCount = /*#__PURE__*/ createUseReadContract({
-  abi: lafAbi,
-  address: lafAddress,
-  functionName: 'itemsCount',
-})
-
-/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"lostCount"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useReadLafLostCount = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -6773,10 +9481,22 @@ export const useReadLafLostCount = /*#__PURE__*/ createUseReadContract({
 })
 
 /**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"nonReturnCount"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ */
+export const useReadLafNonReturnCount = /*#__PURE__*/ createUseReadContract({
+  abi: lafAbi,
+  address: lafAddress,
+  functionName: 'nonReturnCount',
+})
+
+/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"owner"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useReadLafOwner = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -6788,7 +9508,7 @@ export const useReadLafOwner = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"registeredCount"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useReadLafRegisteredCount = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -6800,7 +9520,7 @@ export const useReadLafRegisteredCount = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"returnedCount"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useReadLafReturnedCount = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -6812,7 +9532,7 @@ export const useReadLafReturnedCount = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"rewardsDistributed"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useReadLafRewardsDistributed = /*#__PURE__*/ createUseReadContract(
   { abi: lafAbi, address: lafAddress, functionName: 'rewardsDistributed' },
@@ -6822,7 +9542,7 @@ export const useReadLafRewardsDistributed = /*#__PURE__*/ createUseReadContract(
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"royaltyInfo"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useReadLafRoyaltyInfo = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -6831,10 +9551,48 @@ export const useReadLafRoyaltyInfo = /*#__PURE__*/ createUseReadContract({
 })
 
 /**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"supportRewards"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ */
+export const useReadLafSupportRewards = /*#__PURE__*/ createUseReadContract({
+  abi: lafAbi,
+  address: lafAddress,
+  functionName: 'supportRewards',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"supportRewardsCount"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ */
+export const useReadLafSupportRewardsCount =
+  /*#__PURE__*/ createUseReadContract({
+    abi: lafAbi,
+    address: lafAddress,
+    functionName: 'supportRewardsCount',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"supportRewardsDistributed"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ */
+export const useReadLafSupportRewardsDistributed =
+  /*#__PURE__*/ createUseReadContract({
+    abi: lafAbi,
+    address: lafAddress,
+    functionName: 'supportRewardsDistributed',
+  })
+
+/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"supportsInterface"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useReadLafSupportsInterface = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -6846,7 +9604,7 @@ export const useReadLafSupportsInterface = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"totalSupply"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useReadLafTotalSupply = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -6858,7 +9616,7 @@ export const useReadLafTotalSupply = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"treasury"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useReadLafTreasury = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -6870,7 +9628,7 @@ export const useReadLafTreasury = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"trust"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useReadLafTrust = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -6882,7 +9640,7 @@ export const useReadLafTrust = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"uri"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useReadLafUri = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -6894,7 +9652,7 @@ export const useReadLafUri = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useWriteLaf = /*#__PURE__*/ createUseWriteContract({
   abi: lafAbi,
@@ -6905,7 +9663,7 @@ export const useWriteLaf = /*#__PURE__*/ createUseWriteContract({
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"addCharity"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useWriteLafAddCharity = /*#__PURE__*/ createUseWriteContract({
   abi: lafAbi,
@@ -6917,7 +9675,7 @@ export const useWriteLafAddCharity = /*#__PURE__*/ createUseWriteContract({
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"found"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useWriteLafFound = /*#__PURE__*/ createUseWriteContract({
   abi: lafAbi,
@@ -6929,7 +9687,7 @@ export const useWriteLafFound = /*#__PURE__*/ createUseWriteContract({
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"lost"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useWriteLafLost = /*#__PURE__*/ createUseWriteContract({
   abi: lafAbi,
@@ -6941,7 +9699,7 @@ export const useWriteLafLost = /*#__PURE__*/ createUseWriteContract({
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"mint"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useWriteLafMint = /*#__PURE__*/ createUseWriteContract({
   abi: lafAbi,
@@ -6950,10 +9708,22 @@ export const useWriteLafMint = /*#__PURE__*/ createUseWriteContract({
 })
 
 /**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"nonReturn"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ */
+export const useWriteLafNonReturn = /*#__PURE__*/ createUseWriteContract({
+  abi: lafAbi,
+  address: lafAddress,
+  functionName: 'nonReturn',
+})
+
+/**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"ping"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useWriteLafPing = /*#__PURE__*/ createUseWriteContract({
   abi: lafAbi,
@@ -6965,7 +9735,7 @@ export const useWriteLafPing = /*#__PURE__*/ createUseWriteContract({
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"registerItem"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useWriteLafRegisterItem = /*#__PURE__*/ createUseWriteContract({
   abi: lafAbi,
@@ -6977,7 +9747,7 @@ export const useWriteLafRegisterItem = /*#__PURE__*/ createUseWriteContract({
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"renounceOwnership"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useWriteLafRenounceOwnership =
   /*#__PURE__*/ createUseWriteContract({
@@ -6990,7 +9760,7 @@ export const useWriteLafRenounceOwnership =
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"returned"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useWriteLafReturned = /*#__PURE__*/ createUseWriteContract({
   abi: lafAbi,
@@ -7002,7 +9772,7 @@ export const useWriteLafReturned = /*#__PURE__*/ createUseWriteContract({
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"revokeLost"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useWriteLafRevokeLost = /*#__PURE__*/ createUseWriteContract({
   abi: lafAbi,
@@ -7014,7 +9784,7 @@ export const useWriteLafRevokeLost = /*#__PURE__*/ createUseWriteContract({
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"safeBatchTransferFrom"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useWriteLafSafeBatchTransferFrom =
   /*#__PURE__*/ createUseWriteContract({
@@ -7027,7 +9797,7 @@ export const useWriteLafSafeBatchTransferFrom =
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"safeTransferFrom"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useWriteLafSafeTransferFrom = /*#__PURE__*/ createUseWriteContract(
   { abi: lafAbi, address: lafAddress, functionName: 'safeTransferFrom' },
@@ -7037,7 +9807,7 @@ export const useWriteLafSafeTransferFrom = /*#__PURE__*/ createUseWriteContract(
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setApprovalForAll"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useWriteLafSetApprovalForAll =
   /*#__PURE__*/ createUseWriteContract({
@@ -7050,52 +9820,55 @@ export const useWriteLafSetApprovalForAll =
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setFoundCooldown"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useWriteLafSetFoundCooldown = /*#__PURE__*/ createUseWriteContract(
   { abi: lafAbi, address: lafAddress, functionName: 'setFoundCooldown' },
 )
 
 /**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setImmediateRewardPercentage"`
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setImmediateRewardBps"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
-export const useWriteLafSetImmediateRewardPercentage =
+export const useWriteLafSetImmediateRewardBps =
   /*#__PURE__*/ createUseWriteContract({
     abi: lafAbi,
     address: lafAddress,
-    functionName: 'setImmediateRewardPercentage',
+    functionName: 'setImmediateRewardBps',
   })
 
 /**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setMinCharityFee"`
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setMinCharityFeeBps"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
-export const useWriteLafSetMinCharityFee = /*#__PURE__*/ createUseWriteContract(
-  { abi: lafAbi, address: lafAddress, functionName: 'setMinCharityFee' },
-)
+export const useWriteLafSetMinCharityFeeBps =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: lafAbi,
+    address: lafAddress,
+    functionName: 'setMinCharityFeeBps',
+  })
 
 /**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setMinFee"`
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setMinFeeBps"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
-export const useWriteLafSetMinFee = /*#__PURE__*/ createUseWriteContract({
+export const useWriteLafSetMinFeeBps = /*#__PURE__*/ createUseWriteContract({
   abi: lafAbi,
   address: lafAddress,
-  functionName: 'setMinFee',
+  functionName: 'setMinFeeBps',
 })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setMinReward"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useWriteLafSetMinReward = /*#__PURE__*/ createUseWriteContract({
   abi: lafAbi,
@@ -7104,10 +9877,49 @@ export const useWriteLafSetMinReward = /*#__PURE__*/ createUseWriteContract({
 })
 
 /**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setNonReturnCooldown"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ */
+export const useWriteLafSetNonReturnCooldown =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: lafAbi,
+    address: lafAddress,
+    functionName: 'setNonReturnCooldown',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setNonReturnGracePeriod"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ */
+export const useWriteLafSetNonReturnGracePeriod =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: lafAbi,
+    address: lafAddress,
+    functionName: 'setNonReturnGracePeriod',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setNonReturnRewardBps"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ */
+export const useWriteLafSetNonReturnRewardBps =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: lafAbi,
+    address: lafAddress,
+    functionName: 'setNonReturnRewardBps',
+  })
+
+/**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setReturnCooldown"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useWriteLafSetReturnCooldown =
   /*#__PURE__*/ createUseWriteContract({
@@ -7120,7 +9932,7 @@ export const useWriteLafSetReturnCooldown =
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setRevokeLostCooldown"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useWriteLafSetRevokeLostCooldown =
   /*#__PURE__*/ createUseWriteContract({
@@ -7130,22 +9942,10 @@ export const useWriteLafSetRevokeLostCooldown =
   })
 
 /**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setRewardToken"`
- *
- * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
- */
-export const useWriteLafSetRewardToken = /*#__PURE__*/ createUseWriteContract({
-  abi: lafAbi,
-  address: lafAddress,
-  functionName: 'setRewardToken',
-})
-
-/**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setTreasury"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useWriteLafSetTreasury = /*#__PURE__*/ createUseWriteContract({
   abi: lafAbi,
@@ -7154,10 +9954,22 @@ export const useWriteLafSetTreasury = /*#__PURE__*/ createUseWriteContract({
 })
 
 /**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"support"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ */
+export const useWriteLafSupport = /*#__PURE__*/ createUseWriteContract({
+  abi: lafAbi,
+  address: lafAddress,
+  functionName: 'support',
+})
+
+/**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"thumbDown"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useWriteLafThumbDown = /*#__PURE__*/ createUseWriteContract({
   abi: lafAbi,
@@ -7169,7 +9981,7 @@ export const useWriteLafThumbDown = /*#__PURE__*/ createUseWriteContract({
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"thumbUp"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useWriteLafThumbUp = /*#__PURE__*/ createUseWriteContract({
   abi: lafAbi,
@@ -7181,7 +9993,7 @@ export const useWriteLafThumbUp = /*#__PURE__*/ createUseWriteContract({
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"toggleActiveCharity"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useWriteLafToggleActiveCharity =
   /*#__PURE__*/ createUseWriteContract({
@@ -7194,7 +10006,7 @@ export const useWriteLafToggleActiveCharity =
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"transferOwnership"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useWriteLafTransferOwnership =
   /*#__PURE__*/ createUseWriteContract({
@@ -7204,10 +10016,23 @@ export const useWriteLafTransferOwnership =
   })
 
 /**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"updateRewardToken"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ */
+export const useWriteLafUpdateRewardToken =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: lafAbi,
+    address: lafAddress,
+    functionName: 'updateRewardToken',
+  })
+
+/**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useSimulateLaf = /*#__PURE__*/ createUseSimulateContract({
   abi: lafAbi,
@@ -7218,7 +10043,7 @@ export const useSimulateLaf = /*#__PURE__*/ createUseSimulateContract({
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"addCharity"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useSimulateLafAddCharity = /*#__PURE__*/ createUseSimulateContract(
   { abi: lafAbi, address: lafAddress, functionName: 'addCharity' },
@@ -7228,7 +10053,7 @@ export const useSimulateLafAddCharity = /*#__PURE__*/ createUseSimulateContract(
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"found"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useSimulateLafFound = /*#__PURE__*/ createUseSimulateContract({
   abi: lafAbi,
@@ -7240,7 +10065,7 @@ export const useSimulateLafFound = /*#__PURE__*/ createUseSimulateContract({
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"lost"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useSimulateLafLost = /*#__PURE__*/ createUseSimulateContract({
   abi: lafAbi,
@@ -7252,7 +10077,7 @@ export const useSimulateLafLost = /*#__PURE__*/ createUseSimulateContract({
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"mint"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useSimulateLafMint = /*#__PURE__*/ createUseSimulateContract({
   abi: lafAbi,
@@ -7261,10 +10086,22 @@ export const useSimulateLafMint = /*#__PURE__*/ createUseSimulateContract({
 })
 
 /**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"nonReturn"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ */
+export const useSimulateLafNonReturn = /*#__PURE__*/ createUseSimulateContract({
+  abi: lafAbi,
+  address: lafAddress,
+  functionName: 'nonReturn',
+})
+
+/**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"ping"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useSimulateLafPing = /*#__PURE__*/ createUseSimulateContract({
   abi: lafAbi,
@@ -7276,7 +10113,7 @@ export const useSimulateLafPing = /*#__PURE__*/ createUseSimulateContract({
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"registerItem"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useSimulateLafRegisterItem =
   /*#__PURE__*/ createUseSimulateContract({
@@ -7289,7 +10126,7 @@ export const useSimulateLafRegisterItem =
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"renounceOwnership"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useSimulateLafRenounceOwnership =
   /*#__PURE__*/ createUseSimulateContract({
@@ -7302,7 +10139,7 @@ export const useSimulateLafRenounceOwnership =
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"returned"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useSimulateLafReturned = /*#__PURE__*/ createUseSimulateContract({
   abi: lafAbi,
@@ -7314,7 +10151,7 @@ export const useSimulateLafReturned = /*#__PURE__*/ createUseSimulateContract({
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"revokeLost"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useSimulateLafRevokeLost = /*#__PURE__*/ createUseSimulateContract(
   { abi: lafAbi, address: lafAddress, functionName: 'revokeLost' },
@@ -7324,7 +10161,7 @@ export const useSimulateLafRevokeLost = /*#__PURE__*/ createUseSimulateContract(
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"safeBatchTransferFrom"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useSimulateLafSafeBatchTransferFrom =
   /*#__PURE__*/ createUseSimulateContract({
@@ -7337,7 +10174,7 @@ export const useSimulateLafSafeBatchTransferFrom =
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"safeTransferFrom"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useSimulateLafSafeTransferFrom =
   /*#__PURE__*/ createUseSimulateContract({
@@ -7350,7 +10187,7 @@ export const useSimulateLafSafeTransferFrom =
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setApprovalForAll"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useSimulateLafSetApprovalForAll =
   /*#__PURE__*/ createUseSimulateContract({
@@ -7363,7 +10200,7 @@ export const useSimulateLafSetApprovalForAll =
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setFoundCooldown"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useSimulateLafSetFoundCooldown =
   /*#__PURE__*/ createUseSimulateContract({
@@ -7373,48 +10210,49 @@ export const useSimulateLafSetFoundCooldown =
   })
 
 /**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setImmediateRewardPercentage"`
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setImmediateRewardBps"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
-export const useSimulateLafSetImmediateRewardPercentage =
+export const useSimulateLafSetImmediateRewardBps =
   /*#__PURE__*/ createUseSimulateContract({
     abi: lafAbi,
     address: lafAddress,
-    functionName: 'setImmediateRewardPercentage',
+    functionName: 'setImmediateRewardBps',
   })
 
 /**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setMinCharityFee"`
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setMinCharityFeeBps"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
-export const useSimulateLafSetMinCharityFee =
+export const useSimulateLafSetMinCharityFeeBps =
   /*#__PURE__*/ createUseSimulateContract({
     abi: lafAbi,
     address: lafAddress,
-    functionName: 'setMinCharityFee',
+    functionName: 'setMinCharityFeeBps',
   })
 
 /**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setMinFee"`
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setMinFeeBps"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
-export const useSimulateLafSetMinFee = /*#__PURE__*/ createUseSimulateContract({
-  abi: lafAbi,
-  address: lafAddress,
-  functionName: 'setMinFee',
-})
+export const useSimulateLafSetMinFeeBps =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: lafAbi,
+    address: lafAddress,
+    functionName: 'setMinFeeBps',
+  })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setMinReward"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useSimulateLafSetMinReward =
   /*#__PURE__*/ createUseSimulateContract({
@@ -7424,10 +10262,49 @@ export const useSimulateLafSetMinReward =
   })
 
 /**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setNonReturnCooldown"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ */
+export const useSimulateLafSetNonReturnCooldown =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: lafAbi,
+    address: lafAddress,
+    functionName: 'setNonReturnCooldown',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setNonReturnGracePeriod"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ */
+export const useSimulateLafSetNonReturnGracePeriod =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: lafAbi,
+    address: lafAddress,
+    functionName: 'setNonReturnGracePeriod',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setNonReturnRewardBps"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ */
+export const useSimulateLafSetNonReturnRewardBps =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: lafAbi,
+    address: lafAddress,
+    functionName: 'setNonReturnRewardBps',
+  })
+
+/**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setReturnCooldown"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useSimulateLafSetReturnCooldown =
   /*#__PURE__*/ createUseSimulateContract({
@@ -7440,7 +10317,7 @@ export const useSimulateLafSetReturnCooldown =
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setRevokeLostCooldown"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useSimulateLafSetRevokeLostCooldown =
   /*#__PURE__*/ createUseSimulateContract({
@@ -7450,23 +10327,10 @@ export const useSimulateLafSetRevokeLostCooldown =
   })
 
 /**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setRewardToken"`
- *
- * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
- */
-export const useSimulateLafSetRewardToken =
-  /*#__PURE__*/ createUseSimulateContract({
-    abi: lafAbi,
-    address: lafAddress,
-    functionName: 'setRewardToken',
-  })
-
-/**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setTreasury"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useSimulateLafSetTreasury =
   /*#__PURE__*/ createUseSimulateContract({
@@ -7476,10 +10340,22 @@ export const useSimulateLafSetTreasury =
   })
 
 /**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"support"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ */
+export const useSimulateLafSupport = /*#__PURE__*/ createUseSimulateContract({
+  abi: lafAbi,
+  address: lafAddress,
+  functionName: 'support',
+})
+
+/**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"thumbDown"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useSimulateLafThumbDown = /*#__PURE__*/ createUseSimulateContract({
   abi: lafAbi,
@@ -7491,7 +10367,7 @@ export const useSimulateLafThumbDown = /*#__PURE__*/ createUseSimulateContract({
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"thumbUp"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useSimulateLafThumbUp = /*#__PURE__*/ createUseSimulateContract({
   abi: lafAbi,
@@ -7503,7 +10379,7 @@ export const useSimulateLafThumbUp = /*#__PURE__*/ createUseSimulateContract({
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"toggleActiveCharity"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useSimulateLafToggleActiveCharity =
   /*#__PURE__*/ createUseSimulateContract({
@@ -7516,7 +10392,7 @@ export const useSimulateLafToggleActiveCharity =
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"transferOwnership"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useSimulateLafTransferOwnership =
   /*#__PURE__*/ createUseSimulateContract({
@@ -7526,10 +10402,23 @@ export const useSimulateLafTransferOwnership =
   })
 
 /**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"updateRewardToken"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ */
+export const useSimulateLafUpdateRewardToken =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: lafAbi,
+    address: lafAddress,
+    functionName: 'updateRewardToken',
+  })
+
+/**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useWatchLafEvent = /*#__PURE__*/ createUseWatchContractEvent({
   abi: lafAbi,
@@ -7540,7 +10429,7 @@ export const useWatchLafEvent = /*#__PURE__*/ createUseWatchContractEvent({
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"ApprovalForAll"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useWatchLafApprovalForAllEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -7553,7 +10442,7 @@ export const useWatchLafApprovalForAllEvent =
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"CharityFeesDistributed"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useWatchLafCharityFeesDistributedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -7566,7 +10455,7 @@ export const useWatchLafCharityFeesDistributedEvent =
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"DelegateFeesDistributed"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useWatchLafDelegateFeesDistributedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -7579,7 +10468,7 @@ export const useWatchLafDelegateFeesDistributedEvent =
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"Down"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useWatchLafDownEvent = /*#__PURE__*/ createUseWatchContractEvent({
   abi: lafAbi,
@@ -7591,7 +10480,7 @@ export const useWatchLafDownEvent = /*#__PURE__*/ createUseWatchContractEvent({
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"FeesDistributed"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useWatchLafFeesDistributedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -7604,7 +10493,7 @@ export const useWatchLafFeesDistributedEvent =
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"ItemFound"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useWatchLafItemFoundEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -7617,7 +10506,7 @@ export const useWatchLafItemFoundEvent =
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"ItemLost"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useWatchLafItemLostEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -7627,10 +10516,23 @@ export const useWatchLafItemLostEvent =
   })
 
 /**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"ItemNonReturn"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ */
+export const useWatchLafItemNonReturnEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: lafAbi,
+    address: lafAddress,
+    eventName: 'ItemNonReturn',
+  })
+
+/**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"ItemRegistered"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useWatchLafItemRegisteredEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -7643,7 +10545,7 @@ export const useWatchLafItemRegisteredEvent =
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"ItemReturned"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useWatchLafItemReturnedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -7656,7 +10558,7 @@ export const useWatchLafItemReturnedEvent =
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"ItemRevokedLost"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useWatchLafItemRevokedLostEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -7666,10 +10568,23 @@ export const useWatchLafItemRevokedLostEvent =
   })
 
 /**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"ItemSupported"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ */
+export const useWatchLafItemSupportedEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: lafAbi,
+    address: lafAddress,
+    eventName: 'ItemSupported',
+  })
+
+/**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"Minted"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useWatchLafMintedEvent = /*#__PURE__*/ createUseWatchContractEvent(
   { abi: lafAbi, address: lafAddress, eventName: 'Minted' },
@@ -7679,7 +10594,7 @@ export const useWatchLafMintedEvent = /*#__PURE__*/ createUseWatchContractEvent(
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"OwnershipTransferred"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useWatchLafOwnershipTransferredEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -7692,7 +10607,7 @@ export const useWatchLafOwnershipTransferredEvent =
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"Pong"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useWatchLafPongEvent = /*#__PURE__*/ createUseWatchContractEvent({
   abi: lafAbi,
@@ -7704,7 +10619,7 @@ export const useWatchLafPongEvent = /*#__PURE__*/ createUseWatchContractEvent({
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"RewardsDistributed"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useWatchLafRewardsDistributedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -7714,10 +10629,23 @@ export const useWatchLafRewardsDistributedEvent =
   })
 
 /**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"SupportRewardsDistributed"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ */
+export const useWatchLafSupportRewardsDistributedEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: lafAbi,
+    address: lafAddress,
+    eventName: 'SupportRewardsDistributed',
+  })
+
+/**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"TransferBatch"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useWatchLafTransferBatchEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -7730,7 +10658,7 @@ export const useWatchLafTransferBatchEvent =
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"TransferSingle"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useWatchLafTransferSingleEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -7743,7 +10671,7 @@ export const useWatchLafTransferSingleEvent =
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"URI"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useWatchLafUriEvent = /*#__PURE__*/ createUseWatchContractEvent({
   abi: lafAbi,
@@ -7755,13 +10683,699 @@ export const useWatchLafUriEvent = /*#__PURE__*/ createUseWatchContractEvent({
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"Up"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xd92e65585f5d69e2d9e955ee2d19ef77c0698801)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
  */
 export const useWatchLafUpEvent = /*#__PURE__*/ createUseWatchContractEvent({
   abi: lafAbi,
   address: lafAddress,
   eventName: 'Up',
 })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafEventsAbi}__
+ */
+export const useWatchLafEventsEvent = /*#__PURE__*/ createUseWatchContractEvent(
+  { abi: lafEventsAbi },
+)
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafEventsAbi}__ and `eventName` set to `"CharityFeesDistributed"`
+ */
+export const useWatchLafEventsCharityFeesDistributedEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: lafEventsAbi,
+    eventName: 'CharityFeesDistributed',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafEventsAbi}__ and `eventName` set to `"DelegateFeesDistributed"`
+ */
+export const useWatchLafEventsDelegateFeesDistributedEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: lafEventsAbi,
+    eventName: 'DelegateFeesDistributed',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafEventsAbi}__ and `eventName` set to `"FeesDistributed"`
+ */
+export const useWatchLafEventsFeesDistributedEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: lafEventsAbi,
+    eventName: 'FeesDistributed',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafEventsAbi}__ and `eventName` set to `"ItemFound"`
+ */
+export const useWatchLafEventsItemFoundEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: lafEventsAbi,
+    eventName: 'ItemFound',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafEventsAbi}__ and `eventName` set to `"ItemLost"`
+ */
+export const useWatchLafEventsItemLostEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: lafEventsAbi,
+    eventName: 'ItemLost',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafEventsAbi}__ and `eventName` set to `"ItemNonReturn"`
+ */
+export const useWatchLafEventsItemNonReturnEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: lafEventsAbi,
+    eventName: 'ItemNonReturn',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafEventsAbi}__ and `eventName` set to `"ItemRegistered"`
+ */
+export const useWatchLafEventsItemRegisteredEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: lafEventsAbi,
+    eventName: 'ItemRegistered',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafEventsAbi}__ and `eventName` set to `"ItemReturned"`
+ */
+export const useWatchLafEventsItemReturnedEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: lafEventsAbi,
+    eventName: 'ItemReturned',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafEventsAbi}__ and `eventName` set to `"ItemRevokedLost"`
+ */
+export const useWatchLafEventsItemRevokedLostEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: lafEventsAbi,
+    eventName: 'ItemRevokedLost',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafEventsAbi}__ and `eventName` set to `"ItemSupported"`
+ */
+export const useWatchLafEventsItemSupportedEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: lafEventsAbi,
+    eventName: 'ItemSupported',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafEventsAbi}__ and `eventName` set to `"Minted"`
+ */
+export const useWatchLafEventsMintedEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: lafEventsAbi,
+    eventName: 'Minted',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafEventsAbi}__ and `eventName` set to `"Pong"`
+ */
+export const useWatchLafEventsPongEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: lafEventsAbi,
+    eventName: 'Pong',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafEventsAbi}__ and `eventName` set to `"RewardsDistributed"`
+ */
+export const useWatchLafEventsRewardsDistributedEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: lafEventsAbi,
+    eventName: 'RewardsDistributed',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafEventsAbi}__ and `eventName` set to `"SupportRewardsDistributed"`
+ */
+export const useWatchLafEventsSupportRewardsDistributedEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: lafEventsAbi,
+    eventName: 'SupportRewardsDistributed',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafItemAbi}__
+ */
+export const useReadLafItem = /*#__PURE__*/ createUseReadContract({
+  abi: lafItemAbi,
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"BASIS_POINTS"`
+ */
+export const useReadLafItemBasisPoints = /*#__PURE__*/ createUseReadContract({
+  abi: lafItemAbi,
+  functionName: 'BASIS_POINTS',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"DAY"`
+ */
+export const useReadLafItemDay = /*#__PURE__*/ createUseReadContract({
+  abi: lafItemAbi,
+  functionName: 'DAY',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"MAX_CHARITY_FEE_BPS"`
+ */
+export const useReadLafItemMaxCharityFeeBps =
+  /*#__PURE__*/ createUseReadContract({
+    abi: lafItemAbi,
+    functionName: 'MAX_CHARITY_FEE_BPS',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"MAX_DELEGATE_FEE_BPS"`
+ */
+export const useReadLafItemMaxDelegateFeeBps =
+  /*#__PURE__*/ createUseReadContract({
+    abi: lafItemAbi,
+    functionName: 'MAX_DELEGATE_FEE_BPS',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"MAX_FEE_BPS"`
+ */
+export const useReadLafItemMaxFeeBps = /*#__PURE__*/ createUseReadContract({
+  abi: lafItemAbi,
+  functionName: 'MAX_FEE_BPS',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"MAX_IMMEDIATE_REWARD_BPS"`
+ */
+export const useReadLafItemMaxImmediateRewardBps =
+  /*#__PURE__*/ createUseReadContract({
+    abi: lafItemAbi,
+    functionName: 'MAX_IMMEDIATE_REWARD_BPS',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"MAX_NON_RETURN_REWARD_BPS"`
+ */
+export const useReadLafItemMaxNonReturnRewardBps =
+  /*#__PURE__*/ createUseReadContract({
+    abi: lafItemAbi,
+    functionName: 'MAX_NON_RETURN_REWARD_BPS',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"MIN_CHARITY_FEE_BPS"`
+ */
+export const useReadLafItemMinCharityFeeBps =
+  /*#__PURE__*/ createUseReadContract({
+    abi: lafItemAbi,
+    functionName: 'MIN_CHARITY_FEE_BPS',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"MIN_DELEGATE_FEE_BPS"`
+ */
+export const useReadLafItemMinDelegateFeeBps =
+  /*#__PURE__*/ createUseReadContract({
+    abi: lafItemAbi,
+    functionName: 'MIN_DELEGATE_FEE_BPS',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"MIN_FEE_BPS"`
+ */
+export const useReadLafItemMinFeeBps = /*#__PURE__*/ createUseReadContract({
+  abi: lafItemAbi,
+  functionName: 'MIN_FEE_BPS',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"MIN_IMMEDIATE_REWARD_BPS"`
+ */
+export const useReadLafItemMinImmediateRewardBps =
+  /*#__PURE__*/ createUseReadContract({
+    abi: lafItemAbi,
+    functionName: 'MIN_IMMEDIATE_REWARD_BPS',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"MIN_NON_RETURN_REWARD_BPS"`
+ */
+export const useReadLafItemMinNonReturnRewardBps =
+  /*#__PURE__*/ createUseReadContract({
+    abi: lafItemAbi,
+    functionName: 'MIN_NON_RETURN_REWARD_BPS',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"MONTH"`
+ */
+export const useReadLafItemMonth = /*#__PURE__*/ createUseReadContract({
+  abi: lafItemAbi,
+  functionName: 'MONTH',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"WEEK"`
+ */
+export const useReadLafItemWeek = /*#__PURE__*/ createUseReadContract({
+  abi: lafItemAbi,
+  functionName: 'WEEK',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"YEAR"`
+ */
+export const useReadLafItemYear = /*#__PURE__*/ createUseReadContract({
+  abi: lafItemAbi,
+  functionName: 'YEAR',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"comment"`
+ */
+export const useReadLafItemComment = /*#__PURE__*/ createUseReadContract({
+  abi: lafItemAbi,
+  functionName: 'comment',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"config"`
+ */
+export const useReadLafItemConfig = /*#__PURE__*/ createUseReadContract({
+  abi: lafItemAbi,
+  functionName: 'config',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"cycle"`
+ */
+export const useReadLafItemCycle = /*#__PURE__*/ createUseReadContract({
+  abi: lafItemAbi,
+  functionName: 'cycle',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"delegate"`
+ */
+export const useReadLafItemDelegate = /*#__PURE__*/ createUseReadContract({
+  abi: lafItemAbi,
+  functionName: 'delegate',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"delegateFee"`
+ */
+export const useReadLafItemDelegateFee = /*#__PURE__*/ createUseReadContract({
+  abi: lafItemAbi,
+  functionName: 'delegateFee',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"delegateUpdatedTs"`
+ */
+export const useReadLafItemDelegateUpdatedTs =
+  /*#__PURE__*/ createUseReadContract({
+    abi: lafItemAbi,
+    functionName: 'delegateUpdatedTs',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"detailsUpdatedTs"`
+ */
+export const useReadLafItemDetailsUpdatedTs =
+  /*#__PURE__*/ createUseReadContract({
+    abi: lafItemAbi,
+    functionName: 'detailsUpdatedTs',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"factory"`
+ */
+export const useReadLafItemFactory = /*#__PURE__*/ createUseReadContract({
+  abi: lafItemAbi,
+  functionName: 'factory',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"finder"`
+ */
+export const useReadLafItemFinder = /*#__PURE__*/ createUseReadContract({
+  abi: lafItemAbi,
+  functionName: 'finder',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"geo"`
+ */
+export const useReadLafItemGeo = /*#__PURE__*/ createUseReadContract({
+  abi: lafItemAbi,
+  functionName: 'geo',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"immediateRewardPaid"`
+ */
+export const useReadLafItemImmediateRewardPaid =
+  /*#__PURE__*/ createUseReadContract({
+    abi: lafItemAbi,
+    functionName: 'immediateRewardPaid',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"owner"`
+ */
+export const useReadLafItemOwner = /*#__PURE__*/ createUseReadContract({
+  abi: lafItemAbi,
+  functionName: 'owner',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"reward"`
+ */
+export const useReadLafItemReward = /*#__PURE__*/ createUseReadContract({
+  abi: lafItemAbi,
+  functionName: 'reward',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"secretHash"`
+ */
+export const useReadLafItemSecretHash = /*#__PURE__*/ createUseReadContract({
+  abi: lafItemAbi,
+  functionName: 'secretHash',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"status"`
+ */
+export const useReadLafItemStatus = /*#__PURE__*/ createUseReadContract({
+  abi: lafItemAbi,
+  functionName: 'status',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"statusUpdatedTs"`
+ */
+export const useReadLafItemStatusUpdatedTs =
+  /*#__PURE__*/ createUseReadContract({
+    abi: lafItemAbi,
+    functionName: 'statusUpdatedTs',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"supportReward"`
+ */
+export const useReadLafItemSupportReward = /*#__PURE__*/ createUseReadContract({
+  abi: lafItemAbi,
+  functionName: 'supportReward',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"token"`
+ */
+export const useReadLafItemToken = /*#__PURE__*/ createUseReadContract({
+  abi: lafItemAbi,
+  functionName: 'token',
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafItemAbi}__
+ */
+export const useWriteLafItem = /*#__PURE__*/ createUseWriteContract({
+  abi: lafItemAbi,
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"found"`
+ */
+export const useWriteLafItemFound = /*#__PURE__*/ createUseWriteContract({
+  abi: lafItemAbi,
+  functionName: 'found',
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"initialize"`
+ */
+export const useWriteLafItemInitialize = /*#__PURE__*/ createUseWriteContract({
+  abi: lafItemAbi,
+  functionName: 'initialize',
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"lost"`
+ */
+export const useWriteLafItemLost = /*#__PURE__*/ createUseWriteContract({
+  abi: lafItemAbi,
+  functionName: 'lost',
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"nonReturn"`
+ */
+export const useWriteLafItemNonReturn = /*#__PURE__*/ createUseWriteContract({
+  abi: lafItemAbi,
+  functionName: 'nonReturn',
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"returned"`
+ */
+export const useWriteLafItemReturned = /*#__PURE__*/ createUseWriteContract({
+  abi: lafItemAbi,
+  functionName: 'returned',
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"revokeLost"`
+ */
+export const useWriteLafItemRevokeLost = /*#__PURE__*/ createUseWriteContract({
+  abi: lafItemAbi,
+  functionName: 'revokeLost',
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"support"`
+ */
+export const useWriteLafItemSupport = /*#__PURE__*/ createUseWriteContract({
+  abi: lafItemAbi,
+  functionName: 'support',
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"transferSupportRewardShare"`
+ */
+export const useWriteLafItemTransferSupportRewardShare =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: lafItemAbi,
+    functionName: 'transferSupportRewardShare',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"updateDelegate"`
+ */
+export const useWriteLafItemUpdateDelegate =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: lafItemAbi,
+    functionName: 'updateDelegate',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"updateDetails"`
+ */
+export const useWriteLafItemUpdateDetails =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: lafItemAbi,
+    functionName: 'updateDetails',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"updateReward"`
+ */
+export const useWriteLafItemUpdateReward = /*#__PURE__*/ createUseWriteContract(
+  { abi: lafItemAbi, functionName: 'updateReward' },
+)
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"withdraw"`
+ */
+export const useWriteLafItemWithdraw = /*#__PURE__*/ createUseWriteContract({
+  abi: lafItemAbi,
+  functionName: 'withdraw',
+})
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafItemAbi}__
+ */
+export const useSimulateLafItem = /*#__PURE__*/ createUseSimulateContract({
+  abi: lafItemAbi,
+})
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"found"`
+ */
+export const useSimulateLafItemFound = /*#__PURE__*/ createUseSimulateContract({
+  abi: lafItemAbi,
+  functionName: 'found',
+})
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"initialize"`
+ */
+export const useSimulateLafItemInitialize =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: lafItemAbi,
+    functionName: 'initialize',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"lost"`
+ */
+export const useSimulateLafItemLost = /*#__PURE__*/ createUseSimulateContract({
+  abi: lafItemAbi,
+  functionName: 'lost',
+})
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"nonReturn"`
+ */
+export const useSimulateLafItemNonReturn =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: lafItemAbi,
+    functionName: 'nonReturn',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"returned"`
+ */
+export const useSimulateLafItemReturned =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: lafItemAbi,
+    functionName: 'returned',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"revokeLost"`
+ */
+export const useSimulateLafItemRevokeLost =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: lafItemAbi,
+    functionName: 'revokeLost',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"support"`
+ */
+export const useSimulateLafItemSupport =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: lafItemAbi,
+    functionName: 'support',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"transferSupportRewardShare"`
+ */
+export const useSimulateLafItemTransferSupportRewardShare =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: lafItemAbi,
+    functionName: 'transferSupportRewardShare',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"updateDelegate"`
+ */
+export const useSimulateLafItemUpdateDelegate =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: lafItemAbi,
+    functionName: 'updateDelegate',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"updateDetails"`
+ */
+export const useSimulateLafItemUpdateDetails =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: lafItemAbi,
+    functionName: 'updateDetails',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"updateReward"`
+ */
+export const useSimulateLafItemUpdateReward =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: lafItemAbi,
+    functionName: 'updateReward',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafItemAbi}__ and `functionName` set to `"withdraw"`
+ */
+export const useSimulateLafItemWithdraw =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: lafItemAbi,
+    functionName: 'withdraw',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafItemAbi}__
+ */
+export const useWatchLafItemEvent = /*#__PURE__*/ createUseWatchContractEvent({
+  abi: lafItemAbi,
+})
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafItemAbi}__ and `eventName` set to `"DelegateUpdated"`
+ */
+export const useWatchLafItemDelegateUpdatedEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: lafItemAbi,
+    eventName: 'DelegateUpdated',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafItemAbi}__ and `eventName` set to `"DetailsUpdated"`
+ */
+export const useWatchLafItemDetailsUpdatedEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: lafItemAbi,
+    eventName: 'DetailsUpdated',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafItemAbi}__ and `eventName` set to `"Initialized"`
+ */
+export const useWatchLafItemInitializedEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: lafItemAbi,
+    eventName: 'Initialized',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafItemAbi}__ and `eventName` set to `"RewardUpdated"`
+ */
+export const useWatchLafItemRewardUpdatedEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: lafItemAbi,
+    eventName: 'RewardUpdated',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafItemAbi}__ and `eventName` set to `"Withdrawn"`
+ */
+export const useWatchLafItemWithdrawnEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: lafItemAbi,
+    eventName: 'Withdrawn',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link metaAbi}__
@@ -8075,70 +11689,4 @@ export const useWatchOwnableOwnershipTransferredEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
     abi: ownableAbi,
     eventName: 'OwnershipTransferred',
-  })
-
-/**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link universalSigValidatorAbi}__
- */
-export const useWriteUniversalSigValidator =
-  /*#__PURE__*/ createUseWriteContract({ abi: universalSigValidatorAbi })
-
-/**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link universalSigValidatorAbi}__ and `functionName` set to `"isValidSig"`
- */
-export const useWriteUniversalSigValidatorIsValidSig =
-  /*#__PURE__*/ createUseWriteContract({
-    abi: universalSigValidatorAbi,
-    functionName: 'isValidSig',
-  })
-
-/**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link universalSigValidatorAbi}__ and `functionName` set to `"isValidSigImpl"`
- */
-export const useWriteUniversalSigValidatorIsValidSigImpl =
-  /*#__PURE__*/ createUseWriteContract({
-    abi: universalSigValidatorAbi,
-    functionName: 'isValidSigImpl',
-  })
-
-/**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link universalSigValidatorAbi}__ and `functionName` set to `"isValidSigWithSideEffects"`
- */
-export const useWriteUniversalSigValidatorIsValidSigWithSideEffects =
-  /*#__PURE__*/ createUseWriteContract({
-    abi: universalSigValidatorAbi,
-    functionName: 'isValidSigWithSideEffects',
-  })
-
-/**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link universalSigValidatorAbi}__
- */
-export const useSimulateUniversalSigValidator =
-  /*#__PURE__*/ createUseSimulateContract({ abi: universalSigValidatorAbi })
-
-/**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link universalSigValidatorAbi}__ and `functionName` set to `"isValidSig"`
- */
-export const useSimulateUniversalSigValidatorIsValidSig =
-  /*#__PURE__*/ createUseSimulateContract({
-    abi: universalSigValidatorAbi,
-    functionName: 'isValidSig',
-  })
-
-/**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link universalSigValidatorAbi}__ and `functionName` set to `"isValidSigImpl"`
- */
-export const useSimulateUniversalSigValidatorIsValidSigImpl =
-  /*#__PURE__*/ createUseSimulateContract({
-    abi: universalSigValidatorAbi,
-    functionName: 'isValidSigImpl',
-  })
-
-/**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link universalSigValidatorAbi}__ and `functionName` set to `"isValidSigWithSideEffects"`
- */
-export const useSimulateUniversalSigValidatorIsValidSigWithSideEffects =
-  /*#__PURE__*/ createUseSimulateContract({
-    abi: universalSigValidatorAbi,
-    functionName: 'isValidSigWithSideEffects',
   })

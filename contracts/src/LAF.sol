@@ -301,18 +301,19 @@ contract LAF is ConfigOwnable, Meta, ReentrancyGuard {
     {
         LAFItem item = _getItem(_secretHash);
 
+        if (item.status() != LAFItem.Status.Found) revert LAFErrors.InvalidStatus();
+
         address itemOwner = item.owner();
         address itemFinder = item.finder();
 
-        if (item.status() != LAFItem.Status.Found) revert LAFErrors.InvalidStatus();
         if (itemOwner != msg.sender && itemFinder != msg.sender) revert LAFErrors.InvalidSender();
         
         LAFItem.Status resultStatus;
         address penaltyTarget;
 
+        _distributeSupportReward(item);
         (resultStatus, penaltyTarget) = item.nonReturn(msg.sender);
         _nonReturnPenalty(penaltyTarget);
-        _distributeSupportReward(item);
 
         nonReturnCount++;
 
@@ -507,13 +508,20 @@ contract LAF is ConfigOwnable, Meta, ReentrancyGuard {
 
         if (activeCharitiesCount > 0) {
             uint256 charityShare = amount / activeCharitiesCount;
+            uint256 remainder = amount % activeCharitiesCount;
             
+            uint256 shareToTransfer;
             for (uint256 i = 0; i < activeCharitiesCount; i++) {
                 Charity memory charity = charities[activeCharities[i]];
+                
+                shareToTransfer = charityShare;
 
-                _item.transferSupportRewardShare(charity.contractAddress, charityShare);
+                if (i == 0) {
+                    shareToTransfer += remainder;
+                }
 
-                charities[activeCharities[i]].donated += charityShare;
+                _item.transferSupportRewardShare(charity.contractAddress, shareToTransfer);
+                charities[activeCharities[i]].donated += shareToTransfer;
             }
         }
 

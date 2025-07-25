@@ -120,7 +120,7 @@ export const getAllItems = async () => {
 }
 
 // Enhanced queries with status filtering (using pure subgraph approach)
-// Uses ItemStatus entity for efficient querying without contract calls
+// Uses Status entity for efficient querying without contract calls
 export const getAllItemsWithStatus = async () => {
   try {
     // Current approach: Query all events and compute status
@@ -166,7 +166,7 @@ export const getReturnedItems = async () => {
   }
 }
 
-// Scalable paginated queries using ItemStatus entity (after subgraph redeploy)
+// Scalable paginated queries using Status entity (after subgraph redeploy)
 export const GET_ITEMS_BY_STATUS_PAGINATED = `
   query GetItemsByStatusPaginated(
     $first: Int!
@@ -178,7 +178,7 @@ export const GET_ITEMS_BY_STATUS_PAGINATED = `
     $longitude: BigDecimal
     $radiusKm: BigDecimal
   ) {
-    itemStatuses(
+    Statuses(
       first: $first
       skip: $skip
       where: { 
@@ -215,7 +215,7 @@ export const GET_ITEMS_BY_STATUS_PAGINATED = `
 
 export const GET_ITEMS_COUNT_BY_STATUS = `
   query GetItemsCountByStatus($status: String, $owner: String, $finder: String) {
-    itemStatuses(
+    Statuses(
       where: { 
         status: $status
         owner: $owner
@@ -265,9 +265,9 @@ export const getPaginatedItemsByStatus = async (
     ])
     
     return {
-      items: itemsData.itemStatuses,
-      totalCount: countData.itemStatuses.length,
-      hasMore: (skip + first) < countData.itemStatuses.length,
+      items: itemsData.Statuses,
+      totalCount: countData.Statuses.length,
+      hasMore: (skip + first) < countData.Statuses.length,
       currentPage: page,
       pageSize: first
     }
@@ -295,10 +295,10 @@ export const getPaginatedItemsByOwner = (owner, page, pageSize, orderBy, orderDi
 export const getPaginatedItemsByFinder = (finder, page, pageSize, orderBy, orderDirection) => 
   getPaginatedItemsByStatus(null, null, finder, page, pageSize, orderBy, orderDirection)
 
-// Legacy functions - remove after subgraph redeploy and migration to ItemStatus queries
+// Legacy functions - remove after subgraph redeploy and migration to Status queries
 
 // Get item status by checking if it appears in lost/found/returned events
-export const getItemStatus = async (itemAddress) => {
+export const getStatus = async (itemAddress) => {
   try {
     const [lostData, foundData, returnedData] = await Promise.all([
       client.request(`
@@ -380,7 +380,7 @@ export async function getItemsNearLocation(lat, lng, radiusKm, status = null, ow
     };
 
     const data = await client.request(GET_ITEMS_BY_STATUS_PAGINATED, variables);
-    const items = data.itemStatuses || [];
+    const items = data.Statuses || [];
 
     // Filter by proximity on client-side
     return filterItemsByProximity(items, lat, lng, radiusKm);
@@ -406,7 +406,7 @@ export async function getFoundItemsNearLocation(lat, lng, radiusKm, finder = nul
     };
 
     const data = await client.request(GET_ITEMS_BY_STATUS_PAGINATED, variables);
-    const items = data.itemStatuses || [];
+    const items = data.Statuses || [];
 
     return filterItemsByProximity(items, lat, lng, radiusKm);
   } catch (error) {

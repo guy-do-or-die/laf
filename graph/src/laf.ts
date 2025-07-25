@@ -19,7 +19,7 @@ import {
   ItemLost,
   ItemRegistered,
   ItemReturned,
-  ItemStatus,
+  Status,
   OwnershipTransferred,
   TransferBatch,
   TransferSingle,
@@ -48,15 +48,15 @@ function parseCoordinates(geoLocation: string): Array<BigDecimal | null> {
   return [lat, lng]
 }
 
-// Helper function to get or create ItemStatus entity
-function getOrCreateItemStatus(itemAddress: Bytes): ItemStatus {
-  let itemStatus = ItemStatus.load(itemAddress)
-  if (!itemStatus) {
-    itemStatus = new ItemStatus(itemAddress)
-    itemStatus.item = itemAddress
-    itemStatus.status = "registered"
+// Helper function to get or create Status entity
+function getOrCreateStatus(itemAddress: Bytes): Status {
+  let statusEntity = Status.load(itemAddress)
+  if (!statusEntity) {
+    statusEntity = new Status(itemAddress)
+    statusEntity.item = itemAddress
+    statusEntity.status = "registered"
   }
-  return itemStatus
+  return statusEntity
 }
 
 export function handleApprovalForAll(event: ApprovalForAllEvent): void {
@@ -103,15 +103,15 @@ export function handleItemFound(event: ItemFoundEvent): void {
 
   entity.save()
   
-  // Update ItemStatus entity
-  let itemStatus = getOrCreateItemStatus(event.params.item)
-  itemStatus.status = "found"
-  itemStatus.finder = event.params.finder // Track who found the item
-  itemStatus.foundAt = event.block.timestamp
-  itemStatus.foundTx = event.transaction.hash
-  itemStatus.lastUpdated = event.block.timestamp
-  itemStatus.foundEvent = entity.id
-  itemStatus.save()
+  // Update Status entity
+  let statusEntity = getOrCreateStatus(event.params.item)
+  statusEntity.status = "found"
+  statusEntity.finder = event.params.finder // Track who found the item
+  statusEntity.foundAt = event.block.timestamp
+  statusEntity.foundTx = event.transaction.hash
+  statusEntity.lastUpdated = event.block.timestamp
+  statusEntity.foundEvent = entity.id
+  statusEntity.save()
 }
 
 export function handleItemLost(event: ItemLostEvent): void {
@@ -135,17 +135,17 @@ export function handleItemLost(event: ItemLostEvent): void {
 
   entity.save()
   
-  // Update ItemStatus entity
-  let itemStatus = getOrCreateItemStatus(event.params.item)
-  itemStatus.status = "lost"
-  itemStatus.geoLocation = event.params.geoLocation
-  itemStatus.latitude = coords[0]
-  itemStatus.longitude = coords[1]
-  itemStatus.lostAt = event.block.timestamp
-  itemStatus.lostTx = event.transaction.hash
-  itemStatus.lastUpdated = event.block.timestamp
-  itemStatus.lostEvent = entity.id
-  itemStatus.save()
+  // Update Status entity
+  let statusEntity = getOrCreateStatus(event.params.item)
+  statusEntity.status = "lost"
+  statusEntity.geoLocation = event.params.geoLocation
+  statusEntity.latitude = coords[0]
+  statusEntity.longitude = coords[1]
+  statusEntity.lostAt = event.block.timestamp
+  statusEntity.lostTx = event.transaction.hash
+  statusEntity.lastUpdated = event.block.timestamp
+  statusEntity.lostEvent = entity.id
+  statusEntity.save()
 }
 
 export function handleItemRegistered(event: ItemRegisteredEvent): void {
@@ -162,16 +162,16 @@ export function handleItemRegistered(event: ItemRegisteredEvent): void {
 
   entity.save()
   
-  // Create ItemStatus entity
-  let itemStatus = getOrCreateItemStatus(event.params.item)
-  itemStatus.owner = event.params.owner
-  itemStatus.hash = event.params.hash
-  itemStatus.status = "registered"
-  itemStatus.registeredAt = event.block.timestamp
-  itemStatus.registeredTx = event.transaction.hash
-  itemStatus.lastUpdated = event.block.timestamp
-  itemStatus.registeredEvent = entity.id
-  itemStatus.save()
+  // Create Status entity
+  let statusEntity = getOrCreateStatus(event.params.item)
+  statusEntity.owner = event.params.owner
+  statusEntity.hash = event.params.hash
+  statusEntity.status = "registered"
+  statusEntity.registeredAt = event.block.timestamp
+  statusEntity.registeredTx = event.transaction.hash
+  statusEntity.lastUpdated = event.block.timestamp
+  statusEntity.registeredEvent = entity.id
+  statusEntity.save()
 }
 
 export function handleItemReturned(event: ItemReturnedEvent): void {
@@ -188,14 +188,14 @@ export function handleItemReturned(event: ItemReturnedEvent): void {
 
   entity.save()
   
-  // Update ItemStatus entity
-  let itemStatus = getOrCreateItemStatus(event.params.item)
-  itemStatus.status = "returned"
-  itemStatus.returnedAt = event.block.timestamp
-  itemStatus.returnedTx = event.transaction.hash
-  itemStatus.lastUpdated = event.block.timestamp
-  itemStatus.returnedEvent = entity.id
-  itemStatus.save()
+  // Update Status entity
+  let statusEntity = getOrCreateStatus(event.params.item)
+  statusEntity.status = "returned"
+  statusEntity.returnedAt = event.block.timestamp
+  statusEntity.returnedTx = event.transaction.hash
+  statusEntity.lastUpdated = event.block.timestamp
+  statusEntity.returnedEvent = entity.id
+  statusEntity.save()
 }
 
 export function handleOwnershipTransferred(

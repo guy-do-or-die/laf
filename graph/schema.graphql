@@ -63,7 +63,7 @@ type ItemReturned @entity(immutable: true) {
 }
 
 # Enhanced entity to track current item status efficiently
-type ItemStatus @entity(immutable: false) {
+type Status @entity(immutable: false) {
   id: Bytes! # item contract address
   item: Bytes! # item contract address
   owner: Bytes! # original owner

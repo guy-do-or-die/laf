@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react';
 
 const messages = [
     "making lost things found",
-    "turning loss into hope",
     "bringing people together",
     "creating happy endings",
+    "turning loss into hope",
     "spreading kindness",
+    "raising chances",
     "building trust"
 ];
 

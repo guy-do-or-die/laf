@@ -19,6 +19,5 @@ ignore = ["contracts/lib/signature-validator/contracts/EIP6492.sol"]
 
 remappings = [
     '@openzeppelin/=contracts/lib/openzeppelin-contracts/',
-    '@signature-validator/=contracts/lib/signature-validator/',
     'forge-std/=contracts/lib/forge-std/src/'
 ]

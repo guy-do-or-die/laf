@@ -8,9 +8,9 @@ dataSources:
     name: LAF
     network: base-sepolia
     source:
-      address: "0xd92e65585f5d69e2d9e955ee2d19ef77c0698801"
+      address: "0x9bc899f84588844d16ef867053abecd13fd68f14"
       abi: LAF
-      startBlock: 28647756
+      startBlock: 28844988
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.9
@@ -22,7 +22,7 @@ dataSources:
         - ItemLost
         - ItemRegistered
         - ItemReturned
-        - ItemStatus
+        - Status
         - OwnershipTransferred
         - TransferBatch
         - TransferSingle

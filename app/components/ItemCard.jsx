@@ -12,7 +12,8 @@ import TxButton from "./TxButton";
 import { MessageButton } from "./MessageButton";
 
 import { useAccount } from '../wallet';
-import { itemAbi, useSimulateLafReturned, useWriteLafReturned } from '../contracts';
+import { lafItemAbi, useSimulateLafReturned, useWriteLafReturned } from '../contracts';
+import { ItemStatus, getStatusName } from '../constants/itemStatus';
 import { useSmartWalletSimulateHook, useSmartWalletWriteHook } from '../wallet';
 
 
@@ -27,42 +28,32 @@ export default function ItemCard({ hash, address }) {
         contracts: [
             {
                 address: address,
-                abi: itemAbi,
+                abi: lafItemAbi,
                 functionName: 'comment',
             },
             {
                 address: address,
-                abi: itemAbi,
-                functionName: 'isLost',
+                abi: lafItemAbi,
+                functionName: 'status',
             },
             {
                 address: address,
-                abi: itemAbi,
-                functionName: 'isFound',
-            },
-            {
-                address: address,
-                abi: itemAbi,
-                functionName: 'isReturned',
-            },
-            {
-                address: address,
-                abi: itemAbi,
+                abi: lafItemAbi,
                 functionName: 'geo',
             },
             {
                 address: address,
-                abi: itemAbi,
+                abi: lafItemAbi,
                 functionName: 'reward',
             },
             {
                 address: address,
-                abi: itemAbi,
+                abi: lafItemAbi,
                 functionName: 'finder',
             },
             {
                 address: address,
-                abi: itemAbi,
+                abi: lafItemAbi,
                 functionName: 'owner',
             },
         ],
@@ -71,15 +62,18 @@ export default function ItemCard({ hash, address }) {
 
     useEffect(() => {
         if (readData) {
+          const status = readData[1].result;
+
           setItemData({
             comment: readData[0].result,
-            isLost: readData[1].result,
-            isFound: readData[2].result,
-            isReturned: readData[3].result,
-            geo: readData[4].result,
-            reward: readData[5].result,
-            finder: readData[6].result,
-            owner: readData[7].result,
+            status: status || ItemStatus.None,
+            isLost: status === ItemStatus.Lost,
+            isFound: status === ItemStatus.Found,
+            isReturned: status === ItemStatus.Returned,
+            geo: readData[2].result,
+            reward: readData[3].result,
+            finder: readData[4].result,
+            owner: readData[5].result,
           })
           setTimeout(() => setIsLoading(false), 100)
         }
@@ -95,39 +89,23 @@ export default function ItemCard({ hash, address }) {
         enabled: true
     }
 
-    const getStatus = () => {
-        if (itemData.isReturned) return 3;
-        if (itemData.isFound) return 2;
-        if (itemData.isLost) return 1;
-        return 0;
-    };
-    
-    const getStatusText = (status) => {
-        switch (status) {
-            case 0: return 'Registered';
-            case 1: return 'Lost';
-            case 2: return 'Found';
-            case 3: return 'Returned';
-            default: return 'Unknown';
-        }
-    };
-
     const getStatusColor = (status) => {
         switch (status) {
-            case 0: return 'bg-gray-100';
-            case 1: return 'bg-red-100';
-            case 2: return 'bg-yellow-100';
-            case 3: return 'bg-green-100';
+            case ItemStatus.None:
+            case ItemStatus.Registered: return 'bg-gray-100';
+            case ItemStatus.Lost: return 'bg-red-100';
+            case ItemStatus.Found: return 'bg-yellow-100';
+            case ItemStatus.Returned: return 'bg-green-100';
             default: return 'bg-gray-100';
         }
     };
 
     return (
-        <Card className={`${getStatusColor(getStatus())} w-full min-w-64 min-h-48`}>
+        <Card className={`${getStatusColor(itemData.status)} w-full min-w-64 min-h-48`}>
             <CardContent className="flex-1">
                 <h3 className="font-medium">{itemData.comment || 'Loading...'}</h3>
                 <p className="text-sm text-gray-500">
-                    {!isLoading && getStatusText(getStatus())}
+                    {!isLoading && getStatusName(itemData.status)}
                 </p>
                 {itemData.geo && (
                     <p className="text-sm text-gray-500">

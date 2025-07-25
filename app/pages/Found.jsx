@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams } from "wouter";
 
-import { hashMessage, recoverAddress, recoverMessageAddress } from 'viem';
+import { createCommitRevealSignature, validateSecretHash } from '../utils/secretUtils';
 
 import ItemCard from "../components/ItemCard";
 import TxButton from "../components/TxButton";
@@ -12,53 +12,28 @@ import { useAccount } from "../wallet";
 import { useUnifiedSigning } from "../hooks/useUnifiedSigning";
 import { useSmartWalletDeployment } from "../hooks/useSmartWalletDeployment";
 
-import { useReadLafItems, useSimulateLafFound, useWriteLafFound, useReadItemIsFound, useReadItemOwner } from "../contracts"
-import { useSmartWalletSimulateHook, useSmartWalletWriteHook } from "../wallet"
+import { useReadLafItems, useSimulateLafFound, useWriteLafFound, useReadLafItemStatus, useReadLafItemOwner, useReadLafItemCycle } from "../contracts"
+import { useSmartWalletSimulateHook, useSmartWalletWriteHook, chain } from "../wallet"
 import { useBlockContext } from '../contexts/BlockContext';
 
+import { isItemFound } from "../constants/itemStatus"
 
-const verifySignature = async (signature, secret, expectedAddress) => {
-    if (!signature || !secret || !expectedAddress) return false;
-    
-    try {
-        // Check if this is a smart wallet signature (longer than standard EOA)
-        const isSmartWalletSignature = signature.length > 132;
-        
-        if (isSmartWalletSignature) {
-            console.log('Smart wallet signature detected - deferring to contract validation');
-            return true; // Let contract handle ERC-1271 validation
-        }
-        
-        // For EOA signatures, verify directly against the secret
-        // The secret is already the original hex string that was signed
-        const recoveredSigner = await recoverAddress({
-            hash: hashMessage(secret), // Apply EIP-191 hashing to the original secret
-            signature: signature,
-        });
-        
-        // Handle both direct matches and smart wallet scenarios (signature from controlling EOA)
-        const isValid = recoveredSigner.toLowerCase() === expectedAddress.toLowerCase();
-        console.log(`Signature verification: ${isValid ? '✅ Valid' : '❌ Invalid'}`);
-        console.log(`Expected: ${expectedAddress}, Recovered: ${recoveredSigner}`);
-        console.log(`Secret used for verification: ${secret}`);
-        
-        return isValid;
-    } catch (error) {
-        console.error('Signature verification failed:', error);
-        return false;
-    }
-};
 
 export default function Found() {
-    // Debug: Auto-signing state tracking enabled
-    const { secretHash, secret, ownerSignature } = useParams();
+    const { secretHash, secret } = useParams();
+
+    // Reduced logging frequency
+    const shouldLog = useRef(0);
+    if (shouldLog.current % 50 === 0) {
+        console.log('🔍 Found component loaded with params:', { secretHash, secret });
+    }
+    shouldLog.current++;
 
     const { blockNumber } = useBlockContext();
 
     const { address, activeWalletType, loggedIn, signingMethod, hasSmartWallet, isSmartWalletDeployed } = useAccount();
-    const { signMessage, isReady: signingReady } = useUnifiedSigning();
+    const { isReady: signingReady } = useUnifiedSigning();
 
-    // Use the smart wallet deployment hook
     const { 
         deploymentNeeded, 
         isReady: walletReady, 
@@ -68,62 +43,37 @@ export default function Found() {
     
     const [finderSignature, setFinderSignature] = useState('');
     const [isSigningSecret, setIsSigningSecret] = useState(false);
-    const [ownerSignatureValid, setOwnerSignatureValid] = useState(null);
     const [autoSigningAttempted, setAutoSigningAttempted] = useState(false);
     const [isFound, setIsFound ] = useState(false);
     
-    // Ref to prevent double-invocation in StrictMode
-    const signingInProgressRef = useRef(false);
-    const signingAbortControllerRef = useRef(null);
-    
     const { data: itemAddress } = useReadLafItems({ args: [secretHash] });
-    const { data: ownerAddress } = useReadItemOwner({ address: itemAddress });
+    const { data: itemCycle } = useReadLafItemCycle({ address: itemAddress });
 
-    const { data: isFoundData } = useReadItemIsFound({ address: itemAddress, blockNumber });
+    const { data: itemStatus } = useReadLafItemStatus({ address: itemAddress, blockNumber });
+
+    // Reduced data logging
+    if (shouldLog.current % 100 === 0) {
+        console.log('📈 Found component data:', {
+            itemAddress,
+            itemCycle,
+            itemStatus,
+            blockNumber,
+            loggedIn,
+            walletReady,
+            isFound,
+            finderSignature: !!finderSignature,
+            autoSigningAttempted,
+            deploymentNeeded,
+            isDeploying
+        });
+    }
+    shouldLog.current++;
 
     useEffect(() => {
-        if (isFoundData) {
-            setIsFound(isFoundData);
+        if (itemStatus !== undefined) {
+            setIsFound(isItemFound(itemStatus));
         }
-    }, [isFoundData]);
-
-    // Validate owner signature when we have all required data
-    useEffect(() => {
-        const validateOwnerSignature = async () => {
-            // Owner signature validation doesn't depend on current user's wallet state
-            // It only needs the secret, signature, and owner address from the contract
-            if (!secret || !ownerSignature || !ownerAddress) {
-                console.log('Skipping owner signature validation - missing requirements:', {
-                    secret: !!secret,
-                    ownerSignature: !!ownerSignature,
-                    ownerAddress: !!ownerAddress
-                });
-                return;
-            }
-            
-            console.log('🔍 Validating owner signature...');
-            console.log('Secret:', secret);
-            console.log('Owner signature:', ownerSignature);
-            console.log('Owner address:', ownerAddress);
-            
-            try {
-                const isValid = await verifySignature(ownerSignature, secret, ownerAddress);
-                console.log('Owner signature validation result:', isValid);
-                setOwnerSignatureValid(isValid);
-                
-                if (isValid) {
-                    console.log('✅ Owner signature is valid');
-                } else {
-                    console.log('❌ Owner signature is invalid');
-                }
-            } catch (error) {
-                console.error('Error validating owner signature:', error);
-                setOwnerSignatureValid(false);
-            }
-        };
-        
-        validateOwnerSignature();
-    }, [secret, ownerSignature, ownerAddress]); 
+    }, [itemStatus]);
 
     // Manual signing function (based on Register.jsx pattern)
     const signSecretManually = async () => {
@@ -186,20 +136,28 @@ export default function Found() {
         setAutoSigningAttempted(true);
         
         try {
-            console.log('Starting finder signature process');
-            console.log('Secret to sign:', secret);
-            console.log('Final wallet type (enforced):', finalWalletType);
-            console.log('Final signing method (enforced):', finalSigningMethod);
             
-            // Sign using the enforced wallet type
-            const signature = await signMessage({ 
-                message: secret,
-                signingMethod: finalSigningMethod
-            });
+            if (!itemCycle) {
+                throw new Error('Item cycle not loaded yet');
+            }
             
-            console.log('✅ Finder signature created:', signature?.slice(0, 20) + '...');
-            setFinderSignature(signature);
-            notify('Secret signed successfully!', 'success', {id: "secret-signed"});
+            // Validate secret matches the expected secretHash
+            if (!validateSecretHash(secret, secretHash)) {
+                console.warn('⚠️ Secret validation failed - this may be an old QR code format');
+            }
+            
+            // Create signature using the utility function
+            const signatureHex = await createCommitRevealSignature(
+                secret,
+                secretHash,
+                address,
+                itemAddress,
+                itemCycle,
+                chain.id
+            );
+            
+            setFinderSignature(signatureHex);
+            notify('Secret signature created successfully!', 'success', {id: "secret-signed"});
             
         } catch (error) {
             console.error('❌ Signing failed:', error);
@@ -229,56 +187,16 @@ export default function Found() {
     // Include activeWalletType to retrigger when wallet state stabilizes after transition
     useEffect(() => {
         if (!isFound && !finderSignature && !isSigningSecret && !autoSigningAttempted && 
-            loggedIn && secret && ownerSignatureValid && walletReady) {
+            loggedIn && secret && walletReady) {
             console.log('✅ Wallet ready, attempting automatic signature...');
             console.log('Current wallet state:', { activeWalletType, address, hasSmartWallet });
             signSecretManually();
         }
-    }, [isFound, finderSignature, isSigningSecret, autoSigningAttempted, loggedIn, secret, ownerSignatureValid, walletReady, activeWalletType]);
-
-    // Critical validation function to prevent signature/sender mismatch
-    const validateSignatureBeforeCall = async () => {
-        if (!finderSignature || !address) return false;
-        
-        try {
-            // For smart wallet signatures, defer to contract validation
-            const isSmartWalletSignature = finderSignature.length > 132;
-            if (isSmartWalletSignature) {
-                console.log('✅ Smart wallet signature - deferring to contract validation');
-                return true;
-            }
-            
-            // For EOA signatures, validate they match current wallet
-            const recoveredAddress = await recoverMessageAddress({
-                message: secret,
-                signature: finderSignature,
-            });
-            
-            const isValid = recoveredAddress.toLowerCase() === address.toLowerCase();
-            
-            if (!isValid) {
-                console.error('❌ Signature mismatch detected!');
-                console.error('Signature from:', recoveredAddress);
-                console.error('Current wallet:', address);
-                
-                // Clear the invalid signature
-                setFinderSignature('');
-                notify('Signature mismatch detected. Please sign again with current wallet.', 'error');
-                return false;
-            }
-            
-            console.log('✅ Signature validation passed - signature matches current wallet');
-            return true;
-        } catch (error) {
-            console.error('❌ Signature validation failed:', error);
-            notify('Invalid signature. Please sign again.', 'error');
-            return false;
-        }
-    };
+    }, [isFound, finderSignature, isSigningSecret, autoSigningAttempted, loggedIn, secret, walletReady, activeWalletType]);
 
     const foundParams = {
-        args: [secretHash, secret, ownerSignature, finderSignature],
-        enabled: !isFound && finderSignature && ownerSignature && walletReady,
+        args: [secretHash, finderSignature],
+        enabled: !isFound && finderSignature && walletReady,
         confirmationCallback: ({ data, error }) => {
             if (!error && data) {
                 notify('The owner has been informed!', 'success', {id: "secret-found"});
@@ -290,26 +208,75 @@ export default function Found() {
 
     // Determine current status for streamlined UI
     const getStatus = () => {
-        if (!ownerSignature) return 'invalid_qr';
-        if (isFound) return 'already_found';
-        if (ownerSignatureValid === null) return 'validating';
-        if (!ownerSignatureValid) return 'invalid_signature';
+        const statusData = {
+            isFound,
+            finderSignature: !!finderSignature,
+            isSigningSecret,
+            autoSigningAttempted,
+            deploymentNeeded,
+            isDeploying,
+            walletReady,
+            loggedIn,
+            itemAddress: !!itemAddress
+        };
+        
+        if (isFound) {
+            console.log('🟢 Status: already_found', statusData);
+            return 'already_found';
+        }
         
         // Handle signing states more precisely
         if (!finderSignature) {
-            if (isSigningSecret) return 'signing';
+            if (isSigningSecret) {
+                console.log('🟡 Status: signing', statusData);
+                return 'signing';
+            }
             // If auto-signing was attempted but failed, show manual option
-            if (autoSigningAttempted) return 'need_signature';
+            if (autoSigningAttempted) {
+                console.log('🟠 Status: need_signature', statusData);
+                return 'need_signature';
+            }
             // If auto-signing hasn't been attempted yet, show signing in progress
+            console.log('🟡 Status: signing (auto-attempt pending)', statusData);
             return 'signing';
         }
         
-        if (deploymentNeeded && isDeploying) return 'deploying_wallet';
-        if (deploymentNeeded && !walletReady) return 'need_deployment';
+        if (deploymentNeeded && isDeploying) {
+            console.log('🔵 Status: deploying_wallet', statusData);
+            return 'deploying_wallet';
+        }
+        if (deploymentNeeded && !walletReady) {
+            console.log('🔴 Status: need_deployment', statusData);
+            return 'need_deployment';
+        }
+        console.log('🟢 Status: ready_to_confirm', statusData);
         return 'ready_to_confirm';
     };
     
     const status = getStatus();
+    
+    console.log('🎨 Found component rendering with status:', status);
+    
+    // Handle case where item is not found in contract
+    if (!itemAddress) {
+        console.log('⚠️ Item not found in contract for secretHash:', secretHash);
+        return (
+            <div className="flex flex-col items-center gap-8 p-4">
+                <h1 className="text-2xl font-bold">Item Not Found</h1>
+                <div className="w-full max-w-md space-y-4">
+                    <div className="border-0 p-6 rounded-xl shadow-lg backdrop-blur-sm bg-white/95">
+                        <h3 className="text-lg font-semibold mb-4 text-red-600">Item Not Registered</h3>
+                        <p className="text-sm text-gray-600 mb-4">
+                            This item has not been registered in the LAF system yet, or the QR code is invalid.
+                        </p>
+                        <p className="text-xs text-gray-500">
+                            Secret Hash: {secretHash}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        );
+    }
     
     return (
         <div className="flex flex-col items-center gap-8 p-4">
@@ -324,16 +291,6 @@ export default function Found() {
                 </div>
                 
                 <div className="border-0 p-6 rounded-xl shadow-lg backdrop-blur-sm bg-white/95">
-                    {status === 'invalid_qr' && (
-                        <>
-                            <h3 className="text-lg font-semibold mb-4 text-red-600">Invalid QR Code</h3>
-                            <p className="text-sm text-gray-600">
-                                This QR code doesn't contain the owner's signature. Please make sure you're scanning 
-                                a valid LAF QR code that was generated after the owner signed their secret.
-                            </p>
-                        </>
-                    )}
-                    
                     {status === 'already_found' && (
                         <>
                             <h3 className="text-lg font-semibold mb-4 text-blue-600">Item Already Found</h3>
@@ -343,28 +300,9 @@ export default function Found() {
                         </>
                     )}
                     
-                    {status === 'validating' && (
-                        <>
-                            <h3 className="text-lg font-semibold mb-4 text-yellow-600">Validating...</h3>
-                            <p className="text-sm text-gray-600">
-                                🔍 Validating owner signature...
-                            </p>
-                        </>
-                    )}
-                    
-                    {status === 'invalid_signature' && (
-                        <>
-                            <h3 className="text-lg font-semibold mb-4 text-red-600">Invalid Signature</h3>
-                            <p className="text-sm text-gray-600">
-                                ❌ Invalid owner signature - this QR code may be tampered with
-                            </p>
-                        </>
-                    )}
-                    
                     {status === 'signing' && (
                         <>
                             <h3 className="text-lg font-semibold mb-4 text-blue-600">Signing Secret...</h3>
-                            <p className="text-sm text-green-600 mb-2">✅ Owner signature verified</p>
                             <p className="text-sm text-yellow-600">🔄 Signing secret to prove you found the item...</p>
                         </>
                     )}
@@ -372,7 +310,6 @@ export default function Found() {
                     {status === 'need_signature' && (
                         <>
                             <h3 className="text-lg font-semibold mb-4 text-orange-600">Manual Signature Required</h3>
-                            <p className="text-sm text-green-600 mb-2">✅ Owner signature verified</p>
                             <p className="text-sm text-gray-600 mb-4">
                                 Auto-signing failed. Please sign the secret manually to prove you found the item.
                             </p>
@@ -391,7 +328,6 @@ export default function Found() {
                     {status === 'deploying_wallet' && (
                         <>
                             <h3 className="text-lg font-semibold mb-4 text-blue-600">Deploying Smart Wallet...</h3>
-                            <p className="text-sm text-green-600 mb-2">✅ Owner signature verified</p>
                             <p className="text-sm text-green-600 mb-2">✅ Finder signature completed</p>
                             <p className="text-sm text-yellow-600 mb-4">🚀 {statusMessage}</p>
                             <p className="text-sm text-gray-600">
@@ -403,7 +339,6 @@ export default function Found() {
                     {status === 'need_deployment' && (
                         <>
                             <h3 className="text-lg font-semibold mb-4 text-yellow-600">Preparing Smart Wallet...</h3>
-                            <p className="text-sm text-green-600 mb-2">✅ Owner signature verified</p>
                             <p className="text-sm text-green-600 mb-2">✅ Finder signature completed</p>
                             <p className="text-sm text-yellow-600 mb-4">⚠️ {statusMessage}</p>
                             <p className="text-sm text-gray-600">
@@ -415,7 +350,6 @@ export default function Found() {
                     {status === 'ready_to_confirm' && (
                         <>
                             <h3 className="text-lg font-semibold mb-4 text-green-600">Ready to Confirm!</h3>
-                            <p className="text-sm text-green-600 mb-2">✅ Owner signature verified</p>
                             <p className="text-sm text-green-600 mb-2">✅ Finder signature completed</p>
                             {activeWalletType === 'smart_wallet' && (
                                 <p className="text-sm text-green-600 mb-2">✅ Smart wallet ready</p>
