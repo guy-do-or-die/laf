@@ -15,8 +15,16 @@ contract DeployScript is Script {
         
         address rewardToken = vm.envAddress("REWARD_TOKEN_ADDRESS");
         require(rewardToken != address(0), "REWARD_TOKEN_ADDRESS not set in .env");
-        
-        laf = new LAF(rewardToken);
+
+        LAF.Charity memory charity = LAF.Charity({
+            active: true,
+            contractAddress: 0xd16713A5D4Eb7E3aAc9D2228eB72f6f7328FADBD,
+            title: "Protocol Guild",
+            url: "https://protocolguild.org",
+            donated: 0
+        });
+
+        laf = new LAF(rewardToken, charity);
         
         console2.log("LAF deployed at:", address(laf));
         console2.log("Reward token address:", rewardToken);

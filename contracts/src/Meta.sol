@@ -15,8 +15,9 @@ abstract contract Meta is ERC1155Supply, IERC2981 {
     uint256 constant FOUND = 3;
     uint256 constant RETURNED = 4;
     uint256 constant DELEGATED = 5;
-    uint256 constant UP = 6;
-    uint256 constant DOWN = 7;
+    uint256 constant SUPPORTED = 6;
+    uint256 constant UP = 7;
+    uint256 constant DOWN = 8;
 
     uint256 constant PIC_SIZE = 256;
 
@@ -27,7 +28,7 @@ abstract contract Meta is ERC1155Supply, IERC2981 {
     event Up(address indexed from, address indexed to);
     event Down(address indexed from, address indexed to);
 
-    function thumbUp(address account) public {
+    function thumbUp(address account) external {
         require(balanceOf(msg.sender, UP) > 0, "Insufficient UP token");
 
         _burn(msg.sender, UP, 1);
@@ -36,7 +37,7 @@ abstract contract Meta is ERC1155Supply, IERC2981 {
         emit Up(msg.sender, account);
     }
 
-    function thumbDown(address account) public {
+    function thumbDown(address account) external {
         require(balanceOf(msg.sender, UP) > 0, "Insufficient UP token");
 
         _burn(msg.sender, UP, 1);
@@ -70,6 +71,7 @@ abstract contract Meta is ERC1155Supply, IERC2981 {
         if (tokenId == FOUND) return (unicode"😎", "Found");
         if (tokenId == RETURNED) return (unicode"😇", "Returned");
         if (tokenId == DELEGATED) return (unicode"🧐", "Delegated");
+        if (tokenId == SUPPORTED) return (unicode"🤗", "Supported");
         if (tokenId == UP) return (unicode"👍", "Thumb Up");
         if (tokenId == DOWN) return (unicode"👎", "Thumb Down");
         return (unicode"🫥", "404");
