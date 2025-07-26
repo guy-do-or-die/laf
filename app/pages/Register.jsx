@@ -12,7 +12,7 @@ import TxButton from "../components/TxButton";
 import { Textarea } from "../components/ui/textarea";
 import { notify } from '../components/Notification';
 
-import { useSimulateLafRegisterItem, useWriteLafRegisterItem } from "../contracts"
+import { useSimulateLafRegister, useWriteLafRegister } from "../contracts"
 import { useSmartWalletSimulateHook, useSmartWalletWriteHook } from "../wallet"
 import { useAccount } from "../wallet"
 import { useSmartWalletDeployment } from "../hooks/useSmartWalletDeployment";
@@ -209,8 +209,8 @@ export default function Register() {
                 
                 <div className="flex flex-col gap-2 items-center">
                     <TxButton
-                        simulateHook={useSmartWalletSimulateHook(useSimulateLafRegisterItem)}
-                        writeHook={useSmartWalletWriteHook(useWriteLafRegisterItem)}
+                        simulateHook={useSmartWalletSimulateHook(useSimulateLafRegister)}
+                        writeHook={useSmartWalletWriteHook(useWriteLafRegister)}
                         params={registerParams}
                         text={isDeployingWallet ? "Preparing Smart Wallet..." : "Register Item"}
                         disabled={!walletReady || isDeployingWallet}

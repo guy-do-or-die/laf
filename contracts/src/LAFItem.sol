@@ -134,13 +134,11 @@ contract LAFItem is Config, Initializable, ReentrancyGuard {
 
         token.safeTransferFrom(owner, address(this), _rewardAmount);
 
-        reward = _rewardAmount;
-        geo = _geo;
+        _resetCycle(_rewardAmount, _geo);
 
         status = Status.Lost;
         statusUpdatedTs = block.timestamp;
 
-        _resetCycle();
     }
 
     /// @notice Mark the item as found by providing the correct secret
@@ -420,13 +418,20 @@ contract LAFItem is Config, Initializable, ReentrancyGuard {
     }
 
     /// @notice Reset the item state
-    function _resetCycle () internal {
-        reward = 0;
+    function _resetCycle(uint256 _rewardAmount, string calldata _geo) internal {
+        reward = _rewardAmount;
+        geo = _geo;
+
         supportReward = 0;
         immediateRewardPaid = 0;
+
         delegateFee = 0;
         detailsUpdatedTs = 0;
         delegateUpdatedTs = 0;
+
+        finder = address(0);
+        delegate = address(0);
+
         cycle++;
     }
 

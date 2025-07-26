@@ -34,8 +34,6 @@ library LAFErrors {
     error InvalidDelegateFee(uint256 fee, uint256 min, uint256 max);
     
     // === Signature Errors ===
-    error InvalidOwnerSignature();
-    error InvalidFinderSignature();
     error InvalidSecret();
     
     // === Charity Errors ===

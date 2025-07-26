@@ -109,7 +109,7 @@ contract LAF is ConfigOwnable, Meta, ReentrancyGuard {
     /// @notice Register a new item in the LAF system
     /// @param _secretHash Hash of the secret used to identify the item
     /// @param _comment Description or comment about the item
-    function registerItem(
+    function register(
         address _secretHash,
         string calldata _comment
     ) external

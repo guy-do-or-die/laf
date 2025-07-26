@@ -6,6 +6,615 @@ import {
 } from 'wagmi/codegen'
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// BaseTest
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const baseTestAbi = [
+  {
+    type: 'function',
+    inputs: [],
+    name: 'DEFAULT_COMMENT',
+    outputs: [{ name: '', internalType: 'string', type: 'string' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'DEFAULT_GEO',
+    outputs: [{ name: '', internalType: 'string', type: 'string' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'DEFAULT_REWARD',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'INITIAL_BALANCE',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'IS_TEST',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'supporter', internalType: 'address', type: 'address' },
+      { name: 'amount', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'addSupport',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'seconds_', internalType: 'uint256', type: 'uint256' }],
+    name: 'advanceTime',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'charity1',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'charity2',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'account', internalType: 'address', type: 'address' }],
+    name: 'checkBalance',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'secret', internalType: 'string', type: 'string' },
+      { name: 'privateKey', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'createSecretSignature',
+    outputs: [{ name: '', internalType: 'bytes', type: 'bytes' }],
+    stateMutability: 'pure',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'excludeArtifacts',
+    outputs: [
+      {
+        name: 'excludedArtifacts_',
+        internalType: 'string[]',
+        type: 'string[]',
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'excludeContracts',
+    outputs: [
+      {
+        name: 'excludedContracts_',
+        internalType: 'address[]',
+        type: 'address[]',
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'excludeSelectors',
+    outputs: [
+      {
+        name: 'excludedSelectors_',
+        internalType: 'struct StdInvariant.FuzzSelector[]',
+        type: 'tuple[]',
+        components: [
+          { name: 'addr', internalType: 'address', type: 'address' },
+          { name: 'selectors', internalType: 'bytes4[]', type: 'bytes4[]' },
+        ],
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'excludeSenders',
+    outputs: [
+      {
+        name: 'excludedSenders_',
+        internalType: 'address[]',
+        type: 'address[]',
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'selector', internalType: 'bytes4', type: 'bytes4' }],
+    name: 'expectRevertWithError',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'failed',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'finder',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'finderPrivateKey',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'getItemAddress',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'getItemStatus',
+    outputs: [{ name: '', internalType: 'enum LAFItem.Status', type: 'uint8' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'laf',
+    outputs: [{ name: '', internalType: 'contract LAF', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'malicious',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'maliciousPrivateKey',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'owner',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'ownerPrivateKey',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'itemOwner', internalType: 'address', type: 'address' },
+      { name: 'comment', internalType: 'string', type: 'string' },
+    ],
+    name: 'registerTestItem',
+    outputs: [
+      { name: 'itemAddress', internalType: 'address', type: 'address' },
+    ],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'itemOwner', internalType: 'address', type: 'address' },
+      { name: 'rewardAmount', internalType: 'uint256', type: 'uint256' },
+      { name: 'geoLocation', internalType: 'string', type: 'string' },
+    ],
+    name: 'reportItemLost',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'rewardToken',
+    outputs: [
+      { name: '', internalType: 'contract MockERC20', type: 'address' },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'setUp',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'supporter1',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'supporter2',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'targetArtifactSelectors',
+    outputs: [
+      {
+        name: 'targetedArtifactSelectors_',
+        internalType: 'struct StdInvariant.FuzzArtifactSelector[]',
+        type: 'tuple[]',
+        components: [
+          { name: 'artifact', internalType: 'string', type: 'string' },
+          { name: 'selectors', internalType: 'bytes4[]', type: 'bytes4[]' },
+        ],
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'targetArtifacts',
+    outputs: [
+      {
+        name: 'targetedArtifacts_',
+        internalType: 'string[]',
+        type: 'string[]',
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'targetContracts',
+    outputs: [
+      {
+        name: 'targetedContracts_',
+        internalType: 'address[]',
+        type: 'address[]',
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'targetInterfaces',
+    outputs: [
+      {
+        name: 'targetedInterfaces_',
+        internalType: 'struct StdInvariant.FuzzInterface[]',
+        type: 'tuple[]',
+        components: [
+          { name: 'addr', internalType: 'address', type: 'address' },
+          { name: 'artifacts', internalType: 'string[]', type: 'string[]' },
+        ],
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'targetSelectors',
+    outputs: [
+      {
+        name: 'targetedSelectors_',
+        internalType: 'struct StdInvariant.FuzzSelector[]',
+        type: 'tuple[]',
+        components: [
+          { name: 'addr', internalType: 'address', type: 'address' },
+          { name: 'selectors', internalType: 'bytes4[]', type: 'bytes4[]' },
+        ],
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'targetSenders',
+    outputs: [
+      {
+        name: 'targetedSenders_',
+        internalType: 'address[]',
+        type: 'address[]',
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'testSecret',
+    outputs: [{ name: '', internalType: 'string', type: 'string' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'testSecretHash',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'string', type: 'string', indexed: false },
+    ],
+    name: 'log',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'address', type: 'address', indexed: false },
+    ],
+    name: 'log_address',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'val',
+        internalType: 'uint256[]',
+        type: 'uint256[]',
+        indexed: false,
+      },
+    ],
+    name: 'log_array',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'val',
+        internalType: 'int256[]',
+        type: 'int256[]',
+        indexed: false,
+      },
+    ],
+    name: 'log_array',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'val',
+        internalType: 'address[]',
+        type: 'address[]',
+        indexed: false,
+      },
+    ],
+    name: 'log_array',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'bytes', type: 'bytes', indexed: false },
+    ],
+    name: 'log_bytes',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'bytes32', type: 'bytes32', indexed: false },
+    ],
+    name: 'log_bytes32',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'int256', type: 'int256', indexed: false },
+    ],
+    name: 'log_int',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'address', type: 'address', indexed: false },
+    ],
+    name: 'log_named_address',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      {
+        name: 'val',
+        internalType: 'uint256[]',
+        type: 'uint256[]',
+        indexed: false,
+      },
+    ],
+    name: 'log_named_array',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      {
+        name: 'val',
+        internalType: 'int256[]',
+        type: 'int256[]',
+        indexed: false,
+      },
+    ],
+    name: 'log_named_array',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      {
+        name: 'val',
+        internalType: 'address[]',
+        type: 'address[]',
+        indexed: false,
+      },
+    ],
+    name: 'log_named_array',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'bytes', type: 'bytes', indexed: false },
+    ],
+    name: 'log_named_bytes',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'bytes32', type: 'bytes32', indexed: false },
+    ],
+    name: 'log_named_bytes32',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'int256', type: 'int256', indexed: false },
+      {
+        name: 'decimals',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'log_named_decimal_int',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'uint256', type: 'uint256', indexed: false },
+      {
+        name: 'decimals',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'log_named_decimal_uint',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'int256', type: 'int256', indexed: false },
+    ],
+    name: 'log_named_int',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'string', type: 'string', indexed: false },
+    ],
+    name: 'log_named_string',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'uint256', type: 'uint256', indexed: false },
+    ],
+    name: 'log_named_uint',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'string', type: 'string', indexed: false },
+    ],
+    name: 'log_string',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'uint256', type: 'uint256', indexed: false },
+    ],
+    name: 'log_uint',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'bytes', type: 'bytes', indexed: false },
+    ],
+    name: 'logs',
+  },
+]
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Clones
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1021,6 +1630,1336 @@ export const erc20Address = {
 export const erc20Config = { address: erc20Address, abi: erc20Abi }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// EdgeCaseTests
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const edgeCaseTestsAbi = [
+  {
+    type: 'function',
+    inputs: [],
+    name: 'DEFAULT_COMMENT',
+    outputs: [{ name: '', internalType: 'string', type: 'string' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'DEFAULT_GEO',
+    outputs: [{ name: '', internalType: 'string', type: 'string' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'DEFAULT_REWARD',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'INITIAL_BALANCE',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'IS_TEST',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'supporter', internalType: 'address', type: 'address' },
+      { name: 'amount', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'addSupport',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'seconds_', internalType: 'uint256', type: 'uint256' }],
+    name: 'advanceTime',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'charity1',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'charity2',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'account', internalType: 'address', type: 'address' }],
+    name: 'checkBalance',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'secret', internalType: 'string', type: 'string' },
+      { name: 'privateKey', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'createSecretSignature',
+    outputs: [{ name: '', internalType: 'bytes', type: 'bytes' }],
+    stateMutability: 'pure',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'excludeArtifacts',
+    outputs: [
+      {
+        name: 'excludedArtifacts_',
+        internalType: 'string[]',
+        type: 'string[]',
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'excludeContracts',
+    outputs: [
+      {
+        name: 'excludedContracts_',
+        internalType: 'address[]',
+        type: 'address[]',
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'excludeSelectors',
+    outputs: [
+      {
+        name: 'excludedSelectors_',
+        internalType: 'struct StdInvariant.FuzzSelector[]',
+        type: 'tuple[]',
+        components: [
+          { name: 'addr', internalType: 'address', type: 'address' },
+          { name: 'selectors', internalType: 'bytes4[]', type: 'bytes4[]' },
+        ],
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'excludeSenders',
+    outputs: [
+      {
+        name: 'excludedSenders_',
+        internalType: 'address[]',
+        type: 'address[]',
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'selector', internalType: 'bytes4', type: 'bytes4' }],
+    name: 'expectRevertWithError',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'failed',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'finder',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'finderPrivateKey',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'getItemAddress',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'getItemStatus',
+    outputs: [{ name: '', internalType: 'enum LAFItem.Status', type: 'uint8' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'laf',
+    outputs: [{ name: '', internalType: 'contract LAF', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'malicious',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'maliciousPrivateKey',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'owner',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'ownerPrivateKey',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'itemOwner', internalType: 'address', type: 'address' },
+      { name: 'comment', internalType: 'string', type: 'string' },
+    ],
+    name: 'registerTestItem',
+    outputs: [
+      { name: 'itemAddress', internalType: 'address', type: 'address' },
+    ],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'itemOwner', internalType: 'address', type: 'address' },
+      { name: 'rewardAmount', internalType: 'uint256', type: 'uint256' },
+      { name: 'geoLocation', internalType: 'string', type: 'string' },
+    ],
+    name: 'reportItemLost',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'rewardToken',
+    outputs: [
+      { name: '', internalType: 'contract MockERC20', type: 'address' },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'setUp',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'supporter1',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'supporter2',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'targetArtifactSelectors',
+    outputs: [
+      {
+        name: 'targetedArtifactSelectors_',
+        internalType: 'struct StdInvariant.FuzzArtifactSelector[]',
+        type: 'tuple[]',
+        components: [
+          { name: 'artifact', internalType: 'string', type: 'string' },
+          { name: 'selectors', internalType: 'bytes4[]', type: 'bytes4[]' },
+        ],
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'targetArtifacts',
+    outputs: [
+      {
+        name: 'targetedArtifacts_',
+        internalType: 'string[]',
+        type: 'string[]',
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'targetContracts',
+    outputs: [
+      {
+        name: 'targetedContracts_',
+        internalType: 'address[]',
+        type: 'address[]',
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'targetInterfaces',
+    outputs: [
+      {
+        name: 'targetedInterfaces_',
+        internalType: 'struct StdInvariant.FuzzInterface[]',
+        type: 'tuple[]',
+        components: [
+          { name: 'addr', internalType: 'address', type: 'address' },
+          { name: 'artifacts', internalType: 'string[]', type: 'string[]' },
+        ],
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'targetSelectors',
+    outputs: [
+      {
+        name: 'targetedSelectors_',
+        internalType: 'struct StdInvariant.FuzzSelector[]',
+        type: 'tuple[]',
+        components: [
+          { name: 'addr', internalType: 'address', type: 'address' },
+          { name: 'selectors', internalType: 'bytes4[]', type: 'bytes4[]' },
+        ],
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'targetSenders',
+    outputs: [
+      {
+        name: 'targetedSenders_',
+        internalType: 'address[]',
+        type: 'address[]',
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'testSecret',
+    outputs: [{ name: '', internalType: 'string', type: 'string' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'testSecretHash',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'test_CommunitySupportEdgeCases',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'test_LostReportingEdgeCases',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'test_RegistrationEdgeCases',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'test_SignatureEdgeCases',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'test_StateTransitionEdgeCases',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'test_WithdrawalAndRevocationEdgeCases',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'string', type: 'string', indexed: false },
+    ],
+    name: 'log',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'address', type: 'address', indexed: false },
+    ],
+    name: 'log_address',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'val',
+        internalType: 'uint256[]',
+        type: 'uint256[]',
+        indexed: false,
+      },
+    ],
+    name: 'log_array',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'val',
+        internalType: 'int256[]',
+        type: 'int256[]',
+        indexed: false,
+      },
+    ],
+    name: 'log_array',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'val',
+        internalType: 'address[]',
+        type: 'address[]',
+        indexed: false,
+      },
+    ],
+    name: 'log_array',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'bytes', type: 'bytes', indexed: false },
+    ],
+    name: 'log_bytes',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'bytes32', type: 'bytes32', indexed: false },
+    ],
+    name: 'log_bytes32',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'int256', type: 'int256', indexed: false },
+    ],
+    name: 'log_int',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'address', type: 'address', indexed: false },
+    ],
+    name: 'log_named_address',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      {
+        name: 'val',
+        internalType: 'uint256[]',
+        type: 'uint256[]',
+        indexed: false,
+      },
+    ],
+    name: 'log_named_array',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      {
+        name: 'val',
+        internalType: 'int256[]',
+        type: 'int256[]',
+        indexed: false,
+      },
+    ],
+    name: 'log_named_array',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      {
+        name: 'val',
+        internalType: 'address[]',
+        type: 'address[]',
+        indexed: false,
+      },
+    ],
+    name: 'log_named_array',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'bytes', type: 'bytes', indexed: false },
+    ],
+    name: 'log_named_bytes',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'bytes32', type: 'bytes32', indexed: false },
+    ],
+    name: 'log_named_bytes32',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'int256', type: 'int256', indexed: false },
+      {
+        name: 'decimals',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'log_named_decimal_int',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'uint256', type: 'uint256', indexed: false },
+      {
+        name: 'decimals',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'log_named_decimal_uint',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'int256', type: 'int256', indexed: false },
+    ],
+    name: 'log_named_int',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'string', type: 'string', indexed: false },
+    ],
+    name: 'log_named_string',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'uint256', type: 'uint256', indexed: false },
+    ],
+    name: 'log_named_uint',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'string', type: 'string', indexed: false },
+    ],
+    name: 'log_string',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'uint256', type: 'uint256', indexed: false },
+    ],
+    name: 'log_uint',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'bytes', type: 'bytes', indexed: false },
+    ],
+    name: 'logs',
+  },
+]
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// EndToEndTests
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const endToEndTestsAbi = [
+  {
+    type: 'function',
+    inputs: [],
+    name: 'DEFAULT_COMMENT',
+    outputs: [{ name: '', internalType: 'string', type: 'string' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'DEFAULT_GEO',
+    outputs: [{ name: '', internalType: 'string', type: 'string' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'DEFAULT_REWARD',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'INITIAL_BALANCE',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'IS_TEST',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'supporter', internalType: 'address', type: 'address' },
+      { name: 'amount', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'addSupport',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'seconds_', internalType: 'uint256', type: 'uint256' }],
+    name: 'advanceTime',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'charity1',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'charity2',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'charity3',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'account', internalType: 'address', type: 'address' }],
+    name: 'checkBalance',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'secret', internalType: 'string', type: 'string' },
+      { name: 'privateKey', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'createSecretSignature',
+    outputs: [{ name: '', internalType: 'bytes', type: 'bytes' }],
+    stateMutability: 'pure',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'delegate',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'excludeArtifacts',
+    outputs: [
+      {
+        name: 'excludedArtifacts_',
+        internalType: 'string[]',
+        type: 'string[]',
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'excludeContracts',
+    outputs: [
+      {
+        name: 'excludedContracts_',
+        internalType: 'address[]',
+        type: 'address[]',
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'excludeSelectors',
+    outputs: [
+      {
+        name: 'excludedSelectors_',
+        internalType: 'struct StdInvariant.FuzzSelector[]',
+        type: 'tuple[]',
+        components: [
+          { name: 'addr', internalType: 'address', type: 'address' },
+          { name: 'selectors', internalType: 'bytes4[]', type: 'bytes4[]' },
+        ],
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'excludeSenders',
+    outputs: [
+      {
+        name: 'excludedSenders_',
+        internalType: 'address[]',
+        type: 'address[]',
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'selector', internalType: 'bytes4', type: 'bytes4' }],
+    name: 'expectRevertWithError',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'failed',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'finder',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'finderPrivateKey',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'getItemAddress',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'getItemStatus',
+    outputs: [{ name: '', internalType: 'enum LAFItem.Status', type: 'uint8' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'laf',
+    outputs: [{ name: '', internalType: 'contract LAF', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'malicious',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'maliciousPrivateKey',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'owner',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'ownerPrivateKey',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'itemOwner', internalType: 'address', type: 'address' },
+      { name: 'comment', internalType: 'string', type: 'string' },
+    ],
+    name: 'registerTestItem',
+    outputs: [
+      { name: 'itemAddress', internalType: 'address', type: 'address' },
+    ],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'itemOwner', internalType: 'address', type: 'address' },
+      { name: 'rewardAmount', internalType: 'uint256', type: 'uint256' },
+      { name: 'geoLocation', internalType: 'string', type: 'string' },
+    ],
+    name: 'reportItemLost',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'rewardToken',
+    outputs: [
+      { name: '', internalType: 'contract MockERC20', type: 'address' },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'setUp',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'supporter1',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'supporter2',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'supporter3',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'targetArtifactSelectors',
+    outputs: [
+      {
+        name: 'targetedArtifactSelectors_',
+        internalType: 'struct StdInvariant.FuzzArtifactSelector[]',
+        type: 'tuple[]',
+        components: [
+          { name: 'artifact', internalType: 'string', type: 'string' },
+          { name: 'selectors', internalType: 'bytes4[]', type: 'bytes4[]' },
+        ],
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'targetArtifacts',
+    outputs: [
+      {
+        name: 'targetedArtifacts_',
+        internalType: 'string[]',
+        type: 'string[]',
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'targetContracts',
+    outputs: [
+      {
+        name: 'targetedContracts_',
+        internalType: 'address[]',
+        type: 'address[]',
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'targetInterfaces',
+    outputs: [
+      {
+        name: 'targetedInterfaces_',
+        internalType: 'struct StdInvariant.FuzzInterface[]',
+        type: 'tuple[]',
+        components: [
+          { name: 'addr', internalType: 'address', type: 'address' },
+          { name: 'artifacts', internalType: 'string[]', type: 'string[]' },
+        ],
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'targetSelectors',
+    outputs: [
+      {
+        name: 'targetedSelectors_',
+        internalType: 'struct StdInvariant.FuzzSelector[]',
+        type: 'tuple[]',
+        components: [
+          { name: 'addr', internalType: 'address', type: 'address' },
+          { name: 'selectors', internalType: 'bytes4[]', type: 'bytes4[]' },
+        ],
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'targetSenders',
+    outputs: [
+      {
+        name: 'targetedSenders_',
+        internalType: 'address[]',
+        type: 'address[]',
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'testSecret',
+    outputs: [{ name: '', internalType: 'string', type: 'string' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'testSecretHash',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'test_E2E_CompleteHappyPathJourney',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'test_E2E_ComprehensiveTestSuite',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'test_E2E_CrossPlatformWalletCompatibility',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'test_E2E_ErrorRecoveryAndResilience',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'test_E2E_MultiActorConcurrentScenario',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'test_E2E_ProductionLikeStressTest',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'test_E2E_RealWorldTimingAndGas',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'string', type: 'string', indexed: false },
+    ],
+    name: 'log',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'address', type: 'address', indexed: false },
+    ],
+    name: 'log_address',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'val',
+        internalType: 'uint256[]',
+        type: 'uint256[]',
+        indexed: false,
+      },
+    ],
+    name: 'log_array',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'val',
+        internalType: 'int256[]',
+        type: 'int256[]',
+        indexed: false,
+      },
+    ],
+    name: 'log_array',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'val',
+        internalType: 'address[]',
+        type: 'address[]',
+        indexed: false,
+      },
+    ],
+    name: 'log_array',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'bytes', type: 'bytes', indexed: false },
+    ],
+    name: 'log_bytes',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'bytes32', type: 'bytes32', indexed: false },
+    ],
+    name: 'log_bytes32',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'int256', type: 'int256', indexed: false },
+    ],
+    name: 'log_int',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'address', type: 'address', indexed: false },
+    ],
+    name: 'log_named_address',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      {
+        name: 'val',
+        internalType: 'uint256[]',
+        type: 'uint256[]',
+        indexed: false,
+      },
+    ],
+    name: 'log_named_array',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      {
+        name: 'val',
+        internalType: 'int256[]',
+        type: 'int256[]',
+        indexed: false,
+      },
+    ],
+    name: 'log_named_array',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      {
+        name: 'val',
+        internalType: 'address[]',
+        type: 'address[]',
+        indexed: false,
+      },
+    ],
+    name: 'log_named_array',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'bytes', type: 'bytes', indexed: false },
+    ],
+    name: 'log_named_bytes',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'bytes32', type: 'bytes32', indexed: false },
+    ],
+    name: 'log_named_bytes32',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'int256', type: 'int256', indexed: false },
+      {
+        name: 'decimals',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'log_named_decimal_int',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'uint256', type: 'uint256', indexed: false },
+      {
+        name: 'decimals',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'log_named_decimal_uint',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'int256', type: 'int256', indexed: false },
+    ],
+    name: 'log_named_int',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'string', type: 'string', indexed: false },
+    ],
+    name: 'log_named_string',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'uint256', type: 'uint256', indexed: false },
+    ],
+    name: 'log_named_uint',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'string', type: 'string', indexed: false },
+    ],
+    name: 'log_string',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'uint256', type: 'uint256', indexed: false },
+    ],
+    name: 'log_uint',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'bytes', type: 'bytes', indexed: false },
+    ],
+    name: 'logs',
+  },
+]
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Errors
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1039,6 +2978,678 @@ export const errorsAbi = [
     type: 'error',
     inputs: [{ name: '', internalType: 'address', type: 'address' }],
     name: 'MissingPrecompile',
+  },
+]
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// GasOptimizationTests
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const gasOptimizationTestsAbi = [
+  {
+    type: 'function',
+    inputs: [],
+    name: 'DEFAULT_COMMENT',
+    outputs: [{ name: '', internalType: 'string', type: 'string' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'DEFAULT_GEO',
+    outputs: [{ name: '', internalType: 'string', type: 'string' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'DEFAULT_REWARD',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'INITIAL_BALANCE',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'IS_TEST',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'supporter', internalType: 'address', type: 'address' },
+      { name: 'amount', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'addSupport',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'seconds_', internalType: 'uint256', type: 'uint256' }],
+    name: 'advanceTime',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'charity1',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'charity2',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'account', internalType: 'address', type: 'address' }],
+    name: 'checkBalance',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'secret', internalType: 'string', type: 'string' },
+      { name: 'privateKey', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'createSecretSignature',
+    outputs: [{ name: '', internalType: 'bytes', type: 'bytes' }],
+    stateMutability: 'pure',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'excludeArtifacts',
+    outputs: [
+      {
+        name: 'excludedArtifacts_',
+        internalType: 'string[]',
+        type: 'string[]',
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'excludeContracts',
+    outputs: [
+      {
+        name: 'excludedContracts_',
+        internalType: 'address[]',
+        type: 'address[]',
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'excludeSelectors',
+    outputs: [
+      {
+        name: 'excludedSelectors_',
+        internalType: 'struct StdInvariant.FuzzSelector[]',
+        type: 'tuple[]',
+        components: [
+          { name: 'addr', internalType: 'address', type: 'address' },
+          { name: 'selectors', internalType: 'bytes4[]', type: 'bytes4[]' },
+        ],
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'excludeSenders',
+    outputs: [
+      {
+        name: 'excludedSenders_',
+        internalType: 'address[]',
+        type: 'address[]',
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'selector', internalType: 'bytes4', type: 'bytes4' }],
+    name: 'expectRevertWithError',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'failed',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'finder',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'finderPrivateKey',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'getItemAddress',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'getItemStatus',
+    outputs: [{ name: '', internalType: 'enum LAFItem.Status', type: 'uint8' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'laf',
+    outputs: [{ name: '', internalType: 'contract LAF', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'malicious',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'maliciousPrivateKey',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'owner',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'ownerPrivateKey',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'itemOwner', internalType: 'address', type: 'address' },
+      { name: 'comment', internalType: 'string', type: 'string' },
+    ],
+    name: 'registerTestItem',
+    outputs: [
+      { name: 'itemAddress', internalType: 'address', type: 'address' },
+    ],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'itemOwner', internalType: 'address', type: 'address' },
+      { name: 'rewardAmount', internalType: 'uint256', type: 'uint256' },
+      { name: 'geoLocation', internalType: 'string', type: 'string' },
+    ],
+    name: 'reportItemLost',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'rewardToken',
+    outputs: [
+      { name: '', internalType: 'contract MockERC20', type: 'address' },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'setUp',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'supporter1',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'supporter2',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'targetArtifactSelectors',
+    outputs: [
+      {
+        name: 'targetedArtifactSelectors_',
+        internalType: 'struct StdInvariant.FuzzArtifactSelector[]',
+        type: 'tuple[]',
+        components: [
+          { name: 'artifact', internalType: 'string', type: 'string' },
+          { name: 'selectors', internalType: 'bytes4[]', type: 'bytes4[]' },
+        ],
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'targetArtifacts',
+    outputs: [
+      {
+        name: 'targetedArtifacts_',
+        internalType: 'string[]',
+        type: 'string[]',
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'targetContracts',
+    outputs: [
+      {
+        name: 'targetedContracts_',
+        internalType: 'address[]',
+        type: 'address[]',
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'targetInterfaces',
+    outputs: [
+      {
+        name: 'targetedInterfaces_',
+        internalType: 'struct StdInvariant.FuzzInterface[]',
+        type: 'tuple[]',
+        components: [
+          { name: 'addr', internalType: 'address', type: 'address' },
+          { name: 'artifacts', internalType: 'string[]', type: 'string[]' },
+        ],
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'targetSelectors',
+    outputs: [
+      {
+        name: 'targetedSelectors_',
+        internalType: 'struct StdInvariant.FuzzSelector[]',
+        type: 'tuple[]',
+        components: [
+          { name: 'addr', internalType: 'address', type: 'address' },
+          { name: 'selectors', internalType: 'bytes4[]', type: 'bytes4[]' },
+        ],
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'targetSenders',
+    outputs: [
+      {
+        name: 'targetedSenders_',
+        internalType: 'address[]',
+        type: 'address[]',
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'testSecret',
+    outputs: [{ name: '', internalType: 'string', type: 'string' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'testSecretHash',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'test_BatchOperationsGasEfficiency',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'test_CompleteUserJourneyGasUsage',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'test_FoundReportingGasUsage',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'test_LostReportingGasUsage',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'test_RegistrationGasUsage',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'test_ReturnedGasUsage',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'test_RevokeLostGasUsage',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'test_SupportGasUsage',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'test_WithdrawGasUsage',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'string', type: 'string', indexed: false },
+    ],
+    name: 'log',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'address', type: 'address', indexed: false },
+    ],
+    name: 'log_address',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'val',
+        internalType: 'uint256[]',
+        type: 'uint256[]',
+        indexed: false,
+      },
+    ],
+    name: 'log_array',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'val',
+        internalType: 'int256[]',
+        type: 'int256[]',
+        indexed: false,
+      },
+    ],
+    name: 'log_array',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'val',
+        internalType: 'address[]',
+        type: 'address[]',
+        indexed: false,
+      },
+    ],
+    name: 'log_array',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'bytes', type: 'bytes', indexed: false },
+    ],
+    name: 'log_bytes',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'bytes32', type: 'bytes32', indexed: false },
+    ],
+    name: 'log_bytes32',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'int256', type: 'int256', indexed: false },
+    ],
+    name: 'log_int',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'address', type: 'address', indexed: false },
+    ],
+    name: 'log_named_address',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      {
+        name: 'val',
+        internalType: 'uint256[]',
+        type: 'uint256[]',
+        indexed: false,
+      },
+    ],
+    name: 'log_named_array',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      {
+        name: 'val',
+        internalType: 'int256[]',
+        type: 'int256[]',
+        indexed: false,
+      },
+    ],
+    name: 'log_named_array',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      {
+        name: 'val',
+        internalType: 'address[]',
+        type: 'address[]',
+        indexed: false,
+      },
+    ],
+    name: 'log_named_array',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'bytes', type: 'bytes', indexed: false },
+    ],
+    name: 'log_named_bytes',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'bytes32', type: 'bytes32', indexed: false },
+    ],
+    name: 'log_named_bytes32',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'int256', type: 'int256', indexed: false },
+      {
+        name: 'decimals',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'log_named_decimal_int',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'uint256', type: 'uint256', indexed: false },
+      {
+        name: 'decimals',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'log_named_decimal_uint',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'int256', type: 'int256', indexed: false },
+    ],
+    name: 'log_named_int',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'string', type: 'string', indexed: false },
+    ],
+    name: 'log_named_string',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'uint256', type: 'uint256', indexed: false },
+    ],
+    name: 'log_named_uint',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'string', type: 'string', indexed: false },
+    ],
+    name: 'log_string',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'uint256', type: 'uint256', indexed: false },
+    ],
+    name: 'log_uint',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'bytes', type: 'bytes', indexed: false },
+    ],
+    name: 'logs',
   },
 ]
 
@@ -2706,142 +5317,111 @@ export const initializableAbi = [
 ]
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Item
+// IntegrationTests
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-export const itemAbi = [
-  { type: 'constructor', inputs: [], stateMutability: 'nonpayable' },
+export const integrationTestsAbi = [
   {
     type: 'function',
     inputs: [],
-    name: 'BASIS_POINTS',
-    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
-    stateMutability: 'view',
-  },
-  {
-    type: 'function',
-    inputs: [],
-    name: 'DAY',
-    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
-    stateMutability: 'view',
-  },
-  {
-    type: 'function',
-    inputs: [],
-    name: 'MAX_CHARITY_FEE_BPS',
-    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
-    stateMutability: 'view',
-  },
-  {
-    type: 'function',
-    inputs: [],
-    name: 'MAX_DELEGATE_FEE_BPS',
-    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
-    stateMutability: 'view',
-  },
-  {
-    type: 'function',
-    inputs: [],
-    name: 'MAX_FEE_BPS',
-    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
-    stateMutability: 'view',
-  },
-  {
-    type: 'function',
-    inputs: [],
-    name: 'MAX_IMMEDIATE_REWARD_BPS',
-    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
-    stateMutability: 'view',
-  },
-  {
-    type: 'function',
-    inputs: [],
-    name: 'MAX_NON_RETURN_REWARD_BPS',
-    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
-    stateMutability: 'view',
-  },
-  {
-    type: 'function',
-    inputs: [],
-    name: 'MIN_CHARITY_FEE_BPS',
-    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
-    stateMutability: 'view',
-  },
-  {
-    type: 'function',
-    inputs: [],
-    name: 'MIN_DELEGATE_FEE_BPS',
-    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
-    stateMutability: 'view',
-  },
-  {
-    type: 'function',
-    inputs: [],
-    name: 'MIN_FEE_BPS',
-    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
-    stateMutability: 'view',
-  },
-  {
-    type: 'function',
-    inputs: [],
-    name: 'MIN_IMMEDIATE_REWARD_BPS',
-    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
-    stateMutability: 'view',
-  },
-  {
-    type: 'function',
-    inputs: [],
-    name: 'MIN_NON_RETURN_REWARD_BPS',
-    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
-    stateMutability: 'view',
-  },
-  {
-    type: 'function',
-    inputs: [],
-    name: 'MONTH',
-    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
-    stateMutability: 'view',
-  },
-  {
-    type: 'function',
-    inputs: [],
-    name: 'WEEK',
-    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
-    stateMutability: 'view',
-  },
-  {
-    type: 'function',
-    inputs: [],
-    name: 'YEAR',
-    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
-    stateMutability: 'view',
-  },
-  {
-    type: 'function',
-    inputs: [],
-    name: 'comment',
+    name: 'DEFAULT_COMMENT',
     outputs: [{ name: '', internalType: 'string', type: 'string' }],
     stateMutability: 'view',
   },
   {
     type: 'function',
     inputs: [],
-    name: 'config',
+    name: 'DEFAULT_GEO',
+    outputs: [{ name: '', internalType: 'string', type: 'string' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'DEFAULT_REWARD',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'INITIAL_BALANCE',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'IS_TEST',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'supporter', internalType: 'address', type: 'address' },
+      { name: 'amount', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'addSupport',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'seconds_', internalType: 'uint256', type: 'uint256' }],
+    name: 'advanceTime',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'charity1',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'charity2',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'account', internalType: 'address', type: 'address' }],
+    name: 'checkBalance',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'secret', internalType: 'string', type: 'string' },
+      { name: 'privateKey', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'createSecretSignature',
+    outputs: [{ name: '', internalType: 'bytes', type: 'bytes' }],
+    stateMutability: 'pure',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'daiToken',
     outputs: [
-      { name: 'rewardToken', internalType: 'address', type: 'address' },
-      { name: 'minReward', internalType: 'uint256', type: 'uint256' },
-      { name: 'minCharityFeeBps', internalType: 'uint256', type: 'uint256' },
-      { name: 'minFeeBps', internalType: 'uint256', type: 'uint256' },
-      { name: 'immediateRewardBps', internalType: 'uint256', type: 'uint256' },
-      { name: 'nonReturnRewardBps', internalType: 'uint256', type: 'uint256' },
-      { name: 'foundCooldown', internalType: 'uint256', type: 'uint256' },
-      { name: 'returnCooldown', internalType: 'uint256', type: 'uint256' },
-      { name: 'revokeLostCooldown', internalType: 'uint256', type: 'uint256' },
-      { name: 'nonReturnCooldown', internalType: 'uint256', type: 'uint256' },
+      { name: '', internalType: 'contract MockERC20', type: 'address' },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'excludeArtifacts',
+    outputs: [
       {
-        name: 'nonReturnGracePeriod',
-        internalType: 'uint256',
-        type: 'uint256',
+        name: 'excludedArtifacts_',
+        internalType: 'string[]',
+        type: 'string[]',
       },
     ],
     stateMutability: 'view',
@@ -2849,43 +5429,58 @@ export const itemAbi = [
   {
     type: 'function',
     inputs: [],
-    name: 'cycle',
-    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    name: 'excludeContracts',
+    outputs: [
+      {
+        name: 'excludedContracts_',
+        internalType: 'address[]',
+        type: 'address[]',
+      },
+    ],
     stateMutability: 'view',
   },
   {
     type: 'function',
     inputs: [],
-    name: 'delegate',
-    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    name: 'excludeSelectors',
+    outputs: [
+      {
+        name: 'excludedSelectors_',
+        internalType: 'struct StdInvariant.FuzzSelector[]',
+        type: 'tuple[]',
+        components: [
+          { name: 'addr', internalType: 'address', type: 'address' },
+          { name: 'selectors', internalType: 'bytes4[]', type: 'bytes4[]' },
+        ],
+      },
+    ],
     stateMutability: 'view',
   },
   {
     type: 'function',
     inputs: [],
-    name: 'delegateFee',
-    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    name: 'excludeSenders',
+    outputs: [
+      {
+        name: 'excludedSenders_',
+        internalType: 'address[]',
+        type: 'address[]',
+      },
+    ],
     stateMutability: 'view',
   },
   {
     type: 'function',
-    inputs: [],
-    name: 'delegateUpdatedTs',
-    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
-    stateMutability: 'view',
+    inputs: [{ name: 'selector', internalType: 'bytes4', type: 'bytes4' }],
+    name: 'expectRevertWithError',
+    outputs: [],
+    stateMutability: 'nonpayable',
   },
   {
     type: 'function',
     inputs: [],
-    name: 'detailsUpdatedTs',
-    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
-    stateMutability: 'view',
-  },
-  {
-    type: 'function',
-    inputs: [],
-    name: 'factory',
-    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    name: 'failed',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
     stateMutability: 'view',
   },
   {
@@ -2897,89 +5492,45 @@ export const itemAbi = [
   },
   {
     type: 'function',
-    inputs: [{ name: '_finder', internalType: 'address', type: 'address' }],
-    name: 'found',
-    outputs: [],
-    stateMutability: 'nonpayable',
-  },
-  {
-    type: 'function',
     inputs: [],
-    name: 'geo',
-    outputs: [{ name: '', internalType: 'string', type: 'string' }],
+    name: 'finderPrivateKey',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
     stateMutability: 'view',
   },
   {
     type: 'function',
-    inputs: [
-      { name: '_owner', internalType: 'address', type: 'address' },
-      { name: '_secretHash', internalType: 'address', type: 'address' },
-      { name: '_comment', internalType: 'string', type: 'string' },
-      {
-        name: '_config',
-        internalType: 'struct Config.ConfigData',
-        type: 'tuple',
-        components: [
-          { name: 'rewardToken', internalType: 'address', type: 'address' },
-          { name: 'minReward', internalType: 'uint256', type: 'uint256' },
-          {
-            name: 'minCharityFeeBps',
-            internalType: 'uint256',
-            type: 'uint256',
-          },
-          { name: 'minFeeBps', internalType: 'uint256', type: 'uint256' },
-          {
-            name: 'immediateRewardBps',
-            internalType: 'uint256',
-            type: 'uint256',
-          },
-          {
-            name: 'nonReturnRewardBps',
-            internalType: 'uint256',
-            type: 'uint256',
-          },
-          { name: 'foundCooldown', internalType: 'uint256', type: 'uint256' },
-          { name: 'returnCooldown', internalType: 'uint256', type: 'uint256' },
-          {
-            name: 'revokeLostCooldown',
-            internalType: 'uint256',
-            type: 'uint256',
-          },
-          {
-            name: 'nonReturnCooldown',
-            internalType: 'uint256',
-            type: 'uint256',
-          },
-          {
-            name: 'nonReturnGracePeriod',
-            internalType: 'uint256',
-            type: 'uint256',
-          },
-        ],
-      },
-    ],
-    name: 'initialize',
-    outputs: [],
-    stateMutability: 'nonpayable',
+    inputs: [],
+    name: 'getItemAddress',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
   },
   {
     type: 'function',
-    inputs: [
-      { name: '_rewardAmount', internalType: 'uint256', type: 'uint256' },
-      { name: '_geo', internalType: 'string', type: 'string' },
-    ],
-    name: 'lost',
-    outputs: [],
-    stateMutability: 'nonpayable',
+    inputs: [],
+    name: 'getItemStatus',
+    outputs: [{ name: '', internalType: 'enum LAFItem.Status', type: 'uint8' }],
+    stateMutability: 'view',
   },
   {
     type: 'function',
-    inputs: [{ name: 'initiator', internalType: 'address', type: 'address' }],
-    name: 'nonReturn',
-    outputs: [
-      { name: 'resultStatus', internalType: 'enum Item.Status', type: 'uint8' },
-    ],
-    stateMutability: 'nonpayable',
+    inputs: [],
+    name: 'laf',
+    outputs: [{ name: '', internalType: 'contract LAF', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'malicious',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'maliciousPrivateKey',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
   },
   {
     type: 'function',
@@ -2990,217 +5541,454 @@ export const itemAbi = [
   },
   {
     type: 'function',
+    inputs: [],
+    name: 'ownerPrivateKey',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
     inputs: [
-      { name: '_charity', internalType: 'address', type: 'address' },
-      { name: '_charityFee', internalType: 'uint256', type: 'uint256' },
-      { name: '_fee', internalType: 'uint256', type: 'uint256' },
+      { name: 'itemOwner', internalType: 'address', type: 'address' },
+      { name: 'comment', internalType: 'string', type: 'string' },
     ],
-    name: 'returned',
+    name: 'registerTestItem',
     outputs: [
-      { name: 'rewardAmount', internalType: 'uint256', type: 'uint256' },
-      { name: 'charityFeeAmount', internalType: 'uint256', type: 'uint256' },
-      { name: 'feeAmount', internalType: 'uint256', type: 'uint256' },
-      { name: 'delegateFeeAmount', internalType: 'uint256', type: 'uint256' },
+      { name: 'itemAddress', internalType: 'address', type: 'address' },
     ],
     stateMutability: 'nonpayable',
   },
   {
     type: 'function',
-    inputs: [],
-    name: 'revokeLost',
+    inputs: [
+      { name: 'itemOwner', internalType: 'address', type: 'address' },
+      { name: 'rewardAmount', internalType: 'uint256', type: 'uint256' },
+      { name: 'geoLocation', internalType: 'string', type: 'string' },
+    ],
+    name: 'reportItemLost',
     outputs: [],
     stateMutability: 'nonpayable',
   },
   {
     type: 'function',
     inputs: [],
-    name: 'reward',
-    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    name: 'rewardToken',
+    outputs: [
+      { name: '', internalType: 'contract MockERC20', type: 'address' },
+    ],
     stateMutability: 'view',
   },
   {
     type: 'function',
     inputs: [],
-    name: 'secretHash',
+    name: 'setUp',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'supporter1',
     outputs: [{ name: '', internalType: 'address', type: 'address' }],
     stateMutability: 'view',
   },
   {
     type: 'function',
     inputs: [],
-    name: 'status',
-    outputs: [{ name: '', internalType: 'enum Item.Status', type: 'uint8' }],
+    name: 'supporter2',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
     stateMutability: 'view',
   },
   {
     type: 'function',
     inputs: [],
-    name: 'statusUpdatedTs',
-    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    name: 'targetArtifactSelectors',
+    outputs: [
+      {
+        name: 'targetedArtifactSelectors_',
+        internalType: 'struct StdInvariant.FuzzArtifactSelector[]',
+        type: 'tuple[]',
+        components: [
+          { name: 'artifact', internalType: 'string', type: 'string' },
+          { name: 'selectors', internalType: 'bytes4[]', type: 'bytes4[]' },
+        ],
+      },
+    ],
     stateMutability: 'view',
   },
   {
     type: 'function',
     inputs: [],
-    name: 'token',
-    outputs: [{ name: '', internalType: 'contract IERC20', type: 'address' }],
+    name: 'targetArtifacts',
+    outputs: [
+      {
+        name: 'targetedArtifacts_',
+        internalType: 'string[]',
+        type: 'string[]',
+      },
+    ],
     stateMutability: 'view',
   },
   {
     type: 'function',
-    inputs: [
-      { name: '_delegate', internalType: 'address', type: 'address' },
-      { name: '_delegateFee', internalType: 'uint256', type: 'uint256' },
+    inputs: [],
+    name: 'targetContracts',
+    outputs: [
+      {
+        name: 'targetedContracts_',
+        internalType: 'address[]',
+        type: 'address[]',
+      },
     ],
-    name: 'updateDelegate',
-    outputs: [],
-    stateMutability: 'nonpayable',
+    stateMutability: 'view',
   },
   {
     type: 'function',
-    inputs: [
-      { name: '_comment', internalType: 'string', type: 'string' },
-      { name: '_geo', internalType: 'string', type: 'string' },
+    inputs: [],
+    name: 'targetInterfaces',
+    outputs: [
+      {
+        name: 'targetedInterfaces_',
+        internalType: 'struct StdInvariant.FuzzInterface[]',
+        type: 'tuple[]',
+        components: [
+          { name: 'addr', internalType: 'address', type: 'address' },
+          { name: 'artifacts', internalType: 'string[]', type: 'string[]' },
+        ],
+      },
     ],
-    name: 'updateDetails',
-    outputs: [],
-    stateMutability: 'nonpayable',
+    stateMutability: 'view',
   },
   {
     type: 'function',
-    inputs: [
-      { name: '_rewardAmount', internalType: 'uint256', type: 'uint256' },
+    inputs: [],
+    name: 'targetSelectors',
+    outputs: [
+      {
+        name: 'targetedSelectors_',
+        internalType: 'struct StdInvariant.FuzzSelector[]',
+        type: 'tuple[]',
+        components: [
+          { name: 'addr', internalType: 'address', type: 'address' },
+          { name: 'selectors', internalType: 'bytes4[]', type: 'bytes4[]' },
+        ],
+      },
     ],
-    name: 'updateReward',
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'targetSenders',
+    outputs: [
+      {
+        name: 'targetedSenders_',
+        internalType: 'address[]',
+        type: 'address[]',
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'testSecret',
+    outputs: [{ name: '', internalType: 'string', type: 'string' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'testSecretHash',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'test_CharityDistributionIntegration',
     outputs: [],
     stateMutability: 'nonpayable',
   },
   {
     type: 'function',
     inputs: [],
-    name: 'withdraw',
+    name: 'test_ConfigIntegration',
     outputs: [],
     stateMutability: 'nonpayable',
   },
   {
+    type: 'function',
+    inputs: [],
+    name: 'test_CrossContractStateSync',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'test_EventEmissionIntegration',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'test_GasOptimizationIntegration',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'test_LAFToLAFItemCommunication',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'test_MultiTokenIntegration',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'wethToken',
+    outputs: [
+      { name: '', internalType: 'contract MockERC20', type: 'address' },
+    ],
+    stateMutability: 'view',
+  },
+  {
     type: 'event',
     anonymous: false,
     inputs: [
-      {
-        name: 'oldDelegate',
-        internalType: 'address',
-        type: 'address',
-        indexed: false,
-      },
-      {
-        name: 'newDelegate',
-        internalType: 'address',
-        type: 'address',
-        indexed: false,
-      },
+      { name: '', internalType: 'string', type: 'string', indexed: false },
     ],
-    name: 'DelegateUpdated',
+    name: 'log',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'address', type: 'address', indexed: false },
+    ],
+    name: 'log_address',
   },
   {
     type: 'event',
     anonymous: false,
     inputs: [
       {
-        name: 'comment',
-        internalType: 'string',
-        type: 'string',
+        name: 'val',
+        internalType: 'uint256[]',
+        type: 'uint256[]',
         indexed: false,
       },
-      { name: 'geo', internalType: 'string', type: 'string', indexed: false },
     ],
-    name: 'DetailsUpdated',
+    name: 'log_array',
   },
   {
     type: 'event',
     anonymous: false,
     inputs: [
       {
-        name: 'version',
-        internalType: 'uint64',
-        type: 'uint64',
+        name: 'val',
+        internalType: 'int256[]',
+        type: 'int256[]',
         indexed: false,
       },
     ],
-    name: 'Initialized',
+    name: 'log_array',
   },
   {
     type: 'event',
     anonymous: false,
     inputs: [
       {
-        name: 'oldReward',
+        name: 'val',
+        internalType: 'address[]',
+        type: 'address[]',
+        indexed: false,
+      },
+    ],
+    name: 'log_array',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'bytes', type: 'bytes', indexed: false },
+    ],
+    name: 'log_bytes',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'bytes32', type: 'bytes32', indexed: false },
+    ],
+    name: 'log_bytes32',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'int256', type: 'int256', indexed: false },
+    ],
+    name: 'log_int',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'address', type: 'address', indexed: false },
+    ],
+    name: 'log_named_address',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      {
+        name: 'val',
+        internalType: 'uint256[]',
+        type: 'uint256[]',
+        indexed: false,
+      },
+    ],
+    name: 'log_named_array',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      {
+        name: 'val',
+        internalType: 'int256[]',
+        type: 'int256[]',
+        indexed: false,
+      },
+    ],
+    name: 'log_named_array',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      {
+        name: 'val',
+        internalType: 'address[]',
+        type: 'address[]',
+        indexed: false,
+      },
+    ],
+    name: 'log_named_array',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'bytes', type: 'bytes', indexed: false },
+    ],
+    name: 'log_named_bytes',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'bytes32', type: 'bytes32', indexed: false },
+    ],
+    name: 'log_named_bytes32',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'int256', type: 'int256', indexed: false },
+      {
+        name: 'decimals',
         internalType: 'uint256',
         type: 'uint256',
         indexed: false,
       },
+    ],
+    name: 'log_named_decimal_int',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'uint256', type: 'uint256', indexed: false },
       {
-        name: 'newReward',
+        name: 'decimals',
         internalType: 'uint256',
         type: 'uint256',
         indexed: false,
       },
     ],
-    name: 'RewardUpdated',
+    name: 'log_named_decimal_uint',
   },
   {
-    type: 'error',
+    type: 'event',
+    anonymous: false,
     inputs: [
-      { name: 'timeRemaining', internalType: 'uint256', type: 'uint256' },
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'int256', type: 'int256', indexed: false },
     ],
-    name: 'CooldownNotMet',
+    name: 'log_named_int',
   },
-  { type: 'error', inputs: [], name: 'EmptyValue' },
   {
-    type: 'error',
+    type: 'event',
+    anonymous: false,
     inputs: [
-      { name: 'fee', internalType: 'uint256', type: 'uint256' },
-      { name: 'min', internalType: 'uint256', type: 'uint256' },
-      { name: 'max', internalType: 'uint256', type: 'uint256' },
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'string', type: 'string', indexed: false },
     ],
-    name: 'InvalidCharityFee',
+    name: 'log_named_string',
   },
   {
-    type: 'error',
+    type: 'event',
+    anonymous: false,
     inputs: [
-      { name: 'fee', internalType: 'uint256', type: 'uint256' },
-      { name: 'min', internalType: 'uint256', type: 'uint256' },
-      { name: 'max', internalType: 'uint256', type: 'uint256' },
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'uint256', type: 'uint256', indexed: false },
     ],
-    name: 'InvalidDelegateFee',
+    name: 'log_named_uint',
   },
   {
-    type: 'error',
+    type: 'event',
+    anonymous: false,
     inputs: [
-      { name: 'fee', internalType: 'uint256', type: 'uint256' },
-      { name: 'min', internalType: 'uint256', type: 'uint256' },
-      { name: 'max', internalType: 'uint256', type: 'uint256' },
+      { name: '', internalType: 'string', type: 'string', indexed: false },
     ],
-    name: 'InvalidFee',
+    name: 'log_string',
   },
-  { type: 'error', inputs: [], name: 'InvalidInitialization' },
-  { type: 'error', inputs: [], name: 'InvalidSender' },
-  { type: 'error', inputs: [], name: 'InvalidStatus' },
-  { type: 'error', inputs: [], name: 'InvalidValue' },
-  { type: 'error', inputs: [], name: 'NotInitializing' },
-  { type: 'error', inputs: [], name: 'OnlyFactory' },
-  { type: 'error', inputs: [], name: 'OnlyOwner' },
   {
-    type: 'error',
+    type: 'event',
+    anonymous: false,
     inputs: [
-      { name: 'provided', internalType: 'uint256', type: 'uint256' },
-      { name: 'minimum', internalType: 'uint256', type: 'uint256' },
+      { name: '', internalType: 'uint256', type: 'uint256', indexed: false },
     ],
-    name: 'RewardTooLow',
+    name: 'log_uint',
   },
   {
-    type: 'error',
-    inputs: [{ name: 'token', internalType: 'address', type: 'address' }],
-    name: 'SafeERC20FailedOperation',
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'bytes', type: 'bytes', indexed: false },
+    ],
+    name: 'logs',
   },
 ]
 
@@ -3210,7 +5998,7 @@ export const itemAbi = [
 
 /**
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const lafAbi = [
   {
@@ -3544,7 +6332,7 @@ export const lafAbi = [
       { name: '_secretHash', internalType: 'address', type: 'address' },
       { name: '_comment', internalType: 'string', type: 'string' },
     ],
-    name: 'registerItem',
+    name: 'register',
     outputs: [],
     stateMutability: 'nonpayable',
   },
@@ -4417,16 +7205,16 @@ export const lafAbi = [
 
 /**
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const lafAddress = {
   8453: '0x0000000000000000000000000000000000000000',
-  84532: '0x9bc899f84588844d16Ef867053ABEcD13fd68f14',
+  84532: '0x7ad1Ad0280755cd54B30abC81DBcC521c2ee3F3a',
 }
 
 /**
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const lafConfig = { address: lafAddress, abi: lafAbi }
 
@@ -4482,8 +7270,6 @@ export const lafErrorsAbi = [
     ],
     name: 'InvalidFee',
   },
-  { type: 'error', inputs: [], name: 'InvalidFinderSignature' },
-  { type: 'error', inputs: [], name: 'InvalidOwnerSignature' },
   {
     type: 'error',
     inputs: [
@@ -5713,6 +8499,148 @@ export const metaAbi = [
 ]
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// MockERC20
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const mockErc20Abi = [
+  {
+    type: 'constructor',
+    inputs: [
+      { name: '_name', internalType: 'string', type: 'string' },
+      { name: '_symbol', internalType: 'string', type: 'string' },
+      { name: '_decimals', internalType: 'uint8', type: 'uint8' },
+    ],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: '', internalType: 'address', type: 'address' },
+      { name: '', internalType: 'address', type: 'address' },
+    ],
+    name: 'allowance',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'spender', internalType: 'address', type: 'address' },
+      { name: 'amount', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'approve',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: '', internalType: 'address', type: 'address' }],
+    name: 'balanceOf',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'decimals',
+    outputs: [{ name: '', internalType: 'uint8', type: 'uint8' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'to', internalType: 'address', type: 'address' },
+      { name: 'amount', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'mint',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'name',
+    outputs: [{ name: '', internalType: 'string', type: 'string' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'symbol',
+    outputs: [{ name: '', internalType: 'string', type: 'string' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'totalSupply',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'to', internalType: 'address', type: 'address' },
+      { name: 'amount', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'transfer',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'from', internalType: 'address', type: 'address' },
+      { name: 'to', internalType: 'address', type: 'address' },
+      { name: 'amount', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'transferFrom',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'owner',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'spender',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'value',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'Approval',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'from', internalType: 'address', type: 'address', indexed: true },
+      { name: 'to', internalType: 'address', type: 'address', indexed: true },
+      {
+        name: 'value',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'Transfer',
+  },
+]
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Ownable
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -5832,6 +8760,678 @@ export const safeErc20Abi = [
 ]
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// SecurityAuditTests
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const securityAuditTestsAbi = [
+  {
+    type: 'function',
+    inputs: [],
+    name: 'DEFAULT_COMMENT',
+    outputs: [{ name: '', internalType: 'string', type: 'string' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'DEFAULT_GEO',
+    outputs: [{ name: '', internalType: 'string', type: 'string' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'DEFAULT_REWARD',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'INITIAL_BALANCE',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'IS_TEST',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'supporter', internalType: 'address', type: 'address' },
+      { name: 'amount', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'addSupport',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'seconds_', internalType: 'uint256', type: 'uint256' }],
+    name: 'advanceTime',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'charity1',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'charity2',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'account', internalType: 'address', type: 'address' }],
+    name: 'checkBalance',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'secret', internalType: 'string', type: 'string' },
+      { name: 'privateKey', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'createSecretSignature',
+    outputs: [{ name: '', internalType: 'bytes', type: 'bytes' }],
+    stateMutability: 'pure',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'excludeArtifacts',
+    outputs: [
+      {
+        name: 'excludedArtifacts_',
+        internalType: 'string[]',
+        type: 'string[]',
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'excludeContracts',
+    outputs: [
+      {
+        name: 'excludedContracts_',
+        internalType: 'address[]',
+        type: 'address[]',
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'excludeSelectors',
+    outputs: [
+      {
+        name: 'excludedSelectors_',
+        internalType: 'struct StdInvariant.FuzzSelector[]',
+        type: 'tuple[]',
+        components: [
+          { name: 'addr', internalType: 'address', type: 'address' },
+          { name: 'selectors', internalType: 'bytes4[]', type: 'bytes4[]' },
+        ],
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'excludeSenders',
+    outputs: [
+      {
+        name: 'excludedSenders_',
+        internalType: 'address[]',
+        type: 'address[]',
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'selector', internalType: 'bytes4', type: 'bytes4' }],
+    name: 'expectRevertWithError',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'failed',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'finder',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'finderPrivateKey',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'getItemAddress',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'getItemStatus',
+    outputs: [{ name: '', internalType: 'enum LAFItem.Status', type: 'uint8' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'laf',
+    outputs: [{ name: '', internalType: 'contract LAF', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'malicious',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'maliciousPrivateKey',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'owner',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'ownerPrivateKey',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'itemOwner', internalType: 'address', type: 'address' },
+      { name: 'comment', internalType: 'string', type: 'string' },
+    ],
+    name: 'registerTestItem',
+    outputs: [
+      { name: 'itemAddress', internalType: 'address', type: 'address' },
+    ],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'itemOwner', internalType: 'address', type: 'address' },
+      { name: 'rewardAmount', internalType: 'uint256', type: 'uint256' },
+      { name: 'geoLocation', internalType: 'string', type: 'string' },
+    ],
+    name: 'reportItemLost',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'rewardToken',
+    outputs: [
+      { name: '', internalType: 'contract MockERC20', type: 'address' },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'setUp',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'supporter1',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'supporter2',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'targetArtifactSelectors',
+    outputs: [
+      {
+        name: 'targetedArtifactSelectors_',
+        internalType: 'struct StdInvariant.FuzzArtifactSelector[]',
+        type: 'tuple[]',
+        components: [
+          { name: 'artifact', internalType: 'string', type: 'string' },
+          { name: 'selectors', internalType: 'bytes4[]', type: 'bytes4[]' },
+        ],
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'targetArtifacts',
+    outputs: [
+      {
+        name: 'targetedArtifacts_',
+        internalType: 'string[]',
+        type: 'string[]',
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'targetContracts',
+    outputs: [
+      {
+        name: 'targetedContracts_',
+        internalType: 'address[]',
+        type: 'address[]',
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'targetInterfaces',
+    outputs: [
+      {
+        name: 'targetedInterfaces_',
+        internalType: 'struct StdInvariant.FuzzInterface[]',
+        type: 'tuple[]',
+        components: [
+          { name: 'addr', internalType: 'address', type: 'address' },
+          { name: 'artifacts', internalType: 'string[]', type: 'string[]' },
+        ],
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'targetSelectors',
+    outputs: [
+      {
+        name: 'targetedSelectors_',
+        internalType: 'struct StdInvariant.FuzzSelector[]',
+        type: 'tuple[]',
+        components: [
+          { name: 'addr', internalType: 'address', type: 'address' },
+          { name: 'selectors', internalType: 'bytes4[]', type: 'bytes4[]' },
+        ],
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'targetSenders',
+    outputs: [
+      {
+        name: 'targetedSenders_',
+        internalType: 'address[]',
+        type: 'address[]',
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'testSecret',
+    outputs: [{ name: '', internalType: 'string', type: 'string' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'testSecretHash',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'test_AUDIT_AccessControlBypass',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'test_AUDIT_ReentrancyAttackOnRewards',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'test_AUDIT_RegistrationDoSAttack',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'test_AUDIT_RegistrationFrontrunningAttack',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'test_AUDIT_RegistrationGasIsUnreasonable',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'test_AUDIT_RewardCalculationOverflows',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'test_AUDIT_SignatureMalleabilityAttack',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'test_AUDIT_SignatureReplayAcrossCycles',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'test_AUDIT_StateManipulationAttack',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'string', type: 'string', indexed: false },
+    ],
+    name: 'log',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'address', type: 'address', indexed: false },
+    ],
+    name: 'log_address',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'val',
+        internalType: 'uint256[]',
+        type: 'uint256[]',
+        indexed: false,
+      },
+    ],
+    name: 'log_array',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'val',
+        internalType: 'int256[]',
+        type: 'int256[]',
+        indexed: false,
+      },
+    ],
+    name: 'log_array',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'val',
+        internalType: 'address[]',
+        type: 'address[]',
+        indexed: false,
+      },
+    ],
+    name: 'log_array',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'bytes', type: 'bytes', indexed: false },
+    ],
+    name: 'log_bytes',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'bytes32', type: 'bytes32', indexed: false },
+    ],
+    name: 'log_bytes32',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'int256', type: 'int256', indexed: false },
+    ],
+    name: 'log_int',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'address', type: 'address', indexed: false },
+    ],
+    name: 'log_named_address',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      {
+        name: 'val',
+        internalType: 'uint256[]',
+        type: 'uint256[]',
+        indexed: false,
+      },
+    ],
+    name: 'log_named_array',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      {
+        name: 'val',
+        internalType: 'int256[]',
+        type: 'int256[]',
+        indexed: false,
+      },
+    ],
+    name: 'log_named_array',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      {
+        name: 'val',
+        internalType: 'address[]',
+        type: 'address[]',
+        indexed: false,
+      },
+    ],
+    name: 'log_named_array',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'bytes', type: 'bytes', indexed: false },
+    ],
+    name: 'log_named_bytes',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'bytes32', type: 'bytes32', indexed: false },
+    ],
+    name: 'log_named_bytes32',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'int256', type: 'int256', indexed: false },
+      {
+        name: 'decimals',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'log_named_decimal_int',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'uint256', type: 'uint256', indexed: false },
+      {
+        name: 'decimals',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'log_named_decimal_uint',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'int256', type: 'int256', indexed: false },
+    ],
+    name: 'log_named_int',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'string', type: 'string', indexed: false },
+    ],
+    name: 'log_named_string',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'key', internalType: 'string', type: 'string', indexed: false },
+      { name: 'val', internalType: 'uint256', type: 'uint256', indexed: false },
+    ],
+    name: 'log_named_uint',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'string', type: 'string', indexed: false },
+    ],
+    name: 'log_string',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'uint256', type: 'uint256', indexed: false },
+    ],
+    name: 'log_uint',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: '', internalType: 'bytes', type: 'bytes', indexed: false },
+    ],
+    name: 'logs',
+  },
+]
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Strings
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -5851,6 +9451,584 @@ export const stringsAbi = [
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // React
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link baseTestAbi}__
+ */
+export const useReadBaseTest = /*#__PURE__*/ createUseReadContract({
+  abi: baseTestAbi,
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"DEFAULT_COMMENT"`
+ */
+export const useReadBaseTestDefaultComment =
+  /*#__PURE__*/ createUseReadContract({
+    abi: baseTestAbi,
+    functionName: 'DEFAULT_COMMENT',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"DEFAULT_GEO"`
+ */
+export const useReadBaseTestDefaultGeo = /*#__PURE__*/ createUseReadContract({
+  abi: baseTestAbi,
+  functionName: 'DEFAULT_GEO',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"DEFAULT_REWARD"`
+ */
+export const useReadBaseTestDefaultReward = /*#__PURE__*/ createUseReadContract(
+  { abi: baseTestAbi, functionName: 'DEFAULT_REWARD' },
+)
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"INITIAL_BALANCE"`
+ */
+export const useReadBaseTestInitialBalance =
+  /*#__PURE__*/ createUseReadContract({
+    abi: baseTestAbi,
+    functionName: 'INITIAL_BALANCE',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"IS_TEST"`
+ */
+export const useReadBaseTestIsTest = /*#__PURE__*/ createUseReadContract({
+  abi: baseTestAbi,
+  functionName: 'IS_TEST',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"charity1"`
+ */
+export const useReadBaseTestCharity1 = /*#__PURE__*/ createUseReadContract({
+  abi: baseTestAbi,
+  functionName: 'charity1',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"charity2"`
+ */
+export const useReadBaseTestCharity2 = /*#__PURE__*/ createUseReadContract({
+  abi: baseTestAbi,
+  functionName: 'charity2',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"checkBalance"`
+ */
+export const useReadBaseTestCheckBalance = /*#__PURE__*/ createUseReadContract({
+  abi: baseTestAbi,
+  functionName: 'checkBalance',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"createSecretSignature"`
+ */
+export const useReadBaseTestCreateSecretSignature =
+  /*#__PURE__*/ createUseReadContract({
+    abi: baseTestAbi,
+    functionName: 'createSecretSignature',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"excludeArtifacts"`
+ */
+export const useReadBaseTestExcludeArtifacts =
+  /*#__PURE__*/ createUseReadContract({
+    abi: baseTestAbi,
+    functionName: 'excludeArtifacts',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"excludeContracts"`
+ */
+export const useReadBaseTestExcludeContracts =
+  /*#__PURE__*/ createUseReadContract({
+    abi: baseTestAbi,
+    functionName: 'excludeContracts',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"excludeSelectors"`
+ */
+export const useReadBaseTestExcludeSelectors =
+  /*#__PURE__*/ createUseReadContract({
+    abi: baseTestAbi,
+    functionName: 'excludeSelectors',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"excludeSenders"`
+ */
+export const useReadBaseTestExcludeSenders =
+  /*#__PURE__*/ createUseReadContract({
+    abi: baseTestAbi,
+    functionName: 'excludeSenders',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"failed"`
+ */
+export const useReadBaseTestFailed = /*#__PURE__*/ createUseReadContract({
+  abi: baseTestAbi,
+  functionName: 'failed',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"finder"`
+ */
+export const useReadBaseTestFinder = /*#__PURE__*/ createUseReadContract({
+  abi: baseTestAbi,
+  functionName: 'finder',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"finderPrivateKey"`
+ */
+export const useReadBaseTestFinderPrivateKey =
+  /*#__PURE__*/ createUseReadContract({
+    abi: baseTestAbi,
+    functionName: 'finderPrivateKey',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"getItemAddress"`
+ */
+export const useReadBaseTestGetItemAddress =
+  /*#__PURE__*/ createUseReadContract({
+    abi: baseTestAbi,
+    functionName: 'getItemAddress',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"getItemStatus"`
+ */
+export const useReadBaseTestGetItemStatus = /*#__PURE__*/ createUseReadContract(
+  { abi: baseTestAbi, functionName: 'getItemStatus' },
+)
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"laf"`
+ */
+export const useReadBaseTestLaf = /*#__PURE__*/ createUseReadContract({
+  abi: baseTestAbi,
+  functionName: 'laf',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"malicious"`
+ */
+export const useReadBaseTestMalicious = /*#__PURE__*/ createUseReadContract({
+  abi: baseTestAbi,
+  functionName: 'malicious',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"maliciousPrivateKey"`
+ */
+export const useReadBaseTestMaliciousPrivateKey =
+  /*#__PURE__*/ createUseReadContract({
+    abi: baseTestAbi,
+    functionName: 'maliciousPrivateKey',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"owner"`
+ */
+export const useReadBaseTestOwner = /*#__PURE__*/ createUseReadContract({
+  abi: baseTestAbi,
+  functionName: 'owner',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"ownerPrivateKey"`
+ */
+export const useReadBaseTestOwnerPrivateKey =
+  /*#__PURE__*/ createUseReadContract({
+    abi: baseTestAbi,
+    functionName: 'ownerPrivateKey',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"rewardToken"`
+ */
+export const useReadBaseTestRewardToken = /*#__PURE__*/ createUseReadContract({
+  abi: baseTestAbi,
+  functionName: 'rewardToken',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"supporter1"`
+ */
+export const useReadBaseTestSupporter1 = /*#__PURE__*/ createUseReadContract({
+  abi: baseTestAbi,
+  functionName: 'supporter1',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"supporter2"`
+ */
+export const useReadBaseTestSupporter2 = /*#__PURE__*/ createUseReadContract({
+  abi: baseTestAbi,
+  functionName: 'supporter2',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"targetArtifactSelectors"`
+ */
+export const useReadBaseTestTargetArtifactSelectors =
+  /*#__PURE__*/ createUseReadContract({
+    abi: baseTestAbi,
+    functionName: 'targetArtifactSelectors',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"targetArtifacts"`
+ */
+export const useReadBaseTestTargetArtifacts =
+  /*#__PURE__*/ createUseReadContract({
+    abi: baseTestAbi,
+    functionName: 'targetArtifacts',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"targetContracts"`
+ */
+export const useReadBaseTestTargetContracts =
+  /*#__PURE__*/ createUseReadContract({
+    abi: baseTestAbi,
+    functionName: 'targetContracts',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"targetInterfaces"`
+ */
+export const useReadBaseTestTargetInterfaces =
+  /*#__PURE__*/ createUseReadContract({
+    abi: baseTestAbi,
+    functionName: 'targetInterfaces',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"targetSelectors"`
+ */
+export const useReadBaseTestTargetSelectors =
+  /*#__PURE__*/ createUseReadContract({
+    abi: baseTestAbi,
+    functionName: 'targetSelectors',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"targetSenders"`
+ */
+export const useReadBaseTestTargetSenders = /*#__PURE__*/ createUseReadContract(
+  { abi: baseTestAbi, functionName: 'targetSenders' },
+)
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"testSecret"`
+ */
+export const useReadBaseTestTestSecret = /*#__PURE__*/ createUseReadContract({
+  abi: baseTestAbi,
+  functionName: 'testSecret',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"testSecretHash"`
+ */
+export const useReadBaseTestTestSecretHash =
+  /*#__PURE__*/ createUseReadContract({
+    abi: baseTestAbi,
+    functionName: 'testSecretHash',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link baseTestAbi}__
+ */
+export const useWriteBaseTest = /*#__PURE__*/ createUseWriteContract({
+  abi: baseTestAbi,
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"addSupport"`
+ */
+export const useWriteBaseTestAddSupport = /*#__PURE__*/ createUseWriteContract({
+  abi: baseTestAbi,
+  functionName: 'addSupport',
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"advanceTime"`
+ */
+export const useWriteBaseTestAdvanceTime = /*#__PURE__*/ createUseWriteContract(
+  { abi: baseTestAbi, functionName: 'advanceTime' },
+)
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"expectRevertWithError"`
+ */
+export const useWriteBaseTestExpectRevertWithError =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: baseTestAbi,
+    functionName: 'expectRevertWithError',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"registerTestItem"`
+ */
+export const useWriteBaseTestRegisterTestItem =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: baseTestAbi,
+    functionName: 'registerTestItem',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"reportItemLost"`
+ */
+export const useWriteBaseTestReportItemLost =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: baseTestAbi,
+    functionName: 'reportItemLost',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"setUp"`
+ */
+export const useWriteBaseTestSetUp = /*#__PURE__*/ createUseWriteContract({
+  abi: baseTestAbi,
+  functionName: 'setUp',
+})
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link baseTestAbi}__
+ */
+export const useSimulateBaseTest = /*#__PURE__*/ createUseSimulateContract({
+  abi: baseTestAbi,
+})
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"addSupport"`
+ */
+export const useSimulateBaseTestAddSupport =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: baseTestAbi,
+    functionName: 'addSupport',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"advanceTime"`
+ */
+export const useSimulateBaseTestAdvanceTime =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: baseTestAbi,
+    functionName: 'advanceTime',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"expectRevertWithError"`
+ */
+export const useSimulateBaseTestExpectRevertWithError =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: baseTestAbi,
+    functionName: 'expectRevertWithError',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"registerTestItem"`
+ */
+export const useSimulateBaseTestRegisterTestItem =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: baseTestAbi,
+    functionName: 'registerTestItem',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"reportItemLost"`
+ */
+export const useSimulateBaseTestReportItemLost =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: baseTestAbi,
+    functionName: 'reportItemLost',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link baseTestAbi}__ and `functionName` set to `"setUp"`
+ */
+export const useSimulateBaseTestSetUp = /*#__PURE__*/ createUseSimulateContract(
+  { abi: baseTestAbi, functionName: 'setUp' },
+)
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link baseTestAbi}__
+ */
+export const useWatchBaseTestEvent = /*#__PURE__*/ createUseWatchContractEvent({
+  abi: baseTestAbi,
+})
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link baseTestAbi}__ and `eventName` set to `"log"`
+ */
+export const useWatchBaseTestLogEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: baseTestAbi,
+    eventName: 'log',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link baseTestAbi}__ and `eventName` set to `"log_address"`
+ */
+export const useWatchBaseTestLogAddressEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: baseTestAbi,
+    eventName: 'log_address',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link baseTestAbi}__ and `eventName` set to `"log_array"`
+ */
+export const useWatchBaseTestLogArrayEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: baseTestAbi,
+    eventName: 'log_array',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link baseTestAbi}__ and `eventName` set to `"log_bytes"`
+ */
+export const useWatchBaseTestLogBytesEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: baseTestAbi,
+    eventName: 'log_bytes',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link baseTestAbi}__ and `eventName` set to `"log_bytes32"`
+ */
+export const useWatchBaseTestLogBytes32Event =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: baseTestAbi,
+    eventName: 'log_bytes32',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link baseTestAbi}__ and `eventName` set to `"log_int"`
+ */
+export const useWatchBaseTestLogIntEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: baseTestAbi,
+    eventName: 'log_int',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link baseTestAbi}__ and `eventName` set to `"log_named_address"`
+ */
+export const useWatchBaseTestLogNamedAddressEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: baseTestAbi,
+    eventName: 'log_named_address',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link baseTestAbi}__ and `eventName` set to `"log_named_array"`
+ */
+export const useWatchBaseTestLogNamedArrayEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: baseTestAbi,
+    eventName: 'log_named_array',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link baseTestAbi}__ and `eventName` set to `"log_named_bytes"`
+ */
+export const useWatchBaseTestLogNamedBytesEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: baseTestAbi,
+    eventName: 'log_named_bytes',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link baseTestAbi}__ and `eventName` set to `"log_named_bytes32"`
+ */
+export const useWatchBaseTestLogNamedBytes32Event =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: baseTestAbi,
+    eventName: 'log_named_bytes32',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link baseTestAbi}__ and `eventName` set to `"log_named_decimal_int"`
+ */
+export const useWatchBaseTestLogNamedDecimalIntEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: baseTestAbi,
+    eventName: 'log_named_decimal_int',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link baseTestAbi}__ and `eventName` set to `"log_named_decimal_uint"`
+ */
+export const useWatchBaseTestLogNamedDecimalUintEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: baseTestAbi,
+    eventName: 'log_named_decimal_uint',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link baseTestAbi}__ and `eventName` set to `"log_named_int"`
+ */
+export const useWatchBaseTestLogNamedIntEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: baseTestAbi,
+    eventName: 'log_named_int',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link baseTestAbi}__ and `eventName` set to `"log_named_string"`
+ */
+export const useWatchBaseTestLogNamedStringEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: baseTestAbi,
+    eventName: 'log_named_string',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link baseTestAbi}__ and `eventName` set to `"log_named_uint"`
+ */
+export const useWatchBaseTestLogNamedUintEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: baseTestAbi,
+    eventName: 'log_named_uint',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link baseTestAbi}__ and `eventName` set to `"log_string"`
+ */
+export const useWatchBaseTestLogStringEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: baseTestAbi,
+    eventName: 'log_string',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link baseTestAbi}__ and `eventName` set to `"log_uint"`
+ */
+export const useWatchBaseTestLogUintEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: baseTestAbi,
+    eventName: 'log_uint',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link baseTestAbi}__ and `eventName` set to `"logs"`
+ */
+export const useWatchBaseTestLogsEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: baseTestAbi,
+    eventName: 'logs',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link configAbi}__
@@ -6922,6 +11100,2212 @@ export const useWatchErc20TransferEvent =
     abi: erc20Abi,
     address: erc20Address,
     eventName: 'Transfer',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__
+ */
+export const useReadEdgeCaseTests = /*#__PURE__*/ createUseReadContract({
+  abi: edgeCaseTestsAbi,
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"DEFAULT_COMMENT"`
+ */
+export const useReadEdgeCaseTestsDefaultComment =
+  /*#__PURE__*/ createUseReadContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'DEFAULT_COMMENT',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"DEFAULT_GEO"`
+ */
+export const useReadEdgeCaseTestsDefaultGeo =
+  /*#__PURE__*/ createUseReadContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'DEFAULT_GEO',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"DEFAULT_REWARD"`
+ */
+export const useReadEdgeCaseTestsDefaultReward =
+  /*#__PURE__*/ createUseReadContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'DEFAULT_REWARD',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"INITIAL_BALANCE"`
+ */
+export const useReadEdgeCaseTestsInitialBalance =
+  /*#__PURE__*/ createUseReadContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'INITIAL_BALANCE',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"IS_TEST"`
+ */
+export const useReadEdgeCaseTestsIsTest = /*#__PURE__*/ createUseReadContract({
+  abi: edgeCaseTestsAbi,
+  functionName: 'IS_TEST',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"charity1"`
+ */
+export const useReadEdgeCaseTestsCharity1 = /*#__PURE__*/ createUseReadContract(
+  { abi: edgeCaseTestsAbi, functionName: 'charity1' },
+)
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"charity2"`
+ */
+export const useReadEdgeCaseTestsCharity2 = /*#__PURE__*/ createUseReadContract(
+  { abi: edgeCaseTestsAbi, functionName: 'charity2' },
+)
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"checkBalance"`
+ */
+export const useReadEdgeCaseTestsCheckBalance =
+  /*#__PURE__*/ createUseReadContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'checkBalance',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"createSecretSignature"`
+ */
+export const useReadEdgeCaseTestsCreateSecretSignature =
+  /*#__PURE__*/ createUseReadContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'createSecretSignature',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"excludeArtifacts"`
+ */
+export const useReadEdgeCaseTestsExcludeArtifacts =
+  /*#__PURE__*/ createUseReadContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'excludeArtifacts',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"excludeContracts"`
+ */
+export const useReadEdgeCaseTestsExcludeContracts =
+  /*#__PURE__*/ createUseReadContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'excludeContracts',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"excludeSelectors"`
+ */
+export const useReadEdgeCaseTestsExcludeSelectors =
+  /*#__PURE__*/ createUseReadContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'excludeSelectors',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"excludeSenders"`
+ */
+export const useReadEdgeCaseTestsExcludeSenders =
+  /*#__PURE__*/ createUseReadContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'excludeSenders',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"failed"`
+ */
+export const useReadEdgeCaseTestsFailed = /*#__PURE__*/ createUseReadContract({
+  abi: edgeCaseTestsAbi,
+  functionName: 'failed',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"finder"`
+ */
+export const useReadEdgeCaseTestsFinder = /*#__PURE__*/ createUseReadContract({
+  abi: edgeCaseTestsAbi,
+  functionName: 'finder',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"finderPrivateKey"`
+ */
+export const useReadEdgeCaseTestsFinderPrivateKey =
+  /*#__PURE__*/ createUseReadContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'finderPrivateKey',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"getItemAddress"`
+ */
+export const useReadEdgeCaseTestsGetItemAddress =
+  /*#__PURE__*/ createUseReadContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'getItemAddress',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"getItemStatus"`
+ */
+export const useReadEdgeCaseTestsGetItemStatus =
+  /*#__PURE__*/ createUseReadContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'getItemStatus',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"laf"`
+ */
+export const useReadEdgeCaseTestsLaf = /*#__PURE__*/ createUseReadContract({
+  abi: edgeCaseTestsAbi,
+  functionName: 'laf',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"malicious"`
+ */
+export const useReadEdgeCaseTestsMalicious =
+  /*#__PURE__*/ createUseReadContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'malicious',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"maliciousPrivateKey"`
+ */
+export const useReadEdgeCaseTestsMaliciousPrivateKey =
+  /*#__PURE__*/ createUseReadContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'maliciousPrivateKey',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"owner"`
+ */
+export const useReadEdgeCaseTestsOwner = /*#__PURE__*/ createUseReadContract({
+  abi: edgeCaseTestsAbi,
+  functionName: 'owner',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"ownerPrivateKey"`
+ */
+export const useReadEdgeCaseTestsOwnerPrivateKey =
+  /*#__PURE__*/ createUseReadContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'ownerPrivateKey',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"rewardToken"`
+ */
+export const useReadEdgeCaseTestsRewardToken =
+  /*#__PURE__*/ createUseReadContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'rewardToken',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"supporter1"`
+ */
+export const useReadEdgeCaseTestsSupporter1 =
+  /*#__PURE__*/ createUseReadContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'supporter1',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"supporter2"`
+ */
+export const useReadEdgeCaseTestsSupporter2 =
+  /*#__PURE__*/ createUseReadContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'supporter2',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"targetArtifactSelectors"`
+ */
+export const useReadEdgeCaseTestsTargetArtifactSelectors =
+  /*#__PURE__*/ createUseReadContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'targetArtifactSelectors',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"targetArtifacts"`
+ */
+export const useReadEdgeCaseTestsTargetArtifacts =
+  /*#__PURE__*/ createUseReadContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'targetArtifacts',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"targetContracts"`
+ */
+export const useReadEdgeCaseTestsTargetContracts =
+  /*#__PURE__*/ createUseReadContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'targetContracts',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"targetInterfaces"`
+ */
+export const useReadEdgeCaseTestsTargetInterfaces =
+  /*#__PURE__*/ createUseReadContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'targetInterfaces',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"targetSelectors"`
+ */
+export const useReadEdgeCaseTestsTargetSelectors =
+  /*#__PURE__*/ createUseReadContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'targetSelectors',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"targetSenders"`
+ */
+export const useReadEdgeCaseTestsTargetSenders =
+  /*#__PURE__*/ createUseReadContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'targetSenders',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"testSecret"`
+ */
+export const useReadEdgeCaseTestsTestSecret =
+  /*#__PURE__*/ createUseReadContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'testSecret',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"testSecretHash"`
+ */
+export const useReadEdgeCaseTestsTestSecretHash =
+  /*#__PURE__*/ createUseReadContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'testSecretHash',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__
+ */
+export const useWriteEdgeCaseTests = /*#__PURE__*/ createUseWriteContract({
+  abi: edgeCaseTestsAbi,
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"addSupport"`
+ */
+export const useWriteEdgeCaseTestsAddSupport =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'addSupport',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"advanceTime"`
+ */
+export const useWriteEdgeCaseTestsAdvanceTime =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'advanceTime',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"expectRevertWithError"`
+ */
+export const useWriteEdgeCaseTestsExpectRevertWithError =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'expectRevertWithError',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"registerTestItem"`
+ */
+export const useWriteEdgeCaseTestsRegisterTestItem =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'registerTestItem',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"reportItemLost"`
+ */
+export const useWriteEdgeCaseTestsReportItemLost =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'reportItemLost',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"setUp"`
+ */
+export const useWriteEdgeCaseTestsSetUp = /*#__PURE__*/ createUseWriteContract({
+  abi: edgeCaseTestsAbi,
+  functionName: 'setUp',
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"test_CommunitySupportEdgeCases"`
+ */
+export const useWriteEdgeCaseTestsTestCommunitySupportEdgeCases =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'test_CommunitySupportEdgeCases',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"test_LostReportingEdgeCases"`
+ */
+export const useWriteEdgeCaseTestsTestLostReportingEdgeCases =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'test_LostReportingEdgeCases',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"test_RegistrationEdgeCases"`
+ */
+export const useWriteEdgeCaseTestsTestRegistrationEdgeCases =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'test_RegistrationEdgeCases',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"test_SignatureEdgeCases"`
+ */
+export const useWriteEdgeCaseTestsTestSignatureEdgeCases =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'test_SignatureEdgeCases',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"test_StateTransitionEdgeCases"`
+ */
+export const useWriteEdgeCaseTestsTestStateTransitionEdgeCases =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'test_StateTransitionEdgeCases',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"test_WithdrawalAndRevocationEdgeCases"`
+ */
+export const useWriteEdgeCaseTestsTestWithdrawalAndRevocationEdgeCases =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'test_WithdrawalAndRevocationEdgeCases',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__
+ */
+export const useSimulateEdgeCaseTests = /*#__PURE__*/ createUseSimulateContract(
+  { abi: edgeCaseTestsAbi },
+)
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"addSupport"`
+ */
+export const useSimulateEdgeCaseTestsAddSupport =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'addSupport',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"advanceTime"`
+ */
+export const useSimulateEdgeCaseTestsAdvanceTime =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'advanceTime',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"expectRevertWithError"`
+ */
+export const useSimulateEdgeCaseTestsExpectRevertWithError =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'expectRevertWithError',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"registerTestItem"`
+ */
+export const useSimulateEdgeCaseTestsRegisterTestItem =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'registerTestItem',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"reportItemLost"`
+ */
+export const useSimulateEdgeCaseTestsReportItemLost =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'reportItemLost',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"setUp"`
+ */
+export const useSimulateEdgeCaseTestsSetUp =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'setUp',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"test_CommunitySupportEdgeCases"`
+ */
+export const useSimulateEdgeCaseTestsTestCommunitySupportEdgeCases =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'test_CommunitySupportEdgeCases',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"test_LostReportingEdgeCases"`
+ */
+export const useSimulateEdgeCaseTestsTestLostReportingEdgeCases =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'test_LostReportingEdgeCases',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"test_RegistrationEdgeCases"`
+ */
+export const useSimulateEdgeCaseTestsTestRegistrationEdgeCases =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'test_RegistrationEdgeCases',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"test_SignatureEdgeCases"`
+ */
+export const useSimulateEdgeCaseTestsTestSignatureEdgeCases =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'test_SignatureEdgeCases',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"test_StateTransitionEdgeCases"`
+ */
+export const useSimulateEdgeCaseTestsTestStateTransitionEdgeCases =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'test_StateTransitionEdgeCases',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `functionName` set to `"test_WithdrawalAndRevocationEdgeCases"`
+ */
+export const useSimulateEdgeCaseTestsTestWithdrawalAndRevocationEdgeCases =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: edgeCaseTestsAbi,
+    functionName: 'test_WithdrawalAndRevocationEdgeCases',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link edgeCaseTestsAbi}__
+ */
+export const useWatchEdgeCaseTestsEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({ abi: edgeCaseTestsAbi })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `eventName` set to `"log"`
+ */
+export const useWatchEdgeCaseTestsLogEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: edgeCaseTestsAbi,
+    eventName: 'log',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `eventName` set to `"log_address"`
+ */
+export const useWatchEdgeCaseTestsLogAddressEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: edgeCaseTestsAbi,
+    eventName: 'log_address',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `eventName` set to `"log_array"`
+ */
+export const useWatchEdgeCaseTestsLogArrayEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: edgeCaseTestsAbi,
+    eventName: 'log_array',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `eventName` set to `"log_bytes"`
+ */
+export const useWatchEdgeCaseTestsLogBytesEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: edgeCaseTestsAbi,
+    eventName: 'log_bytes',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `eventName` set to `"log_bytes32"`
+ */
+export const useWatchEdgeCaseTestsLogBytes32Event =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: edgeCaseTestsAbi,
+    eventName: 'log_bytes32',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `eventName` set to `"log_int"`
+ */
+export const useWatchEdgeCaseTestsLogIntEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: edgeCaseTestsAbi,
+    eventName: 'log_int',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `eventName` set to `"log_named_address"`
+ */
+export const useWatchEdgeCaseTestsLogNamedAddressEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: edgeCaseTestsAbi,
+    eventName: 'log_named_address',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `eventName` set to `"log_named_array"`
+ */
+export const useWatchEdgeCaseTestsLogNamedArrayEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: edgeCaseTestsAbi,
+    eventName: 'log_named_array',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `eventName` set to `"log_named_bytes"`
+ */
+export const useWatchEdgeCaseTestsLogNamedBytesEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: edgeCaseTestsAbi,
+    eventName: 'log_named_bytes',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `eventName` set to `"log_named_bytes32"`
+ */
+export const useWatchEdgeCaseTestsLogNamedBytes32Event =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: edgeCaseTestsAbi,
+    eventName: 'log_named_bytes32',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `eventName` set to `"log_named_decimal_int"`
+ */
+export const useWatchEdgeCaseTestsLogNamedDecimalIntEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: edgeCaseTestsAbi,
+    eventName: 'log_named_decimal_int',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `eventName` set to `"log_named_decimal_uint"`
+ */
+export const useWatchEdgeCaseTestsLogNamedDecimalUintEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: edgeCaseTestsAbi,
+    eventName: 'log_named_decimal_uint',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `eventName` set to `"log_named_int"`
+ */
+export const useWatchEdgeCaseTestsLogNamedIntEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: edgeCaseTestsAbi,
+    eventName: 'log_named_int',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `eventName` set to `"log_named_string"`
+ */
+export const useWatchEdgeCaseTestsLogNamedStringEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: edgeCaseTestsAbi,
+    eventName: 'log_named_string',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `eventName` set to `"log_named_uint"`
+ */
+export const useWatchEdgeCaseTestsLogNamedUintEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: edgeCaseTestsAbi,
+    eventName: 'log_named_uint',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `eventName` set to `"log_string"`
+ */
+export const useWatchEdgeCaseTestsLogStringEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: edgeCaseTestsAbi,
+    eventName: 'log_string',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `eventName` set to `"log_uint"`
+ */
+export const useWatchEdgeCaseTestsLogUintEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: edgeCaseTestsAbi,
+    eventName: 'log_uint',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link edgeCaseTestsAbi}__ and `eventName` set to `"logs"`
+ */
+export const useWatchEdgeCaseTestsLogsEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: edgeCaseTestsAbi,
+    eventName: 'logs',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link endToEndTestsAbi}__
+ */
+export const useReadEndToEndTests = /*#__PURE__*/ createUseReadContract({
+  abi: endToEndTestsAbi,
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"DEFAULT_COMMENT"`
+ */
+export const useReadEndToEndTestsDefaultComment =
+  /*#__PURE__*/ createUseReadContract({
+    abi: endToEndTestsAbi,
+    functionName: 'DEFAULT_COMMENT',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"DEFAULT_GEO"`
+ */
+export const useReadEndToEndTestsDefaultGeo =
+  /*#__PURE__*/ createUseReadContract({
+    abi: endToEndTestsAbi,
+    functionName: 'DEFAULT_GEO',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"DEFAULT_REWARD"`
+ */
+export const useReadEndToEndTestsDefaultReward =
+  /*#__PURE__*/ createUseReadContract({
+    abi: endToEndTestsAbi,
+    functionName: 'DEFAULT_REWARD',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"INITIAL_BALANCE"`
+ */
+export const useReadEndToEndTestsInitialBalance =
+  /*#__PURE__*/ createUseReadContract({
+    abi: endToEndTestsAbi,
+    functionName: 'INITIAL_BALANCE',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"IS_TEST"`
+ */
+export const useReadEndToEndTestsIsTest = /*#__PURE__*/ createUseReadContract({
+  abi: endToEndTestsAbi,
+  functionName: 'IS_TEST',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"charity1"`
+ */
+export const useReadEndToEndTestsCharity1 = /*#__PURE__*/ createUseReadContract(
+  { abi: endToEndTestsAbi, functionName: 'charity1' },
+)
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"charity2"`
+ */
+export const useReadEndToEndTestsCharity2 = /*#__PURE__*/ createUseReadContract(
+  { abi: endToEndTestsAbi, functionName: 'charity2' },
+)
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"charity3"`
+ */
+export const useReadEndToEndTestsCharity3 = /*#__PURE__*/ createUseReadContract(
+  { abi: endToEndTestsAbi, functionName: 'charity3' },
+)
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"checkBalance"`
+ */
+export const useReadEndToEndTestsCheckBalance =
+  /*#__PURE__*/ createUseReadContract({
+    abi: endToEndTestsAbi,
+    functionName: 'checkBalance',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"createSecretSignature"`
+ */
+export const useReadEndToEndTestsCreateSecretSignature =
+  /*#__PURE__*/ createUseReadContract({
+    abi: endToEndTestsAbi,
+    functionName: 'createSecretSignature',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"delegate"`
+ */
+export const useReadEndToEndTestsDelegate = /*#__PURE__*/ createUseReadContract(
+  { abi: endToEndTestsAbi, functionName: 'delegate' },
+)
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"excludeArtifacts"`
+ */
+export const useReadEndToEndTestsExcludeArtifacts =
+  /*#__PURE__*/ createUseReadContract({
+    abi: endToEndTestsAbi,
+    functionName: 'excludeArtifacts',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"excludeContracts"`
+ */
+export const useReadEndToEndTestsExcludeContracts =
+  /*#__PURE__*/ createUseReadContract({
+    abi: endToEndTestsAbi,
+    functionName: 'excludeContracts',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"excludeSelectors"`
+ */
+export const useReadEndToEndTestsExcludeSelectors =
+  /*#__PURE__*/ createUseReadContract({
+    abi: endToEndTestsAbi,
+    functionName: 'excludeSelectors',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"excludeSenders"`
+ */
+export const useReadEndToEndTestsExcludeSenders =
+  /*#__PURE__*/ createUseReadContract({
+    abi: endToEndTestsAbi,
+    functionName: 'excludeSenders',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"failed"`
+ */
+export const useReadEndToEndTestsFailed = /*#__PURE__*/ createUseReadContract({
+  abi: endToEndTestsAbi,
+  functionName: 'failed',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"finder"`
+ */
+export const useReadEndToEndTestsFinder = /*#__PURE__*/ createUseReadContract({
+  abi: endToEndTestsAbi,
+  functionName: 'finder',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"finderPrivateKey"`
+ */
+export const useReadEndToEndTestsFinderPrivateKey =
+  /*#__PURE__*/ createUseReadContract({
+    abi: endToEndTestsAbi,
+    functionName: 'finderPrivateKey',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"getItemAddress"`
+ */
+export const useReadEndToEndTestsGetItemAddress =
+  /*#__PURE__*/ createUseReadContract({
+    abi: endToEndTestsAbi,
+    functionName: 'getItemAddress',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"getItemStatus"`
+ */
+export const useReadEndToEndTestsGetItemStatus =
+  /*#__PURE__*/ createUseReadContract({
+    abi: endToEndTestsAbi,
+    functionName: 'getItemStatus',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"laf"`
+ */
+export const useReadEndToEndTestsLaf = /*#__PURE__*/ createUseReadContract({
+  abi: endToEndTestsAbi,
+  functionName: 'laf',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"malicious"`
+ */
+export const useReadEndToEndTestsMalicious =
+  /*#__PURE__*/ createUseReadContract({
+    abi: endToEndTestsAbi,
+    functionName: 'malicious',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"maliciousPrivateKey"`
+ */
+export const useReadEndToEndTestsMaliciousPrivateKey =
+  /*#__PURE__*/ createUseReadContract({
+    abi: endToEndTestsAbi,
+    functionName: 'maliciousPrivateKey',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"owner"`
+ */
+export const useReadEndToEndTestsOwner = /*#__PURE__*/ createUseReadContract({
+  abi: endToEndTestsAbi,
+  functionName: 'owner',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"ownerPrivateKey"`
+ */
+export const useReadEndToEndTestsOwnerPrivateKey =
+  /*#__PURE__*/ createUseReadContract({
+    abi: endToEndTestsAbi,
+    functionName: 'ownerPrivateKey',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"rewardToken"`
+ */
+export const useReadEndToEndTestsRewardToken =
+  /*#__PURE__*/ createUseReadContract({
+    abi: endToEndTestsAbi,
+    functionName: 'rewardToken',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"supporter1"`
+ */
+export const useReadEndToEndTestsSupporter1 =
+  /*#__PURE__*/ createUseReadContract({
+    abi: endToEndTestsAbi,
+    functionName: 'supporter1',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"supporter2"`
+ */
+export const useReadEndToEndTestsSupporter2 =
+  /*#__PURE__*/ createUseReadContract({
+    abi: endToEndTestsAbi,
+    functionName: 'supporter2',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"supporter3"`
+ */
+export const useReadEndToEndTestsSupporter3 =
+  /*#__PURE__*/ createUseReadContract({
+    abi: endToEndTestsAbi,
+    functionName: 'supporter3',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"targetArtifactSelectors"`
+ */
+export const useReadEndToEndTestsTargetArtifactSelectors =
+  /*#__PURE__*/ createUseReadContract({
+    abi: endToEndTestsAbi,
+    functionName: 'targetArtifactSelectors',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"targetArtifacts"`
+ */
+export const useReadEndToEndTestsTargetArtifacts =
+  /*#__PURE__*/ createUseReadContract({
+    abi: endToEndTestsAbi,
+    functionName: 'targetArtifacts',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"targetContracts"`
+ */
+export const useReadEndToEndTestsTargetContracts =
+  /*#__PURE__*/ createUseReadContract({
+    abi: endToEndTestsAbi,
+    functionName: 'targetContracts',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"targetInterfaces"`
+ */
+export const useReadEndToEndTestsTargetInterfaces =
+  /*#__PURE__*/ createUseReadContract({
+    abi: endToEndTestsAbi,
+    functionName: 'targetInterfaces',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"targetSelectors"`
+ */
+export const useReadEndToEndTestsTargetSelectors =
+  /*#__PURE__*/ createUseReadContract({
+    abi: endToEndTestsAbi,
+    functionName: 'targetSelectors',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"targetSenders"`
+ */
+export const useReadEndToEndTestsTargetSenders =
+  /*#__PURE__*/ createUseReadContract({
+    abi: endToEndTestsAbi,
+    functionName: 'targetSenders',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"testSecret"`
+ */
+export const useReadEndToEndTestsTestSecret =
+  /*#__PURE__*/ createUseReadContract({
+    abi: endToEndTestsAbi,
+    functionName: 'testSecret',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"testSecretHash"`
+ */
+export const useReadEndToEndTestsTestSecretHash =
+  /*#__PURE__*/ createUseReadContract({
+    abi: endToEndTestsAbi,
+    functionName: 'testSecretHash',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link endToEndTestsAbi}__
+ */
+export const useWriteEndToEndTests = /*#__PURE__*/ createUseWriteContract({
+  abi: endToEndTestsAbi,
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"addSupport"`
+ */
+export const useWriteEndToEndTestsAddSupport =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: endToEndTestsAbi,
+    functionName: 'addSupport',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"advanceTime"`
+ */
+export const useWriteEndToEndTestsAdvanceTime =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: endToEndTestsAbi,
+    functionName: 'advanceTime',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"expectRevertWithError"`
+ */
+export const useWriteEndToEndTestsExpectRevertWithError =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: endToEndTestsAbi,
+    functionName: 'expectRevertWithError',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"registerTestItem"`
+ */
+export const useWriteEndToEndTestsRegisterTestItem =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: endToEndTestsAbi,
+    functionName: 'registerTestItem',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"reportItemLost"`
+ */
+export const useWriteEndToEndTestsReportItemLost =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: endToEndTestsAbi,
+    functionName: 'reportItemLost',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"setUp"`
+ */
+export const useWriteEndToEndTestsSetUp = /*#__PURE__*/ createUseWriteContract({
+  abi: endToEndTestsAbi,
+  functionName: 'setUp',
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"test_E2E_CompleteHappyPathJourney"`
+ */
+export const useWriteEndToEndTestsTestE2ECompleteHappyPathJourney =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: endToEndTestsAbi,
+    functionName: 'test_E2E_CompleteHappyPathJourney',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"test_E2E_ComprehensiveTestSuite"`
+ */
+export const useWriteEndToEndTestsTestE2EComprehensiveTestSuite =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: endToEndTestsAbi,
+    functionName: 'test_E2E_ComprehensiveTestSuite',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"test_E2E_CrossPlatformWalletCompatibility"`
+ */
+export const useWriteEndToEndTestsTestE2ECrossPlatformWalletCompatibility =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: endToEndTestsAbi,
+    functionName: 'test_E2E_CrossPlatformWalletCompatibility',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"test_E2E_ErrorRecoveryAndResilience"`
+ */
+export const useWriteEndToEndTestsTestE2EErrorRecoveryAndResilience =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: endToEndTestsAbi,
+    functionName: 'test_E2E_ErrorRecoveryAndResilience',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"test_E2E_MultiActorConcurrentScenario"`
+ */
+export const useWriteEndToEndTestsTestE2EMultiActorConcurrentScenario =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: endToEndTestsAbi,
+    functionName: 'test_E2E_MultiActorConcurrentScenario',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"test_E2E_ProductionLikeStressTest"`
+ */
+export const useWriteEndToEndTestsTestE2EProductionLikeStressTest =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: endToEndTestsAbi,
+    functionName: 'test_E2E_ProductionLikeStressTest',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"test_E2E_RealWorldTimingAndGas"`
+ */
+export const useWriteEndToEndTestsTestE2ERealWorldTimingAndGas =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: endToEndTestsAbi,
+    functionName: 'test_E2E_RealWorldTimingAndGas',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link endToEndTestsAbi}__
+ */
+export const useSimulateEndToEndTests = /*#__PURE__*/ createUseSimulateContract(
+  { abi: endToEndTestsAbi },
+)
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"addSupport"`
+ */
+export const useSimulateEndToEndTestsAddSupport =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: endToEndTestsAbi,
+    functionName: 'addSupport',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"advanceTime"`
+ */
+export const useSimulateEndToEndTestsAdvanceTime =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: endToEndTestsAbi,
+    functionName: 'advanceTime',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"expectRevertWithError"`
+ */
+export const useSimulateEndToEndTestsExpectRevertWithError =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: endToEndTestsAbi,
+    functionName: 'expectRevertWithError',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"registerTestItem"`
+ */
+export const useSimulateEndToEndTestsRegisterTestItem =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: endToEndTestsAbi,
+    functionName: 'registerTestItem',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"reportItemLost"`
+ */
+export const useSimulateEndToEndTestsReportItemLost =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: endToEndTestsAbi,
+    functionName: 'reportItemLost',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"setUp"`
+ */
+export const useSimulateEndToEndTestsSetUp =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: endToEndTestsAbi,
+    functionName: 'setUp',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"test_E2E_CompleteHappyPathJourney"`
+ */
+export const useSimulateEndToEndTestsTestE2ECompleteHappyPathJourney =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: endToEndTestsAbi,
+    functionName: 'test_E2E_CompleteHappyPathJourney',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"test_E2E_ComprehensiveTestSuite"`
+ */
+export const useSimulateEndToEndTestsTestE2EComprehensiveTestSuite =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: endToEndTestsAbi,
+    functionName: 'test_E2E_ComprehensiveTestSuite',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"test_E2E_CrossPlatformWalletCompatibility"`
+ */
+export const useSimulateEndToEndTestsTestE2ECrossPlatformWalletCompatibility =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: endToEndTestsAbi,
+    functionName: 'test_E2E_CrossPlatformWalletCompatibility',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"test_E2E_ErrorRecoveryAndResilience"`
+ */
+export const useSimulateEndToEndTestsTestE2EErrorRecoveryAndResilience =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: endToEndTestsAbi,
+    functionName: 'test_E2E_ErrorRecoveryAndResilience',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"test_E2E_MultiActorConcurrentScenario"`
+ */
+export const useSimulateEndToEndTestsTestE2EMultiActorConcurrentScenario =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: endToEndTestsAbi,
+    functionName: 'test_E2E_MultiActorConcurrentScenario',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"test_E2E_ProductionLikeStressTest"`
+ */
+export const useSimulateEndToEndTestsTestE2EProductionLikeStressTest =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: endToEndTestsAbi,
+    functionName: 'test_E2E_ProductionLikeStressTest',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link endToEndTestsAbi}__ and `functionName` set to `"test_E2E_RealWorldTimingAndGas"`
+ */
+export const useSimulateEndToEndTestsTestE2ERealWorldTimingAndGas =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: endToEndTestsAbi,
+    functionName: 'test_E2E_RealWorldTimingAndGas',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link endToEndTestsAbi}__
+ */
+export const useWatchEndToEndTestsEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({ abi: endToEndTestsAbi })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link endToEndTestsAbi}__ and `eventName` set to `"log"`
+ */
+export const useWatchEndToEndTestsLogEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: endToEndTestsAbi,
+    eventName: 'log',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link endToEndTestsAbi}__ and `eventName` set to `"log_address"`
+ */
+export const useWatchEndToEndTestsLogAddressEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: endToEndTestsAbi,
+    eventName: 'log_address',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link endToEndTestsAbi}__ and `eventName` set to `"log_array"`
+ */
+export const useWatchEndToEndTestsLogArrayEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: endToEndTestsAbi,
+    eventName: 'log_array',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link endToEndTestsAbi}__ and `eventName` set to `"log_bytes"`
+ */
+export const useWatchEndToEndTestsLogBytesEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: endToEndTestsAbi,
+    eventName: 'log_bytes',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link endToEndTestsAbi}__ and `eventName` set to `"log_bytes32"`
+ */
+export const useWatchEndToEndTestsLogBytes32Event =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: endToEndTestsAbi,
+    eventName: 'log_bytes32',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link endToEndTestsAbi}__ and `eventName` set to `"log_int"`
+ */
+export const useWatchEndToEndTestsLogIntEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: endToEndTestsAbi,
+    eventName: 'log_int',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link endToEndTestsAbi}__ and `eventName` set to `"log_named_address"`
+ */
+export const useWatchEndToEndTestsLogNamedAddressEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: endToEndTestsAbi,
+    eventName: 'log_named_address',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link endToEndTestsAbi}__ and `eventName` set to `"log_named_array"`
+ */
+export const useWatchEndToEndTestsLogNamedArrayEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: endToEndTestsAbi,
+    eventName: 'log_named_array',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link endToEndTestsAbi}__ and `eventName` set to `"log_named_bytes"`
+ */
+export const useWatchEndToEndTestsLogNamedBytesEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: endToEndTestsAbi,
+    eventName: 'log_named_bytes',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link endToEndTestsAbi}__ and `eventName` set to `"log_named_bytes32"`
+ */
+export const useWatchEndToEndTestsLogNamedBytes32Event =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: endToEndTestsAbi,
+    eventName: 'log_named_bytes32',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link endToEndTestsAbi}__ and `eventName` set to `"log_named_decimal_int"`
+ */
+export const useWatchEndToEndTestsLogNamedDecimalIntEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: endToEndTestsAbi,
+    eventName: 'log_named_decimal_int',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link endToEndTestsAbi}__ and `eventName` set to `"log_named_decimal_uint"`
+ */
+export const useWatchEndToEndTestsLogNamedDecimalUintEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: endToEndTestsAbi,
+    eventName: 'log_named_decimal_uint',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link endToEndTestsAbi}__ and `eventName` set to `"log_named_int"`
+ */
+export const useWatchEndToEndTestsLogNamedIntEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: endToEndTestsAbi,
+    eventName: 'log_named_int',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link endToEndTestsAbi}__ and `eventName` set to `"log_named_string"`
+ */
+export const useWatchEndToEndTestsLogNamedStringEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: endToEndTestsAbi,
+    eventName: 'log_named_string',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link endToEndTestsAbi}__ and `eventName` set to `"log_named_uint"`
+ */
+export const useWatchEndToEndTestsLogNamedUintEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: endToEndTestsAbi,
+    eventName: 'log_named_uint',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link endToEndTestsAbi}__ and `eventName` set to `"log_string"`
+ */
+export const useWatchEndToEndTestsLogStringEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: endToEndTestsAbi,
+    eventName: 'log_string',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link endToEndTestsAbi}__ and `eventName` set to `"log_uint"`
+ */
+export const useWatchEndToEndTestsLogUintEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: endToEndTestsAbi,
+    eventName: 'log_uint',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link endToEndTestsAbi}__ and `eventName` set to `"logs"`
+ */
+export const useWatchEndToEndTestsLogsEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: endToEndTestsAbi,
+    eventName: 'logs',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__
+ */
+export const useReadGasOptimizationTests = /*#__PURE__*/ createUseReadContract({
+  abi: gasOptimizationTestsAbi,
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"DEFAULT_COMMENT"`
+ */
+export const useReadGasOptimizationTestsDefaultComment =
+  /*#__PURE__*/ createUseReadContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'DEFAULT_COMMENT',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"DEFAULT_GEO"`
+ */
+export const useReadGasOptimizationTestsDefaultGeo =
+  /*#__PURE__*/ createUseReadContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'DEFAULT_GEO',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"DEFAULT_REWARD"`
+ */
+export const useReadGasOptimizationTestsDefaultReward =
+  /*#__PURE__*/ createUseReadContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'DEFAULT_REWARD',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"INITIAL_BALANCE"`
+ */
+export const useReadGasOptimizationTestsInitialBalance =
+  /*#__PURE__*/ createUseReadContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'INITIAL_BALANCE',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"IS_TEST"`
+ */
+export const useReadGasOptimizationTestsIsTest =
+  /*#__PURE__*/ createUseReadContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'IS_TEST',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"charity1"`
+ */
+export const useReadGasOptimizationTestsCharity1 =
+  /*#__PURE__*/ createUseReadContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'charity1',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"charity2"`
+ */
+export const useReadGasOptimizationTestsCharity2 =
+  /*#__PURE__*/ createUseReadContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'charity2',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"checkBalance"`
+ */
+export const useReadGasOptimizationTestsCheckBalance =
+  /*#__PURE__*/ createUseReadContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'checkBalance',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"createSecretSignature"`
+ */
+export const useReadGasOptimizationTestsCreateSecretSignature =
+  /*#__PURE__*/ createUseReadContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'createSecretSignature',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"excludeArtifacts"`
+ */
+export const useReadGasOptimizationTestsExcludeArtifacts =
+  /*#__PURE__*/ createUseReadContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'excludeArtifacts',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"excludeContracts"`
+ */
+export const useReadGasOptimizationTestsExcludeContracts =
+  /*#__PURE__*/ createUseReadContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'excludeContracts',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"excludeSelectors"`
+ */
+export const useReadGasOptimizationTestsExcludeSelectors =
+  /*#__PURE__*/ createUseReadContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'excludeSelectors',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"excludeSenders"`
+ */
+export const useReadGasOptimizationTestsExcludeSenders =
+  /*#__PURE__*/ createUseReadContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'excludeSenders',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"failed"`
+ */
+export const useReadGasOptimizationTestsFailed =
+  /*#__PURE__*/ createUseReadContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'failed',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"finder"`
+ */
+export const useReadGasOptimizationTestsFinder =
+  /*#__PURE__*/ createUseReadContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'finder',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"finderPrivateKey"`
+ */
+export const useReadGasOptimizationTestsFinderPrivateKey =
+  /*#__PURE__*/ createUseReadContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'finderPrivateKey',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"getItemAddress"`
+ */
+export const useReadGasOptimizationTestsGetItemAddress =
+  /*#__PURE__*/ createUseReadContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'getItemAddress',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"getItemStatus"`
+ */
+export const useReadGasOptimizationTestsGetItemStatus =
+  /*#__PURE__*/ createUseReadContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'getItemStatus',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"laf"`
+ */
+export const useReadGasOptimizationTestsLaf =
+  /*#__PURE__*/ createUseReadContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'laf',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"malicious"`
+ */
+export const useReadGasOptimizationTestsMalicious =
+  /*#__PURE__*/ createUseReadContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'malicious',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"maliciousPrivateKey"`
+ */
+export const useReadGasOptimizationTestsMaliciousPrivateKey =
+  /*#__PURE__*/ createUseReadContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'maliciousPrivateKey',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"owner"`
+ */
+export const useReadGasOptimizationTestsOwner =
+  /*#__PURE__*/ createUseReadContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'owner',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"ownerPrivateKey"`
+ */
+export const useReadGasOptimizationTestsOwnerPrivateKey =
+  /*#__PURE__*/ createUseReadContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'ownerPrivateKey',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"rewardToken"`
+ */
+export const useReadGasOptimizationTestsRewardToken =
+  /*#__PURE__*/ createUseReadContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'rewardToken',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"supporter1"`
+ */
+export const useReadGasOptimizationTestsSupporter1 =
+  /*#__PURE__*/ createUseReadContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'supporter1',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"supporter2"`
+ */
+export const useReadGasOptimizationTestsSupporter2 =
+  /*#__PURE__*/ createUseReadContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'supporter2',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"targetArtifactSelectors"`
+ */
+export const useReadGasOptimizationTestsTargetArtifactSelectors =
+  /*#__PURE__*/ createUseReadContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'targetArtifactSelectors',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"targetArtifacts"`
+ */
+export const useReadGasOptimizationTestsTargetArtifacts =
+  /*#__PURE__*/ createUseReadContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'targetArtifacts',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"targetContracts"`
+ */
+export const useReadGasOptimizationTestsTargetContracts =
+  /*#__PURE__*/ createUseReadContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'targetContracts',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"targetInterfaces"`
+ */
+export const useReadGasOptimizationTestsTargetInterfaces =
+  /*#__PURE__*/ createUseReadContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'targetInterfaces',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"targetSelectors"`
+ */
+export const useReadGasOptimizationTestsTargetSelectors =
+  /*#__PURE__*/ createUseReadContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'targetSelectors',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"targetSenders"`
+ */
+export const useReadGasOptimizationTestsTargetSenders =
+  /*#__PURE__*/ createUseReadContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'targetSenders',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"testSecret"`
+ */
+export const useReadGasOptimizationTestsTestSecret =
+  /*#__PURE__*/ createUseReadContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'testSecret',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"testSecretHash"`
+ */
+export const useReadGasOptimizationTestsTestSecretHash =
+  /*#__PURE__*/ createUseReadContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'testSecretHash',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__
+ */
+export const useWriteGasOptimizationTests =
+  /*#__PURE__*/ createUseWriteContract({ abi: gasOptimizationTestsAbi })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"addSupport"`
+ */
+export const useWriteGasOptimizationTestsAddSupport =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'addSupport',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"advanceTime"`
+ */
+export const useWriteGasOptimizationTestsAdvanceTime =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'advanceTime',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"expectRevertWithError"`
+ */
+export const useWriteGasOptimizationTestsExpectRevertWithError =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'expectRevertWithError',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"registerTestItem"`
+ */
+export const useWriteGasOptimizationTestsRegisterTestItem =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'registerTestItem',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"reportItemLost"`
+ */
+export const useWriteGasOptimizationTestsReportItemLost =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'reportItemLost',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"setUp"`
+ */
+export const useWriteGasOptimizationTestsSetUp =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'setUp',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"test_BatchOperationsGasEfficiency"`
+ */
+export const useWriteGasOptimizationTestsTestBatchOperationsGasEfficiency =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'test_BatchOperationsGasEfficiency',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"test_CompleteUserJourneyGasUsage"`
+ */
+export const useWriteGasOptimizationTestsTestCompleteUserJourneyGasUsage =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'test_CompleteUserJourneyGasUsage',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"test_FoundReportingGasUsage"`
+ */
+export const useWriteGasOptimizationTestsTestFoundReportingGasUsage =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'test_FoundReportingGasUsage',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"test_LostReportingGasUsage"`
+ */
+export const useWriteGasOptimizationTestsTestLostReportingGasUsage =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'test_LostReportingGasUsage',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"test_RegistrationGasUsage"`
+ */
+export const useWriteGasOptimizationTestsTestRegistrationGasUsage =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'test_RegistrationGasUsage',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"test_ReturnedGasUsage"`
+ */
+export const useWriteGasOptimizationTestsTestReturnedGasUsage =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'test_ReturnedGasUsage',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"test_RevokeLostGasUsage"`
+ */
+export const useWriteGasOptimizationTestsTestRevokeLostGasUsage =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'test_RevokeLostGasUsage',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"test_SupportGasUsage"`
+ */
+export const useWriteGasOptimizationTestsTestSupportGasUsage =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'test_SupportGasUsage',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"test_WithdrawGasUsage"`
+ */
+export const useWriteGasOptimizationTestsTestWithdrawGasUsage =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'test_WithdrawGasUsage',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__
+ */
+export const useSimulateGasOptimizationTests =
+  /*#__PURE__*/ createUseSimulateContract({ abi: gasOptimizationTestsAbi })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"addSupport"`
+ */
+export const useSimulateGasOptimizationTestsAddSupport =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'addSupport',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"advanceTime"`
+ */
+export const useSimulateGasOptimizationTestsAdvanceTime =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'advanceTime',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"expectRevertWithError"`
+ */
+export const useSimulateGasOptimizationTestsExpectRevertWithError =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'expectRevertWithError',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"registerTestItem"`
+ */
+export const useSimulateGasOptimizationTestsRegisterTestItem =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'registerTestItem',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"reportItemLost"`
+ */
+export const useSimulateGasOptimizationTestsReportItemLost =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'reportItemLost',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"setUp"`
+ */
+export const useSimulateGasOptimizationTestsSetUp =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'setUp',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"test_BatchOperationsGasEfficiency"`
+ */
+export const useSimulateGasOptimizationTestsTestBatchOperationsGasEfficiency =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'test_BatchOperationsGasEfficiency',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"test_CompleteUserJourneyGasUsage"`
+ */
+export const useSimulateGasOptimizationTestsTestCompleteUserJourneyGasUsage =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'test_CompleteUserJourneyGasUsage',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"test_FoundReportingGasUsage"`
+ */
+export const useSimulateGasOptimizationTestsTestFoundReportingGasUsage =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'test_FoundReportingGasUsage',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"test_LostReportingGasUsage"`
+ */
+export const useSimulateGasOptimizationTestsTestLostReportingGasUsage =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'test_LostReportingGasUsage',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"test_RegistrationGasUsage"`
+ */
+export const useSimulateGasOptimizationTestsTestRegistrationGasUsage =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'test_RegistrationGasUsage',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"test_ReturnedGasUsage"`
+ */
+export const useSimulateGasOptimizationTestsTestReturnedGasUsage =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'test_ReturnedGasUsage',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"test_RevokeLostGasUsage"`
+ */
+export const useSimulateGasOptimizationTestsTestRevokeLostGasUsage =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'test_RevokeLostGasUsage',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"test_SupportGasUsage"`
+ */
+export const useSimulateGasOptimizationTestsTestSupportGasUsage =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'test_SupportGasUsage',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `functionName` set to `"test_WithdrawGasUsage"`
+ */
+export const useSimulateGasOptimizationTestsTestWithdrawGasUsage =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: gasOptimizationTestsAbi,
+    functionName: 'test_WithdrawGasUsage',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link gasOptimizationTestsAbi}__
+ */
+export const useWatchGasOptimizationTestsEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({ abi: gasOptimizationTestsAbi })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `eventName` set to `"log"`
+ */
+export const useWatchGasOptimizationTestsLogEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: gasOptimizationTestsAbi,
+    eventName: 'log',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `eventName` set to `"log_address"`
+ */
+export const useWatchGasOptimizationTestsLogAddressEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: gasOptimizationTestsAbi,
+    eventName: 'log_address',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `eventName` set to `"log_array"`
+ */
+export const useWatchGasOptimizationTestsLogArrayEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: gasOptimizationTestsAbi,
+    eventName: 'log_array',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `eventName` set to `"log_bytes"`
+ */
+export const useWatchGasOptimizationTestsLogBytesEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: gasOptimizationTestsAbi,
+    eventName: 'log_bytes',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `eventName` set to `"log_bytes32"`
+ */
+export const useWatchGasOptimizationTestsLogBytes32Event =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: gasOptimizationTestsAbi,
+    eventName: 'log_bytes32',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `eventName` set to `"log_int"`
+ */
+export const useWatchGasOptimizationTestsLogIntEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: gasOptimizationTestsAbi,
+    eventName: 'log_int',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `eventName` set to `"log_named_address"`
+ */
+export const useWatchGasOptimizationTestsLogNamedAddressEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: gasOptimizationTestsAbi,
+    eventName: 'log_named_address',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `eventName` set to `"log_named_array"`
+ */
+export const useWatchGasOptimizationTestsLogNamedArrayEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: gasOptimizationTestsAbi,
+    eventName: 'log_named_array',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `eventName` set to `"log_named_bytes"`
+ */
+export const useWatchGasOptimizationTestsLogNamedBytesEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: gasOptimizationTestsAbi,
+    eventName: 'log_named_bytes',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `eventName` set to `"log_named_bytes32"`
+ */
+export const useWatchGasOptimizationTestsLogNamedBytes32Event =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: gasOptimizationTestsAbi,
+    eventName: 'log_named_bytes32',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `eventName` set to `"log_named_decimal_int"`
+ */
+export const useWatchGasOptimizationTestsLogNamedDecimalIntEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: gasOptimizationTestsAbi,
+    eventName: 'log_named_decimal_int',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `eventName` set to `"log_named_decimal_uint"`
+ */
+export const useWatchGasOptimizationTestsLogNamedDecimalUintEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: gasOptimizationTestsAbi,
+    eventName: 'log_named_decimal_uint',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `eventName` set to `"log_named_int"`
+ */
+export const useWatchGasOptimizationTestsLogNamedIntEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: gasOptimizationTestsAbi,
+    eventName: 'log_named_int',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `eventName` set to `"log_named_string"`
+ */
+export const useWatchGasOptimizationTestsLogNamedStringEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: gasOptimizationTestsAbi,
+    eventName: 'log_named_string',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `eventName` set to `"log_named_uint"`
+ */
+export const useWatchGasOptimizationTestsLogNamedUintEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: gasOptimizationTestsAbi,
+    eventName: 'log_named_uint',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `eventName` set to `"log_string"`
+ */
+export const useWatchGasOptimizationTestsLogStringEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: gasOptimizationTestsAbi,
+    eventName: 'log_string',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `eventName` set to `"log_uint"`
+ */
+export const useWatchGasOptimizationTestsLogUintEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: gasOptimizationTestsAbi,
+    eventName: 'log_uint',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link gasOptimizationTestsAbi}__ and `eventName` set to `"logs"`
+ */
+export const useWatchGasOptimizationTestsLogsEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: gasOptimizationTestsAbi,
+    eventName: 'logs',
   })
 
 /**
@@ -8643,485 +15027,753 @@ export const useWatchInitializableInitializedEvent =
   })
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link integrationTestsAbi}__
  */
-export const useReadItem = /*#__PURE__*/ createUseReadContract({ abi: itemAbi })
-
-/**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"BASIS_POINTS"`
- */
-export const useReadItemBasisPoints = /*#__PURE__*/ createUseReadContract({
-  abi: itemAbi,
-  functionName: 'BASIS_POINTS',
+export const useReadIntegrationTests = /*#__PURE__*/ createUseReadContract({
+  abi: integrationTestsAbi,
 })
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"DAY"`
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"DEFAULT_COMMENT"`
  */
-export const useReadItemDay = /*#__PURE__*/ createUseReadContract({
-  abi: itemAbi,
-  functionName: 'DAY',
+export const useReadIntegrationTestsDefaultComment =
+  /*#__PURE__*/ createUseReadContract({
+    abi: integrationTestsAbi,
+    functionName: 'DEFAULT_COMMENT',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"DEFAULT_GEO"`
+ */
+export const useReadIntegrationTestsDefaultGeo =
+  /*#__PURE__*/ createUseReadContract({
+    abi: integrationTestsAbi,
+    functionName: 'DEFAULT_GEO',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"DEFAULT_REWARD"`
+ */
+export const useReadIntegrationTestsDefaultReward =
+  /*#__PURE__*/ createUseReadContract({
+    abi: integrationTestsAbi,
+    functionName: 'DEFAULT_REWARD',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"INITIAL_BALANCE"`
+ */
+export const useReadIntegrationTestsInitialBalance =
+  /*#__PURE__*/ createUseReadContract({
+    abi: integrationTestsAbi,
+    functionName: 'INITIAL_BALANCE',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"IS_TEST"`
+ */
+export const useReadIntegrationTestsIsTest =
+  /*#__PURE__*/ createUseReadContract({
+    abi: integrationTestsAbi,
+    functionName: 'IS_TEST',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"charity1"`
+ */
+export const useReadIntegrationTestsCharity1 =
+  /*#__PURE__*/ createUseReadContract({
+    abi: integrationTestsAbi,
+    functionName: 'charity1',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"charity2"`
+ */
+export const useReadIntegrationTestsCharity2 =
+  /*#__PURE__*/ createUseReadContract({
+    abi: integrationTestsAbi,
+    functionName: 'charity2',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"checkBalance"`
+ */
+export const useReadIntegrationTestsCheckBalance =
+  /*#__PURE__*/ createUseReadContract({
+    abi: integrationTestsAbi,
+    functionName: 'checkBalance',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"createSecretSignature"`
+ */
+export const useReadIntegrationTestsCreateSecretSignature =
+  /*#__PURE__*/ createUseReadContract({
+    abi: integrationTestsAbi,
+    functionName: 'createSecretSignature',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"daiToken"`
+ */
+export const useReadIntegrationTestsDaiToken =
+  /*#__PURE__*/ createUseReadContract({
+    abi: integrationTestsAbi,
+    functionName: 'daiToken',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"excludeArtifacts"`
+ */
+export const useReadIntegrationTestsExcludeArtifacts =
+  /*#__PURE__*/ createUseReadContract({
+    abi: integrationTestsAbi,
+    functionName: 'excludeArtifacts',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"excludeContracts"`
+ */
+export const useReadIntegrationTestsExcludeContracts =
+  /*#__PURE__*/ createUseReadContract({
+    abi: integrationTestsAbi,
+    functionName: 'excludeContracts',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"excludeSelectors"`
+ */
+export const useReadIntegrationTestsExcludeSelectors =
+  /*#__PURE__*/ createUseReadContract({
+    abi: integrationTestsAbi,
+    functionName: 'excludeSelectors',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"excludeSenders"`
+ */
+export const useReadIntegrationTestsExcludeSenders =
+  /*#__PURE__*/ createUseReadContract({
+    abi: integrationTestsAbi,
+    functionName: 'excludeSenders',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"failed"`
+ */
+export const useReadIntegrationTestsFailed =
+  /*#__PURE__*/ createUseReadContract({
+    abi: integrationTestsAbi,
+    functionName: 'failed',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"finder"`
+ */
+export const useReadIntegrationTestsFinder =
+  /*#__PURE__*/ createUseReadContract({
+    abi: integrationTestsAbi,
+    functionName: 'finder',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"finderPrivateKey"`
+ */
+export const useReadIntegrationTestsFinderPrivateKey =
+  /*#__PURE__*/ createUseReadContract({
+    abi: integrationTestsAbi,
+    functionName: 'finderPrivateKey',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"getItemAddress"`
+ */
+export const useReadIntegrationTestsGetItemAddress =
+  /*#__PURE__*/ createUseReadContract({
+    abi: integrationTestsAbi,
+    functionName: 'getItemAddress',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"getItemStatus"`
+ */
+export const useReadIntegrationTestsGetItemStatus =
+  /*#__PURE__*/ createUseReadContract({
+    abi: integrationTestsAbi,
+    functionName: 'getItemStatus',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"laf"`
+ */
+export const useReadIntegrationTestsLaf = /*#__PURE__*/ createUseReadContract({
+  abi: integrationTestsAbi,
+  functionName: 'laf',
 })
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"MAX_CHARITY_FEE_BPS"`
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"malicious"`
  */
-export const useReadItemMaxCharityFeeBps = /*#__PURE__*/ createUseReadContract({
-  abi: itemAbi,
-  functionName: 'MAX_CHARITY_FEE_BPS',
-})
+export const useReadIntegrationTestsMalicious =
+  /*#__PURE__*/ createUseReadContract({
+    abi: integrationTestsAbi,
+    functionName: 'malicious',
+  })
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"MAX_DELEGATE_FEE_BPS"`
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"maliciousPrivateKey"`
  */
-export const useReadItemMaxDelegateFeeBps = /*#__PURE__*/ createUseReadContract(
-  { abi: itemAbi, functionName: 'MAX_DELEGATE_FEE_BPS' },
+export const useReadIntegrationTestsMaliciousPrivateKey =
+  /*#__PURE__*/ createUseReadContract({
+    abi: integrationTestsAbi,
+    functionName: 'maliciousPrivateKey',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"owner"`
+ */
+export const useReadIntegrationTestsOwner = /*#__PURE__*/ createUseReadContract(
+  { abi: integrationTestsAbi, functionName: 'owner' },
 )
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"MAX_FEE_BPS"`
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"ownerPrivateKey"`
  */
-export const useReadItemMaxFeeBps = /*#__PURE__*/ createUseReadContract({
-  abi: itemAbi,
-  functionName: 'MAX_FEE_BPS',
-})
-
-/**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"MAX_IMMEDIATE_REWARD_BPS"`
- */
-export const useReadItemMaxImmediateRewardBps =
+export const useReadIntegrationTestsOwnerPrivateKey =
   /*#__PURE__*/ createUseReadContract({
-    abi: itemAbi,
-    functionName: 'MAX_IMMEDIATE_REWARD_BPS',
+    abi: integrationTestsAbi,
+    functionName: 'ownerPrivateKey',
   })
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"MAX_NON_RETURN_REWARD_BPS"`
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"rewardToken"`
  */
-export const useReadItemMaxNonReturnRewardBps =
+export const useReadIntegrationTestsRewardToken =
   /*#__PURE__*/ createUseReadContract({
-    abi: itemAbi,
-    functionName: 'MAX_NON_RETURN_REWARD_BPS',
+    abi: integrationTestsAbi,
+    functionName: 'rewardToken',
   })
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"MIN_CHARITY_FEE_BPS"`
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"supporter1"`
  */
-export const useReadItemMinCharityFeeBps = /*#__PURE__*/ createUseReadContract({
-  abi: itemAbi,
-  functionName: 'MIN_CHARITY_FEE_BPS',
-})
-
-/**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"MIN_DELEGATE_FEE_BPS"`
- */
-export const useReadItemMinDelegateFeeBps = /*#__PURE__*/ createUseReadContract(
-  { abi: itemAbi, functionName: 'MIN_DELEGATE_FEE_BPS' },
-)
-
-/**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"MIN_FEE_BPS"`
- */
-export const useReadItemMinFeeBps = /*#__PURE__*/ createUseReadContract({
-  abi: itemAbi,
-  functionName: 'MIN_FEE_BPS',
-})
-
-/**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"MIN_IMMEDIATE_REWARD_BPS"`
- */
-export const useReadItemMinImmediateRewardBps =
+export const useReadIntegrationTestsSupporter1 =
   /*#__PURE__*/ createUseReadContract({
-    abi: itemAbi,
-    functionName: 'MIN_IMMEDIATE_REWARD_BPS',
+    abi: integrationTestsAbi,
+    functionName: 'supporter1',
   })
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"MIN_NON_RETURN_REWARD_BPS"`
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"supporter2"`
  */
-export const useReadItemMinNonReturnRewardBps =
+export const useReadIntegrationTestsSupporter2 =
   /*#__PURE__*/ createUseReadContract({
-    abi: itemAbi,
-    functionName: 'MIN_NON_RETURN_REWARD_BPS',
+    abi: integrationTestsAbi,
+    functionName: 'supporter2',
   })
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"MONTH"`
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"targetArtifactSelectors"`
  */
-export const useReadItemMonth = /*#__PURE__*/ createUseReadContract({
-  abi: itemAbi,
-  functionName: 'MONTH',
+export const useReadIntegrationTestsTargetArtifactSelectors =
+  /*#__PURE__*/ createUseReadContract({
+    abi: integrationTestsAbi,
+    functionName: 'targetArtifactSelectors',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"targetArtifacts"`
+ */
+export const useReadIntegrationTestsTargetArtifacts =
+  /*#__PURE__*/ createUseReadContract({
+    abi: integrationTestsAbi,
+    functionName: 'targetArtifacts',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"targetContracts"`
+ */
+export const useReadIntegrationTestsTargetContracts =
+  /*#__PURE__*/ createUseReadContract({
+    abi: integrationTestsAbi,
+    functionName: 'targetContracts',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"targetInterfaces"`
+ */
+export const useReadIntegrationTestsTargetInterfaces =
+  /*#__PURE__*/ createUseReadContract({
+    abi: integrationTestsAbi,
+    functionName: 'targetInterfaces',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"targetSelectors"`
+ */
+export const useReadIntegrationTestsTargetSelectors =
+  /*#__PURE__*/ createUseReadContract({
+    abi: integrationTestsAbi,
+    functionName: 'targetSelectors',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"targetSenders"`
+ */
+export const useReadIntegrationTestsTargetSenders =
+  /*#__PURE__*/ createUseReadContract({
+    abi: integrationTestsAbi,
+    functionName: 'targetSenders',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"testSecret"`
+ */
+export const useReadIntegrationTestsTestSecret =
+  /*#__PURE__*/ createUseReadContract({
+    abi: integrationTestsAbi,
+    functionName: 'testSecret',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"testSecretHash"`
+ */
+export const useReadIntegrationTestsTestSecretHash =
+  /*#__PURE__*/ createUseReadContract({
+    abi: integrationTestsAbi,
+    functionName: 'testSecretHash',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"wethToken"`
+ */
+export const useReadIntegrationTestsWethToken =
+  /*#__PURE__*/ createUseReadContract({
+    abi: integrationTestsAbi,
+    functionName: 'wethToken',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link integrationTestsAbi}__
+ */
+export const useWriteIntegrationTests = /*#__PURE__*/ createUseWriteContract({
+  abi: integrationTestsAbi,
 })
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"WEEK"`
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"addSupport"`
  */
-export const useReadItemWeek = /*#__PURE__*/ createUseReadContract({
-  abi: itemAbi,
-  functionName: 'WEEK',
-})
+export const useWriteIntegrationTestsAddSupport =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: integrationTestsAbi,
+    functionName: 'addSupport',
+  })
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"YEAR"`
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"advanceTime"`
  */
-export const useReadItemYear = /*#__PURE__*/ createUseReadContract({
-  abi: itemAbi,
-  functionName: 'YEAR',
-})
+export const useWriteIntegrationTestsAdvanceTime =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: integrationTestsAbi,
+    functionName: 'advanceTime',
+  })
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"comment"`
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"expectRevertWithError"`
  */
-export const useReadItemComment = /*#__PURE__*/ createUseReadContract({
-  abi: itemAbi,
-  functionName: 'comment',
-})
+export const useWriteIntegrationTestsExpectRevertWithError =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: integrationTestsAbi,
+    functionName: 'expectRevertWithError',
+  })
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"config"`
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"registerTestItem"`
  */
-export const useReadItemConfig = /*#__PURE__*/ createUseReadContract({
-  abi: itemAbi,
-  functionName: 'config',
-})
+export const useWriteIntegrationTestsRegisterTestItem =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: integrationTestsAbi,
+    functionName: 'registerTestItem',
+  })
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"cycle"`
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"reportItemLost"`
  */
-export const useReadItemCycle = /*#__PURE__*/ createUseReadContract({
-  abi: itemAbi,
-  functionName: 'cycle',
-})
+export const useWriteIntegrationTestsReportItemLost =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: integrationTestsAbi,
+    functionName: 'reportItemLost',
+  })
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"delegate"`
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"setUp"`
  */
-export const useReadItemDelegate = /*#__PURE__*/ createUseReadContract({
-  abi: itemAbi,
-  functionName: 'delegate',
-})
+export const useWriteIntegrationTestsSetUp =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: integrationTestsAbi,
+    functionName: 'setUp',
+  })
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"delegateFee"`
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"test_CharityDistributionIntegration"`
  */
-export const useReadItemDelegateFee = /*#__PURE__*/ createUseReadContract({
-  abi: itemAbi,
-  functionName: 'delegateFee',
-})
+export const useWriteIntegrationTestsTestCharityDistributionIntegration =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: integrationTestsAbi,
+    functionName: 'test_CharityDistributionIntegration',
+  })
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"delegateUpdatedTs"`
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"test_ConfigIntegration"`
  */
-export const useReadItemDelegateUpdatedTs = /*#__PURE__*/ createUseReadContract(
-  { abi: itemAbi, functionName: 'delegateUpdatedTs' },
-)
+export const useWriteIntegrationTestsTestConfigIntegration =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: integrationTestsAbi,
+    functionName: 'test_ConfigIntegration',
+  })
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"detailsUpdatedTs"`
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"test_CrossContractStateSync"`
  */
-export const useReadItemDetailsUpdatedTs = /*#__PURE__*/ createUseReadContract({
-  abi: itemAbi,
-  functionName: 'detailsUpdatedTs',
-})
+export const useWriteIntegrationTestsTestCrossContractStateSync =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: integrationTestsAbi,
+    functionName: 'test_CrossContractStateSync',
+  })
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"factory"`
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"test_EventEmissionIntegration"`
  */
-export const useReadItemFactory = /*#__PURE__*/ createUseReadContract({
-  abi: itemAbi,
-  functionName: 'factory',
-})
+export const useWriteIntegrationTestsTestEventEmissionIntegration =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: integrationTestsAbi,
+    functionName: 'test_EventEmissionIntegration',
+  })
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"finder"`
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"test_GasOptimizationIntegration"`
  */
-export const useReadItemFinder = /*#__PURE__*/ createUseReadContract({
-  abi: itemAbi,
-  functionName: 'finder',
-})
+export const useWriteIntegrationTestsTestGasOptimizationIntegration =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: integrationTestsAbi,
+    functionName: 'test_GasOptimizationIntegration',
+  })
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"geo"`
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"test_LAFToLAFItemCommunication"`
  */
-export const useReadItemGeo = /*#__PURE__*/ createUseReadContract({
-  abi: itemAbi,
-  functionName: 'geo',
-})
+export const useWriteIntegrationTestsTestLafToLafItemCommunication =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: integrationTestsAbi,
+    functionName: 'test_LAFToLAFItemCommunication',
+  })
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"owner"`
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"test_MultiTokenIntegration"`
  */
-export const useReadItemOwner = /*#__PURE__*/ createUseReadContract({
-  abi: itemAbi,
-  functionName: 'owner',
-})
+export const useWriteIntegrationTestsTestMultiTokenIntegration =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: integrationTestsAbi,
+    functionName: 'test_MultiTokenIntegration',
+  })
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"reward"`
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link integrationTestsAbi}__
  */
-export const useReadItemReward = /*#__PURE__*/ createUseReadContract({
-  abi: itemAbi,
-  functionName: 'reward',
-})
+export const useSimulateIntegrationTests =
+  /*#__PURE__*/ createUseSimulateContract({ abi: integrationTestsAbi })
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"secretHash"`
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"addSupport"`
  */
-export const useReadItemSecretHash = /*#__PURE__*/ createUseReadContract({
-  abi: itemAbi,
-  functionName: 'secretHash',
-})
-
-/**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"status"`
- */
-export const useReadItemStatus = /*#__PURE__*/ createUseReadContract({
-  abi: itemAbi,
-  functionName: 'status',
-})
-
-/**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"statusUpdatedTs"`
- */
-export const useReadItemStatusUpdatedTs = /*#__PURE__*/ createUseReadContract({
-  abi: itemAbi,
-  functionName: 'statusUpdatedTs',
-})
-
-/**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"token"`
- */
-export const useReadItemToken = /*#__PURE__*/ createUseReadContract({
-  abi: itemAbi,
-  functionName: 'token',
-})
-
-/**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link itemAbi}__
- */
-export const useWriteItem = /*#__PURE__*/ createUseWriteContract({
-  abi: itemAbi,
-})
-
-/**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"found"`
- */
-export const useWriteItemFound = /*#__PURE__*/ createUseWriteContract({
-  abi: itemAbi,
-  functionName: 'found',
-})
-
-/**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"initialize"`
- */
-export const useWriteItemInitialize = /*#__PURE__*/ createUseWriteContract({
-  abi: itemAbi,
-  functionName: 'initialize',
-})
-
-/**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"lost"`
- */
-export const useWriteItemLost = /*#__PURE__*/ createUseWriteContract({
-  abi: itemAbi,
-  functionName: 'lost',
-})
-
-/**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"nonReturn"`
- */
-export const useWriteItemNonReturn = /*#__PURE__*/ createUseWriteContract({
-  abi: itemAbi,
-  functionName: 'nonReturn',
-})
-
-/**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"returned"`
- */
-export const useWriteItemReturned = /*#__PURE__*/ createUseWriteContract({
-  abi: itemAbi,
-  functionName: 'returned',
-})
-
-/**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"revokeLost"`
- */
-export const useWriteItemRevokeLost = /*#__PURE__*/ createUseWriteContract({
-  abi: itemAbi,
-  functionName: 'revokeLost',
-})
-
-/**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"updateDelegate"`
- */
-export const useWriteItemUpdateDelegate = /*#__PURE__*/ createUseWriteContract({
-  abi: itemAbi,
-  functionName: 'updateDelegate',
-})
-
-/**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"updateDetails"`
- */
-export const useWriteItemUpdateDetails = /*#__PURE__*/ createUseWriteContract({
-  abi: itemAbi,
-  functionName: 'updateDetails',
-})
-
-/**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"updateReward"`
- */
-export const useWriteItemUpdateReward = /*#__PURE__*/ createUseWriteContract({
-  abi: itemAbi,
-  functionName: 'updateReward',
-})
-
-/**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"withdraw"`
- */
-export const useWriteItemWithdraw = /*#__PURE__*/ createUseWriteContract({
-  abi: itemAbi,
-  functionName: 'withdraw',
-})
-
-/**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link itemAbi}__
- */
-export const useSimulateItem = /*#__PURE__*/ createUseSimulateContract({
-  abi: itemAbi,
-})
-
-/**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"found"`
- */
-export const useSimulateItemFound = /*#__PURE__*/ createUseSimulateContract({
-  abi: itemAbi,
-  functionName: 'found',
-})
-
-/**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"initialize"`
- */
-export const useSimulateItemInitialize =
+export const useSimulateIntegrationTestsAddSupport =
   /*#__PURE__*/ createUseSimulateContract({
-    abi: itemAbi,
-    functionName: 'initialize',
+    abi: integrationTestsAbi,
+    functionName: 'addSupport',
   })
 
 /**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"lost"`
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"advanceTime"`
  */
-export const useSimulateItemLost = /*#__PURE__*/ createUseSimulateContract({
-  abi: itemAbi,
-  functionName: 'lost',
-})
-
-/**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"nonReturn"`
- */
-export const useSimulateItemNonReturn = /*#__PURE__*/ createUseSimulateContract(
-  { abi: itemAbi, functionName: 'nonReturn' },
-)
-
-/**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"returned"`
- */
-export const useSimulateItemReturned = /*#__PURE__*/ createUseSimulateContract({
-  abi: itemAbi,
-  functionName: 'returned',
-})
-
-/**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"revokeLost"`
- */
-export const useSimulateItemRevokeLost =
+export const useSimulateIntegrationTestsAdvanceTime =
   /*#__PURE__*/ createUseSimulateContract({
-    abi: itemAbi,
-    functionName: 'revokeLost',
+    abi: integrationTestsAbi,
+    functionName: 'advanceTime',
   })
 
 /**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"updateDelegate"`
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"expectRevertWithError"`
  */
-export const useSimulateItemUpdateDelegate =
+export const useSimulateIntegrationTestsExpectRevertWithError =
   /*#__PURE__*/ createUseSimulateContract({
-    abi: itemAbi,
-    functionName: 'updateDelegate',
+    abi: integrationTestsAbi,
+    functionName: 'expectRevertWithError',
   })
 
 /**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"updateDetails"`
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"registerTestItem"`
  */
-export const useSimulateItemUpdateDetails =
+export const useSimulateIntegrationTestsRegisterTestItem =
   /*#__PURE__*/ createUseSimulateContract({
-    abi: itemAbi,
-    functionName: 'updateDetails',
+    abi: integrationTestsAbi,
+    functionName: 'registerTestItem',
   })
 
 /**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"updateReward"`
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"reportItemLost"`
  */
-export const useSimulateItemUpdateReward =
+export const useSimulateIntegrationTestsReportItemLost =
   /*#__PURE__*/ createUseSimulateContract({
-    abi: itemAbi,
-    functionName: 'updateReward',
+    abi: integrationTestsAbi,
+    functionName: 'reportItemLost',
   })
 
 /**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link itemAbi}__ and `functionName` set to `"withdraw"`
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"setUp"`
  */
-export const useSimulateItemWithdraw = /*#__PURE__*/ createUseSimulateContract({
-  abi: itemAbi,
-  functionName: 'withdraw',
-})
+export const useSimulateIntegrationTestsSetUp =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: integrationTestsAbi,
+    functionName: 'setUp',
+  })
 
 /**
- * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link itemAbi}__
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"test_CharityDistributionIntegration"`
  */
-export const useWatchItemEvent = /*#__PURE__*/ createUseWatchContractEvent({
-  abi: itemAbi,
-})
+export const useSimulateIntegrationTestsTestCharityDistributionIntegration =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: integrationTestsAbi,
+    functionName: 'test_CharityDistributionIntegration',
+  })
 
 /**
- * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link itemAbi}__ and `eventName` set to `"DelegateUpdated"`
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"test_ConfigIntegration"`
  */
-export const useWatchItemDelegateUpdatedEvent =
+export const useSimulateIntegrationTestsTestConfigIntegration =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: integrationTestsAbi,
+    functionName: 'test_ConfigIntegration',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"test_CrossContractStateSync"`
+ */
+export const useSimulateIntegrationTestsTestCrossContractStateSync =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: integrationTestsAbi,
+    functionName: 'test_CrossContractStateSync',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"test_EventEmissionIntegration"`
+ */
+export const useSimulateIntegrationTestsTestEventEmissionIntegration =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: integrationTestsAbi,
+    functionName: 'test_EventEmissionIntegration',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"test_GasOptimizationIntegration"`
+ */
+export const useSimulateIntegrationTestsTestGasOptimizationIntegration =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: integrationTestsAbi,
+    functionName: 'test_GasOptimizationIntegration',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"test_LAFToLAFItemCommunication"`
+ */
+export const useSimulateIntegrationTestsTestLafToLafItemCommunication =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: integrationTestsAbi,
+    functionName: 'test_LAFToLAFItemCommunication',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link integrationTestsAbi}__ and `functionName` set to `"test_MultiTokenIntegration"`
+ */
+export const useSimulateIntegrationTestsTestMultiTokenIntegration =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: integrationTestsAbi,
+    functionName: 'test_MultiTokenIntegration',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link integrationTestsAbi}__
+ */
+export const useWatchIntegrationTestsEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({ abi: integrationTestsAbi })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link integrationTestsAbi}__ and `eventName` set to `"log"`
+ */
+export const useWatchIntegrationTestsLogEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
-    abi: itemAbi,
-    eventName: 'DelegateUpdated',
+    abi: integrationTestsAbi,
+    eventName: 'log',
   })
 
 /**
- * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link itemAbi}__ and `eventName` set to `"DetailsUpdated"`
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link integrationTestsAbi}__ and `eventName` set to `"log_address"`
  */
-export const useWatchItemDetailsUpdatedEvent =
+export const useWatchIntegrationTestsLogAddressEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
-    abi: itemAbi,
-    eventName: 'DetailsUpdated',
+    abi: integrationTestsAbi,
+    eventName: 'log_address',
   })
 
 /**
- * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link itemAbi}__ and `eventName` set to `"Initialized"`
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link integrationTestsAbi}__ and `eventName` set to `"log_array"`
  */
-export const useWatchItemInitializedEvent =
+export const useWatchIntegrationTestsLogArrayEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
-    abi: itemAbi,
-    eventName: 'Initialized',
+    abi: integrationTestsAbi,
+    eventName: 'log_array',
   })
 
 /**
- * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link itemAbi}__ and `eventName` set to `"RewardUpdated"`
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link integrationTestsAbi}__ and `eventName` set to `"log_bytes"`
  */
-export const useWatchItemRewardUpdatedEvent =
+export const useWatchIntegrationTestsLogBytesEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
-    abi: itemAbi,
-    eventName: 'RewardUpdated',
+    abi: integrationTestsAbi,
+    eventName: 'log_bytes',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link integrationTestsAbi}__ and `eventName` set to `"log_bytes32"`
+ */
+export const useWatchIntegrationTestsLogBytes32Event =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: integrationTestsAbi,
+    eventName: 'log_bytes32',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link integrationTestsAbi}__ and `eventName` set to `"log_int"`
+ */
+export const useWatchIntegrationTestsLogIntEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: integrationTestsAbi,
+    eventName: 'log_int',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link integrationTestsAbi}__ and `eventName` set to `"log_named_address"`
+ */
+export const useWatchIntegrationTestsLogNamedAddressEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: integrationTestsAbi,
+    eventName: 'log_named_address',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link integrationTestsAbi}__ and `eventName` set to `"log_named_array"`
+ */
+export const useWatchIntegrationTestsLogNamedArrayEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: integrationTestsAbi,
+    eventName: 'log_named_array',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link integrationTestsAbi}__ and `eventName` set to `"log_named_bytes"`
+ */
+export const useWatchIntegrationTestsLogNamedBytesEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: integrationTestsAbi,
+    eventName: 'log_named_bytes',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link integrationTestsAbi}__ and `eventName` set to `"log_named_bytes32"`
+ */
+export const useWatchIntegrationTestsLogNamedBytes32Event =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: integrationTestsAbi,
+    eventName: 'log_named_bytes32',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link integrationTestsAbi}__ and `eventName` set to `"log_named_decimal_int"`
+ */
+export const useWatchIntegrationTestsLogNamedDecimalIntEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: integrationTestsAbi,
+    eventName: 'log_named_decimal_int',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link integrationTestsAbi}__ and `eventName` set to `"log_named_decimal_uint"`
+ */
+export const useWatchIntegrationTestsLogNamedDecimalUintEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: integrationTestsAbi,
+    eventName: 'log_named_decimal_uint',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link integrationTestsAbi}__ and `eventName` set to `"log_named_int"`
+ */
+export const useWatchIntegrationTestsLogNamedIntEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: integrationTestsAbi,
+    eventName: 'log_named_int',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link integrationTestsAbi}__ and `eventName` set to `"log_named_string"`
+ */
+export const useWatchIntegrationTestsLogNamedStringEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: integrationTestsAbi,
+    eventName: 'log_named_string',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link integrationTestsAbi}__ and `eventName` set to `"log_named_uint"`
+ */
+export const useWatchIntegrationTestsLogNamedUintEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: integrationTestsAbi,
+    eventName: 'log_named_uint',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link integrationTestsAbi}__ and `eventName` set to `"log_string"`
+ */
+export const useWatchIntegrationTestsLogStringEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: integrationTestsAbi,
+    eventName: 'log_string',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link integrationTestsAbi}__ and `eventName` set to `"log_uint"`
+ */
+export const useWatchIntegrationTestsLogUintEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: integrationTestsAbi,
+    eventName: 'log_uint',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link integrationTestsAbi}__ and `eventName` set to `"logs"`
+ */
+export const useWatchIntegrationTestsLogsEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: integrationTestsAbi,
+    eventName: 'logs',
   })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useReadLaf = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -9132,7 +15784,7 @@ export const useReadLaf = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"BASIS_POINTS"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useReadLafBasisPoints = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -9144,7 +15796,7 @@ export const useReadLafBasisPoints = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"DAY"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useReadLafDay = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -9156,7 +15808,7 @@ export const useReadLafDay = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"MAX_CHARITY_FEE_BPS"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useReadLafMaxCharityFeeBps = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -9168,7 +15820,7 @@ export const useReadLafMaxCharityFeeBps = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"MAX_DELEGATE_FEE_BPS"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useReadLafMaxDelegateFeeBps = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -9180,7 +15832,7 @@ export const useReadLafMaxDelegateFeeBps = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"MAX_FEE_BPS"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useReadLafMaxFeeBps = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -9192,7 +15844,7 @@ export const useReadLafMaxFeeBps = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"MAX_IMMEDIATE_REWARD_BPS"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useReadLafMaxImmediateRewardBps =
   /*#__PURE__*/ createUseReadContract({
@@ -9205,7 +15857,7 @@ export const useReadLafMaxImmediateRewardBps =
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"MAX_NON_RETURN_REWARD_BPS"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useReadLafMaxNonReturnRewardBps =
   /*#__PURE__*/ createUseReadContract({
@@ -9218,7 +15870,7 @@ export const useReadLafMaxNonReturnRewardBps =
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"MIN_CHARITY_FEE_BPS"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useReadLafMinCharityFeeBps = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -9230,7 +15882,7 @@ export const useReadLafMinCharityFeeBps = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"MIN_DELEGATE_FEE_BPS"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useReadLafMinDelegateFeeBps = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -9242,7 +15894,7 @@ export const useReadLafMinDelegateFeeBps = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"MIN_FEE_BPS"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useReadLafMinFeeBps = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -9254,7 +15906,7 @@ export const useReadLafMinFeeBps = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"MIN_IMMEDIATE_REWARD_BPS"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useReadLafMinImmediateRewardBps =
   /*#__PURE__*/ createUseReadContract({
@@ -9267,7 +15919,7 @@ export const useReadLafMinImmediateRewardBps =
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"MIN_NON_RETURN_REWARD_BPS"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useReadLafMinNonReturnRewardBps =
   /*#__PURE__*/ createUseReadContract({
@@ -9280,7 +15932,7 @@ export const useReadLafMinNonReturnRewardBps =
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"MONTH"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useReadLafMonth = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -9292,7 +15944,7 @@ export const useReadLafMonth = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"WEEK"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useReadLafWeek = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -9304,7 +15956,7 @@ export const useReadLafWeek = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"YEAR"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useReadLafYear = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -9316,7 +15968,7 @@ export const useReadLafYear = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"balanceOf"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useReadLafBalanceOf = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -9328,7 +15980,7 @@ export const useReadLafBalanceOf = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"balanceOfBatch"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useReadLafBalanceOfBatch = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -9340,7 +15992,7 @@ export const useReadLafBalanceOfBatch = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"charities"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useReadLafCharities = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -9352,7 +16004,7 @@ export const useReadLafCharities = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"charitiesCount"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useReadLafCharitiesCount = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -9364,7 +16016,7 @@ export const useReadLafCharitiesCount = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"charityFeesDistributed"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useReadLafCharityFeesDistributed =
   /*#__PURE__*/ createUseReadContract({
@@ -9377,7 +16029,7 @@ export const useReadLafCharityFeesDistributed =
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"config"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useReadLafConfig = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -9389,7 +16041,7 @@ export const useReadLafConfig = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"delegateFeesDistributed"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useReadLafDelegateFeesDistributed =
   /*#__PURE__*/ createUseReadContract({
@@ -9402,7 +16054,7 @@ export const useReadLafDelegateFeesDistributed =
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"exists"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useReadLafExists = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -9414,7 +16066,7 @@ export const useReadLafExists = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"feesDistributed"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useReadLafFeesDistributed = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -9426,7 +16078,7 @@ export const useReadLafFeesDistributed = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"foundCount"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useReadLafFoundCount = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -9438,7 +16090,7 @@ export const useReadLafFoundCount = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"isApprovedForAll"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useReadLafIsApprovedForAll = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -9450,7 +16102,7 @@ export const useReadLafIsApprovedForAll = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"itemImplementation"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useReadLafItemImplementation = /*#__PURE__*/ createUseReadContract(
   { abi: lafAbi, address: lafAddress, functionName: 'itemImplementation' },
@@ -9460,7 +16112,7 @@ export const useReadLafItemImplementation = /*#__PURE__*/ createUseReadContract(
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"items"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useReadLafItems = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -9472,7 +16124,7 @@ export const useReadLafItems = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"lostCount"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useReadLafLostCount = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -9484,7 +16136,7 @@ export const useReadLafLostCount = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"nonReturnCount"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useReadLafNonReturnCount = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -9496,7 +16148,7 @@ export const useReadLafNonReturnCount = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"owner"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useReadLafOwner = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -9508,7 +16160,7 @@ export const useReadLafOwner = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"registeredCount"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useReadLafRegisteredCount = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -9520,7 +16172,7 @@ export const useReadLafRegisteredCount = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"returnedCount"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useReadLafReturnedCount = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -9532,7 +16184,7 @@ export const useReadLafReturnedCount = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"rewardsDistributed"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useReadLafRewardsDistributed = /*#__PURE__*/ createUseReadContract(
   { abi: lafAbi, address: lafAddress, functionName: 'rewardsDistributed' },
@@ -9542,7 +16194,7 @@ export const useReadLafRewardsDistributed = /*#__PURE__*/ createUseReadContract(
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"royaltyInfo"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useReadLafRoyaltyInfo = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -9554,7 +16206,7 @@ export const useReadLafRoyaltyInfo = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"supportRewards"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useReadLafSupportRewards = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -9566,7 +16218,7 @@ export const useReadLafSupportRewards = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"supportRewardsCount"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useReadLafSupportRewardsCount =
   /*#__PURE__*/ createUseReadContract({
@@ -9579,7 +16231,7 @@ export const useReadLafSupportRewardsCount =
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"supportRewardsDistributed"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useReadLafSupportRewardsDistributed =
   /*#__PURE__*/ createUseReadContract({
@@ -9592,7 +16244,7 @@ export const useReadLafSupportRewardsDistributed =
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"supportsInterface"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useReadLafSupportsInterface = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -9604,7 +16256,7 @@ export const useReadLafSupportsInterface = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"totalSupply"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useReadLafTotalSupply = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -9616,7 +16268,7 @@ export const useReadLafTotalSupply = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"treasury"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useReadLafTreasury = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -9628,7 +16280,7 @@ export const useReadLafTreasury = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"trust"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useReadLafTrust = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -9640,7 +16292,7 @@ export const useReadLafTrust = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"uri"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useReadLafUri = /*#__PURE__*/ createUseReadContract({
   abi: lafAbi,
@@ -9652,7 +16304,7 @@ export const useReadLafUri = /*#__PURE__*/ createUseReadContract({
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWriteLaf = /*#__PURE__*/ createUseWriteContract({
   abi: lafAbi,
@@ -9663,7 +16315,7 @@ export const useWriteLaf = /*#__PURE__*/ createUseWriteContract({
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"addCharity"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWriteLafAddCharity = /*#__PURE__*/ createUseWriteContract({
   abi: lafAbi,
@@ -9675,7 +16327,7 @@ export const useWriteLafAddCharity = /*#__PURE__*/ createUseWriteContract({
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"found"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWriteLafFound = /*#__PURE__*/ createUseWriteContract({
   abi: lafAbi,
@@ -9687,7 +16339,7 @@ export const useWriteLafFound = /*#__PURE__*/ createUseWriteContract({
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"lost"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWriteLafLost = /*#__PURE__*/ createUseWriteContract({
   abi: lafAbi,
@@ -9699,7 +16351,7 @@ export const useWriteLafLost = /*#__PURE__*/ createUseWriteContract({
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"mint"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWriteLafMint = /*#__PURE__*/ createUseWriteContract({
   abi: lafAbi,
@@ -9711,7 +16363,7 @@ export const useWriteLafMint = /*#__PURE__*/ createUseWriteContract({
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"nonReturn"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWriteLafNonReturn = /*#__PURE__*/ createUseWriteContract({
   abi: lafAbi,
@@ -9723,7 +16375,7 @@ export const useWriteLafNonReturn = /*#__PURE__*/ createUseWriteContract({
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"ping"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWriteLafPing = /*#__PURE__*/ createUseWriteContract({
   abi: lafAbi,
@@ -9732,22 +16384,22 @@ export const useWriteLafPing = /*#__PURE__*/ createUseWriteContract({
 })
 
 /**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"registerItem"`
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"register"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
-export const useWriteLafRegisterItem = /*#__PURE__*/ createUseWriteContract({
+export const useWriteLafRegister = /*#__PURE__*/ createUseWriteContract({
   abi: lafAbi,
   address: lafAddress,
-  functionName: 'registerItem',
+  functionName: 'register',
 })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"renounceOwnership"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWriteLafRenounceOwnership =
   /*#__PURE__*/ createUseWriteContract({
@@ -9760,7 +16412,7 @@ export const useWriteLafRenounceOwnership =
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"returned"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWriteLafReturned = /*#__PURE__*/ createUseWriteContract({
   abi: lafAbi,
@@ -9772,7 +16424,7 @@ export const useWriteLafReturned = /*#__PURE__*/ createUseWriteContract({
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"revokeLost"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWriteLafRevokeLost = /*#__PURE__*/ createUseWriteContract({
   abi: lafAbi,
@@ -9784,7 +16436,7 @@ export const useWriteLafRevokeLost = /*#__PURE__*/ createUseWriteContract({
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"safeBatchTransferFrom"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWriteLafSafeBatchTransferFrom =
   /*#__PURE__*/ createUseWriteContract({
@@ -9797,7 +16449,7 @@ export const useWriteLafSafeBatchTransferFrom =
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"safeTransferFrom"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWriteLafSafeTransferFrom = /*#__PURE__*/ createUseWriteContract(
   { abi: lafAbi, address: lafAddress, functionName: 'safeTransferFrom' },
@@ -9807,7 +16459,7 @@ export const useWriteLafSafeTransferFrom = /*#__PURE__*/ createUseWriteContract(
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setApprovalForAll"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWriteLafSetApprovalForAll =
   /*#__PURE__*/ createUseWriteContract({
@@ -9820,7 +16472,7 @@ export const useWriteLafSetApprovalForAll =
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setFoundCooldown"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWriteLafSetFoundCooldown = /*#__PURE__*/ createUseWriteContract(
   { abi: lafAbi, address: lafAddress, functionName: 'setFoundCooldown' },
@@ -9830,7 +16482,7 @@ export const useWriteLafSetFoundCooldown = /*#__PURE__*/ createUseWriteContract(
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setImmediateRewardBps"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWriteLafSetImmediateRewardBps =
   /*#__PURE__*/ createUseWriteContract({
@@ -9843,7 +16495,7 @@ export const useWriteLafSetImmediateRewardBps =
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setMinCharityFeeBps"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWriteLafSetMinCharityFeeBps =
   /*#__PURE__*/ createUseWriteContract({
@@ -9856,7 +16508,7 @@ export const useWriteLafSetMinCharityFeeBps =
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setMinFeeBps"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWriteLafSetMinFeeBps = /*#__PURE__*/ createUseWriteContract({
   abi: lafAbi,
@@ -9868,7 +16520,7 @@ export const useWriteLafSetMinFeeBps = /*#__PURE__*/ createUseWriteContract({
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setMinReward"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWriteLafSetMinReward = /*#__PURE__*/ createUseWriteContract({
   abi: lafAbi,
@@ -9880,7 +16532,7 @@ export const useWriteLafSetMinReward = /*#__PURE__*/ createUseWriteContract({
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setNonReturnCooldown"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWriteLafSetNonReturnCooldown =
   /*#__PURE__*/ createUseWriteContract({
@@ -9893,7 +16545,7 @@ export const useWriteLafSetNonReturnCooldown =
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setNonReturnGracePeriod"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWriteLafSetNonReturnGracePeriod =
   /*#__PURE__*/ createUseWriteContract({
@@ -9906,7 +16558,7 @@ export const useWriteLafSetNonReturnGracePeriod =
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setNonReturnRewardBps"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWriteLafSetNonReturnRewardBps =
   /*#__PURE__*/ createUseWriteContract({
@@ -9919,7 +16571,7 @@ export const useWriteLafSetNonReturnRewardBps =
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setReturnCooldown"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWriteLafSetReturnCooldown =
   /*#__PURE__*/ createUseWriteContract({
@@ -9932,7 +16584,7 @@ export const useWriteLafSetReturnCooldown =
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setRevokeLostCooldown"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWriteLafSetRevokeLostCooldown =
   /*#__PURE__*/ createUseWriteContract({
@@ -9945,7 +16597,7 @@ export const useWriteLafSetRevokeLostCooldown =
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setTreasury"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWriteLafSetTreasury = /*#__PURE__*/ createUseWriteContract({
   abi: lafAbi,
@@ -9957,7 +16609,7 @@ export const useWriteLafSetTreasury = /*#__PURE__*/ createUseWriteContract({
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"support"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWriteLafSupport = /*#__PURE__*/ createUseWriteContract({
   abi: lafAbi,
@@ -9969,7 +16621,7 @@ export const useWriteLafSupport = /*#__PURE__*/ createUseWriteContract({
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"thumbDown"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWriteLafThumbDown = /*#__PURE__*/ createUseWriteContract({
   abi: lafAbi,
@@ -9981,7 +16633,7 @@ export const useWriteLafThumbDown = /*#__PURE__*/ createUseWriteContract({
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"thumbUp"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWriteLafThumbUp = /*#__PURE__*/ createUseWriteContract({
   abi: lafAbi,
@@ -9993,7 +16645,7 @@ export const useWriteLafThumbUp = /*#__PURE__*/ createUseWriteContract({
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"toggleActiveCharity"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWriteLafToggleActiveCharity =
   /*#__PURE__*/ createUseWriteContract({
@@ -10006,7 +16658,7 @@ export const useWriteLafToggleActiveCharity =
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"transferOwnership"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWriteLafTransferOwnership =
   /*#__PURE__*/ createUseWriteContract({
@@ -10019,7 +16671,7 @@ export const useWriteLafTransferOwnership =
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"updateRewardToken"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWriteLafUpdateRewardToken =
   /*#__PURE__*/ createUseWriteContract({
@@ -10032,7 +16684,7 @@ export const useWriteLafUpdateRewardToken =
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useSimulateLaf = /*#__PURE__*/ createUseSimulateContract({
   abi: lafAbi,
@@ -10043,7 +16695,7 @@ export const useSimulateLaf = /*#__PURE__*/ createUseSimulateContract({
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"addCharity"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useSimulateLafAddCharity = /*#__PURE__*/ createUseSimulateContract(
   { abi: lafAbi, address: lafAddress, functionName: 'addCharity' },
@@ -10053,7 +16705,7 @@ export const useSimulateLafAddCharity = /*#__PURE__*/ createUseSimulateContract(
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"found"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useSimulateLafFound = /*#__PURE__*/ createUseSimulateContract({
   abi: lafAbi,
@@ -10065,7 +16717,7 @@ export const useSimulateLafFound = /*#__PURE__*/ createUseSimulateContract({
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"lost"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useSimulateLafLost = /*#__PURE__*/ createUseSimulateContract({
   abi: lafAbi,
@@ -10077,7 +16729,7 @@ export const useSimulateLafLost = /*#__PURE__*/ createUseSimulateContract({
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"mint"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useSimulateLafMint = /*#__PURE__*/ createUseSimulateContract({
   abi: lafAbi,
@@ -10089,7 +16741,7 @@ export const useSimulateLafMint = /*#__PURE__*/ createUseSimulateContract({
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"nonReturn"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useSimulateLafNonReturn = /*#__PURE__*/ createUseSimulateContract({
   abi: lafAbi,
@@ -10101,7 +16753,7 @@ export const useSimulateLafNonReturn = /*#__PURE__*/ createUseSimulateContract({
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"ping"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useSimulateLafPing = /*#__PURE__*/ createUseSimulateContract({
   abi: lafAbi,
@@ -10110,23 +16762,22 @@ export const useSimulateLafPing = /*#__PURE__*/ createUseSimulateContract({
 })
 
 /**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"registerItem"`
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"register"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
-export const useSimulateLafRegisterItem =
-  /*#__PURE__*/ createUseSimulateContract({
-    abi: lafAbi,
-    address: lafAddress,
-    functionName: 'registerItem',
-  })
+export const useSimulateLafRegister = /*#__PURE__*/ createUseSimulateContract({
+  abi: lafAbi,
+  address: lafAddress,
+  functionName: 'register',
+})
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"renounceOwnership"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useSimulateLafRenounceOwnership =
   /*#__PURE__*/ createUseSimulateContract({
@@ -10139,7 +16790,7 @@ export const useSimulateLafRenounceOwnership =
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"returned"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useSimulateLafReturned = /*#__PURE__*/ createUseSimulateContract({
   abi: lafAbi,
@@ -10151,7 +16802,7 @@ export const useSimulateLafReturned = /*#__PURE__*/ createUseSimulateContract({
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"revokeLost"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useSimulateLafRevokeLost = /*#__PURE__*/ createUseSimulateContract(
   { abi: lafAbi, address: lafAddress, functionName: 'revokeLost' },
@@ -10161,7 +16812,7 @@ export const useSimulateLafRevokeLost = /*#__PURE__*/ createUseSimulateContract(
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"safeBatchTransferFrom"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useSimulateLafSafeBatchTransferFrom =
   /*#__PURE__*/ createUseSimulateContract({
@@ -10174,7 +16825,7 @@ export const useSimulateLafSafeBatchTransferFrom =
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"safeTransferFrom"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useSimulateLafSafeTransferFrom =
   /*#__PURE__*/ createUseSimulateContract({
@@ -10187,7 +16838,7 @@ export const useSimulateLafSafeTransferFrom =
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setApprovalForAll"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useSimulateLafSetApprovalForAll =
   /*#__PURE__*/ createUseSimulateContract({
@@ -10200,7 +16851,7 @@ export const useSimulateLafSetApprovalForAll =
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setFoundCooldown"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useSimulateLafSetFoundCooldown =
   /*#__PURE__*/ createUseSimulateContract({
@@ -10213,7 +16864,7 @@ export const useSimulateLafSetFoundCooldown =
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setImmediateRewardBps"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useSimulateLafSetImmediateRewardBps =
   /*#__PURE__*/ createUseSimulateContract({
@@ -10226,7 +16877,7 @@ export const useSimulateLafSetImmediateRewardBps =
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setMinCharityFeeBps"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useSimulateLafSetMinCharityFeeBps =
   /*#__PURE__*/ createUseSimulateContract({
@@ -10239,7 +16890,7 @@ export const useSimulateLafSetMinCharityFeeBps =
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setMinFeeBps"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useSimulateLafSetMinFeeBps =
   /*#__PURE__*/ createUseSimulateContract({
@@ -10252,7 +16903,7 @@ export const useSimulateLafSetMinFeeBps =
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setMinReward"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useSimulateLafSetMinReward =
   /*#__PURE__*/ createUseSimulateContract({
@@ -10265,7 +16916,7 @@ export const useSimulateLafSetMinReward =
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setNonReturnCooldown"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useSimulateLafSetNonReturnCooldown =
   /*#__PURE__*/ createUseSimulateContract({
@@ -10278,7 +16929,7 @@ export const useSimulateLafSetNonReturnCooldown =
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setNonReturnGracePeriod"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useSimulateLafSetNonReturnGracePeriod =
   /*#__PURE__*/ createUseSimulateContract({
@@ -10291,7 +16942,7 @@ export const useSimulateLafSetNonReturnGracePeriod =
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setNonReturnRewardBps"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useSimulateLafSetNonReturnRewardBps =
   /*#__PURE__*/ createUseSimulateContract({
@@ -10304,7 +16955,7 @@ export const useSimulateLafSetNonReturnRewardBps =
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setReturnCooldown"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useSimulateLafSetReturnCooldown =
   /*#__PURE__*/ createUseSimulateContract({
@@ -10317,7 +16968,7 @@ export const useSimulateLafSetReturnCooldown =
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setRevokeLostCooldown"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useSimulateLafSetRevokeLostCooldown =
   /*#__PURE__*/ createUseSimulateContract({
@@ -10330,7 +16981,7 @@ export const useSimulateLafSetRevokeLostCooldown =
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"setTreasury"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useSimulateLafSetTreasury =
   /*#__PURE__*/ createUseSimulateContract({
@@ -10343,7 +16994,7 @@ export const useSimulateLafSetTreasury =
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"support"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useSimulateLafSupport = /*#__PURE__*/ createUseSimulateContract({
   abi: lafAbi,
@@ -10355,7 +17006,7 @@ export const useSimulateLafSupport = /*#__PURE__*/ createUseSimulateContract({
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"thumbDown"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useSimulateLafThumbDown = /*#__PURE__*/ createUseSimulateContract({
   abi: lafAbi,
@@ -10367,7 +17018,7 @@ export const useSimulateLafThumbDown = /*#__PURE__*/ createUseSimulateContract({
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"thumbUp"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useSimulateLafThumbUp = /*#__PURE__*/ createUseSimulateContract({
   abi: lafAbi,
@@ -10379,7 +17030,7 @@ export const useSimulateLafThumbUp = /*#__PURE__*/ createUseSimulateContract({
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"toggleActiveCharity"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useSimulateLafToggleActiveCharity =
   /*#__PURE__*/ createUseSimulateContract({
@@ -10392,7 +17043,7 @@ export const useSimulateLafToggleActiveCharity =
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"transferOwnership"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useSimulateLafTransferOwnership =
   /*#__PURE__*/ createUseSimulateContract({
@@ -10405,7 +17056,7 @@ export const useSimulateLafTransferOwnership =
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link lafAbi}__ and `functionName` set to `"updateRewardToken"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useSimulateLafUpdateRewardToken =
   /*#__PURE__*/ createUseSimulateContract({
@@ -10418,7 +17069,7 @@ export const useSimulateLafUpdateRewardToken =
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWatchLafEvent = /*#__PURE__*/ createUseWatchContractEvent({
   abi: lafAbi,
@@ -10429,7 +17080,7 @@ export const useWatchLafEvent = /*#__PURE__*/ createUseWatchContractEvent({
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"ApprovalForAll"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWatchLafApprovalForAllEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -10442,7 +17093,7 @@ export const useWatchLafApprovalForAllEvent =
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"CharityFeesDistributed"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWatchLafCharityFeesDistributedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -10455,7 +17106,7 @@ export const useWatchLafCharityFeesDistributedEvent =
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"DelegateFeesDistributed"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWatchLafDelegateFeesDistributedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -10468,7 +17119,7 @@ export const useWatchLafDelegateFeesDistributedEvent =
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"Down"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWatchLafDownEvent = /*#__PURE__*/ createUseWatchContractEvent({
   abi: lafAbi,
@@ -10480,7 +17131,7 @@ export const useWatchLafDownEvent = /*#__PURE__*/ createUseWatchContractEvent({
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"FeesDistributed"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWatchLafFeesDistributedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -10493,7 +17144,7 @@ export const useWatchLafFeesDistributedEvent =
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"ItemFound"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWatchLafItemFoundEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -10506,7 +17157,7 @@ export const useWatchLafItemFoundEvent =
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"ItemLost"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWatchLafItemLostEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -10519,7 +17170,7 @@ export const useWatchLafItemLostEvent =
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"ItemNonReturn"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWatchLafItemNonReturnEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -10532,7 +17183,7 @@ export const useWatchLafItemNonReturnEvent =
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"ItemRegistered"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWatchLafItemRegisteredEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -10545,7 +17196,7 @@ export const useWatchLafItemRegisteredEvent =
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"ItemReturned"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWatchLafItemReturnedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -10558,7 +17209,7 @@ export const useWatchLafItemReturnedEvent =
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"ItemRevokedLost"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWatchLafItemRevokedLostEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -10571,7 +17222,7 @@ export const useWatchLafItemRevokedLostEvent =
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"ItemSupported"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWatchLafItemSupportedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -10584,7 +17235,7 @@ export const useWatchLafItemSupportedEvent =
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"Minted"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWatchLafMintedEvent = /*#__PURE__*/ createUseWatchContractEvent(
   { abi: lafAbi, address: lafAddress, eventName: 'Minted' },
@@ -10594,7 +17245,7 @@ export const useWatchLafMintedEvent = /*#__PURE__*/ createUseWatchContractEvent(
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"OwnershipTransferred"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWatchLafOwnershipTransferredEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -10607,7 +17258,7 @@ export const useWatchLafOwnershipTransferredEvent =
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"Pong"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWatchLafPongEvent = /*#__PURE__*/ createUseWatchContractEvent({
   abi: lafAbi,
@@ -10619,7 +17270,7 @@ export const useWatchLafPongEvent = /*#__PURE__*/ createUseWatchContractEvent({
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"RewardsDistributed"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWatchLafRewardsDistributedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -10632,7 +17283,7 @@ export const useWatchLafRewardsDistributedEvent =
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"SupportRewardsDistributed"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWatchLafSupportRewardsDistributedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -10645,7 +17296,7 @@ export const useWatchLafSupportRewardsDistributedEvent =
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"TransferBatch"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWatchLafTransferBatchEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -10658,7 +17309,7 @@ export const useWatchLafTransferBatchEvent =
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"TransferSingle"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWatchLafTransferSingleEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -10671,7 +17322,7 @@ export const useWatchLafTransferSingleEvent =
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"URI"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWatchLafUriEvent = /*#__PURE__*/ createUseWatchContractEvent({
   abi: lafAbi,
@@ -10683,7 +17334,7 @@ export const useWatchLafUriEvent = /*#__PURE__*/ createUseWatchContractEvent({
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link lafAbi}__ and `eventName` set to `"Up"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x9bc899f84588844d16ef867053abecd13fd68f14)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a)
  */
 export const useWatchLafUpEvent = /*#__PURE__*/ createUseWatchContractEvent({
   abi: lafAbi,
@@ -11611,6 +18262,167 @@ export const useWatchMetaUpEvent = /*#__PURE__*/ createUseWatchContractEvent({
 })
 
 /**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link mockErc20Abi}__
+ */
+export const useReadMockErc20 = /*#__PURE__*/ createUseReadContract({
+  abi: mockErc20Abi,
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link mockErc20Abi}__ and `functionName` set to `"allowance"`
+ */
+export const useReadMockErc20Allowance = /*#__PURE__*/ createUseReadContract({
+  abi: mockErc20Abi,
+  functionName: 'allowance',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link mockErc20Abi}__ and `functionName` set to `"balanceOf"`
+ */
+export const useReadMockErc20BalanceOf = /*#__PURE__*/ createUseReadContract({
+  abi: mockErc20Abi,
+  functionName: 'balanceOf',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link mockErc20Abi}__ and `functionName` set to `"decimals"`
+ */
+export const useReadMockErc20Decimals = /*#__PURE__*/ createUseReadContract({
+  abi: mockErc20Abi,
+  functionName: 'decimals',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link mockErc20Abi}__ and `functionName` set to `"name"`
+ */
+export const useReadMockErc20Name = /*#__PURE__*/ createUseReadContract({
+  abi: mockErc20Abi,
+  functionName: 'name',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link mockErc20Abi}__ and `functionName` set to `"symbol"`
+ */
+export const useReadMockErc20Symbol = /*#__PURE__*/ createUseReadContract({
+  abi: mockErc20Abi,
+  functionName: 'symbol',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link mockErc20Abi}__ and `functionName` set to `"totalSupply"`
+ */
+export const useReadMockErc20TotalSupply = /*#__PURE__*/ createUseReadContract({
+  abi: mockErc20Abi,
+  functionName: 'totalSupply',
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link mockErc20Abi}__
+ */
+export const useWriteMockErc20 = /*#__PURE__*/ createUseWriteContract({
+  abi: mockErc20Abi,
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link mockErc20Abi}__ and `functionName` set to `"approve"`
+ */
+export const useWriteMockErc20Approve = /*#__PURE__*/ createUseWriteContract({
+  abi: mockErc20Abi,
+  functionName: 'approve',
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link mockErc20Abi}__ and `functionName` set to `"mint"`
+ */
+export const useWriteMockErc20Mint = /*#__PURE__*/ createUseWriteContract({
+  abi: mockErc20Abi,
+  functionName: 'mint',
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link mockErc20Abi}__ and `functionName` set to `"transfer"`
+ */
+export const useWriteMockErc20Transfer = /*#__PURE__*/ createUseWriteContract({
+  abi: mockErc20Abi,
+  functionName: 'transfer',
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link mockErc20Abi}__ and `functionName` set to `"transferFrom"`
+ */
+export const useWriteMockErc20TransferFrom =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: mockErc20Abi,
+    functionName: 'transferFrom',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link mockErc20Abi}__
+ */
+export const useSimulateMockErc20 = /*#__PURE__*/ createUseSimulateContract({
+  abi: mockErc20Abi,
+})
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link mockErc20Abi}__ and `functionName` set to `"approve"`
+ */
+export const useSimulateMockErc20Approve =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: mockErc20Abi,
+    functionName: 'approve',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link mockErc20Abi}__ and `functionName` set to `"mint"`
+ */
+export const useSimulateMockErc20Mint = /*#__PURE__*/ createUseSimulateContract(
+  { abi: mockErc20Abi, functionName: 'mint' },
+)
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link mockErc20Abi}__ and `functionName` set to `"transfer"`
+ */
+export const useSimulateMockErc20Transfer =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: mockErc20Abi,
+    functionName: 'transfer',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link mockErc20Abi}__ and `functionName` set to `"transferFrom"`
+ */
+export const useSimulateMockErc20TransferFrom =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: mockErc20Abi,
+    functionName: 'transferFrom',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link mockErc20Abi}__
+ */
+export const useWatchMockErc20Event = /*#__PURE__*/ createUseWatchContractEvent(
+  { abi: mockErc20Abi },
+)
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link mockErc20Abi}__ and `eventName` set to `"Approval"`
+ */
+export const useWatchMockErc20ApprovalEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: mockErc20Abi,
+    eventName: 'Approval',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link mockErc20Abi}__ and `eventName` set to `"Transfer"`
+ */
+export const useWatchMockErc20TransferEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: mockErc20Abi,
+    eventName: 'Transfer',
+  })
+
+/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link ownableAbi}__
  */
 export const useReadOwnable = /*#__PURE__*/ createUseReadContract({
@@ -11689,4 +18501,766 @@ export const useWatchOwnableOwnershipTransferredEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
     abi: ownableAbi,
     eventName: 'OwnershipTransferred',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link securityAuditTestsAbi}__
+ */
+export const useReadSecurityAuditTests = /*#__PURE__*/ createUseReadContract({
+  abi: securityAuditTestsAbi,
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"DEFAULT_COMMENT"`
+ */
+export const useReadSecurityAuditTestsDefaultComment =
+  /*#__PURE__*/ createUseReadContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'DEFAULT_COMMENT',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"DEFAULT_GEO"`
+ */
+export const useReadSecurityAuditTestsDefaultGeo =
+  /*#__PURE__*/ createUseReadContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'DEFAULT_GEO',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"DEFAULT_REWARD"`
+ */
+export const useReadSecurityAuditTestsDefaultReward =
+  /*#__PURE__*/ createUseReadContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'DEFAULT_REWARD',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"INITIAL_BALANCE"`
+ */
+export const useReadSecurityAuditTestsInitialBalance =
+  /*#__PURE__*/ createUseReadContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'INITIAL_BALANCE',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"IS_TEST"`
+ */
+export const useReadSecurityAuditTestsIsTest =
+  /*#__PURE__*/ createUseReadContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'IS_TEST',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"charity1"`
+ */
+export const useReadSecurityAuditTestsCharity1 =
+  /*#__PURE__*/ createUseReadContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'charity1',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"charity2"`
+ */
+export const useReadSecurityAuditTestsCharity2 =
+  /*#__PURE__*/ createUseReadContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'charity2',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"checkBalance"`
+ */
+export const useReadSecurityAuditTestsCheckBalance =
+  /*#__PURE__*/ createUseReadContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'checkBalance',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"createSecretSignature"`
+ */
+export const useReadSecurityAuditTestsCreateSecretSignature =
+  /*#__PURE__*/ createUseReadContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'createSecretSignature',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"excludeArtifacts"`
+ */
+export const useReadSecurityAuditTestsExcludeArtifacts =
+  /*#__PURE__*/ createUseReadContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'excludeArtifacts',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"excludeContracts"`
+ */
+export const useReadSecurityAuditTestsExcludeContracts =
+  /*#__PURE__*/ createUseReadContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'excludeContracts',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"excludeSelectors"`
+ */
+export const useReadSecurityAuditTestsExcludeSelectors =
+  /*#__PURE__*/ createUseReadContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'excludeSelectors',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"excludeSenders"`
+ */
+export const useReadSecurityAuditTestsExcludeSenders =
+  /*#__PURE__*/ createUseReadContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'excludeSenders',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"failed"`
+ */
+export const useReadSecurityAuditTestsFailed =
+  /*#__PURE__*/ createUseReadContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'failed',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"finder"`
+ */
+export const useReadSecurityAuditTestsFinder =
+  /*#__PURE__*/ createUseReadContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'finder',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"finderPrivateKey"`
+ */
+export const useReadSecurityAuditTestsFinderPrivateKey =
+  /*#__PURE__*/ createUseReadContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'finderPrivateKey',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"getItemAddress"`
+ */
+export const useReadSecurityAuditTestsGetItemAddress =
+  /*#__PURE__*/ createUseReadContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'getItemAddress',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"getItemStatus"`
+ */
+export const useReadSecurityAuditTestsGetItemStatus =
+  /*#__PURE__*/ createUseReadContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'getItemStatus',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"laf"`
+ */
+export const useReadSecurityAuditTestsLaf = /*#__PURE__*/ createUseReadContract(
+  { abi: securityAuditTestsAbi, functionName: 'laf' },
+)
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"malicious"`
+ */
+export const useReadSecurityAuditTestsMalicious =
+  /*#__PURE__*/ createUseReadContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'malicious',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"maliciousPrivateKey"`
+ */
+export const useReadSecurityAuditTestsMaliciousPrivateKey =
+  /*#__PURE__*/ createUseReadContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'maliciousPrivateKey',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"owner"`
+ */
+export const useReadSecurityAuditTestsOwner =
+  /*#__PURE__*/ createUseReadContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'owner',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"ownerPrivateKey"`
+ */
+export const useReadSecurityAuditTestsOwnerPrivateKey =
+  /*#__PURE__*/ createUseReadContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'ownerPrivateKey',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"rewardToken"`
+ */
+export const useReadSecurityAuditTestsRewardToken =
+  /*#__PURE__*/ createUseReadContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'rewardToken',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"supporter1"`
+ */
+export const useReadSecurityAuditTestsSupporter1 =
+  /*#__PURE__*/ createUseReadContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'supporter1',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"supporter2"`
+ */
+export const useReadSecurityAuditTestsSupporter2 =
+  /*#__PURE__*/ createUseReadContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'supporter2',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"targetArtifactSelectors"`
+ */
+export const useReadSecurityAuditTestsTargetArtifactSelectors =
+  /*#__PURE__*/ createUseReadContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'targetArtifactSelectors',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"targetArtifacts"`
+ */
+export const useReadSecurityAuditTestsTargetArtifacts =
+  /*#__PURE__*/ createUseReadContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'targetArtifacts',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"targetContracts"`
+ */
+export const useReadSecurityAuditTestsTargetContracts =
+  /*#__PURE__*/ createUseReadContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'targetContracts',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"targetInterfaces"`
+ */
+export const useReadSecurityAuditTestsTargetInterfaces =
+  /*#__PURE__*/ createUseReadContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'targetInterfaces',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"targetSelectors"`
+ */
+export const useReadSecurityAuditTestsTargetSelectors =
+  /*#__PURE__*/ createUseReadContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'targetSelectors',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"targetSenders"`
+ */
+export const useReadSecurityAuditTestsTargetSenders =
+  /*#__PURE__*/ createUseReadContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'targetSenders',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"testSecret"`
+ */
+export const useReadSecurityAuditTestsTestSecret =
+  /*#__PURE__*/ createUseReadContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'testSecret',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"testSecretHash"`
+ */
+export const useReadSecurityAuditTestsTestSecretHash =
+  /*#__PURE__*/ createUseReadContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'testSecretHash',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link securityAuditTestsAbi}__
+ */
+export const useWriteSecurityAuditTests = /*#__PURE__*/ createUseWriteContract({
+  abi: securityAuditTestsAbi,
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"addSupport"`
+ */
+export const useWriteSecurityAuditTestsAddSupport =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'addSupport',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"advanceTime"`
+ */
+export const useWriteSecurityAuditTestsAdvanceTime =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'advanceTime',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"expectRevertWithError"`
+ */
+export const useWriteSecurityAuditTestsExpectRevertWithError =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'expectRevertWithError',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"registerTestItem"`
+ */
+export const useWriteSecurityAuditTestsRegisterTestItem =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'registerTestItem',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"reportItemLost"`
+ */
+export const useWriteSecurityAuditTestsReportItemLost =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'reportItemLost',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"setUp"`
+ */
+export const useWriteSecurityAuditTestsSetUp =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'setUp',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"test_AUDIT_AccessControlBypass"`
+ */
+export const useWriteSecurityAuditTestsTestAuditAccessControlBypass =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'test_AUDIT_AccessControlBypass',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"test_AUDIT_ReentrancyAttackOnRewards"`
+ */
+export const useWriteSecurityAuditTestsTestAuditReentrancyAttackOnRewards =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'test_AUDIT_ReentrancyAttackOnRewards',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"test_AUDIT_RegistrationDoSAttack"`
+ */
+export const useWriteSecurityAuditTestsTestAuditRegistrationDoSAttack =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'test_AUDIT_RegistrationDoSAttack',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"test_AUDIT_RegistrationFrontrunningAttack"`
+ */
+export const useWriteSecurityAuditTestsTestAuditRegistrationFrontrunningAttack =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'test_AUDIT_RegistrationFrontrunningAttack',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"test_AUDIT_RegistrationGasIsUnreasonable"`
+ */
+export const useWriteSecurityAuditTestsTestAuditRegistrationGasIsUnreasonable =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'test_AUDIT_RegistrationGasIsUnreasonable',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"test_AUDIT_RewardCalculationOverflows"`
+ */
+export const useWriteSecurityAuditTestsTestAuditRewardCalculationOverflows =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'test_AUDIT_RewardCalculationOverflows',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"test_AUDIT_SignatureMalleabilityAttack"`
+ */
+export const useWriteSecurityAuditTestsTestAuditSignatureMalleabilityAttack =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'test_AUDIT_SignatureMalleabilityAttack',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"test_AUDIT_SignatureReplayAcrossCycles"`
+ */
+export const useWriteSecurityAuditTestsTestAuditSignatureReplayAcrossCycles =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'test_AUDIT_SignatureReplayAcrossCycles',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"test_AUDIT_StateManipulationAttack"`
+ */
+export const useWriteSecurityAuditTestsTestAuditStateManipulationAttack =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'test_AUDIT_StateManipulationAttack',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link securityAuditTestsAbi}__
+ */
+export const useSimulateSecurityAuditTests =
+  /*#__PURE__*/ createUseSimulateContract({ abi: securityAuditTestsAbi })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"addSupport"`
+ */
+export const useSimulateSecurityAuditTestsAddSupport =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'addSupport',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"advanceTime"`
+ */
+export const useSimulateSecurityAuditTestsAdvanceTime =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'advanceTime',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"expectRevertWithError"`
+ */
+export const useSimulateSecurityAuditTestsExpectRevertWithError =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'expectRevertWithError',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"registerTestItem"`
+ */
+export const useSimulateSecurityAuditTestsRegisterTestItem =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'registerTestItem',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"reportItemLost"`
+ */
+export const useSimulateSecurityAuditTestsReportItemLost =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'reportItemLost',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"setUp"`
+ */
+export const useSimulateSecurityAuditTestsSetUp =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'setUp',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"test_AUDIT_AccessControlBypass"`
+ */
+export const useSimulateSecurityAuditTestsTestAuditAccessControlBypass =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'test_AUDIT_AccessControlBypass',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"test_AUDIT_ReentrancyAttackOnRewards"`
+ */
+export const useSimulateSecurityAuditTestsTestAuditReentrancyAttackOnRewards =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'test_AUDIT_ReentrancyAttackOnRewards',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"test_AUDIT_RegistrationDoSAttack"`
+ */
+export const useSimulateSecurityAuditTestsTestAuditRegistrationDoSAttack =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'test_AUDIT_RegistrationDoSAttack',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"test_AUDIT_RegistrationFrontrunningAttack"`
+ */
+export const useSimulateSecurityAuditTestsTestAuditRegistrationFrontrunningAttack =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'test_AUDIT_RegistrationFrontrunningAttack',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"test_AUDIT_RegistrationGasIsUnreasonable"`
+ */
+export const useSimulateSecurityAuditTestsTestAuditRegistrationGasIsUnreasonable =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'test_AUDIT_RegistrationGasIsUnreasonable',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"test_AUDIT_RewardCalculationOverflows"`
+ */
+export const useSimulateSecurityAuditTestsTestAuditRewardCalculationOverflows =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'test_AUDIT_RewardCalculationOverflows',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"test_AUDIT_SignatureMalleabilityAttack"`
+ */
+export const useSimulateSecurityAuditTestsTestAuditSignatureMalleabilityAttack =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'test_AUDIT_SignatureMalleabilityAttack',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"test_AUDIT_SignatureReplayAcrossCycles"`
+ */
+export const useSimulateSecurityAuditTestsTestAuditSignatureReplayAcrossCycles =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'test_AUDIT_SignatureReplayAcrossCycles',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `functionName` set to `"test_AUDIT_StateManipulationAttack"`
+ */
+export const useSimulateSecurityAuditTestsTestAuditStateManipulationAttack =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: securityAuditTestsAbi,
+    functionName: 'test_AUDIT_StateManipulationAttack',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link securityAuditTestsAbi}__
+ */
+export const useWatchSecurityAuditTestsEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({ abi: securityAuditTestsAbi })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `eventName` set to `"log"`
+ */
+export const useWatchSecurityAuditTestsLogEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: securityAuditTestsAbi,
+    eventName: 'log',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `eventName` set to `"log_address"`
+ */
+export const useWatchSecurityAuditTestsLogAddressEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: securityAuditTestsAbi,
+    eventName: 'log_address',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `eventName` set to `"log_array"`
+ */
+export const useWatchSecurityAuditTestsLogArrayEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: securityAuditTestsAbi,
+    eventName: 'log_array',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `eventName` set to `"log_bytes"`
+ */
+export const useWatchSecurityAuditTestsLogBytesEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: securityAuditTestsAbi,
+    eventName: 'log_bytes',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `eventName` set to `"log_bytes32"`
+ */
+export const useWatchSecurityAuditTestsLogBytes32Event =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: securityAuditTestsAbi,
+    eventName: 'log_bytes32',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `eventName` set to `"log_int"`
+ */
+export const useWatchSecurityAuditTestsLogIntEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: securityAuditTestsAbi,
+    eventName: 'log_int',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `eventName` set to `"log_named_address"`
+ */
+export const useWatchSecurityAuditTestsLogNamedAddressEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: securityAuditTestsAbi,
+    eventName: 'log_named_address',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `eventName` set to `"log_named_array"`
+ */
+export const useWatchSecurityAuditTestsLogNamedArrayEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: securityAuditTestsAbi,
+    eventName: 'log_named_array',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `eventName` set to `"log_named_bytes"`
+ */
+export const useWatchSecurityAuditTestsLogNamedBytesEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: securityAuditTestsAbi,
+    eventName: 'log_named_bytes',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `eventName` set to `"log_named_bytes32"`
+ */
+export const useWatchSecurityAuditTestsLogNamedBytes32Event =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: securityAuditTestsAbi,
+    eventName: 'log_named_bytes32',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `eventName` set to `"log_named_decimal_int"`
+ */
+export const useWatchSecurityAuditTestsLogNamedDecimalIntEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: securityAuditTestsAbi,
+    eventName: 'log_named_decimal_int',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `eventName` set to `"log_named_decimal_uint"`
+ */
+export const useWatchSecurityAuditTestsLogNamedDecimalUintEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: securityAuditTestsAbi,
+    eventName: 'log_named_decimal_uint',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `eventName` set to `"log_named_int"`
+ */
+export const useWatchSecurityAuditTestsLogNamedIntEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: securityAuditTestsAbi,
+    eventName: 'log_named_int',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `eventName` set to `"log_named_string"`
+ */
+export const useWatchSecurityAuditTestsLogNamedStringEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: securityAuditTestsAbi,
+    eventName: 'log_named_string',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `eventName` set to `"log_named_uint"`
+ */
+export const useWatchSecurityAuditTestsLogNamedUintEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: securityAuditTestsAbi,
+    eventName: 'log_named_uint',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `eventName` set to `"log_string"`
+ */
+export const useWatchSecurityAuditTestsLogStringEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: securityAuditTestsAbi,
+    eventName: 'log_string',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `eventName` set to `"log_uint"`
+ */
+export const useWatchSecurityAuditTestsLogUintEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: securityAuditTestsAbi,
+    eventName: 'log_uint',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link securityAuditTestsAbi}__ and `eventName` set to `"logs"`
+ */
+export const useWatchSecurityAuditTestsLogsEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: securityAuditTestsAbi,
+    eventName: 'logs',
   })
