@@ -6,12 +6,17 @@ import ItemContainer from './containers/ItemContainer/ItemContainer';
  * @param {Object} props - Component props
  * @param {string} props.hash - Item hash
  * @param {string} props.address - Item contract address
+ * @param {boolean} props.neutral - If true, uses neutral styling without status colors
+ * @param {string} props.className - Additional CSS classes
  */
-export default function ItemCard({ hash, address }) {
+export default function ItemCard({ hash, address, neutral, className, ...rest }) {
     return (
         <ItemContainer 
             hash={hash} 
-            address={address} 
+            address={address}
+            neutral={neutral}
+            className={className}
+            {...rest}
         />
     );
 }

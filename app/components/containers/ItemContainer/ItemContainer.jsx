@@ -14,13 +14,14 @@ import ItemActions from '@/components/pure/ItemActions';
  * @param {string} props.hash - Item hash
  * @param {string} props.address - Item contract address
  * @param {string} props.className - Additional CSS classes
+ * @param {boolean} props.neutral - If true, uses neutral styling without status colors
  */
-export default function ItemContainer({ hash, address, className = "" }) {
+export default function ItemContainer({ hash, address, className = "", neutral = false }) {
     const { itemData, isLoading } = useItemData(address);
 
     if (isLoading) {
         return (
-            <Card className={`w-full max-w-sm h-48 bg-white shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-200/40 overflow-hidden gap-0 py-0 flex flex-col ${className}`}>
+            <Card className={`${neutral ? 'w-full h-48' : 'w-full aspect-square'} bg-white shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-200/40 overflow-hidden gap-0 py-0 flex flex-col ${className}`}>
                 <CardContent className="pt-4 px-4 pb-0 flex-1">
                     <div className="space-y-2.5">
                         <Skeleton className="h-6 w-3/4 rounded-md" />
@@ -40,14 +41,14 @@ export default function ItemContainer({ hash, address, className = "" }) {
 
     return (
         <Card className={`
-            w-full max-w-sm h-48
-            ${itemData.statusColor || 'bg-white'} 
+            ${neutral ? 'bg-white' : (itemData.statusColor || 'bg-white')} 
+            ${neutral ? '' : 'hover:scale-[1.02]'}
+            ${neutral ? 'w-full h-48' : 'w-full aspect-square'}
             shadow-sm hover:shadow-lg 
             transition-all duration-300 
             border border-gray-200/40
             overflow-hidden
             gap-0 py-0
-            hover:scale-[1.02]
             group
             flex flex-col
             ${className}

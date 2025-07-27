@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { getStatusName } from '@/constants/itemStatus';
+import { getStatusName, ItemStatus } from '@/constants/itemStatus';
 import { Badge } from '@/components/ui/badge';
 import { Modal } from '@/components/ui/modal';
 import { MapPin, DollarSign } from 'lucide-react';
@@ -23,19 +23,21 @@ export default function ItemDisplay({ itemData, isLoading }) {
         return null; // Skeleton is handled in ItemContainer
     }
 
-    // Enhanced status badge styling with color coding
+    // Enhanced status badge styling with contrasting colors for visibility
     const getStatusBadgeStyle = (status) => {
         switch (status) {
-            case 0: // Registered
-                return "bg-blue-100 text-blue-800 border-blue-200";
-            case 1: // Lost
-                return "bg-red-100 text-red-800 border-red-200";
-            case 2: // Found
-                return "bg-yellow-100 text-yellow-800 border-yellow-200";
-            case 3: // Returned
-                return "bg-green-100 text-green-800 border-green-200";
+            case ItemStatus.None:
+                return "bg-slate-100 text-slate-800 border-slate-300";
+            case ItemStatus.Registered:
+                return "bg-indigo-100 text-indigo-800 border-indigo-300";
+            case ItemStatus.Lost:
+                return "bg-orange-100 text-orange-800 border-orange-300";
+            case ItemStatus.Found:
+                return "bg-emerald-100 text-emerald-800 border-emerald-300";
+            case ItemStatus.Returned:
+                return "bg-purple-100 text-purple-800 border-purple-300";
             default:
-                return "bg-gray-100 text-gray-800 border-gray-200";
+                return "bg-slate-100 text-slate-800 border-slate-300";
         }
     };
 
@@ -67,45 +69,45 @@ export default function ItemDisplay({ itemData, isLoading }) {
 
     return (
         <>
-            <div className="space-y-3">
+            <div className="flex flex-col h-full">
                 {/* Item Title */}
-                <div>
-                    <h3 className="text-lg font-bold text-gray-900 leading-tight line-clamp-2 group-hover:text-gray-700 transition-colors duration-200">
+                <div className="mb-3">
+                    <h3 className="text-lg font-bold text-gray-900 leading-tight truncate group-hover:text-gray-700 transition-colors duration-200">
                         {itemData.comment || 'Untitled Item'}
                     </h3>
                 </div>
 
-                {/* Inline Badges */}
-                <div className="flex justify-between items-center gap-1">
+                {/* Inline Badges - Centered in remaining space */}
+                <div className="flex justify-center items-center gap-2 flex-1">
                     {/* Status Badge */}
                     <Badge 
-                        className={`text-xs font-semibold px-2.5 py-1 border ${getStatusBadgeStyle(itemData.status)} shadow-sm`}
+                        className={`text-sm font-semibold px-3 py-1.5 border ${getStatusBadgeStyle(itemData.status)} shadow-sm`}
                     >
                         {getStatusName(itemData.status)}
                     </Badge>
 
                     {/* Reward Badge */}
-                    {itemData.hasReward && (
+                    {itemData.hasReward ? (
                         <Badge 
                             variant="outline"
-                            className="text-xs font-medium px-2.5 py-1 bg-green-50 text-green-700 border-green-300 shadow-sm"
+                            className="text-sm font-medium px-3 py-1.5 bg-green-50 text-green-700 border-green-300 shadow-sm"
                         >
-                            <DollarSign className="h-3 w-3 mr-1.5 text-green-600" />
+                            <DollarSign className="h-4 w-4 mr-1.5 text-green-600" />
                             {itemData.formattedReward}
                         </Badge>
-                    )}
+                    ) : null}
 
                     {/* Location Badge - Icon Only, Clickable */}
-                    {itemData.geo && (
+                    {itemData.geo ? (
                         <Badge 
                             variant="outline"
-                            className="text-xs font-medium px-2.5 py-[6px] bg-gray-50 text-gray-700 border-gray-300 hover:bg-gray-100 cursor-pointer transition-colors duration-200 shadow-sm flex items-center justify-center"
+                            className="text-sm font-medium px-4 py-2.5 bg-gray-50 text-gray-700 border-gray-300 hover:bg-gray-100 cursor-pointer transition-colors duration-200 shadow-sm flex items-center justify-center"
                             onClick={handleLocationClick}
                             title="View location on map"
                         >
-                            <MapPin className="h-3 w-3 text-gray-500" />
+                            <MapPin className="h-4 w-4 text-gray-500" />
                         </Badge>
-                    )}
+                    ) : null}
                 </div>
             </div>
 
