@@ -2,6 +2,7 @@ import { useSimulateLafFound, useWriteLafFound } from '@/contracts';
 import { useSmartWalletSimulateHook, useSmartWalletWriteHook } from '@/wallet';
 
 import TxButton from '@/components/TxButton';
+import { notify } from '@/components/Notification';
 
 /**
  * Specialized button component for marking items as found
@@ -11,6 +12,7 @@ import TxButton from '@/components/TxButton';
  * @param {string} props.signature - Finder signature for verification
  * @param {string} props.className - Additional CSS classes
  * @param {boolean} props.disabled - Whether button should be disabled
+ * Includes success notification callback when transaction completes
  */
 export default function FoundButton({ hash, signature, className = "", disabled = false }) {
     const simulateHook = useSmartWalletSimulateHook(useSimulateLafFound);
@@ -18,7 +20,12 @@ export default function FoundButton({ hash, signature, className = "", disabled 
     
     const foundParams = {
         args: [hash, signature],
-        enabled: !disabled && !!signature
+        enabled: !disabled && !!signature,
+        confirmationCallback: ({ data, error }) => {
+            if (!error && data) {
+                notify('The owner has been informed!', 'success', {id: "secret-found"});
+            }
+        }
     };
 
     return (
@@ -27,7 +34,7 @@ export default function FoundButton({ hash, signature, className = "", disabled 
             writeHook={writeHook}
             params={foundParams}
             className={className}
-            text="Found"
+            text="Confirm Found"
         />
     );
 }

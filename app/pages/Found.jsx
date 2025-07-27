@@ -5,6 +5,7 @@ import { recoverMessageAddress } from 'viem';
 
 import ItemCard from "../components/ItemCard";
 import TxButton from "../components/TxButton";
+import FoundButton from "../components/pure/FoundButton";
 import { Button } from "../components/ui/button";
 
 import { notify } from "../components/Notification";
@@ -12,8 +13,7 @@ import { useAccount } from "../wallet";
 import { useUnifiedSigning } from "../hooks/useUnifiedSigning";
 import { useSmartWalletDeployment } from "../hooks/useSmartWalletDeployment";
 
-import { useReadLafItems, useSimulateLafFound, useWriteLafFound, useReadLafItemStatus, useReadLafItemOwner, useReadLafItemCycle } from "../contracts"
-import { useSmartWalletSimulateHook, useSmartWalletWriteHook, chain } from "../wallet"
+import { useReadLafItems, useReadLafItemStatus, useReadLafItemOwner, useReadLafItemCycle } from "../contracts"
 import { useBlockContext } from '../contexts/BlockContext';
 
 import { isItemFound } from "../constants/itemStatus"
@@ -204,18 +204,6 @@ export default function Found() {
         }
     }, [isFound, finderSignature, isSigningSecret, autoSigningAttempted, loggedIn, secret, walletReady, activeWalletType]);
 
-    const foundParams = {
-        args: [secretHash, finderSignature],
-        enabled: !isFound && finderSignature && walletReady,
-        confirmationCallback: ({ data, error }) => {
-            if (!error && data) {
-                notify('The owner has been informed!', 'success', {id: "secret-found"});
-                setFinderSignature(null);
-                setAutoSigningAttempted(false);
-            }
-        }
-    };
-
     // Determine current status for streamlined UI
     const getStatus = () => {
         const statusData = {
@@ -368,11 +356,10 @@ export default function Found() {
                                 Everything is ready! Confirm you found this item to receive your immediate reward.
                             </p>
                             <div className="flex justify-center">
-                                <TxButton
-                                    simulateHook={useSmartWalletSimulateHook(useSimulateLafFound)}
-                                    writeHook={useSmartWalletWriteHook(useWriteLafFound)}
-                                    params={foundParams}
-                                    text="Confirm Found" 
+                                <FoundButton
+                                    hash={secretHash}
+                                    signature={finderSignature}
+                                    className="px-6 py-2"
                                 />
                             </div>
                         </>
