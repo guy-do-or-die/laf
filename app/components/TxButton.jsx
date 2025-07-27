@@ -1,9 +1,7 @@
-
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useWaitForTransactionReceipt } from 'wagmi'
 
 import { LoaderCircle } from 'lucide-react'
-
 import { Button } from "./ui/button"; 
 
 import { notify, hide, parseError } from '../components/Notification'
@@ -22,6 +20,8 @@ import {
 function TxButton({simulateHook, writeHook, params, text}) {
 
     const { address, loggedIn } = useAccount()
+    const [triggerCompleted, setTriggerCompleted] = useState(false)
+    const [shouldAutoExecute, setShouldAutoExecute] = useState(false)
 
     const {
         data: simulateData,
@@ -30,7 +30,7 @@ function TxButton({simulateHook, writeHook, params, text}) {
         isError: isSimulateError,
         error: simulateError
     } = simulateHook({
-        query: { enabled: params.enabled && loggedIn },
+        query: { enabled: params.enabled && loggedIn && (!params.trigger || triggerCompleted) },
         ...params
     })
 
@@ -42,6 +42,7 @@ function TxButton({simulateHook, writeHook, params, text}) {
         isError: isWriteError,
         error: writeError
     } = writeHook({
+        // Enable write hook when simulation succeeds
         query: { enabled: params.enabled && loggedIn && isSimulateSuccess },
         ...params
     })
@@ -84,15 +85,37 @@ function TxButton({simulateHook, writeHook, params, text}) {
     useEffect(() => {
         if (isConfirmationError) {
             params.onConfirmationError?.(confirmationError) || notify(parseError(confirmationError), 'error')
+            hide('confirming')
         }
         if (isConfirmationSuccess) {
             params.onConfirmationSuccess?.(confirmationData) ||
                 notify(<span>{txLink(confirmationData?.transactionHash, 'Transaction')} confirmed</span>, 'success')
+            hide('confirming')
         }
         if (isConfirmationError || isConfirmationSuccess) {
             params.confirmationCallback?.({ data: confirmationData, error: confirmationError })
         }
     }, [isConfirmationError, isConfirmationSuccess])
+
+    useEffect(() => {
+        if (!isConfirmationLoading && !isConfirmationSuccess && !isConfirmationError) {
+            hide('confirming')
+        }
+    }, [isConfirmationLoading, isConfirmationSuccess, isConfirmationError])
+
+    useEffect(() => {
+        if (shouldAutoExecute && isSimulateSuccess && !isWritePending) {
+            setShouldAutoExecute(false);
+
+            const executor = createTransactionExecutor({
+                writeContract,
+                simulateData,
+                address
+            });
+
+            executor();
+        }
+    }, [shouldAutoExecute, isSimulateSuccess, isWritePending]);
 
     useEffect(() => {
         if (params.enabled && isSimulateLoading) {
@@ -112,12 +135,10 @@ function TxButton({simulateHook, writeHook, params, text}) {
     }, [isWritePending])
 
     useEffect(() => {
-        if (params.enabled && writeData && isConfirmationLoading) {
+        if (params.enabled && writeData && isConfirmationLoading && !params.trigger) {
             notify(<span>Confirming {txLink(writeData, 'Transaction')}</span>, 'loading', { id: 'confirming' })
-        } else {
-            hide('confirming')
         }
-    }, [isConfirmationLoading])
+    }, [isConfirmationLoading, params.enabled, writeData, params.trigger])
 
 
     const transactionPhase = determineTransactionPhase({
@@ -137,14 +158,40 @@ function TxButton({simulateHook, writeHook, params, text}) {
         loggedIn,
         enabled: params?.enabled,
         simulateData,
-        phase: transactionPhase
+        phase: transactionPhase,
+        trigger: params?.trigger
     });
     const buttonText = getTransactionButtonText(transactionPhase, text);
-    const onClick = createTransactionExecutor({
-        writeContract,
-        simulateData,
-        address
-    });
+    // Enhanced onClick handler that supports triggers
+    const onClick = async () => {
+        try {
+            // Step 1: Run trigger if provided and not yet completed
+            if (params.trigger && !triggerCompleted) {
+                const shouldProceed = await params.trigger();
+                if (shouldProceed === false) {
+                    return; // Stop execution if trigger returns false
+                }
+
+                // Mark trigger as completed to enable simulation and auto-execute
+                setTriggerCompleted(true);
+                setShouldAutoExecute(true);
+                notify('Preparing transaction...', 'info');
+                return; // Let the component re-render and simulate
+            }
+
+            // Step 2: Execute transaction (simulation should be complete by now)
+            const executor = createTransactionExecutor({
+                writeContract,
+                simulateData,
+                address
+            });
+
+            return executor();
+        } catch (error) {
+            console.error('Transaction error:', error);
+            notify('Transaction failed. Please try again.', 'error');
+        }
+    };
 
     return (
         <Button variant="outline" className="flex-1" onClick={onClick} disabled={disabled}>

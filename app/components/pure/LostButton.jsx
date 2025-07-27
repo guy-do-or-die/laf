@@ -1,19 +1,20 @@
-import { useState, useEffect } from 'react';
 import { parseUnits } from 'viem';
+import { useLocation } from 'wouter';
 
-import { Button } from '@/components/ui/button';
-import TxButton from '@/components/TxButton';
 import { notify } from '@/components/Notification';
 import { useApproval } from '@/hooks/useApproval';
+
+import TxButton from '@/components/TxButton';
 
 import {
     useReadLafItems,
     useSimulateLafLost,
     useWriteLafLost
 } from '@/contracts';
+
 import { useSmartWalletSimulateHook, useSmartWalletWriteHook } from '@/wallet';
-import { useAccount } from '@/wallet';
 import { useRewardToken } from '@/contexts/LafConfigContext';
+
 
 /**
  * Pure component for LostButton component that uses useApproval hook and handling
@@ -29,16 +30,18 @@ export default function LostButton({
     secretHash, 
     reward, 
     geo, 
-    className = "", 
-    disabled = false 
+    disabled: externalDisabled = false, 
+    className = "" 
 }) {
-    const { address, activeWalletType } = useAccount();
-    const [isReporting, setIsReporting] = useState(false);
-
+    const [, setLocation] = useLocation();
     const { data: itemContractAddress } = useReadLafItems({ args: [secretHash] });
-    
+
     // Get reward token info from LAF config context
     const { address: rewardTokenAddress, decimals: rewardTokenDecimals, isReady: isConfigReady } = useRewardToken();
+    
+    // Smart wallet hooks for lost transaction
+    const simulateLost = useSmartWalletSimulateHook(useSimulateLafLost);
+    const writeLost = useSmartWalletWriteHook(useWriteLafLost);
     
     // Parse reward value using contract decimals
     const rewardValue = reward ? parseUnits(reward, rewardTokenDecimals) : 0n;
@@ -56,36 +59,33 @@ export default function LostButton({
         enabled: !!itemContractAddress
     });
 
-    const simulateLost = useSmartWalletSimulateHook(useSimulateLafLost);
-    const writeLost = useSmartWalletWriteHook(useWriteLafLost);
-
-    // Handle approval before allowing TxButton to execute
-    const handleApprovalFirst = async () => {
-        if (needsApproval && !isApproving) {
-            setIsReporting(true);
+    // Button disabled logic - includes external disabled prop and internal validation
+    const disabled = externalDisabled || !itemContractAddress || !secretHash || rewardValue <= 0n || !geo?.trim() || !isConfigReady;
+    
+    // Trigger for TxButton - handles approval before lost transaction
+    const trigger = async () => {
+        if (needsApproval && !isApproved) {
             notify('Processing approval...', 'info');
-            const success = approve();
-            if (!success) {
-                setIsReporting(false);
+            const approvalSuccess = await approve();
+            if (!approvalSuccess) {
                 return false;
             }
+
+            await new Promise(resolve => setTimeout(resolve, 500));
         }
         return true;
     };
-    
-    // Auto-reset reporting state when approval completes
-    useEffect(() => {
-        if (isApproved && isReporting) {
-            setIsReporting(false); // Allow TxButton to take over
-        }
-    }, [isApproved, isReporting]);
 
     // Lost transaction parameters for TxButton
     const lostParams = {
         args: [secretHash, rewardValue, geo],
-        enabled: !!itemContractAddress && !!secretHash && rewardValue > 0n && !!geo?.trim() && isConfigReady && (!needsApproval || isApproved),
+        enabled: !disabled,
+        trigger: needsApproval && !isApproved ? trigger : undefined,
         onWriteSuccess: () => {
             notify('Item successfully reported as lost!', 'success');
+            setTimeout(() => {
+                setLocation('/items');
+            }, 2000);
         },
         writeCallback: ({ data, error }) => {
             if (error) {
@@ -94,27 +94,21 @@ export default function LostButton({
         }
     };
 
-    // If approval is needed and not yet approved, show approval button
-    if (needsApproval && !isApproved) {
-        return (
-            <Button
-                onClick={handleApprovalFirst}
-                disabled={disabled || isApproving || !isConfigReady}
-                className={className}
-            >
-                {isApproving ? 'Approving...' : 'Find'}
-            </Button>
-        );
-    }
+    // Determine button text based on current state
+    const getButtonText = () => {
+        if (isApproving) return 'Processing...';
+        if (needsApproval && !isApproved) return 'Find'; // Will handle approval + lost seamlessly
+        return 'Find'; // Will execute lost transaction
+    };
 
-    // Once approved (or no approval needed), show TxButton for lost transaction
+    // Use TxButton with trigger for seamless approval + lost transaction
     return (
         <TxButton
             simulateHook={simulateLost}
             writeHook={writeLost}
             params={lostParams}
-            text="Find"
             className={className}
+            text={getButtonText()}
         />
     );
 }

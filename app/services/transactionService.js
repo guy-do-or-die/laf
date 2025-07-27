@@ -72,10 +72,11 @@ export function isTransactionLoading(phase) {
  * @returns {boolean} - True if button should be disabled
  */
 export function shouldDisableTransaction(params) {
-    const { loggedIn, enabled, simulateData, phase } = params;
+    const { loggedIn, enabled, simulateData, phase, trigger } = params;
     
     if (!loggedIn || !enabled) return true;
-    if (!simulateData?.request) return true;
+    // Allow triggers to bypass simulation requirement
+    if (!trigger && !simulateData?.request) return true;
     if (isTransactionLoading(phase)) return true;
     
     return false;

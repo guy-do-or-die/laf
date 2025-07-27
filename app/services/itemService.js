@@ -38,7 +38,7 @@ export function isItemInStatus(itemData, targetStatus) {
  */
 export function canReportLost(itemData) {
     const status = determineItemStatus(itemData);
-    return status === ItemStatus.Registered;
+    return status === ItemStatus.Registered || status === ItemStatus.Returned;
 }
 
 /**

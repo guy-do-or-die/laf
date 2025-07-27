@@ -174,7 +174,7 @@ export function useAccount() {
         isConnected,
         isSmartWalletDeployed: smartWalletDeployed
       });
-      console.log('🔗 Unified Wallet State:', debugState);
+      //console.log('🔗 Unified Wallet State:', debugState);
     }
   }, [loggedIn, activeWalletType, address, signingMethod, smartWalletDeployed]);
 
