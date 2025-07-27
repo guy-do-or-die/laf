@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams } from "wouter";
 
-import { createCommitRevealSignature, validateSecretHash } from '../utils/secretUtils';
 import { recoverMessageAddress } from 'viem';
 
 import ItemCard from "../components/ItemCard";
@@ -19,7 +18,7 @@ import { useBlockContext } from '../contexts/BlockContext';
 
 import { isItemFound } from "../constants/itemStatus"
 
-import { verifySignature } from '../services/signatureService';
+import { createCommitRevealSignature, validateSecretHash } from '../services/secretService';
 
 
 export default function Found() {
@@ -145,12 +144,16 @@ export default function Found() {
             }
             
             // Validate secret matches the expected secretHash
-            if (!validateSecretHash(secret, secretHash)) {
+            const validationResult = validateSecretHash(secret, secretHash);
+            if (!validationResult.success || !validationResult.data.isValid) {
                 console.warn('⚠️ Secret validation failed - this may be an old QR code format');
+                if (validationResult.error) {
+                    console.error('Validation error:', validationResult.error.message);
+                }
             }
             
             // Create signature using the utility function
-            const signatureHex = await createCommitRevealSignature(
+            const signatureResult = await createCommitRevealSignature(
                 secret,
                 secretHash,
                 address,
@@ -159,7 +162,11 @@ export default function Found() {
                 chain.id
             );
             
-            setFinderSignature(signatureHex);
+            if (!signatureResult.success) {
+                throw new Error(`Signature creation failed: ${signatureResult.error.message}`);
+            }
+            
+            setFinderSignature(signatureResult.data.signature);
             notify('Secret signature created successfully!', 'success', {id: "secret-signed"});
             
         } catch (error) {

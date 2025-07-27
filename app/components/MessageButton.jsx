@@ -23,8 +23,7 @@ export const MessageButton = ({ recipientAddress, itemTitle, secretHash, classNa
   return (
     <>
       <Button onClick={handleClick} disabled={!loggedIn || isConnecting || !client} className={className} size="sm">
-        <MessageCircle className="mr-2 h-4 w-4" />
-        Message
+        <MessageCircle className="mr-2 h-4 w-4" /> Message
       </Button>
       {showModal && (
         <MessageModal

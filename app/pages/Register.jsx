@@ -2,8 +2,6 @@ import {useRef, useEffect, useState} from 'react';
 
 import { useLocation } from 'wouter';
 
-import { generateSecretHash, generateRandomSecret } from '../utils/secretUtils';
-
 import QRCodeStyling from 'qr-code-styling';
 import qrOptions from '../../qr-options.json';
 
@@ -15,9 +13,10 @@ import { notify } from '../components/Notification';
 import { useSimulateLafRegister, useWriteLafRegister } from "../contracts"
 import { useSmartWalletSimulateHook, useSmartWalletWriteHook } from "../wallet"
 import { useAccount } from "../wallet"
+
 import { useSmartWalletDeployment } from "../hooks/useSmartWalletDeployment";
 
-import { generateRandomSecret, generateSecretHash } from '@/services/signatureService';
+import { generateRandomSecret } from '@/services/secretService';
 
 
 export default function Register() {
@@ -26,7 +25,12 @@ export default function Register() {
     const { isDeploying: isDeployingWallet, isReady: walletReady } = useSmartWalletDeployment();
     
     const [itemData, setItemData] = useState(() => {
-        const { secret, secretHash } = generateRandomSecret();
+        const result = generateRandomSecret();
+        if (!result.success) {
+            console.error('Failed to generate random secret:', result.error);
+            return { secret: '', secretHash: '', qrCode: null };
+        }
+        const { secret, secretHash } = result.data;
         return { secret, secretHash, qrCode: null };
     });
 
@@ -101,7 +105,14 @@ export default function Register() {
         generationAttemptRef.current = false;
         
         // Generate new secret and QR code
-        const { secret, secretHash } = generateRandomSecret();
+        const result = generateRandomSecret();
+        if (!result.success) {
+            console.error('Failed to generate random secret:', result.error);
+            notify('Failed to generate new secret. Please try again.', 'error');
+            return;
+        }
+
+        const { secret, secretHash } = result.data;
         setItemData({
             secret,
             secretHash,

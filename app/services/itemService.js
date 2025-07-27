@@ -1,18 +1,6 @@
-/**
- * Item Service - Pure business logic for item operations and status management
- * Following SRP: Only handles item-related calculations, no UI or React dependencies
- */
+import {formatUnits} from 'viem';
 
-/**
- * Item status enum for consistent status identification
- */
-export const ITEM_STATUS = {
-    REGISTERED: 0,
-    LOST: 1,
-    FOUND: 2,
-    RETURNED: 3
-};
-
+import { ItemStatus } from "@/constants/itemStatus";
 
 
 /**
@@ -21,14 +9,14 @@ export const ITEM_STATUS = {
  * @returns {number} - Item status enum value
  */
 export function determineItemStatus(itemData) {
-    if (!itemData) return ITEM_STATUS.REGISTERED;
+    if (!itemData) return ItemStatus.Registered;
     
     // Priority order: returned > found > lost > registered
-    if (itemData.isReturned) return ITEM_STATUS.RETURNED;
-    if (itemData.isFound) return ITEM_STATUS.FOUND;
-    if (itemData.isLost) return ITEM_STATUS.LOST;
+    if (itemData.isReturned) return ItemStatus.Returned;
+    if (itemData.isFound) return ItemStatus.Found;
+    if (itemData.isLost) return ItemStatus.Lost;
     
-    return ITEM_STATUS.REGISTERED;
+    return ItemStatus.Registered;
 }
 
 
@@ -50,7 +38,7 @@ export function isItemInStatus(itemData, targetStatus) {
  */
 export function canReportLost(itemData) {
     const status = determineItemStatus(itemData);
-    return status === ITEM_STATUS.REGISTERED;
+    return status === ItemStatus.Registered;
 }
 
 /**
@@ -64,7 +52,7 @@ export function canReturn(itemData, currentUserAddress) {
     const isOwner = currentUserAddress && 
                    currentUserAddress.toLowerCase() === itemData.owner?.toLowerCase();
     
-    return status === ITEM_STATUS.FOUND && isOwner;
+    return status === ItemStatus.Found && isOwner;
 }
 
 /**
@@ -77,8 +65,6 @@ export function formatReward(rewardAmount, decimals = 6) {
     if (!rewardAmount || rewardAmount === 0n) return '0';
     
     try {
-        // Use viem's formatUnits for proper decimal handling
-        const { formatUnits } = require('viem');
         return formatUnits(rewardAmount, decimals);
     } catch (error) {
         console.error('Error formatting reward:', error);
@@ -125,7 +111,7 @@ export function getMessagingRecipient(itemData, currentUserAddress) {
     } else {
         return { 
             address: itemData.finder, 
-            role: 'other_to_finder',
+            role: 'other_to_owner',
             title: itemData.comment || "Item"
         };
     }
@@ -159,6 +145,103 @@ export function validateItemData(itemData) {
 }
 
 /**
+ * Get status color class for UI styling
+ * @param {number} status - Item status enum value
+ * @returns {string} - CSS class name for status color
+ */
+export function getStatusColor(status) {
+    switch (status) {
+        case ItemStatus.None: return 'bg-red-100';
+        case ItemStatus.Registered: return 'bg-gray-100';
+        case ItemStatus.Lost: return 'bg-red-100';
+        case ItemStatus.Found: return 'bg-yellow-100';
+        case ItemStatus.Returned: return 'bg-green-100';
+        default: return 'bg-gray-100';
+    }
+}
+
+/**
+ * Create return transaction parameters
+ * @param {string} hash - Item hash
+ * @param {number} charityIndex - Charity index (default: 0)
+ * @param {number} charityFee - Charity fee in basis points (default: 100)
+ * @param {number} fee - Platform fee in basis points (default: 0)
+ * @returns {Object} - Transaction parameters for return function
+ */
+export function createReturnParams(hash, charityIndex = 0, charityFee = 100, fee = 0) {
+    return {
+        args: [hash, charityIndex, charityFee, fee],
+        enabled: true
+    };
+}
+
+/**
+ * Create contract configuration for reading item data
+ * @param {string} address - Item contract address
+ * @param {Object} abi - Contract ABI
+ * @returns {Array} - Contract configuration array for useReadContracts
+ */
+export function createItemContractConfig(address, abi) {
+    return [
+        {
+            address: address,
+            abi: abi,
+            functionName: 'comment',
+        },
+        {
+            address: address,
+            abi: abi,
+            functionName: 'status',
+        },
+        {
+            address: address,
+            abi: abi,
+            functionName: 'geo',
+        },
+        {
+            address: address,
+            abi: abi,
+            functionName: 'reward',
+        },
+        {
+            address: address,
+            abi: abi,
+            functionName: 'finder',
+        },
+        {
+            address: address,
+            abi: abi,
+            functionName: 'owner',
+        },
+    ];
+}
+
+/**
+ * Process raw contract data into structured item data
+ * @param {Array} readData - Raw contract read results
+ * @returns {Object} - Processed item data
+ */
+export function processContractData(readData) {
+    if (!readData || readData.length < 6) {
+        return null;
+    }
+    
+    const status = readData[1].result;
+    
+    return {
+        comment: readData[0].result,
+        status: status || ItemStatus.Registered,
+        isLost: status === ItemStatus.Lost,
+        isFound: status === ItemStatus.Found,
+        isReturned: status === ItemStatus.Returned,
+        geo: readData[2].result,
+        reward: readData[3].result,
+        finder: readData[4].result,
+        owner: readData[5].result,
+    };
+}
+
+/**
  * Create item business data object with computed properties
  * @param {Object} itemData - Raw item data from contract
  * @param {string} currentUserAddress - Current user's address
@@ -172,6 +255,7 @@ export function createItemBusinessData(itemData, currentUserAddress) {
     return {
         ...itemData,
         status,
+        statusColor: getStatusColor(status),
         formattedReward: reward,
         messagingRecipient,
         canReportLost: canReportLost(itemData),
