@@ -1,25 +1,15 @@
 import { useState, useEffect } from "react";
 import { useParams } from "wouter";
 
-import LostButton from "../components/pure/LostButton";
-
-import { notify } from "../components/Notification";
-
-import { Input } from "../components/ui/input";
-import { Label } from "../components/ui/label";
-import { Button } from "../components/ui/button";
-
-import { MapPin } from "lucide-react";
-
 import {
     useReadLafItems,
     useReadLafItemStatus,
 } from "../contracts"
 
 
-import { useAccount } from "../wallet"
 import { ItemStatus, getStatusName } from "../constants/itemStatus"
 import { useBlockContext } from '../contexts/BlockContext';
+
 import LostForm from "../components/pure/LostForm";
 
 export default function Lost() {
@@ -27,16 +17,12 @@ export default function Lost() {
     const { blockNumber } = useBlockContext();
 
     const [itemStatus, setItemStatus] = useState();
-
-    const { address } = useAccount();
     
-    // Get the specific Item contract address for this secretHash
     const { data: itemContractAddress } = useReadLafItems({
         args: [secretHash],
         enabled: !!secretHash
     });
     
-    // Get the current status of the item
     const { data: itemStatusData } = useReadLafItemStatus({ 
         address: itemContractAddress, 
         blockNumber 
@@ -47,8 +33,6 @@ export default function Lost() {
             setItemStatus(itemStatusData);
         }
     }, [itemStatusData]);
-    
-    // Handle different item statuses
     
     if (!itemContractAddress) {
         return (

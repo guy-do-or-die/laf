@@ -1,4 +1,5 @@
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 
 import { useItemData } from '@/hooks/useItemData';
 
@@ -17,12 +18,44 @@ import ItemActions from '@/components/pure/ItemActions';
 export default function ItemContainer({ hash, address, className = "" }) {
     const { itemData, isLoading } = useItemData(address);
 
+    if (isLoading) {
+        return (
+            <Card className={`w-full max-w-sm h-48 bg-white shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-200/40 overflow-hidden gap-0 py-0 flex flex-col ${className}`}>
+                <CardContent className="pt-4 px-4 pb-0 flex-1">
+                    <div className="space-y-2.5">
+                        <Skeleton className="h-6 w-3/4 rounded-md" />
+                        <Skeleton className="h-5 w-1/3 rounded-full" />
+                        <div className="space-y-2">
+                            <Skeleton className="h-6 w-2/3 rounded-md" />
+                            <Skeleton className="h-6 w-1/2 rounded-md" />
+                        </div>
+                    </div>
+                </CardContent>
+                <CardFooter className="px-4 pt-3 pb-4 h-16 flex items-center">
+                    <Skeleton className="h-8 w-full rounded-md" />
+                </CardFooter>
+            </Card>
+        );
+    }
+
     return (
-        <Card className={`${itemData.statusColor || 'bg-gray-100'} w-full min-w-64 min-h-48 ${className}`}>
-            <CardContent className="flex-1">
+        <Card className={`
+            w-full max-w-sm h-48
+            ${itemData.statusColor || 'bg-white'} 
+            shadow-sm hover:shadow-lg 
+            transition-all duration-300 
+            border border-gray-200/40
+            overflow-hidden
+            gap-0 py-0
+            hover:scale-[1.02]
+            group
+            flex flex-col
+            ${className}
+        `}>
+            <CardContent className="pt-4 px-4 pb-0 flex-1">
                 <ItemDisplay itemData={itemData} isLoading={isLoading} />
             </CardContent>
-            <CardFooter className="flex flex-wrap gap-2">
+            <CardFooter className="px-4 pt-3 pb-4 h-16 flex items-center">
                 <ItemActions
                     itemData={itemData}
                     isLoading={isLoading}

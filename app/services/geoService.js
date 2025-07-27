@@ -3,6 +3,8 @@
  * Following SRP: Only handles geolocation operations, no UI or React dependencies
  */
 
+import Geohash from 'latlon-geohash';
+
 /**
  * Geolocation error types enum
  */
@@ -257,5 +259,167 @@ export function isWithinRadius(location, center, radiusKm) {
         return distance <= radiusKm;
     } catch (error) {
         return false;
+    }
+}
+
+/**
+ * Encode coordinates to geohash
+ * @param {number} latitude - Latitude coordinate
+ * @param {number} longitude - Longitude coordinate
+ * @param {number} precision - Geohash precision (default: 12 for ~3.7m accuracy)
+ * @returns {string} - Geohash string
+ */
+export function encodeGeohash(latitude, longitude, precision = 12) {
+    const validation = validateCoordinates({ latitude, longitude });
+    if (!validation.isValid) {
+        throw new Error(`Invalid coordinates for geohash encoding: ${validation.errors.join(', ')}`);
+    }
+    
+    return Geohash.encode(latitude, longitude, precision);
+}
+
+/**
+ * Decode geohash to coordinates
+ * @param {string} geohash - Geohash string to decode
+ * @returns {Object} - Coordinates object with latitude and longitude
+ */
+export function decodeGeohash(geohash) {
+    if (!geohash || typeof geohash !== 'string') {
+        throw new Error('Invalid geohash: must be a non-empty string');
+    }
+    
+    try {
+        const decoded = Geohash.decode(geohash);
+        return {
+            latitude: decoded.lat,
+            longitude: decoded.lon
+        };
+    } catch (error) {
+        throw new Error(`Failed to decode geohash '${geohash}': ${error.message}`);
+    }
+}
+
+/**
+ * Validate geohash string
+ * @param {string} geohash - Geohash string to validate
+ * @returns {boolean} - True if geohash is valid
+ */
+export function isValidGeohash(geohash) {
+    try {
+        decodeGeohash(geohash);
+        return true;
+    } catch (error) {
+        return false;
+    }
+}
+
+/**
+ * Search for address suggestions using OpenStreetMap Nominatim
+ * @param {string} query - Search query string
+ * @param {number} limit - Maximum number of results (default: 5)
+ * @returns {Promise<Array>} - Promise resolving to array of address suggestions
+ */
+export async function searchAddressSuggestions(query, limit = 5) {
+    if (!query || typeof query !== 'string' || query.trim().length < 2) {
+        return [];
+    }
+    
+    try {
+        const response = await fetch(
+            `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query.trim())}&limit=${limit}&addressdetails=1`,
+            {
+                headers: {
+                    'User-Agent': 'LAF-App/1.0'
+                }
+            }
+        );
+        
+        if (!response.ok) {
+            throw new Error(`Geocoding API error: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        
+        if (!data || data.length === 0) {
+            return [];
+        }
+        
+        return data.map(result => {
+            const coordinates = {
+                latitude: parseFloat(result.lat),
+                longitude: parseFloat(result.lon)
+            };
+            
+            const validation = validateCoordinates(coordinates);
+            if (!validation.isValid) {
+                return null;
+            }
+            
+            return {
+                coordinates,
+                displayName: result.display_name,
+                type: result.type,
+                importance: result.importance || 0,
+                boundingBox: result.boundingbox ? {
+                    south: parseFloat(result.boundingbox[0]),
+                    north: parseFloat(result.boundingbox[1]),
+                    west: parseFloat(result.boundingbox[2]),
+                    east: parseFloat(result.boundingbox[3])
+                } : null
+            };
+        }).filter(Boolean); // Remove null results
+    } catch (error) {
+        console.warn('Address search failed:', error);
+        return [];
+    }
+}
+
+/**
+ * Forward geocoding function using OpenStreetMap Nominatim
+ * @param {string} address - Address string to geocode
+ * @returns {Promise<Object>} - Promise resolving to coordinates object
+ */
+export async function forwardGeocode(address) {
+    const suggestions = await searchAddressSuggestions(address, 1);
+    
+    if (suggestions.length === 0) {
+        throw new Error('Address not found');
+    }
+    
+    return suggestions[0];
+}
+
+/**
+ * Reverse geocoding function using OpenStreetMap Nominatim
+ * @param {number} latitude - Latitude coordinate
+ * @param {number} longitude - Longitude coordinate
+ * @returns {Promise<string>} - Promise resolving to human-readable address
+ */
+export async function reverseGeocode(latitude, longitude) {
+    const validation = validateCoordinates({ latitude, longitude });
+    if (!validation.isValid) {
+        throw new Error(`Invalid coordinates for reverse geocoding: ${validation.errors.join(', ')}`);
+    }
+    
+    try {
+        const response = await fetch(
+            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=18&addressdetails=1`,
+            {
+                headers: {
+                    'User-Agent': 'LAF-App/1.0'
+                }
+            }
+        );
+        
+        if (!response.ok) {
+            throw new Error(`Geocoding API error: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        return data.display_name || formatCoordinates({ latitude, longitude });
+    } catch (error) {
+        console.warn('Reverse geocoding failed:', error);
+        // Fallback to coordinate display
+        return formatCoordinates({ latitude, longitude });
     }
 }

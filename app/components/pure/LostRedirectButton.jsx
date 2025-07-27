@@ -9,10 +9,11 @@ import { Button } from '@/components/ui/button';
  * @param {string} props.className - Additional CSS classes
  * @param {boolean} props.disabled - Whether button should be disabled
  */
-export default function LostRedirectButton({ hash, className = "flex-1", disabled = false }) {
+export default function LostRedirectButton({ hash, className = "flex-1", disabled = false, size = "default" }) {
     return (
         <Button 
             variant="outline" 
+            size={size}
             className={className} 
             disabled={disabled}
             asChild

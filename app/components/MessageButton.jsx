@@ -10,7 +10,7 @@ import { useAccount } from '../wallet';
 import { MessageModal } from './MessageModal';
 
 
-export const MessageButton = ({ recipientAddress, itemTitle, secretHash, className = "" }) => {
+export const MessageButton = ({ recipientAddress, itemTitle, secretHash, className = "", size = "sm" }) => {
   const { client, isConnecting } = useMessagingConnection();
   const { loggedIn } = useAccount();
 
@@ -22,7 +22,7 @@ export const MessageButton = ({ recipientAddress, itemTitle, secretHash, classNa
 
   return (
     <>
-      <Button onClick={handleClick} disabled={!loggedIn || isConnecting || !client} className={className} size="sm">
+      <Button onClick={handleClick} disabled={!loggedIn || isConnecting || !client} className={className} size={size}>
         <MessageCircle className="mr-2 h-4 w-4" /> Message
       </Button>
       {showModal && (

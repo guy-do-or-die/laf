@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams } from "wouter";
 
-import ItemCard from "../components/ItemCard";
+import ItemCard from "../components/Item";
 
 import FoundButton from "../components/pure/FoundButton";
 

@@ -17,7 +17,7 @@ import {
 
 
 
-function TxButton({simulateHook, writeHook, params, text}) {
+function TxButton({simulateHook, writeHook, params, text, size = "default", className = "flex-1"}) {
 
     const { address, loggedIn } = useAccount()
     const [triggerCompleted, setTriggerCompleted] = useState(false)
@@ -194,7 +194,7 @@ function TxButton({simulateHook, writeHook, params, text}) {
     };
 
     return (
-        <Button variant="outline" className="flex-1" onClick={onClick} disabled={disabled}>
+        <Button variant="outline" size={size} className={className} onClick={onClick} disabled={disabled}>
             {loading && <LoaderCircle className="mr-2 h-4 w-4 animate-spin" />}
             {buttonText}
         </Button>

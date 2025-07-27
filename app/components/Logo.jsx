@@ -24,7 +24,7 @@ export default function Logo() {
     return (
         <div className="flex-shrink-0 w-48 md:w-80">
             <a href="/" className="hover:text-blue-600 transition-colors block">
-                <h1 className="text-md md:text-2xl font-bold">
+                <h1 className="text-lg md:text-2xl font-bold">
                     <span className="inline-block">LAF is...</span>
                 </h1>
                 <p 

@@ -80,8 +80,8 @@ export default function Register() {
             
             setQrGenerated(true);
             
-            console.log('QR URL generated:', url);
-            console.log('QR URL generated:', `${window.location.origin}/lost/${itemData.secretHash}`);
+            console.log('Found URL:', url);
+            console.log('Loost URL:', `${window.location.origin}/lost/${itemData.secretHash}`);
             console.log('QR code ready!');
         } catch (error) {
             console.error('Error generating QR code:', error);

@@ -12,7 +12,7 @@ import TxButton from '@/components/TxButton';
  * @param {string} props.className - Additional CSS classes
  * @param {boolean} props.disabled - Whether button should be disabled
  */
-export default function ReturnedButton({ hash, className = "", disabled = false }) {
+export default function ReturnedButton({ hash, className = "", disabled = false, size = "default" }) {
     const simulateHook = useSmartWalletSimulateHook(useSimulateLafReturned);
     const writeHook = useSmartWalletWriteHook(useWriteLafReturned);
     const returnParams = createReturnParams(hash);
@@ -23,6 +23,7 @@ export default function ReturnedButton({ hash, className = "", disabled = false 
             simulateHook={simulateHook}
             writeHook={writeHook}
             className={className}
+            size={size}
             text="Returned"
         />
     );

@@ -94,7 +94,6 @@ export function useApproval({
     // Handle write success/error with useEffect
     useEffect(() => {
         if (isWriteSuccess) {
-            notify('Token approval successful!', 'success');
             setApprovalStatus('approved');
             setIsApproving(false);
             
@@ -108,7 +107,6 @@ export function useApproval({
     useEffect(() => {
         if (isWriteError) {
             console.error('Approval failed:', writeError);
-            notify('Approval failed. Please try again.', 'error');
             setApprovalStatus('error');
             setIsApproving(false);
         }
@@ -119,13 +117,6 @@ export function useApproval({
         
         setIsApproving(true);
         setApprovalStatus('approving');
-
-        // Notify user based on wallet type
-        if (activeWalletType === 'smart_wallet') {
-            notify('Approving token spending in background...', 'info');
-        } else {
-            notify('Please confirm the approval transaction...', 'info');
-        }
 
         try {
             writeContract({ 

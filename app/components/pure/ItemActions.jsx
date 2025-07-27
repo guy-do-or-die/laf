@@ -14,36 +14,58 @@ import ReturnedButton from '@/components/pure/ReturnedButton';
  * @param {string} props.hash - Item hash for routing and messaging
  */
 export default function ItemActions({ itemData, isLoading, hash }) {
+    if (isLoading) {
+        return null; // Skeleton is handled in ItemContainer
+    }
+
+    // Count total buttons to determine sizing
+    const buttonCount = (
+        (itemData.canReportLost ? 1 : 0) +
+        (itemData.status === ItemStatus.Found && itemData.messagingRecipient?.address ? 1 : 0) +
+        (itemData.status === ItemStatus.Found && itemData.canReturn ? 1 : 0)
+    );
+
+    const buttonClass = buttonCount === 1 
+        ? "w-full text-xs font-medium shadow-sm hover:shadow-md transition-all duration-200" 
+        : "flex-1 text-xs font-medium shadow-sm hover:shadow-md transition-all duration-200";
+    
+    const buttonSize = "sm"; // Use sm size for h-8 height
+
     return (
-        <>
-            { 
-                itemData.canReportLost && (
-                    <LostRedirectButton 
-                        hash={hash}
-                        className="flex-1"
-                    />
-                )
-            }
-            { 
-                itemData.status === ItemStatus.Found && !isLoading && (
-                    <>
-                        {itemData.messagingRecipient?.address && (
-                            <MessageButton
-                                recipientAddress={itemData.messagingRecipient.address}
-                                itemTitle={itemData.messagingRecipient.title}
-                                secretHash={hash}
-                                className="flex-1"
-                            />
-                        )}
-                        
-                        {itemData.canReturn && (
-                            <ReturnedButton 
-                                hash={hash}
-                            />
-                        )}
-                    </>
-                )
-            }
-        </>
+        <div className="flex gap-2.5 w-full">
+            {/* Report Lost Button */}
+            {itemData.canReportLost && (
+                <LostRedirectButton 
+                    hash={hash}
+                    className={buttonClass}
+                    size={buttonSize}
+                />
+            )}
+            
+            {/* Found Item Actions */}
+            {itemData.status === ItemStatus.Found && (
+                <>
+                    {/* Messaging Button */}
+                    {itemData.messagingRecipient?.address && (
+                        <MessageButton
+                            recipientAddress={itemData.messagingRecipient.address}
+                            itemTitle={itemData.messagingRecipient.title}
+                            secretHash={hash}
+                            className={buttonClass}
+                            size={buttonSize}
+                        />
+                    )}
+                    
+                    {/* Return Button */}
+                    {itemData.canReturn && (
+                        <ReturnedButton 
+                            hash={hash}
+                            className={buttonClass}
+                            size={buttonSize}
+                        />
+                    )}
+                </>
+            )}
+        </div>
     );
 }
