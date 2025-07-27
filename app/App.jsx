@@ -12,8 +12,8 @@ import Items from "./pages/Items";
 
 function App() {
   return (
-      <div className="min-h-screen font-sans antialiased flex flex-col">
-        <Header />
+    <div className="min-h-screen font-sans antialiased flex flex-col">
+      <Header />
 
       <Content>
         <Router>
@@ -25,8 +25,8 @@ function App() {
         </Router>
       </Content>
 
-        <Footer />
-      </div>
+      <Footer />
+    </div>
   );
 }
 

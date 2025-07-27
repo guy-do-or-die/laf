@@ -6,7 +6,7 @@ import { lafItemAbi } from '../contracts';
 import { 
     createItemContractConfig,
     processContractData, 
-    createItemBusinessData 
+    getItemData 
 } from '../services/itemService';
 
 /**
@@ -16,7 +16,7 @@ import {
  * @returns {Object} - Item data and loading state
  */
 export function useItemData(address) {
-    const [itemBusinessData, setItemBusinessData] = useState({});
+    const [itemData, setItemData] = useState({});
     const [isLoading, setIsLoading] = useState(true);
 
     const { address: currentUserAddress } = useAccount();
@@ -32,15 +32,16 @@ export function useItemData(address) {
             const rawItemData = processContractData(readData);
 
             if (rawItemData) {
-                const businessData = createItemBusinessData(rawItemData, currentUserAddress);
-                setItemBusinessData(businessData);
-                setTimeout(() => setIsLoading(false), 100);
+                const itemData = getItemData(rawItemData, currentUserAddress);
+
+                setItemData(itemData);
+                setIsLoading(false);
             }
         }
     }, [readData, isError, blockNumber, currentUserAddress]);
 
     return {
-        itemBusinessData,
+        itemData,
         isLoading,
         isError
     };

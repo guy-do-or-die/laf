@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
-import { useParams, useLocation } from "wouter";
+import { useParams } from "wouter";
 
-import { parseUnits } from "viem";
-
-import TxButton from "../components/TxButton";
+import LostButton from "../components/pure/LostButton";
 
 import { notify } from "../components/Notification";
 
@@ -14,17 +12,10 @@ import { Button } from "../components/ui/button";
 import { MapPin } from "lucide-react";
 
 import {
-    useReadErc20Allowance,
-    useSimulateErc20Approve,
-    useWriteErc20Approve,
-    useSimulateLafLost,
-    useWriteLafLost,
     useReadLafItems,
     useReadLafItemStatus,
 } from "../contracts"
 
-import { useSmartWalletWriteHook, useSmartWalletSimulateHook } from "../wallet"
-import { useSmartWallets } from '@privy-io/react-auth/smart-wallets';
 
 import { useAccount } from "../wallet"
 import { ItemStatus, getStatusName } from "../constants/itemStatus"
@@ -32,19 +23,16 @@ import { useBlockContext } from '../contexts/BlockContext';
 
 export default function Lost() {
     const { secretHash } = useParams();
-    const [, setLocation] = useLocation();
+    const { blockNumber } = useBlockContext();
 
     const [itemStatus, setItemStatus] = useState();
 
-    const { blockNumber } = useBlockContext();
-
     const [reward, setReward] = useState("1");
     const [geo, setGeo] = useState("");
+
     const [isGettingLocation, setIsGettingLocation] = useState(false);
 
     const { address } = useAccount();
-    const { client: smartWalletClient } = useSmartWallets();
-    const isSmartWallet = !!smartWalletClient;
     
     // Get the specific Item contract address for this secretHash
     const { data: itemContractAddress } = useReadLafItems({
@@ -64,65 +52,9 @@ export default function Lost() {
         }
     }, [itemStatusData]);
     
-    // Item contract does the transferFrom, so approve the Item contract
-    const approvalTarget = itemContractAddress;
-    
-    const { data: allowance, refetch: refetchAllowance } = useReadErc20Allowance({ 
-        args: [address, approvalTarget],
-        enabled: !!approvalTarget
-    });
-
-    const rewardValue = reward ? parseUnits(reward, 6) : parseUnits("0", 6);
-    
-    // Debug info
-    console.log('Debug Lost.jsx:', {
-        secretHash,
-        address,
-        isSmartWallet,
-        smartWalletClient: !!smartWalletClient,
-        allowance,
-        rewardValue,
-        itemContractAddress,
-        approvalTarget,
-        itemStatus,
-        statusName: itemStatus !== undefined ? getStatusName(itemStatus) : 'Loading...'
-    });
-    
-    const allowanceParams = {
-        args: [approvalTarget, rewardValue],
-        enabled: reward !== "0" && !!approvalTarget,
-        confirmationCallback: ({ data, error }) => {
-            if (!error && data) {
-                notify('Approved!', 'success');
-                refetchAllowance();
-            }
-        }
-    };
-
-    const lostParams = {
-        args: [secretHash, rewardValue, geo],
-        enabled: reward !== "0" && geo.trim() !== "" && !!itemContractAddress && allowance >= rewardValue && (itemStatus === ItemStatus.Registered || itemStatus === ItemStatus.Returned),
-        confirmationCallback: ({ data, error }) => {
-            if (!error && data) {
-                notify('Item reported lost!', 'success');
-                setLocation('/items');
-            }
-        }
-    };
-
     // Handle different item statuses
-    console.log('🔍 Status Check Debug:', {
-        itemContractAddress,
-        itemContractAddressType: typeof itemContractAddress,
-        itemContractAddressTruthy: !!itemContractAddress,
-        itemStatus,
-        itemStatusType: typeof itemStatus,
-        isRegistered: itemStatus === ItemStatus.Registered,
-        ItemStatusValues: ItemStatus
-    });
     
     if (!itemContractAddress) {
-        console.log('❌ Showing Item Not Found - no contract address');
         return (
             <div className="flex flex-col items-center gap-8 p-4">
                 <h1 className="text-2xl font-bold">Item Not Found</h1>
@@ -141,7 +73,7 @@ export default function Lost() {
 
     if (itemStatus !== undefined && itemStatus !== ItemStatus.Registered && itemStatus !== ItemStatus.Returned) {
         const statusName = getStatusName(itemStatus);
-        console.log('⚠️ Showing Cannot Report as Lost - invalid status:', { itemStatus, statusName });
+
         return (
             <div className="flex flex-col items-center gap-8 p-4">
                 <h1 className="text-2xl font-bold">Cannot Report as Lost</h1>
@@ -160,7 +92,7 @@ export default function Lost() {
         );
     }
 
-    console.log('✅ Showing main form - item is registered and ready');
+
     
     return (
         <div className="flex flex-col items-center gap-8 p-4">
@@ -236,20 +168,13 @@ export default function Lost() {
                 { 
                     !itemContractAddress ? (
                         <div className="text-center text-gray-500">Loading item...</div>
-                    ) : allowance < rewardValue ? (
-                        <TxButton
-                            key="approve-button"
-                            simulateHook={useSmartWalletSimulateHook(useSimulateErc20Approve)}
-                            writeHook={useSmartWalletWriteHook(useWriteErc20Approve)}
-                            params={allowanceParams}
-                            text="Approve" />
                     ) : (
-                        <TxButton
-                            key="lost-button"
-                            simulateHook={useSmartWalletSimulateHook(useSimulateLafLost)}
-                            writeHook={useSmartWalletWriteHook(useWriteLafLost)}
-                            params={lostParams}
-                            text="Find" />
+                        <LostButton
+                            secretHash={secretHash}
+                            reward={reward}
+                            geo={geo}
+                            className="w-full"
+                        />
                     )
                 }
             </div>

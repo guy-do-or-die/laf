@@ -243,23 +243,23 @@ export function processContractData(readData) {
 
 /**
  * Create item business data object with computed properties
- * @param {Object} itemData - Raw item data from contract
+ * @param {Object} rawItemData - Raw item data from contract
  * @param {string} currentUserAddress - Current user's address
  * @returns {Object} - Processed item business data
  */
-export function createItemBusinessData(itemData, currentUserAddress) {
-    const status = determineItemStatus(itemData);
-    const reward = hasReward(itemData) ? formatReward(itemData.reward) : null;
-    const messagingRecipient = getMessagingRecipient(itemData, currentUserAddress);
+export function getItemData(rawItemData, currentUserAddress) {
+    const status = determineItemStatus(rawItemData);
+    const reward = hasReward(rawItemData) ? formatReward(rawItemData.reward) : null;
+    const messagingRecipient = getMessagingRecipient(rawItemData, currentUserAddress);
     
     return {
-        ...itemData,
+        ...rawItemData,
         status,
         statusColor: getStatusColor(status),
         formattedReward: reward,
         messagingRecipient,
-        canReportLost: canReportLost(itemData),
-        canReturn: canReturn(itemData, currentUserAddress),
-        hasReward: hasReward(itemData)
+        canReportLost: canReportLost(rawItemData),
+        canReturn: canReturn(rawItemData, currentUserAddress),
+        hasReward: hasReward(rawItemData)
     };
 }

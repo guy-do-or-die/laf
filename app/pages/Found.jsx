@@ -1,15 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams } from "wouter";
 
-import { recoverMessageAddress } from 'viem';
-
 import ItemCard from "../components/ItemCard";
-import TxButton from "../components/TxButton";
+
 import FoundButton from "../components/pure/FoundButton";
+
 import { Button } from "../components/ui/button";
 
 import { notify } from "../components/Notification";
-import { useAccount } from "../wallet";
+import { useAccount, chain } from "../wallet";
 import { useUnifiedSigning } from "../hooks/useUnifiedSigning";
 import { useSmartWalletDeployment } from "../hooks/useSmartWalletDeployment";
 
@@ -24,7 +23,6 @@ import { createCommitRevealSignature, validateSecretHash } from '../services/sec
 export default function Found() {
     const { secretHash, secret } = useParams();
 
-    // Reduced logging frequency
     const shouldLog = useRef(0);
     if (shouldLog.current % 50 === 0) {
         console.log('🔍 Found component loaded with params:', { secretHash, secret });

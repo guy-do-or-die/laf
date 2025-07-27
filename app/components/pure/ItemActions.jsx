@@ -1,8 +1,7 @@
-import { CardFooter } from "@/components/ui/card";
 import { MessageButton } from "@/components/MessageButton";
 import { ItemStatus } from '@/constants/itemStatus';
 
-import LostButton from '@/components/pure/LostButton';
+import LostRedirectButton from '@/components/pure/LostRedirectButton';
 import ReturnedButton from '@/components/pure/ReturnedButton';
 
 
@@ -16,10 +15,10 @@ import ReturnedButton from '@/components/pure/ReturnedButton';
  */
 export default function ItemActions({ itemData, isLoading, hash }) {
     return (
-        <CardFooter className="flex flex-wrap gap-2">
+        <>
             { 
                 itemData.canReportLost && (
-                    <LostButton 
+                    <LostRedirectButton 
                         hash={hash}
                         className="flex-1"
                     />
@@ -45,6 +44,6 @@ export default function ItemActions({ itemData, isLoading, hash }) {
                     </>
                 )
             }
-        </CardFooter>
+        </>
     );
 }

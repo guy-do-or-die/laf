@@ -1,3 +1,5 @@
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
+
 import { useItemData } from '@/hooks/useItemData';
 
 import ItemDisplay from '@/components/pure/ItemDisplay';
@@ -13,19 +15,20 @@ import ItemActions from '@/components/pure/ItemActions';
  * @param {string} props.className - Additional CSS classes
  */
 export default function ItemContainer({ hash, address, className = "" }) {
-    const { itemBusinessData, isLoading } = useItemData(address);
+    const { itemData, isLoading } = useItemData(address);
 
     return (
-        <div className={className}>
-            <ItemDisplay 
-                itemData={itemBusinessData}
-                isLoading={isLoading}
-            />
-            <ItemActions
-                itemData={itemBusinessData}
-                isLoading={isLoading}
-                hash={hash}
-            />
-        </div>
+        <Card className={`${itemData.statusColor || 'bg-gray-100'} w-full min-w-64 min-h-48 ${className}`}>
+            <CardContent className="flex-1">
+                <ItemDisplay itemData={itemData} isLoading={isLoading} />
+            </CardContent>
+            <CardFooter className="flex flex-wrap gap-2">
+                <ItemActions
+                    itemData={itemData}
+                    isLoading={isLoading}
+                    hash={hash}
+                />
+            </CardFooter>
+        </Card>
     );
 }
