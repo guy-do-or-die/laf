@@ -54,9 +54,15 @@ export default function User() {
     currentUserAddress
   });
 
-  // Check if viewing own profile
-  const isOwnProfile = currentUserAddress && userAddress && 
-    currentUserAddress.toLowerCase() === userAddress.toLowerCase();
+  // Get current user's UP token balance (voting power)
+  const { data: currentUserVotingPower } = useReadLafBalanceOf({
+    args: [currentUserAddress, 7], // Token ID 7 for UP tokens
+    enabled: !!currentUserAddress,
+  });
+
+  const isOwnProfile = currentUserAddress?.toLowerCase() === userAddress?.toLowerCase();
+  const hasVotingPower = !!currentUserVotingPower && currentUserVotingPower > 0n;
+  const canVote = !isOwnProfile && currentUserAddress;
 
   // Multicall for all user statistics
   const contractsConfig = [
@@ -232,34 +238,6 @@ export default function User() {
     }
   });
 
-  // Thumb up/down functionality
-  const { writeContract: thumbUp, isPending: thumbUpPending } = useWriteLafThumbUp();
-  const { writeContract: thumbDown, isPending: thumbDownPending } = useWriteLafThumbDown();
-  const { data: thumbUpSimulation } = useSimulateLafThumbUp({
-    args: [userAddress],
-  });
-  const { data: thumbDownSimulation } = useSimulateLafThumbDown({
-    args: [userAddress],
-  });
-
-  // For now, let's allow all logged-in users to vote and see what the actual contract error is
-  const canVote = !!currentUserAddress && !isOwnProfile;
-
-  // Check current user's voting power for display purposes
-  const { data: currentUserVotingPower } = useReadLafBalanceOf({
-    args: [currentUserAddress, 7], // Token ID 7 for display
-    enabled: !!currentUserAddress,
-  });
-
-  // Debug voting
-  console.log('Voting Debug:', {
-    currentUserAddress,
-    userAddress,
-    canVote,
-    isOwnProfile,
-    currentUserVotingPower: currentUserVotingPower?.toString()
-  });
-
   // Format address for display
   const formatAddress = (addr) => {
     if (!addr) return '';
@@ -291,58 +269,81 @@ export default function User() {
           </p>
         </div>
 
-        {/* Trust Score and Vote Counts */}
+        {/* Trust Score and Interactive Vote Counts */}
         <div className="text-center mb-6">
-          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 inline-block">
-            <div className="text-2xl font-bold text-gray-900 mb-2">
+          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 inline-block">
+            <div className="text-3xl font-bold text-gray-900 mb-4">
               Trust Score: {trustScore ? Number(trustScore).toString() : '0'}
             </div>
-            <div className="flex justify-center gap-6 text-sm text-gray-600">
-              <div className="flex items-center gap-1">
-                <ThumbsUp className="w-4 h-4 text-green-600" />
-                <span>{thumbUpCount ? formatUnits(thumbUpCount, 0) : '0'}</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <ThumbsDown className="w-4 h-4 text-red-600" />
-                <span>{thumbDownCount ? formatUnits(thumbDownCount, 0) : '0'}</span>
-              </div>
-            </div>
+            
+            {/* Check if viewing own profile */}
+            {(() => {
+             
+              return (
+                <div className="flex justify-center gap-6">
+                  {canVote ? (
+                    // Interactive voting buttons with counts
+                    <>
+                      <TxButton
+                        simulateHook={useSimulateLafThumbUp}
+                        writeHook={useWriteLafThumbUp}
+                        params={{
+                          args: [userAddress],
+                          enabled: !!userAddress && !!currentUserAddress && hasVotingPower,
+                        }}
+                        text={
+                          <div className="flex items-center gap-2">
+                            <ThumbsUp className="w-5 h-5 text-green-600" />
+                            <span className="font-bold text-lg">
+                              {thumbUpCount ? formatUnits(thumbUpCount, 0) : '0'}
+                            </span>
+                          </div>
+                        }
+                        className="flex items-center px-4 py-2 hover:bg-green-50 transition-colors"
+                        size="lg"
+                      />
+                      <TxButton
+                        simulateHook={useSimulateLafThumbDown}
+                        writeHook={useWriteLafThumbDown}
+                        params={{
+                          args: [userAddress],
+                          enabled: !!userAddress && !!currentUserAddress && hasVotingPower,
+                        }}
+                        text={
+                          <div className="flex items-center gap-2">
+                            <ThumbsDown className="w-5 h-5 text-red-600" />
+                            <span className="font-bold text-lg">
+                              {thumbDownCount ? formatUnits(thumbDownCount, 0) : '0'}
+                            </span>
+                          </div>
+                        }
+                        className="flex items-center px-4 py-2 hover:bg-red-50 transition-colors"
+                        size="lg"
+                      />
+                    </>
+                  ) : (
+                    // Static display for own profile or logged out users
+                    <>
+                      <div className="flex items-center gap-2 px-4 py-2">
+                        <ThumbsUp className="w-5 h-5 text-green-600" />
+                        <span className="font-bold text-lg">
+                          {thumbUpCount ? formatUnits(thumbUpCount, 0) : '0'}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-2 px-4 py-2">
+                        <ThumbsDown className="w-5 h-5 text-red-600" />
+                        <span className="font-bold text-lg">
+                          {thumbDownCount ? formatUnits(thumbDownCount, 0) : '0'}
+                        </span>
+                      </div>
+                    </>
+                  )}
+                </div>
+              );
+            })()
+            }
           </div>
         </div>
-
-        {/* Thumb Actions - Only show for other users */}
-        {!isOwnProfile && currentUserAddress && (
-          <div className="flex justify-center gap-2 mb-8">
-            {canVote ? (
-              <>
-                <TxButton
-                  simulateHook={useSimulateLafThumbUp}
-                  writeHook={useWriteLafThumbUp}
-                  params={{
-                    args: [userAddress],
-                    enabled: !!userAddress && canVote,
-                  }}
-                  text={<><ThumbsUp className="w-4 h-4 mr-2" />Thumb Up</>}
-                  className="flex items-center"
-                />
-                <TxButton
-                  simulateHook={useSimulateLafThumbDown}
-                  writeHook={useWriteLafThumbDown}
-                  params={{
-                    args: [userAddress],
-                    enabled: !!userAddress && canVote,
-                  }}
-                  text={<><ThumbsDown className="w-4 h-4 mr-2" />Thumb Down</>}
-                  className="flex items-center"
-                />
-              </>
-            ) : (
-              <div className="text-center text-gray-500">
-                <p className="text-sm mb-2">You must be logged in to rate users</p>
-              </div>
-            )}
-          </div>
-        )}
 
         {/* Contract-based Statistics */}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">

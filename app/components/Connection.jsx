@@ -124,12 +124,10 @@ export default function Connection() {
                 <User className="h-4 w-4" />
                 <span className="hidden sm:flex font-semibold items-center gap-2">
                     <span className="text-green-600">{formatBalance(balance)}</span>
-                    {upBalance > 0n && (
-                        <span className="text-blue-600 flex items-center gap-1">
-                            <ThumbsUp className="h-4 w-4" />
-                            {formatUnits(upBalance, 0)}
-                        </span>
-                    )}
+                    <span className="text-yellow-600 flex items-center gap-1">
+                        <ThumbsUp className="h-3 w-3" />
+                        {formatUnits(upBalance, 0)}
+                    </span>
                 </span>
                 <ChevronDown className="h-3 w-3" />
             </DropdownMenuTrigger>

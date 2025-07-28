@@ -241,7 +241,7 @@ export default function Landing() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <FeatureCard
               title="1. Register"
-              description="Create a unique QR code for your valuable items. Print and attach them for future identification."
+              description="Create a unique QR code or NFC tag for your valuable items. Print and attach them for future identification."
               icon={Package}
               color="text-blue-600"
             />

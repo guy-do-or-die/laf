@@ -6,7 +6,7 @@ import { Button } from "./ui/button";
 
 import { notify, hide, parseError } from '../components/Notification'
 import { txLink } from '../components/Utils'
-import { useAccount } from '../wallet'
+import { useAccount, useSmartWalletWriteHook, useSmartWalletSimulateHook } from '../wallet'
 import { 
     determineTransactionPhase, 
     isTransactionLoading, 
@@ -22,14 +22,14 @@ function TxButton({simulateHook, writeHook, params, text, size = "default", clas
     const { address, loggedIn } = useAccount()
     const [triggerCompleted, setTriggerCompleted] = useState(false)
     const [shouldAutoExecute, setShouldAutoExecute] = useState(false)
-
+    
     const {
         data: simulateData,
         isSuccess: isSimulateSuccess,
         isLoading: isSimulateLoading,
         isError: isSimulateError,
         error: simulateError
-    } = simulateHook({
+    } = useSmartWalletSimulateHook(simulateHook)({
         query: { enabled: params.enabled && loggedIn && (!params.trigger || triggerCompleted) },
         ...params
     })
@@ -41,7 +41,7 @@ function TxButton({simulateHook, writeHook, params, text, size = "default", clas
         isSuccess: isWriteSuccess,
         isError: isWriteError,
         error: writeError
-    } = writeHook({
+    } = useSmartWalletWriteHook(writeHook)({
         // Enable write hook when simulation succeeds
         query: { enabled: params.enabled && loggedIn && isSimulateSuccess },
         ...params
