@@ -1,28 +1,29 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams } from "wouter";
 
-import { createCommitRevealSignature, validateSecretHash } from '../utils/secretUtils';
+import ItemCard from "../components/Item";
 
-import ItemCard from "../components/ItemCard";
-import TxButton from "../components/TxButton";
+import FoundButton from "../components/pure/FoundButton";
+
 import { Button } from "../components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
 
 import { notify } from "../components/Notification";
-import { useAccount } from "../wallet";
+import { useAccount, chain } from "../wallet";
 import { useUnifiedSigning } from "../hooks/useUnifiedSigning";
 import { useSmartWalletDeployment } from "../hooks/useSmartWalletDeployment";
 
-import { useReadLafItems, useSimulateLafFound, useWriteLafFound, useReadLafItemStatus, useReadLafItemOwner, useReadLafItemCycle } from "../contracts"
-import { useSmartWalletSimulateHook, useSmartWalletWriteHook, chain } from "../wallet"
+import { useReadLafItems, useReadLafItemStatus, useReadLafItemOwner, useReadLafItemCycle } from "../contracts"
 import { useBlockContext } from '../contexts/BlockContext';
 
 import { isItemFound } from "../constants/itemStatus"
+
+import { createCommitRevealSignature, validateSecretHash } from '../services/secretService';
 
 
 export default function Found() {
     const { secretHash, secret } = useParams();
 
-    // Reduced logging frequency
     const shouldLog = useRef(0);
     if (shouldLog.current % 50 === 0) {
         console.log('🔍 Found component loaded with params:', { secretHash, secret });
@@ -142,12 +143,16 @@ export default function Found() {
             }
             
             // Validate secret matches the expected secretHash
-            if (!validateSecretHash(secret, secretHash)) {
+            const validationResult = validateSecretHash(secret, secretHash);
+            if (!validationResult.success || !validationResult.data.isValid) {
                 console.warn('⚠️ Secret validation failed - this may be an old QR code format');
+                if (validationResult.error) {
+                    console.error('Validation error:', validationResult.error.message);
+                }
             }
             
             // Create signature using the utility function
-            const signatureHex = await createCommitRevealSignature(
+            const signatureResult = await createCommitRevealSignature(
                 secret,
                 secretHash,
                 address,
@@ -156,7 +161,11 @@ export default function Found() {
                 chain.id
             );
             
-            setFinderSignature(signatureHex);
+            if (!signatureResult.success) {
+                throw new Error(`Signature creation failed: ${signatureResult.error.message}`);
+            }
+            
+            setFinderSignature(signatureResult.data.signature);
             notify('Secret signature created successfully!', 'success', {id: "secret-signed"});
             
         } catch (error) {
@@ -193,18 +202,6 @@ export default function Found() {
             signSecretManually();
         }
     }, [isFound, finderSignature, isSigningSecret, autoSigningAttempted, loggedIn, secret, walletReady, activeWalletType]);
-
-    const foundParams = {
-        args: [secretHash, finderSignature],
-        enabled: !isFound && finderSignature && walletReady,
-        confirmationCallback: ({ data, error }) => {
-            if (!error && data) {
-                notify('The owner has been informed!', 'success', {id: "secret-found"});
-                setFinderSignature(null);
-                setAutoSigningAttempted(false);
-            }
-        }
-    };
 
     // Determine current status for streamlined UI
     const getStatus = () => {
@@ -263,16 +260,18 @@ export default function Found() {
         return (
             <div className="flex flex-col items-center gap-8 p-4">
                 <h1 className="text-2xl font-bold">Item Not Found</h1>
-                <div className="w-full max-w-md space-y-4">
-                    <div className="border-0 p-6 rounded-xl shadow-lg backdrop-blur-sm bg-white/95">
-                        <h3 className="text-lg font-semibold mb-4 text-red-600">Item Not Registered</h3>
-                        <p className="text-sm text-gray-600 mb-4">
-                            This item has not been registered in the LAF system yet, or the QR code is invalid.
-                        </p>
-                        <p className="text-xs text-gray-500">
-                            Secret Hash: {secretHash}
-                        </p>
-                    </div>
+                <div className="w-full max-w-md">
+                    <Card>
+                        <CardContent className="pt-6">
+                            <h3 className="text-lg font-semibold mb-4 text-red-600">Item Not Registered</h3>
+                            <p className="text-sm text-gray-600 mb-4">
+                                This item has not been registered in the LAF system yet, or the QR code is invalid.
+                            </p>
+                            <p className="text-xs text-gray-500 font-mono break-all">
+                                Secret Hash: {secretHash}
+                            </p>
+                        </CardContent>
+                    </Card>
                 </div>
             </div>
         );
@@ -283,97 +282,93 @@ export default function Found() {
             <h1 className="text-2xl font-bold">Found Item</h1>
             
             <div className="w-full max-w-md space-y-4">
-                <div className="mb-4">
-                    <ItemCard
-                        hash={secretHash}
-                        address={itemAddress}
-                    />
-                </div>
+                <ItemCard
+                    hash={secretHash}
+                    address={itemAddress}
+                    neutral={true}
+                />
                 
-                <div className="border-0 p-6 rounded-xl shadow-lg backdrop-blur-sm bg-white/95">
-                    {status === 'already_found' && (
-                        <>
-                            <h3 className="text-lg font-semibold mb-4 text-blue-600">Item Already Found</h3>
-                            <p className="text-sm text-gray-600">
-                                Return the item to the owner to receive the remaining part.
-                            </p>
-                        </>
-                    )}
+                <Card>
+                    <CardContent className="pt-6">
+                        {status === 'already_found' && (
+                            <>
+                                <h3 className="text-lg font-semibold mb-4">Item Already Found</h3>
+                                <p className="text-sm text-gray-600">
+                                    Return the item to the owner to receive the remaining part.
+                                </p>
+                            </>
+                        )}
                     
-                    {status === 'signing' && (
-                        <>
-                            <h3 className="text-lg font-semibold mb-4 text-blue-600">Signing Secret...</h3>
-                            <p className="text-sm text-yellow-600">🔄 Signing secret to prove you found the item...</p>
-                        </>
-                    )}
-                    
-                    {status === 'need_signature' && (
-                        <>
-                            <h3 className="text-lg font-semibold mb-4 text-orange-600">Manual Signature Required</h3>
-                            <p className="text-sm text-gray-600 mb-4">
-                                Auto-signing failed. Please sign the secret manually to prove you found the item.
-                            </p>
-                            <div className="flex justify-center">
+                        {status === 'signing' && (
+                            <>
+                                <h3 className="text-lg font-semibold mb-4">Signing Secret...</h3>
+                                <p className="text-sm text-gray-600">
+                                    Signing secret to prove you found the item...
+                                </p>
+                            </>
+                        )}
+                        
+                        {status === 'need_signature' && (
+                            <>
+                                <h3 className="text-lg font-semibold mb-4">Manual Signature Required</h3>
+                                <p className="text-sm text-gray-600 mb-4">
+                                    Auto-signing failed. Please sign the secret manually to prove you found the item.
+                                </p>
                                 <Button 
                                     onClick={signSecretManually}
                                     disabled={!address || isSigningSecret}
-                                    className="px-6 py-2"
                                 >
                                     {isSigningSecret ? 'Signing...' : 'Sign Secret'}
                                 </Button>
-                            </div>
-                        </>
-                    )}
-                    
-                    {status === 'deploying_wallet' && (
-                        <>
-                            <h3 className="text-lg font-semibold mb-4 text-blue-600">Deploying Smart Wallet...</h3>
-                            <p className="text-sm text-green-600 mb-2">✅ Finder signature completed</p>
-                            <p className="text-sm text-yellow-600 mb-4">🚀 {statusMessage}</p>
-                            <p className="text-sm text-gray-600">
-                                Your smart wallet is being deployed automatically to receive USDC rewards...
-                            </p>
-                        </>
-                    )}
-                    
-                    {status === 'need_deployment' && (
-                        <>
-                            <h3 className="text-lg font-semibold mb-4 text-yellow-600">Preparing Smart Wallet...</h3>
-                            <p className="text-sm text-green-600 mb-2">✅ Finder signature completed</p>
-                            <p className="text-sm text-yellow-600 mb-4">⚠️ {statusMessage}</p>
-                            <p className="text-sm text-gray-600">
-                                Smart wallet deployment will happen automatically...
-                            </p>
-                        </>
-                    )}
-                    
-                    {status === 'ready_to_confirm' && (
-                        <>
-                            <h3 className="text-lg font-semibold mb-4 text-green-600">Ready to Confirm!</h3>
-                            <p className="text-sm text-green-600 mb-2">✅ Finder signature completed</p>
-                            {activeWalletType === 'smart_wallet' && (
-                                <p className="text-sm text-green-600 mb-2">✅ Smart wallet ready</p>
-                            )}
-                            <p className="text-sm text-gray-600 mb-4">
-                                Everything is ready! Confirm you found this item to receive your immediate reward.
-                            </p>
-                            <div className="flex justify-center">
-                                <TxButton
-                                    simulateHook={useSmartWalletSimulateHook(useSimulateLafFound)}
-                                    writeHook={useSmartWalletWriteHook(useWriteLafFound)}
-                                    params={foundParams}
-                                    text="Confirm Found" 
+                            </>
+                        )}
+                        
+                        {status === 'deploying_wallet' && (
+                            <>
+                                <h3 className="text-lg font-semibold mb-4">Deploying Smart Wallet...</h3>
+                                <p className="text-sm text-gray-600 mb-2">Finder signature completed</p>
+                                <p className="text-sm text-gray-600 mb-4">{statusMessage}</p>
+                                <p className="text-sm text-gray-600">
+                                    Your smart wallet is being deployed automatically to receive USDC rewards...
+                                </p>
+                            </>
+                        )}
+                        
+                        {status === 'need_deployment' && (
+                            <>
+                                <h3 className="text-lg font-semibold mb-4">Preparing Smart Wallet...</h3>
+                                <p className="text-sm text-gray-600 mb-2">Finder signature completed</p>
+                                <p className="text-sm text-gray-600 mb-4">{statusMessage}</p>
+                                <p className="text-sm text-gray-600">
+                                    Smart wallet deployment will happen automatically...
+                                </p>
+                            </>
+                        )}
+                        
+                        {status === 'ready_to_confirm' && (
+                            <>
+                                <h3 className="text-lg font-semibold mb-4">Ready to Confirm!</h3>
+                                <p className="text-sm text-gray-600 mb-2">Finder signature completed</p>
+                                {activeWalletType === 'smart_wallet' && (
+                                    <p className="text-sm text-gray-600 mb-2">Smart wallet ready</p>
+                                )}
+                                <p className="text-sm text-gray-600 mb-4">
+                                    Everything is ready! Confirm you found this item to receive your immediate reward.
+                                </p>
+                                <FoundButton
+                                    hash={secretHash}
+                                    signature={finderSignature}
                                 />
-                            </div>
-                        </>
-                    )}
-                    
-                    {!loggedIn && (
-                        <p className="text-sm text-red-600 mt-4 text-center">
-                            Please connect your wallet first
-                        </p>
-                    )}
-                </div>
+                            </>
+                        )}
+                        
+                        {!loggedIn && (
+                            <p className="text-sm text-gray-600 text-center">
+                                Please connect your wallet first
+                            </p>
+                        )}
+                    </CardContent>
+                </Card>
             </div>
         </div>
     );

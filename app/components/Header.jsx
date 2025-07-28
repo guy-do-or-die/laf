@@ -1,6 +1,7 @@
+import Logo from './Logo'
+import Navigation from './Navigation'
 import Notification from './Notification'
 import Connection from './Connection'
-import Logo from './Logo'
 
 import { MessagingStatus } from '@/components/MessagingStatus'
 
@@ -25,7 +26,10 @@ export default function Header() {
                 
                 {/* Desktop Layout */}
                 <div className="hidden md:flex items-center justify-between">
-                    <Logo />
+                    <div className="flex items-center space-x-6">
+                        <Logo />
+                        <Navigation />
+                    </div>
                     <div className="flex-grow flex justify-center">
                         <Notification />
                     </div>

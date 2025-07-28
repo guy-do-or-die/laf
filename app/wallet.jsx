@@ -10,6 +10,15 @@ import { WagmiProvider, createConfig, useSetActiveWallet } from '@privy-io/wagmi
 import { SmartWalletsProvider, useSmartWallets } from '@privy-io/react-auth/smart-wallets';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { 
+  detectSmartWallet, 
+  detectEmbeddedWallet, 
+  detectExternalWallet, 
+  determineActiveWallet, 
+  isUserLoggedIn, 
+  isSmartWalletDeployed, 
+  createWalletDebugState 
+} from '@/services/walletService';
 
 export const queryClient = new QueryClient()
 
@@ -122,80 +131,52 @@ export function useAccount() {
   const { client: privySmartWalletClient } = useSmartWallets();
   const { setActiveWallet } = useSetActiveWallet();
 
-  // UNIFIED WALLET DETECTION LOGIC
-  // Priority: Smart Wallet > Embedded Wallet > External Wallet
+  // Use wallet service for unified wallet detection
+  const smartWalletDetection = detectSmartWallet(user, privySmartWalletClient);
+  const embeddedWalletDetection = detectEmbeddedWallet(user);
+  const externalWalletDetection = detectExternalWallet(wallets, isConnected);
   
-  // 1. Check for Privy Smart Wallet (highest priority)
-  const smartWallet = user?.linkedAccounts?.find((account) => account.type === 'smart_wallet');
-  const hasSmartWallet = !!(smartWallet && privySmartWalletClient);
-  const {data: bytecode} = useBytecode({ address: smartWallet?.address })
-  const isSmartWalletDeployed = bytecode !== '0x' && bytecode !== null
+  // Determine active wallet using service
+  const activeWalletInfo = determineActiveWallet({
+    smartWallet: smartWalletDetection,
+    embeddedWallet: embeddedWalletDetection,
+    externalWallet: externalWalletDetection
+  });
   
-  // 2. Check for Privy Embedded Wallet
-  const embeddedWallet = user?.linkedAccounts?.find((account) => account.type === 'wallet' && account.walletClientType === 'privy');
-  const hasEmbeddedWallet = !!embeddedWallet;
+  const { activeWalletType, address, signingMethod, activeWallet } = activeWalletInfo;
   
-  // 3. Check for External/Injected Wallet (connected via wagmi)
-  const externalWallet = wallets.find((wallet) => wallet.walletClientType !== 'privy');
-  const hasExternalWallet = !!(externalWallet && isConnected);
+  // Check smart wallet deployment status
+  const {data: bytecode} = useBytecode({ address: smartWalletDetection.address });
+  const smartWalletDeployed = isSmartWalletDeployed(bytecode);
   
-  // DETERMINE ACTIVE WALLET AND ADDRESS
-  let activeWalletType, address, signingMethod;
-  
-  if (hasSmartWallet) {
-    activeWalletType = 'smart_wallet';
-    address = smartWallet.address;
-    signingMethod = 'privy_smart_wallet';
-  } else if (hasEmbeddedWallet) {
-    activeWalletType = 'embedded_wallet';
-    address = embeddedWallet.address;
-    signingMethod = 'privy_embedded';
-  } else if (hasExternalWallet) {
-    activeWalletType = 'external_wallet';
-    address = externalWallet.address;
-    signingMethod = 'wagmi_external';
-  } else {
-    activeWalletType = null;
-    address = null;
-    signingMethod = null;
-  }
-  
-  const loggedIn = ready && authenticated && isConnected && !!address;
+  // Determine login status using service
+  const loggedIn = isUserLoggedIn({ ready, authenticated, isConnected, address });
 
   // Set active wallet for wagmi if we have an external wallet
   useEffect(() => {
-    if (externalWallet && activeWalletType === 'external_wallet') {
-      setActiveWallet(externalWallet);
+    if (externalWalletDetection.externalWallet && activeWalletType === 'external_wallet') {
+      setActiveWallet(externalWalletDetection.externalWallet);
     }
-  }, [externalWallet, activeWalletType, setActiveWallet]);
+  }, [externalWalletDetection.externalWallet, activeWalletType, setActiveWallet]);
 
-  // Debug wallet state (throttled to prevent spam)
+  // Debug wallet state using wallet service
   useEffect(() => {
     if (loggedIn) {
-      console.log('🔗 Unified Wallet State:', {
+      const debugState = createWalletDebugState({
         activeWalletType,
-        address: address?.slice(0, 8) + '...',
+        address,
         signingMethod,
-        hasSmartWallet,
-        smartWallet: smartWallet ? { address: smartWallet.address, type: smartWallet.type } : null,
-        privySmartWalletClient: !!privySmartWalletClient,
-        userLinkedAccounts: user?.linkedAccounts?.map(acc => ({ type: acc.type, address: acc.address?.slice(0, 8) + '...' })),
-        hasEmbeddedWallet,
-        hasExternalWallet,
-        privyClientAvailable: !!privySmartWalletClient,
-        wagmiConnected: isConnected,
-        isSmartWalletDeployed
+        smartWallet: smartWalletDetection.smartWallet,
+        embeddedWallet: embeddedWalletDetection.embeddedWallet,
+        externalWallet: externalWalletDetection.externalWallet,
+        user,
+        privySmartWalletClient,
+        isConnected,
+        isSmartWalletDeployed: smartWalletDeployed
       });
+      //console.log('🔗 Unified Wallet State:', debugState);
     }
-  }, [loggedIn,
-    activeWalletType,
-    address,
-    signingMethod,
-    hasSmartWallet,
-    hasEmbeddedWallet,
-    hasExternalWallet,
-    isSmartWalletDeployed
-  ]);
+  }, [loggedIn, activeWalletType, address, signingMethod, smartWalletDeployed]);
 
   return {
     // Core account info
@@ -207,12 +188,12 @@ export function useAccount() {
     signingMethod,
     
     // Specific wallet objects
-    smartWallet: hasSmartWallet ? smartWallet : null,
-    smartWalletClient: hasSmartWallet ? privySmartWalletClient : null,
-    embeddedWallet: hasEmbeddedWallet ? embeddedWallet : null,
-    externalWallet: hasExternalWallet ? externalWallet : null,
+    smartWallet: smartWalletDetection.smartWallet,
+    smartWalletClient: smartWalletDetection.hasSmartWallet ? privySmartWalletClient : null,
+    embeddedWallet: embeddedWalletDetection.embeddedWallet,
+    externalWallet: externalWalletDetection.externalWallet,
 
-    isSmartWalletDeployed,
+    isSmartWalletDeployed: smartWalletDeployed,
     
     // Auth methods
     login,

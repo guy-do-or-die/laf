@@ -3,11 +3,11 @@ import {
   getItemsNearLocation,
   getLostItemsNearLocation,
   getFoundItemsNearLocation
-} from '../utils/graphql'
+} from '@/services/graphService'
 import {
   calculateDistance,
-  getCurrentLocation
-} from '../utils/geo'
+  getCurrentPosition
+} from '@/services/geoService'
 
 /**
  * React hook for geo-filtered item loading
@@ -123,7 +123,7 @@ export const useItemsNearMe = (radiusKm = 10, status = null) => {
     try {
       setGettingLocation(true)
       setLocationError(null)
-      const location = await getCurrentLocation()
+      const location = await getCurrentPosition()
       setLocation(location)
     } catch (error) {
       setLocationError(error.message)
@@ -133,8 +133,8 @@ export const useItemsNearMe = (radiusKm = 10, status = null) => {
   }, [])
 
   const geoFilteredItems = useGeoFilteredItems(
-    location?.lat,
-    location?.lng,
+    location?.latitude,
+    location?.longitude,
     radiusKm,
     status,
     null,

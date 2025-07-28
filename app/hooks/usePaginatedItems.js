@@ -4,7 +4,7 @@ import {
   getPaginatedItemsByOwner,
   getPaginatedItemsByFinder,
   getItemsNearLocation
-} from '../utils/graphql'
+} from '../services/graphService'
 
 // Import geo filtering utilities for future enhancements
 import {

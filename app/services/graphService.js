@@ -1,5 +1,5 @@
 import { GraphQLClient } from 'graphql-request'
-import { filterItemsByProximity } from './geo'
+import { filterItemsByProximity } from '@/services/geoService';
 
 
 const client = new GraphQLClient(import.meta.env.VITE_GRAPH_URL)
@@ -171,7 +171,7 @@ export const GET_ITEMS_BY_STATUS_PAGINATED = `
   query GetItemsByStatusPaginated(
     $first: Int!
     $skip: Int!
-    $status: String!
+    $status: String
     $owner: Bytes
     $finder: Bytes
     $latitude: BigDecimal
@@ -251,17 +251,26 @@ export const getPaginatedItemsByStatus = async (
     const skip = page * pageSize
     const first = Math.min(pageSize, 1000) // GraphQL limit
     
+    // Build variables object, only including non-null values
+    const variables = {
+      first,
+      skip,
+      orderBy,
+      orderDirection
+    };
+    
+    if (status !== null) variables.status = status;
+    if (owner !== null) variables.owner = owner;
+    if (finder !== null) variables.finder = finder;
+    
+    const countVariables = {};
+    if (status !== null) countVariables.status = status;
+    if (owner !== null) countVariables.owner = owner;
+    if (finder !== null) countVariables.finder = finder;
+    
     const [itemsData, countData] = await Promise.all([
-      client.request(GET_ITEMS_BY_STATUS_PAGINATED, {
-        status,
-        owner,
-        finder,
-        first,
-        skip,
-        orderBy,
-        orderDirection
-      }),
-      client.request(GET_ITEMS_COUNT_BY_STATUS, { status, owner, finder })
+      client.request(GET_ITEMS_BY_STATUS_PAGINATED, variables),
+      client.request(GET_ITEMS_COUNT_BY_STATUS, countVariables)
     ])
     
     return {

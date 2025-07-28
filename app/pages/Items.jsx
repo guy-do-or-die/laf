@@ -4,19 +4,18 @@ import { Link } from 'wouter';
 import { useBlockNumber } from "wagmi";
 
 import { useAccount } from '../wallet';
-import { getUserItems } from '../utils/graphql';
-import { useBlockContext, useBlockUpdates } from '../contexts/BlockContext';
+import { getUserItems } from '../services/graphService';
+import { useBlockContext } from '../contexts/BlockContext';
 
 import { Card, CardContent } from "../components/ui/card";
 import { Button } from "../components/ui/button";
-import ItemCard from "../components/ItemCard";
+import ItemCard from "../components/Item";
 
 
 export default function Items() {
     const { address, loggedIn } = useAccount();
     const [items, setItems] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const { currentBlock, updateTrigger } = useBlockContext();
 
     const { blockNumber } = useBlockNumber();
    
@@ -76,7 +75,7 @@ export default function Items() {
                         </CardContent>
                     </Card>
                 ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 w-full">
                         {items?.map((item) => (
                             <ItemCard 
                                 key={item.hash} 

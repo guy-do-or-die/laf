@@ -9,15 +9,17 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { LogIn, LogOut, User, ChevronDown, ArrowDownToLine, ArrowUpFromLine, Key } from "lucide-react";
+import { LogIn, LogOut, User, ChevronDown, ArrowDownToLine, ArrowUpFromLine, Key, UserCircle, ThumbsUp } from "lucide-react";
 import { useFundWallet, usePrivy} from '@privy-io/react-auth';
 
 import { useAccount, chain } from '../wallet';
-import { useReadErc20BalanceOf } from '../contracts';
+import { useReadErc20BalanceOf, useReadLafBalanceOf } from '../contracts';
 import { useMessagingConnection } from '../messaging/MessagingProvider';
 
 import {notify} from './Notification';
 import { useBlockContext } from '../contexts/BlockContext';
+
+import { ROUTES, buildRoute } from '../constants/routes';
 
 
 export default function Connection() {
@@ -28,21 +30,23 @@ export default function Connection() {
     const [isOpen, setIsOpen] = useState(false);
 
     const [balance, setBalance] = useState(0n);
+    const [upBalance, setUpBalance] = useState(0n);
 
     const { blockNumber } = useBlockContext(); 
     const { data: balanceData } = useReadErc20BalanceOf({ args: [address], blockNumber });
+    const { data: upBalanceData } = useReadLafBalanceOf({ args: [address, 7], blockNumber });
 
     const { fundWallet } = useFundWallet();
 
     useEffect(() => {
-        if (loggedIn && location === '/') {
+        if (loggedIn && location === ROUTES.ROOT) {
             notify('Connected', 'success', { id: "connected"});
-            setLocation('/items');
+            setLocation(ROUTES.ITEMS);
             connectMessaging();
         }
 
-        if (!loggedIn && location === '/items') {
-            setLocation('/');
+        if (!loggedIn && location === ROUTES.ITEMS) {
+            setLocation(ROUTES.ROOT);
             disconnectMessaging();
         }
     }, [loggedIn]);
@@ -52,6 +56,12 @@ export default function Connection() {
             setBalance(balanceData);
         }
     }, [balanceData]);
+
+    useEffect(() => {
+        if (upBalanceData) {
+            setUpBalance(upBalanceData);
+        }
+    }, [upBalanceData]);
 
     const handleLogin = () => {
         login();
@@ -112,8 +122,14 @@ export default function Connection() {
         <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
             <DropdownMenuTrigger className="text-sm px-3 py-2 flex items-center gap-2 h-10 rounded-lg border-0 bg-background shadow-sm hover:bg-accent hover:text-accent-foreground hover:shadow-md transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
                 <User className="h-4 w-4" />
-                <span className="hidden sm:inline font-semibold text-green-600">
-                    {formatBalance(balance)}
+                <span className="hidden sm:flex font-semibold items-center gap-2">
+                    <span className="text-green-600">{formatBalance(balance)}</span>
+                    {upBalance > 0n && (
+                        <span className="text-blue-600 flex items-center gap-1">
+                            <ThumbsUp className="h-4 w-4" />
+                            {formatUnits(upBalance, 0)}
+                        </span>
+                    )}
                 </span>
                 <ChevronDown className="h-3 w-3" />
             </DropdownMenuTrigger>
@@ -129,6 +145,13 @@ export default function Connection() {
                             <span className="font-mono text-sm group-hover:font-semibold">{formatAddress(address)}</span>
                         </div>
                     </a>
+                </DropdownMenuItem>
+                <DropdownMenuItem 
+                    onClick={() => { setLocation(buildRoute.user(address)); setIsOpen(false); }}
+                    className="flex items-center gap-2 px-3 py-2 rounded-md transition-colors hover:bg-accent/50 focus:bg-accent/70 cursor-pointer"
+                >
+                    <UserCircle className="h-4 w-4 text-purple-600" />
+                    <span className="text-sm font-medium">My Profile</span>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 {isSmartWallet && (

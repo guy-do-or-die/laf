@@ -2,20 +2,23 @@ import {useRef, useEffect, useState} from 'react';
 
 import { useLocation } from 'wouter';
 
-import { generateSecretHash, generateRandomSecret } from '../utils/secretUtils';
-
 import QRCodeStyling from 'qr-code-styling';
 import qrOptions from '../../qr-options.json';
 
 import TxButton from "../components/TxButton";
 
 import { Textarea } from "../components/ui/textarea";
+import { Button } from "../components/ui/button";
+import { RotateCcw, Download, Printer } from "lucide-react";
 import { notify } from '../components/Notification';
 
 import { useSimulateLafRegister, useWriteLafRegister } from "../contracts"
 import { useSmartWalletSimulateHook, useSmartWalletWriteHook } from "../wallet"
 import { useAccount } from "../wallet"
+
 import { useSmartWalletDeployment } from "../hooks/useSmartWalletDeployment";
+
+import { generateRandomSecret } from '@/services/secretService';
 
 
 export default function Register() {
@@ -24,7 +27,12 @@ export default function Register() {
     const { isDeploying: isDeployingWallet, isReady: walletReady } = useSmartWalletDeployment();
     
     const [itemData, setItemData] = useState(() => {
-        const { secret, secretHash } = generateRandomSecret();
+        const result = generateRandomSecret();
+        if (!result.success) {
+            console.error('Failed to generate random secret:', result.error);
+            return { secret: '', secretHash: '', qrCode: null };
+        }
+        const { secret, secretHash } = result.data;
         return { secret, secretHash, qrCode: null };
     });
 
@@ -74,7 +82,8 @@ export default function Register() {
             
             setQrGenerated(true);
             
-            console.log('QR URL generated:', url);
+            console.log('Found URL:', url);
+            console.log('Loost URL:', `${window.location.origin}/lost/${itemData.secretHash}`);
             console.log('QR code ready!');
         } catch (error) {
             console.error('Error generating QR code:', error);
@@ -99,7 +108,14 @@ export default function Register() {
         generationAttemptRef.current = false;
         
         // Generate new secret and QR code
-        const { secret, secretHash } = generateRandomSecret();
+        const result = generateRandomSecret();
+        if (!result.success) {
+            console.error('Failed to generate random secret:', result.error);
+            notify('Failed to generate new secret. Please try again.', 'error');
+            return;
+        }
+
+        const { secret, secretHash } = result.data;
         setItemData({
             secret,
             secretHash,
@@ -176,31 +192,67 @@ export default function Register() {
                 )}
                 
                 <p className="text-sm text-gray-600 mb-4">
-                    {qrGenerated ? 'Click to download' : 
+                    {qrGenerated ? 'Click QR code to download, or use buttons below' : 
                      isGeneratingQR ? 'Generating your QR code...' :
                      !loggedIn ? 'Please connect your wallet to continue' :
                      'Loading your item QR'}
                 </p>
                 
-                {/* QR Regeneration Button */}
-                {loggedIn && (
-                    <div className="flex flex-col gap-2 mb-4">
-                        <button
+                {/* QR Action Buttons */}
+                {loggedIn && qrGenerated && (
+                    <div className="flex justify-center gap-2 mb-4">
+                        <Button
                             onClick={regenerateQRCode}
                             disabled={isGeneratingQR}
-                            className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                            variant="outline"
+                            size="sm"
+                            title="Generate new QR code"
                         >
-                            {isGeneratingQR ? 'Generating...' : 'Regenerate QR Code'}
-                        </button>
-                        <p className="text-xs text-gray-500 text-center">
-                            Generate a new QR code with a fresh secret
-                        </p>
+                            <RotateCcw className="h-4 w-4" />
+                        </Button>
+                        <Button
+                            onClick={() => {
+                                if (itemData.qrCode) {
+                                    itemData.qrCode.download({ 
+                                        name: `laf-item-${itemData.secretHash.slice(0, 8)}`, 
+                                        extension: 'png' 
+                                    });
+                                }
+                            }}
+                            variant="outline"
+                            size="sm"
+                            title="Download QR code"
+                        >
+                            <Download className="h-4 w-4" />
+                        </Button>
+                        <Button
+                            onClick={() => {
+                                if (qrRef.current) {
+                                    const printWindow = window.open('', '_blank');
+                                    printWindow.document.write(`
+                                        <html>
+                                            <head><title>LAF Item QR Code</title></head>
+                                            <body style="display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0;">
+                                                ${qrRef.current.innerHTML}
+                                            </body>
+                                        </html>
+                                    `);
+                                    printWindow.document.close();
+                                    printWindow.print();
+                                }
+                            }}
+                            variant="outline"
+                            size="sm"
+                            title="Print QR code"
+                        >
+                            <Printer className="h-4 w-4" />
+                        </Button>
                     </div>
                 )}
                 
                 <div className="mb-4">
                     <Textarea
-                        placeholder="Comment (describe your item)"
+                        placeholder="Describe your item in a few words..."
                         value={comment}
                         onChange={(e) => setComment(e.target.value)}
                         disabled={!qrGenerated}
@@ -212,7 +264,7 @@ export default function Register() {
                         simulateHook={useSmartWalletSimulateHook(useSimulateLafRegister)}
                         writeHook={useSmartWalletWriteHook(useWriteLafRegister)}
                         params={registerParams}
-                        text={isDeployingWallet ? "Preparing Smart Wallet..." : "Register Item"}
+                        text={isDeployingWallet ? "Preparing Wallet..." : "Register"}
                         disabled={!walletReady || isDeployingWallet}
                     />
                 </div>

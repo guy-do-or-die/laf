@@ -13,8 +13,8 @@ contract DeployScript is Script {
         
         vm.startBroadcast();
         
-        address rewardToken = vm.envAddress("REWARD_TOKEN_ADDRESS");
-        require(rewardToken != address(0), "REWARD_TOKEN_ADDRESS not set in .env");
+        address rewardToken = vm.envAddress("VITE_REWARD_TOKEN_ADDRESS");
+        require(rewardToken != address(0), "VITE_REWARD_TOKEN_ADDRESS not set in .env");
 
         LAF.Charity memory charity = LAF.Charity({
             active: true,
