@@ -1,5 +1,5 @@
 import { GraphQLClient } from 'graphql-request'
-import { filterItemsByProximity } from './geo'
+import { filterItemsByProximity } from '@/services/geoService';
 
 
 const client = new GraphQLClient(import.meta.env.VITE_GRAPH_URL)

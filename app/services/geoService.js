@@ -423,3 +423,70 @@ export async function reverseGeocode(latitude, longitude) {
         return formatCoordinates({ latitude, longitude });
     }
 }
+
+/**
+ * Filter items by proximity to a center point
+ * @param {Array} items - Array of items to filter
+ * @param {number} centerLat - Center latitude
+ * @param {number} centerLng - Center longitude
+ * @param {number} radiusKm - Search radius in kilometers
+ * @returns {Array} - Filtered array of items within radius
+ */
+export function filterItemsByProximity(items, centerLat, centerLng, radiusKm) {
+    if (!items || !Array.isArray(items)) {
+        return [];
+    }
+    
+    const center = { latitude: centerLat, longitude: centerLng };
+    const centerValidation = validateCoordinates(center);
+    
+    if (!centerValidation.isValid) {
+        console.warn('Invalid center coordinates for proximity filtering:', centerValidation.errors);
+        return items; // Return all items if center is invalid
+    }
+    
+    return items.filter(item => {
+        // Try to extract coordinates from item
+        let itemLocation = null;
+        
+        // Check various possible location formats in the item
+        if (item.geo) {
+            // Parse geo string format like "lat,lng" or "lat, lng"
+            const geoStr = item.geo.toString().trim();
+            const coords = geoStr.split(',').map(coord => parseFloat(coord.trim()));
+            
+            if (coords.length === 2 && !isNaN(coords[0]) && !isNaN(coords[1])) {
+                itemLocation = {
+                    latitude: coords[0],
+                    longitude: coords[1]
+                };
+            }
+        } else if (item.latitude && item.longitude) {
+            // Direct latitude/longitude properties
+            itemLocation = {
+                latitude: parseFloat(item.latitude),
+                longitude: parseFloat(item.longitude)
+            };
+        } else if (item.lat && item.lng) {
+            // Alternative lat/lng properties
+            itemLocation = {
+                latitude: parseFloat(item.lat),
+                longitude: parseFloat(item.lng)
+            };
+        }
+        
+        // If no valid location found, exclude from results
+        if (!itemLocation) {
+            return false;
+        }
+        
+        // Validate item coordinates
+        const itemValidation = validateCoordinates(itemLocation);
+        if (!itemValidation.isValid) {
+            return false;
+        }
+        
+        // Check if item is within radius
+        return isWithinRadius(itemLocation, center, radiusKm);
+    });
+}

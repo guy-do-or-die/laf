@@ -4,8 +4,8 @@ import { Link } from 'wouter';
 import { useBlockNumber } from "wagmi";
 
 import { useAccount } from '../wallet';
-import { getUserItems } from '../utils/graphql';
-import { useBlockContext, useBlockUpdates } from '../contexts/BlockContext';
+import { getUserItems } from '../services/graphService';
+import { useBlockContext } from '../contexts/BlockContext';
 
 import { Card, CardContent } from "../components/ui/card";
 import { Button } from "../components/ui/button";
@@ -16,7 +16,6 @@ export default function Items() {
     const { address, loggedIn } = useAccount();
     const [items, setItems] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const { currentBlock, updateTrigger } = useBlockContext();
 
     const { blockNumber } = useBlockNumber();
    

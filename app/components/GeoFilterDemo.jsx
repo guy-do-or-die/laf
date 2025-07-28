@@ -4,7 +4,7 @@ import {
   useItemsNearMe,
   useGeoFilteredItems 
 } from '../hooks/useGeoFilteredItems'
-import { parseGeoLocation } from '../utils/graphql'
+import { parseGeoLocation } from '../services/graphService'
 import { calculateDistance, formatCoordinates, sortItemsByDistance } from '../utils/geo'
 
 /**
