@@ -9,7 +9,10 @@ import {
 import { formatUnits } from 'viem';
 import { useReadContracts } from 'wagmi';
 import { Link } from 'wouter';
-import { Search, Package, Heart, TrendingUp, Users, DollarSign } from 'lucide-react';
+import { Search, Package, Heart, TrendingUp, Users, DollarSign, MapPin } from 'lucide-react';
+import ItemsMap from '@/components/ItemsMap';
+import { useState, useEffect } from 'react';
+import { getLostItems } from '@/services/graphService';
 
 // Reusable StatCard component
 function StatCard({ title, icon: Icon, value, description, isLoading, color = "text-blue-600" }) {
@@ -52,6 +55,9 @@ function FeatureCard({ title, description, icon: Icon, color = "text-blue-600" }
 
 export default function Landing() {
   const { address } = useAccount();
+  const [recentLostItems, setRecentLostItems] = useState([]);
+  const [mapLoading, setMapLoading] = useState(true);
+  const [mapError, setMapError] = useState(null);
 
   // Get LAF configuration
   const { data: lafConfig } = useReadLafConfig();
@@ -139,6 +145,35 @@ export default function Landing() {
     formatUnits(rewardsDistributed, rewardTokenDecimals) : '0';
   const totalCharityFees = charityFeesDistributed ? 
     formatUnits(charityFeesDistributed, rewardTokenDecimals) : '0';
+
+  // Load recent lost items for map display
+  useEffect(() => {
+    const loadRecentLostItems = async () => {
+      try {
+        setMapLoading(true);
+        setMapError(null);
+        const lostItems = await getLostItems();
+        
+        // Get the 10 most recent lost items with valid geo data
+        const itemsWithGeo = lostItems
+          .filter(item => item.geo && item.geo.trim() !== '')
+          .slice(0, 10)
+          .map(item => ({
+            ...item,
+            status: 'lost'
+          }));
+        
+        setRecentLostItems(itemsWithGeo);
+      } catch (error) {
+        console.error('Failed to load recent lost items:', error);
+        setMapError('Failed to load recent lost items');
+      } finally {
+        setMapLoading(false);
+      }
+    };
+
+    loadRecentLostItems();
+  }, []);
 
   return (
     <div className="w-full">
@@ -234,6 +269,33 @@ export default function Landing() {
             />
           </div>
         </div>
+
+      {/* Recent Lost Items Map */}
+      <div className="mb-12">
+        <ItemsMap
+          items={recentLostItems}
+          center={[40.7128, -74.0060]} // Default center
+          zoom={8}
+          height="h-80"
+          loading={mapLoading}
+          error={mapError}
+          interactive={true}
+          showZoomControl={true}
+          fitBounds={true}
+          title="Recent Lost Items - Help Find Them!"
+          emptyMessage="No recent lost items with location data found"
+          rewardTokenDecimals={rewardTokenDecimals}
+        />
+        
+        <div className="text-center mt-4">
+          <Link href="/hunt">
+            <Button variant="outline" className="rounded-lg shadow-md">
+              <MapPin className="h-4 w-4 mr-2" />
+              Explore All Items on Map
+            </Button>
+          </Link>
+        </div>
+      </div>
 
       {/* How It Works */}
       <div className="mb-12">

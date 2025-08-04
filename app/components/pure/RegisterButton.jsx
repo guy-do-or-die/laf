@@ -1,5 +1,4 @@
 import { useSimulateLafRegister, useWriteLafRegister } from '@/contracts';
-import { useSmartWalletSimulateHook, useSmartWalletWriteHook } from '@/wallet';
 
 import TxButton from '@/components/TxButton';
 
@@ -14,9 +13,6 @@ import TxButton from '@/components/TxButton';
  * @param {boolean} props.disabled - Whether button should be disabled
  */
 export default function RegisterButton({ secretHash, comment, className = "", disabled = false }) {
-    const simulateHook = useSmartWalletSimulateHook(useSimulateLafRegister);
-    const writeHook = useSmartWalletWriteHook(useWriteLafRegister);
-    
     const registerParams = {
         args: [secretHash, comment],
         enabled: !disabled && !!secretHash && !!comment
@@ -24,8 +20,8 @@ export default function RegisterButton({ secretHash, comment, className = "", di
 
     return (
         <TxButton
-            simulateHook={simulateHook}
-            writeHook={writeHook}
+            simulateHook={useSimulateLafRegister}
+            writeHook={useWriteLafRegister}
             params={registerParams}
             className={className}
             text="Register"

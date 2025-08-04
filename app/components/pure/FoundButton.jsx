@@ -1,5 +1,4 @@
 import { useSimulateLafFound, useWriteLafFound } from '@/contracts';
-import { useSmartWalletSimulateHook, useSmartWalletWriteHook } from '@/wallet';
 
 import TxButton from '@/components/TxButton';
 import { notify } from '@/components/Notification';
@@ -15,9 +14,6 @@ import { notify } from '@/components/Notification';
  * Includes success notification callback when transaction completes
  */
 export default function FoundButton({ hash, signature, className = "", disabled = false }) {
-    const simulateHook = useSmartWalletSimulateHook(useSimulateLafFound);
-    const writeHook = useSmartWalletWriteHook(useWriteLafFound);
-    
     const foundParams = {
         args: [hash, signature],
         enabled: !disabled && !!signature,
@@ -30,8 +26,8 @@ export default function FoundButton({ hash, signature, className = "", disabled 
 
     return (
         <TxButton
-            simulateHook={simulateHook}
-            writeHook={writeHook}
+            simulateHook={useSimulateLafFound}
+            writeHook={useWriteLafFound}
             params={foundParams}
             className={className}
             text="Confirm Found"

@@ -10,6 +10,7 @@ import Lost from "./pages/Lost";
 import Found from "./pages/Found";
 import Items from "./pages/Items";
 import User from "./pages/User";
+import Hunt from "./pages/Hunt";
 
 import { ROUTE_PATTERNS } from "./constants/routes";
 
@@ -30,6 +31,7 @@ function App() {
           <Route path={ROUTE_PATTERNS.FOUND_ITEM} component={Found} />
           <Route path={ROUTE_PATTERNS.ITEMS} component={Items} />
           <Route path={ROUTE_PATTERNS.USER} component={User} />
+          <Route path={ROUTE_PATTERNS.HUNT} component={Hunt} />
         </Router>
       </Content>
 

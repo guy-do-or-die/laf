@@ -1,5 +1,4 @@
 import { useSimulateLafReturned, useWriteLafReturned } from '@/contracts';
-import { useSmartWalletSimulateHook, useSmartWalletWriteHook } from '@/wallet';
 import { createReturnParams } from '@/services/itemService';
 
 import TxButton from '@/components/TxButton';
@@ -13,15 +12,13 @@ import TxButton from '@/components/TxButton';
  * @param {boolean} props.disabled - Whether button should be disabled
  */
 export default function ReturnedButton({ hash, className = "", disabled = false, size = "default" }) {
-    const simulateHook = useSmartWalletSimulateHook(useSimulateLafReturned);
-    const writeHook = useSmartWalletWriteHook(useWriteLafReturned);
     const returnParams = createReturnParams(hash);
 
     return (
         <TxButton
             params={{ ...returnParams, enabled: !disabled }}
-            simulateHook={simulateHook}
-            writeHook={writeHook}
+            simulateHook={useSimulateLafReturned}
+            writeHook={useWriteLafReturned}
             className={className}
             size={size}
             text="Returned"

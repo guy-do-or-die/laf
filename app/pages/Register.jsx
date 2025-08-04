@@ -13,7 +13,6 @@ import { RotateCcw, Download, Printer } from "lucide-react";
 import { notify } from '../components/Notification';
 
 import { useSimulateLafRegister, useWriteLafRegister } from "../contracts"
-import { useSmartWalletSimulateHook, useSmartWalletWriteHook } from "../wallet"
 import { useAccount } from "../wallet"
 
 import { useSmartWalletDeployment } from "../hooks/useSmartWalletDeployment";
@@ -261,8 +260,8 @@ export default function Register() {
                 
                 <div className="flex flex-col gap-2 items-center">
                     <TxButton
-                        simulateHook={useSmartWalletSimulateHook(useSimulateLafRegister)}
-                        writeHook={useSmartWalletWriteHook(useWriteLafRegister)}
+                        simulateHook={useSimulateLafRegister}
+                        writeHook={useWriteLafRegister}
                         params={registerParams}
                         text={isDeployingWallet ? "Preparing Wallet..." : "Register"}
                         disabled={!walletReady || isDeployingWallet}

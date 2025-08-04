@@ -12,7 +12,6 @@ import {
     useWriteLafLost
 } from '@/contracts';
 
-import { useSmartWalletSimulateHook, useSmartWalletWriteHook } from '@/wallet';
 import { useRewardToken } from '@/contexts/LafConfigContext';
 
 
@@ -38,10 +37,6 @@ export default function LostButton({
 
     // Get reward token info from LAF config context
     const { address: rewardTokenAddress, decimals: rewardTokenDecimals, isReady: isConfigReady } = useRewardToken();
-    
-    // Smart wallet hooks for lost transaction
-    const simulateLost = useSmartWalletSimulateHook(useSimulateLafLost);
-    const writeLost = useSmartWalletWriteHook(useWriteLafLost);
     
     // Parse reward value using contract decimals
     const rewardValue = reward ? parseUnits(reward, rewardTokenDecimals) : 0n;
@@ -104,8 +99,8 @@ export default function LostButton({
     // Use TxButton with trigger for seamless approval + lost transaction
     return (
         <TxButton
-            simulateHook={simulateLost}
-            writeHook={writeLost}
+            simulateHook={useSimulateLafLost}
+            writeHook={useWriteLafLost}
             params={lostParams}
             className={className}
             text={getButtonText()}
