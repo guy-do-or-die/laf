@@ -7,7 +7,13 @@
   },
   "BASE_SEPOLIA": {
     "LAF": {
-      "address": "0x7ad1ad0280755cd54b30abc81dbcc521c2ee3f3a",
+      "address": "0x43669e01844c29ae9601c8e6484d6285395ba5f1",
+      "startBlock": null
+    }
+  },
+  "BASE": {
+    "LAF": {
+      "address": "0x43669e01844c29ae9601c8e6484d6285395ba5f1",
       "startBlock": null
     }
   }

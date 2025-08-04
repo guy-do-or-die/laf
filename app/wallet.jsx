@@ -4,7 +4,7 @@ import { encodeFunctionData } from 'viem'
 
 import * as chains from 'viem/chains'
 
-import { http, useAccount as useWagmi, useBytecode } from 'wagmi'
+import { http, webSocket, useAccount as useWagmi, useBytecode } from 'wagmi'
 import { PrivyProvider, usePrivy, useWallets } from '@privy-io/react-auth'
 import { WagmiProvider, createConfig, useSetActiveWallet } from '@privy-io/wagmi'
 import { SmartWalletsProvider, useSmartWallets } from '@privy-io/react-auth/smart-wallets';
@@ -27,7 +27,7 @@ export const supportedChains = {
     test: chains.baseSepolia,
 }
   
-export const chain = supportedChains['test']
+export const chain = supportedChains['main']
 
 export const privyConfig = {
     loginMethods: ['email', 'google', 'wallet'],
@@ -44,7 +44,7 @@ export const privyConfig = {
 
 export const wagmiConfig = createConfig({
   chains: [chain],
-  transports: { [chain.id]: http() },
+  transports: { [chain.id]: webSocket("wss://base-rpc.publicnode.com") },
 })
 
 

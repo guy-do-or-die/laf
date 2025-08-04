@@ -6,7 +6,9 @@
   "scripts": {
     "lint": "eslint .",
     "prettify": "npx prettier --write .",
-    "contracts": "scripts/deployContract.sh",
+    "contracts:deploy": "scripts/deployContract.sh",
+    "contracts:verify": "scripts/verifyContract.sh",
+    "contracts": "bun run contracts:deploy",
     "graph": "scripts/deploySubgraph.sh",
     "wagmi": "wagmi generate",
     "dev": "bun run wagmi && vite",

@@ -6,11 +6,11 @@ schema:
 dataSources:
   - kind: ethereum
     name: LAF
-    network: base-sepolia
+    network: base
     source:
-      address: "0x43669e01844c29ae9601c8e6484d6285395ba5f1"
+      address: "0xa6efe42721ee358e6bc95cff259003951fa1e595"
       abi: LAF
-      startBlock: 28897780
+      startBlock: 33742803
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.9

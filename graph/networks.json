@@ -10,5 +10,11 @@
       "address": "0x43669e01844c29ae9601c8e6484d6285395ba5f1",
       "startBlock": null
     }
+  },
+  "BASE": {
+    "LAF": {
+      "address": "0xa6efe42721ee358e6bc95cff259003951fa1e595",
+      "startBlock": null
+    }
   }
 }

@@ -137,7 +137,7 @@ if [ "$AUTO_INCREMENT" = true ] && [ -z "$VERSION_LABEL" ]; then
 fi
 
 # Build deploy command
-DEPLOY_CMD="graph deploy laf-dev"
+DEPLOY_CMD="graph deploy laf"
 if [ -n "$VERSION_LABEL" ]; then
     DEPLOY_CMD="$DEPLOY_CMD --version-label \"$VERSION_LABEL\""
 fi
