@@ -1,3 +1,4 @@
+import * as chains from 'viem/chains'
 import { lafAddress } from '@/contracts'
 import { chain } from '@/wallet'
 
@@ -28,13 +29,10 @@ export default function Links() {
   const explorer = chain.blockExplorers?.default.url
   const contractAddress = lafAddress[chain.id]
 
-  const openSeaChainSlug = {
-    8453: 'base',
-    84532: 'base-sepolia',
+  const osUrl = {
+    [chains.base.id]: `https://opensea.io/assets/base/${contractAddress}`,
+    [chains.baseSepolia.id]: `https://testnet.rarible.com/collection/base/${contractAddress}`,
   }[chain.id]
-
-  const osBase = chain.testnet ? 'https://testnets.opensea.io' : 'https://opensea.io'
-  const osUrl = openSeaChainSlug ? `${osBase}/assets/${openSeaChainSlug}/${contractAddress}` : null
 
   return (
     <div className="links flex justify-center items-start">
