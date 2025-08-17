@@ -2,7 +2,7 @@ import Links from './Links'
 
 const Base = () => {
   return (
-      <svg className="inline-block align-middle h-6 sm:h-7 md:h-8 lg:h-10 w-auto" viewBox="0 0 120 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg className="inline-block align-middle h-6 sm:h-7 md:h-8 lg:h-8 w-auto" viewBox="0 0 120 34" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M1.79971 33.0556C1.03659 33.0556 0.655029 32.6744 0.655029 31.9122V15.1433C0.655029 14.3811 1.03659 14 1.79971 14H18.5884C19.3515 14 19.7331 14.3811 19.7331 15.1433V31.9122C19.7331 32.6744 19.3515 33.0556 18.5884 33.0556H1.79971Z"
           fill="#0000FF" />
@@ -15,12 +15,12 @@ const Base = () => {
 
 export default function Footer() {
   return (
-    <footer className="border-t mt-8 border-gray-200/50 bg-gray-50 py-3 sm:py-4 px-4 sm:px-6 text-gray-600 text-sm mt-auto">
+    <footer className="border-t mt-8 border-gray-200/50 bg-gray-50 py-2.5 sm:py-3 px-4 sm:px-6 text-gray-600 text-sm mt-auto">
       <div className="max-w-4xl mx-auto flex flex-row justify-between items-center gap-3 sm:gap-4">
         <Links />
         <div className="flex items-center gap-1.5 sm:gap-2">
           <div className="text-xs sm:text-sm">built on</div>
-          <a className="ml-2 mb-4" href="https://base.org/" target="_blank">
+          <a className="ml-2 mb-3" href="https://base.org/" target="_blank">
             <Base />
           </a>
         </div>

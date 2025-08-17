@@ -28,6 +28,14 @@ export default function Links() {
   const explorer = chain.blockExplorers?.default.url
   const contractAddress = lafAddress[chain.id]
 
+  const openSeaChainSlug = {
+    8453: 'base',
+    84532: 'base-sepolia',
+  }[chain.id]
+
+  const osBase = chain.testnet ? 'https://testnets.opensea.io' : 'https://opensea.io'
+  const osUrl = openSeaChainSlug ? `${osBase}/assets/${openSeaChainSlug}/${contractAddress}` : null
+
   return (
     <div className="links flex justify-center items-start">
       <div className="flex flex-wrap gap-x-2 md:gap-4 filter grayscale">
@@ -35,15 +43,11 @@ export default function Links() {
         {/*
             <Link title="Telegram" href="https://t.me/laf_is" icon={telegramUrl} />
             <Link title="Discord" href="https://discord.gg/" icon={discordUrl} />
-            <Link title="Guild" href="https://guild.xyz/laf" icon={guildUrl} />
-            <Link title="X" href="http://x.com/laf_is" icon={xUrl} />
-            */}
-        {chain ? (
-          <Link
-            title="Opensea"
-            href={`https://${chain.testnet ? 'testnets.' : ''}opensea.io/assets/${chain.network}/${contractAddress}`}
-            icon={openseaUrl}
-          />
+        */}
+        <Link title="Guild" href="https://era.guild.xyz/laf-is" icon={guildUrl} />
+        <Link title="X" href="https://x.com/laf_is_found" icon={xUrl} />
+        {osUrl ? (
+          <Link title="Opensea" href={osUrl} icon={openseaUrl} />
         ) : (
           ''
         )}

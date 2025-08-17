@@ -26,6 +26,7 @@ export function parseError(error) {
     /(RPC Error)/,
     /(RPC error)/,
     /(Invalid parameters were provided to the RPC method)/,
+    /(max address transaction sponsorship count reached)/,
   ]
 
   let msg

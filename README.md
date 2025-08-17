@@ -6,7 +6,7 @@ A decentralized lost-and-found platform with simple mechanics, rewards, reputati
 
 ## 🎯 What is LAF?
 
-LAF (Lost and Found) is a Web3 application that creates a secure, trustless system for reporting and recovering lost items. Users can register their valuable items with secret id encoded in a QR code, report them as lost with rewards, and enable finders to claim rewards by simply scanning the QR code, getting in touch with the owner via embedded XMTP chat and returning the item to the owner.
+LAF (Lost and Found) is a Web3 application that creates a secure, trustless system for reporting and recovering lost items. Users can register their valuable items with secret id encoded in a QR code, report them as lost with rewards, and enable finders to claim rewards by simply scanning the QR code, getting in touch with the owner via embedded Waku chat and returning the item to the owner.
 
 ## ✨ Key Features
 

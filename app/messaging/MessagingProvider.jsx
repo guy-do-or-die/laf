@@ -2,20 +2,16 @@ import { createContext, useContext, useMemo } from "react";
 
 // Import messaging providers
 import WakuProvider, { useWaku } from "./waku/WakuContext";
-import XMTPProvider, { useXMTP } from "./xmtp/contexts/XMTPContext";
 
 // Import connection hooks
 import { useConnectWaku } from "./waku/useConnectWaku";
-import { useConnectXmtp } from "./xmtp/hooks/useConnectXmtp";
 
 // Import conversation hooks
 import { useWakuConversation } from "./waku/useWakuConversation";
-import { useConversation as useXMTPConversation } from "./xmtp/hooks/useConversation";
 
 // Messaging provider types
 export const MessagingProviders = {
   WAKU: 'waku',
-  XMTP: 'xmtp',
   DISABLED: null
 };
 
@@ -55,12 +51,8 @@ export const useMessagingConnection = () => {
     };
   }
 
-  // Only call hooks for the active provider to avoid "Provider not available" errors
-  if (CURRENT_PROVIDER === MessagingProviders.WAKU) {
-    return useConnectWaku();
-  } else {
-    return useConnectXmtp();
-  }
+  // Only call hooks for the active provider (Waku)
+  return useConnectWaku();
 };
 
 // Hook to use conversation (abstracts XMTP/Waku conversation hooks)
@@ -78,13 +70,8 @@ export const useMessagingConversation = (recipientAddress, secretHash = null) =>
     };
   }
 
-  // Only call hooks for the active provider to avoid "Provider not available" errors
-  if (CURRENT_PROVIDER === MessagingProviders.WAKU) {
-    return useWakuConversation(recipientAddress, secretHash);
-  } else {
-    // XMTP doesn't support secretHash-based topics, use regular conversation
-    return useXMTPConversation(recipientAddress);
-  }
+  // Use Waku conversation
+  return useWakuConversation(recipientAddress, secretHash);
 };
 
 // Disabled messaging provider component
@@ -112,12 +99,11 @@ function DisabledMessagingProvider({ children }) {
 
 // Active messaging provider adapter component
 function ActiveMessagingProviderAdapter({ children }) {
-  // Only call hooks for the active provider to avoid "Provider not available" errors
-  const wakuContext = CURRENT_PROVIDER === MessagingProviders.WAKU ? useWaku() : null;
-  const xmtpContext = CURRENT_PROVIDER === MessagingProviders.XMTP ? useXMTP() : null;
+  // Only call hooks for the active provider (Waku)
+  const wakuContext = useWaku();
 
   const value = useMemo(() => {
-    const currentContext = CURRENT_PROVIDER === MessagingProviders.WAKU ? wakuContext : xmtpContext;
+    const currentContext = wakuContext;
 
     return {
       provider: CURRENT_PROVIDER,
@@ -132,7 +118,7 @@ function ActiveMessagingProviderAdapter({ children }) {
       autoMessagingEnabled: currentContext?.autoMessagingEnabled !== undefined ? currentContext.autoMessagingEnabled : true,
       setAutoMessagingEnabled: currentContext?.setAutoMessagingEnabled || (() => {}),
     };
-  }, [wakuContext, xmtpContext]);
+  }, [wakuContext]);
 
   return (
     <MessagingContext.Provider value={value}>
@@ -152,21 +138,11 @@ export default function MessagingProvider({ children }) {
     );
   }
   
-  if (CURRENT_PROVIDER === MessagingProviders.WAKU) {
-    return (
-      <WakuProvider>
-        <ActiveMessagingProviderAdapter>
-          {children}
-        </ActiveMessagingProviderAdapter>
-      </WakuProvider>
-    );
-  } else {
-    return (
-      <XMTPProvider>
-        <ActiveMessagingProviderAdapter>
-          {children}
-        </ActiveMessagingProviderAdapter>
-      </XMTPProvider>
-    );
-  }
+  return (
+    <WakuProvider>
+      <ActiveMessagingProviderAdapter>
+        {children}
+      </ActiveMessagingProviderAdapter>
+    </WakuProvider>
+  );
 }

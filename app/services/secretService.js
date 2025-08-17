@@ -1,6 +1,8 @@
 import { privateKeyToAccount } from 'viem/accounts';
 import { encodePacked, keccak256 } from 'viem';
 
+import { chain } from '@/wallet'
+
 
 // Custom error classes for better error categorization
 export class SecurityError extends Error {
@@ -219,10 +221,10 @@ export function generateSecretHash(secret, userWalletAddress = null) {
  * @param {string} finderAddress - The finder's address
  * @param {string} itemAddress - The item contract address
  * @param {bigint} itemCycle - The item cycle number
- * @param {number} chainId - The chain ID (default: 84532 for Base Sepolia)
+ * @param {number|bigint} chainId - The chain ID (defaults to selected env chain)
  * @returns {Promise<Object>} - Result object with success, data (signature), and error
  */
-export async function createCommitRevealSignature(secret, secretHash, finderAddress, itemAddress, itemCycle, chainId = 84532) {
+export async function createCommitRevealSignature(secret, secretHash, finderAddress, itemAddress, itemCycle, chainId = chain.id) {
     try {
         // Validate that the secret matches the expected secretHash
         const validationResult = validateSecretHash(secret, secretHash);
@@ -242,9 +244,12 @@ export async function createCommitRevealSignature(secret, secretHash, finderAddr
         const account = privateKeyToAccount(privateKeyResult.data.privateKey);
         
         // Create the message hash that matches the contract's expectation
+        const cycle = typeof itemCycle === 'bigint' ? itemCycle : BigInt(itemCycle);
+        const chainIdBig = typeof chainId === 'bigint' ? chainId : BigInt(chainId);
+
         const rawMessageHash = keccak256(encodePacked(
             ['address', 'address', 'address', 'uint256', 'uint256'],
-            [secretHash, finderAddress, itemAddress, Number(itemCycle), Number(chainId)]
+            [secretHash, finderAddress, itemAddress, cycle, chainIdBig]
         ));
         
         // Sign the raw message hash directly (contract will apply EIP-191 prefix)

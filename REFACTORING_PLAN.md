@@ -116,7 +116,7 @@ components/containers/ItemContainer/ ← Container component
 ```bash
 # Create: services/messagingService.js
 ```
-**Extract from**: `MessagingProvider.jsx`, `MessageModal.jsx`, XMTP/Waku logic
+**Extract from**: `MessagingProvider.jsx`, `MessageModal.jsx`, Waku logic
 **Functions**: `initializeMessaging()`, `switchProvider()`, `validateRecipient()`, `formatMessage()`
 
 #### **Step 1.7: Geolocation Service**
@@ -477,7 +477,7 @@ export function SignatureContainer({ secret }) {
 #### **3. Messaging Architecture Issues**
 - [ ] **Provider Abstraction Leakage**: `MessagingProvider.jsx` has complex provider switching logic (173 lines)
 - [ ] **Message Modal Complexity**: 329 lines with mixed UI/business logic
-- [ ] **Conversation Management**: Duplicate conversation handling between XMTP/Waku
+- [ ] **Conversation Management**: Validate Waku conversation handling; remove obsolete XMTP references
 
 #### **4. ~~GraphQL Query Duplication~~ (MOVED TO FINAL PHASE)**
 - [ ] ~~Query Service~~ → **DEFERRED**: Will tackle GraphQL optimization in final phase

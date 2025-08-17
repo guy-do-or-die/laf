@@ -8,7 +8,6 @@
  */
 export const MESSAGING_PROVIDERS = {
     WAKU: 'waku',
-    XMTP: 'xmtp',
     DISABLED: null
 };
 
@@ -44,14 +43,6 @@ export function getProviderCapabilities(provider) {
             requiresConnection: true,
             maxMessageSize: 1024 * 1024, // 1MB
             supportsBinaryMessages: true
-        },
-        [MESSAGING_PROVIDERS.XMTP]: {
-            supportsSecretHash: false,
-            supportsTopics: false,
-            supportsEncryption: true,
-            requiresConnection: true,
-            maxMessageSize: 100 * 1024, // 100KB
-            supportsBinaryMessages: false
         },
         [MESSAGING_PROVIDERS.DISABLED]: {
             supportsSecretHash: false,
@@ -184,11 +175,6 @@ export function formatMessage(content, provider, metadata = {}) {
                 secretHash: metadata.secretHash,
                 ...metadata
             };
-        case MESSAGING_PROVIDERS.XMTP:
-            return {
-                ...baseMessage,
-                ...metadata
-            };
         default:
             return baseMessage;
     }
@@ -210,9 +196,6 @@ export function getConversationId(provider, recipientAddress, secretHash = null)
         case MESSAGING_PROVIDERS.WAKU:
             // Waku uses topic-based conversations with secret hash
             return secretHash ? `${recipientAddress}-${secretHash}` : recipientAddress;
-        case MESSAGING_PROVIDERS.XMTP:
-            // XMTP uses direct address-based conversations
-            return recipientAddress;
         default:
             return recipientAddress;
     }

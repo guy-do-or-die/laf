@@ -56,7 +56,7 @@ export default function ItemContainer({ hash, address, className = "", neutral =
             <CardContent className="pt-4 px-4 pb-0 flex-1">
                 <ItemDetails itemData={itemData} isLoading={isLoading} />
             </CardContent>
-            <CardFooter className="px-4 pt-3 pb-4 h-16 flex items-center">
+            <CardFooter className="px-4 pt-3 pb-8 h-16 flex items-center">
                 <ItemActions
                     itemData={itemData}
                     isLoading={isLoading}

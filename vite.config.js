@@ -1,7 +1,6 @@
 import path from "path";
 
 import { defineConfig } from "vite";
-import { nodePolyfills } from "vite-plugin-node-polyfills";
 
 import react from "@vitejs/plugin-react";
 
@@ -12,15 +11,6 @@ export default defineConfig(({ command, mode }) => {
   return {
     plugins: [
       react(),
-      // Only use node polyfills in production builds, not in dev
-      ...(isProduction
-        ? [
-            nodePolyfills({
-              // Whether to polyfill `node:` protocol imports.
-              protocolImports: true,
-            }),
-          ]
-        : []),
     ],
     resolve: {
       alias: {
@@ -28,10 +18,7 @@ export default defineConfig(({ command, mode }) => {
         "~": path.resolve(__dirname, "./"),
       },
     },
-    optimizeDeps: {
-      exclude: ["@xmtp/browser-sdk"],
-      include: ["protobufjs/minimal"],
-    },
+    optimizeDeps: {},
     define: {
       global: "globalThis",
     },

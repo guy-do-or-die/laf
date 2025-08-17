@@ -14,6 +14,17 @@ import ItemsMap from '@/components/ItemsMap';
 import { useState, useEffect } from 'react';
 import { getLostItems } from '@/services/graphService';
 
+// Helper to create an emoji-based icon component compatible with StatCard's `icon` API
+const makeEmojiIcon = (symbol, label) => ({ className = '' }) => (
+  <span
+    className={`inline-block align-middle text-xl ${className}`}
+    role="img"
+    aria-label={label}
+  >
+    {symbol}
+  </span>
+);
+
 // Reusable StatCard component
 function StatCard({ title, icon: Icon, value, description, isLoading, color = "text-blue-600" }) {
   return (
@@ -206,7 +217,7 @@ export default function Landing() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <StatCard
               title="Items Registered"
-              icon={Package}
+              icon={makeEmojiIcon('😉', 'items registered')}
               value={registeredCount ? formatUnits(registeredCount, 0) : '0'}
               description="Total items in the system"
               isLoading={statsLoading}
@@ -214,7 +225,7 @@ export default function Landing() {
             />
             <StatCard
               title="Items Lost"
-              icon={Search}
+              icon={makeEmojiIcon('😢', 'items lost')}
               value={lostCount ? formatUnits(lostCount, 0) : '0'}
               description="Currently missing items"
               isLoading={statsLoading}
@@ -222,7 +233,7 @@ export default function Landing() {
             />
             <StatCard
               title="Items Found"
-              icon={Heart}
+              icon={makeEmojiIcon('😎', 'items found')}
               value={foundCount ? formatUnits(foundCount, 0) : '0'}
               description="Successfully located items"
               isLoading={statsLoading}
@@ -230,7 +241,7 @@ export default function Landing() {
             />
             <StatCard
               title="Items Returned"
-              icon={TrendingUp}
+              icon={makeEmojiIcon('😇', 'items returned')}
               value={returnedCount ? formatUnits(returnedCount, 0) : '0'}
               description="Completed reunions"
               isLoading={statsLoading}

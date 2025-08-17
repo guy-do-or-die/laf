@@ -171,7 +171,7 @@ This document outlines comprehensive testing for the LAF (Lost and Found) system
 - ✅ QR code generation and scanning
 - ✅ Wallet connection (EOA & Smart Wallets)
 - ✅ Transaction signing flows
-- ✅ XMTP messaging integration
+- ✅ Waku messaging integration
 - ✅ Mobile responsiveness
 
 #### Backend Integration:

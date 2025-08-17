@@ -13,13 +13,13 @@ import { useMessaging, useMessagingConversation } from "@/messaging/MessagingPro
 
 export const MessageModal = ({ isOpen, onClose, itemTitle, secretHash, recipientAddress }) => {
   const { address } = useAccount();
-  const { client, provider } = useMessaging();
+  const { client } = useMessaging();
   
   // Get our Waku node's peer ID for proper sender identification
   const ourPeerId = client?.peerId;
   
-  // For Waku, use peer ID; for XMTP, use wallet address
-  const ourIdentity = provider === 'waku' ? ourPeerId : address;
+  // Waku-only: identify sender using our node peer ID (fallback to wallet address if unavailable)
+  const ourIdentity = ourPeerId || address;
 
   // Use the abstracted messaging conversation hook with secretHash for item-specific messaging
   const {
