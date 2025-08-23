@@ -21,7 +21,7 @@ abstract contract Meta is ERC1155Supply, IERC2981 {
 
     uint256 constant PIC_SIZE = 256;
 
-    constructor() ERC1155("LAF is...") {}
+    constructor() ERC1155(unicode"Laf is…") {}
 
     mapping(address => int) public trust;
 
@@ -65,7 +65,7 @@ abstract contract Meta is ERC1155Supply, IERC2981 {
     }
 
     function getMeta(uint256 tokenId) internal pure returns (string memory emoji, string memory title) {
-        if (tokenId == 0) return (unicode"❤️‍🩹", "LAF is...");
+        if (tokenId == 0) return (unicode"❤️‍🩹", unicode"Laf is…");
         if (tokenId == REGISTERED) return (unicode"😉", "Registered");
         if (tokenId == LOST) return (unicode"😢", "Lost");
         if (tokenId == FOUND) return (unicode"😎", "Found");

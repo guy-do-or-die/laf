@@ -12,8 +12,8 @@ import "./ILAF.sol";
 import "./Config.sol";
 
 
-/// @title LAF is... lost and found item contract 
-/// @notice Manages the lifecycle of a single item in the LAF system
+/// @title Laf is… lost and found item contract 
+/// @notice Manages the lifecycle of a single item in the Laf system
 /// @dev Uses minimal proxy pattern for gas-efficient deployment
 contract LAFItem is Config, Initializable, ReentrancyGuard {
     using SafeERC20 for IERC20;

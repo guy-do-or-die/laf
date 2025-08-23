@@ -21,8 +21,8 @@ import "./Meta.sol";
 import "./ConfigOwnable.sol";
 
 
-/// @title LAF is... lost and found items factory contract
-/// @notice Main contract for the LAF decentralized lost and found system
+/// @title Laf is… lost and found items factory contract
+/// @notice Main contract for the Laf decentralized lost and found system
 /// @dev Implements item registration, lost/found/return lifecycle, and charity management
 contract LAF is ConfigOwnable, Meta, ReentrancyGuard {
 

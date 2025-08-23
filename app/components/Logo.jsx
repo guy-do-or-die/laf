@@ -24,12 +24,13 @@ export default function Logo() {
     return (
         <div className="flex-shrink-0 w-48 md:w-80">
             <a href="/" className="hover:text-blue-600 transition-colors block">
-                <h1 className="text-lg md:text-2xl font-bold">
-                    <span className="inline-block">LAF is...</span>
+                <h1 className="flex items-center gap-2 text-xl md:text-2xl font-bold">
+                    <span role="img" aria-label="Mending Heart" className="text-2xl md:text-3xl">❤️‍🩹</span>
+                    <span>Laf is…</span>
                 </h1>
-                <p 
+                <p
                     key={currentMessage}
-                    className="text-base text-sm md:text-lg text-pink-500 font-medium transition-all duration-500 ease-in-out transform hover:scale-105 mt-1 leading-tight min-h-[24px] md:min-h-[28px]"
+                    className="ml-4 text-sm md:text-lg text-pink-500 font-medium transition-all duration-500 ease-in-out transform hover:scale-105 mt-1 leading-tight min-h-[24px] md:min-h-[28px]"
                 >
                     {messages[currentMessage]}
                 </p>

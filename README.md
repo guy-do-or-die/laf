@@ -1,4 +1,4 @@
-# LAF is... Lost and Found
+# Laf is… Lost and Found
 
 A decentralized lost-and-found platform with simple mechanics, rewards, reputation scores and community engagement.
 

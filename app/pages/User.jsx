@@ -71,9 +71,9 @@ export default function User() {
       address: lafAddress[chain.id],
       abi: lafAbi,
       functionName: 'balanceOf',
-      args: [userAddress, 0], // LAF is... commemorative token
+      args: [userAddress, 0], // Laf is… commemorative token
     },
-    // LAF Token balances for different states
+    // Laf Token balances for different states
     {
       address: lafAddress[chain.id],
       abi: lafAbi,
