@@ -5,10 +5,28 @@
     <link rel="icon" type="image/svg+xml" href="/heart.svg" />
     <link rel="stylesheet" href="/app/index.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      html, body { background: #ffffff; }
+    </style>
+    <!-- Farcaster Miniapp embed metadata -->
+    <meta
+      name="fc:miniapp"
+      content='{"version":"1","imageUrl":"https://laf.is/miniapp-og.png","button":{"title":"Find Laf","action":{"type":"launch_frame","name":"Laf is…","url":"https://laf.is/","splashImageUrl":"https://laf.is/favicon/android-chrome-512x512.png","splashBackgroundColor":"#ffffff"}}}'
+    />
     <title>Laf is…</title>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/app/main.jsx"></script>
+    <!-- Farcaster Miniapp SDK ready() -->
+    <script type="module">
+      import { sdk } from 'https://esm.sh/@farcaster/miniapp-sdk'
+      // Call ready once UI is painted
+      window.addEventListener('load', () => {
+        requestAnimationFrame(() => {
+          sdk.actions.ready().catch(() => {})
+        })
+      })
+    </script>
   </body>
 </html>
