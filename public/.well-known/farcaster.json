@@ -1,0 +1,37 @@
+{
+  "frame": {
+    "name": "Laf is…",
+    "version": "1",
+    "iconUrl": "https://laf.is/heart.svg",
+    "homeUrl": "https://laf.is",
+    "imageUrl": "https://laf.is/heart.svg",
+    "buttonTitle": "Find Laf",
+    "splashImageUrl": "https://laf.is/heart.svg",
+    "splashBackgroundColor": "#FFFFFF",
+    "webhookUrl": "https://laf.is/api/webhook",
+    "subtitle": "Lost and found",
+    "primaryCategory": "social",
+    "description": "A decentralized lost-and-found platform with simple mechanics, rewards, reputation scores and community engagement",
+    "heroImageUrl": "https://laf.is/heart.svg",
+    "screenshotUrls": [
+      "https://laf.is/heart.svg"
+    ],
+    "tags": [
+      "lost",
+      "found",
+      "heart",
+      "help",
+      "aid"
+    ],
+    "ogTitle": "Laf is… Lost and Found",
+    "tagline": "Laf is… Lost and Found",
+    "ogDescription": "A caring lost and found app that helps you recover what matters",
+    "ogImageUrl": "https://laf.is/heart.svg",
+    "castShareUrl": "https://farcaster.xyz/~/compose?text=text=Find%20Laf"
+  },
+  "accountAssociation": {
+    "header": "eyJmaWQiOjMyMTMwMSwidHlwZSI6ImF1dGgiLCJrZXkiOiIweERFMWZEQ2YxNDMyMUQxODgxZDQ2NEFjQzhFODA2MjMzNjFBQ0I1MjgifQ",
+    "payload": "eyJkb21haW4iOiJsYWYuaXMifQ",
+    "signature": "NVgAF9RTPASCJ9YfajspTH1+bJfG8W6bvSP8db1gUew10mZolPzN1Pg1RlgkU03C1r3VF1cRVxrrEJKNnR23IBs="
+  }
+}

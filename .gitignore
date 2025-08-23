@@ -1,5 +1,8 @@
 .*
 !.gitignore
+!.well-known
+!/public/.well-known
+!/public/.well-known/**
 
 local/
 
