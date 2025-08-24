@@ -4,10 +4,13 @@ import { encodeFunctionData } from 'viem'
 
 import * as chains from 'viem/chains'
 
-import { http, webSocket, useAccount as useWagmi, useBytecode } from 'wagmi'
+import { webSocket, useAccount as useWagmi, useBytecode } from 'wagmi'
 import { PrivyProvider, usePrivy, useWallets } from '@privy-io/react-auth'
 import { WagmiProvider, createConfig, useSetActiveWallet } from '@privy-io/wagmi'
 import { SmartWalletsProvider, useSmartWallets } from '@privy-io/react-auth/smart-wallets';
+import { useLoginToMiniApp } from '@privy-io/react-auth/farcaster'
+
+import frameSdk from '@farcaster/frame-sdk'
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { 
@@ -31,7 +34,7 @@ const envChainKey = (import.meta.env.VITE_CHAIN || import.meta.env.VITE_CHAIN_NA
 export const chain = supportedChains[envChainKey] || supportedChains.main
 
 export const privyConfig = {
-    loginMethods: ['email', 'google', 'wallet'],
+    loginMethods: ['email', 'google', 'farcaster', 'wallet'],
     walletChainType: 'ethereum-only',
     supportedChains: [chain],
     defaultChain: chain,
@@ -134,6 +137,39 @@ export function useAccount() {
   const { user, ready, authenticated, login, logout, exportWallet } = usePrivy();
   const { client: privySmartWalletClient } = useSmartWallets();
   const { setActiveWallet } = useSetActiveWallet();
+  
+  // Farcaster miniapp integration
+  const { initLoginToMiniApp, loginToMiniApp } = useLoginToMiniApp();
+  
+  // Automatic Farcaster login for miniapps
+  useEffect(() => {
+    if (ready && !authenticated) {
+      const login = async () => {
+        try {
+          console.log('🔗 Initiating Farcaster miniapp login...');
+          // Initialize a new login attempt to get a nonce for the Farcaster wallet to sign
+          const { nonce } = await initLoginToMiniApp();
+          
+          // Request a signature from Farcaster
+          const result = await frameSdk.actions.signIn({ nonce: nonce });
+          
+          // Send the received signature from Farcaster to Privy for authentication
+          await loginToMiniApp({
+            message: result.message,
+            signature: result.signature,
+          });
+          
+          console.log('✅ Farcaster miniapp login successful');
+        } catch (error) {
+          console.error('❌ Farcaster miniapp login failed:', error);
+          // Fallback to regular login if Farcaster login fails
+          console.log('🔄 Falling back to regular login methods');
+        }
+      };
+      
+      login();
+    }
+  }, [ready, authenticated, initLoginToMiniApp, loginToMiniApp]);
 
   // Use wallet service for unified wallet detection
   const smartWalletDetection = detectSmartWallet(user, privySmartWalletClient);

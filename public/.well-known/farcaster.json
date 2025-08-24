@@ -1,5 +1,5 @@
 {
-  "miniapp": {
+  "frame": {
     "version": "1",
     "name": "Laf is…",
     "iconUrl": "https://laf.is/favicon/android-chrome-192x192.png",
@@ -13,5 +13,8 @@
     "header": "eyJmaWQiOjMyMTMwMSwidHlwZSI6ImF1dGgiLCJrZXkiOiIweERFMWZEQ2YxNDMyMUQxODgxZDQ2NEFjQzhFODA2MjMzNjFBQ0I1MjgifQ",
     "payload": "eyJkb21haW4iOiJsYWYuaXMifQ",
     "signature": "NVgAF9RTPASCJ9YfajspTH1+bJfG8W6bvSP8db1gUew10mZolPzN1Pg1RlgkU03C1r3VF1cRVxrrEJKNnR23IBs="
+  },
+  "baseBuilder": {
+    "allowedAddresses": ["0x48dC794aA0C8309aC541339571fE95e9896725cf"]
   }
 }
